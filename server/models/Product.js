@@ -14,16 +14,8 @@ const ProductSchema = new Schema({
     required: true,
   },
   price: {
-    type: String,
+    type: Number,
     required: true,
-  },
-  quantity: {
-    type: Integer,
-    required: true,
-  },
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "users",
   },
 });
 module.exports = mongoose.model("products", ProductSchema);
