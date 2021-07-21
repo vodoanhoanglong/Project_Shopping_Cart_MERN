@@ -2,7 +2,10 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 
+const verifyToken = require("./middleware/auth");
 const authRouter = require("./routes/auth");
+const productRouter = require("./routes/product");
+const cartRouter = require("./routes/cart");
 
 const connectDB = async () => {
   try {
@@ -28,6 +31,8 @@ const app = express();
 app.use(express.json());
 
 app.use("/auth", authRouter);
+app.use("/product_action", verifyToken, productRouter);
+app.use("/cart", cartRouter);
 
 const PORT = 5000;
 

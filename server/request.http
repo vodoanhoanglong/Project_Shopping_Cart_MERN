@@ -1,7 +1,59 @@
-POST http://localhost:5000/auth/register
+
+POST http://localhost:5000/auth/login
 Content-Type: application/json
 
 {
     "username": "hoanglong",
     "password": "longloi123"
 }
+
+###
+POST http://localhost:5000/product_action
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGY2NGVjNTdmMjNiYzIzY2M1ZTkzMDEiLCJpYXQiOjE2MjY4MzU1MjR9.kfSPVHQQ8DiEuZe8I6vcjIGzrBLzoFZQl5NU0p8WicQ
+
+{
+    "title": "Quan Ao 4",
+    "description": "Quan dep hai",
+    "url": "img.freepik.com/free-photo/three-young-beautiful-smiling-girls-trendy-summer-casual-jeans-clothes-sexy-carefree-women-posing-positive-models-sunglasses_158538-4730.jpg?size=626&ext=jpg",
+    "price": 200000
+}
+
+###
+PUT http://localhost:5000/product_action/60f79afcd100ad430030cff1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGY2NGVjNTdmMjNiYzIzY2M1ZTkzMDEiLCJpYXQiOjE2MjY4MzU1MjR9.kfSPVHQQ8DiEuZe8I6vcjIGzrBLzoFZQl5NU0p8WicQ
+
+{
+    "title": "Quan Ao Update",
+    "description": "Quan dep Update",
+    "url": "img.freepik.com/free-photo/three-young-beautiful-smiling-girls-trendy-summer-casual-jeans-clothes-sexy-carefree-women-posing-positive-models-sunglasses_158538-4730.jpg?size=626&ext=jpg",
+    "price": 100000
+}
+
+###
+
+DELETE http://localhost:5000/product_action/60f79afcd100ad430030cff1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGY2NGVjNTdmMjNiYzIzY2M1ZTkzMDEiLCJpYXQiOjE2MjY4MzU1MjR9.kfSPVHQQ8DiEuZe8I6vcjIGzrBLzoFZQl5NU0p8WicQ
+
+
+###
+POST http://localhost:5000/cart
+Content-Type: application/json
+
+{
+    "cartItem": [
+        {
+            "title": "Quan Ao 2",
+            "price": 200000,
+            "quantity": 2
+        },
+        {
+            "title": "Quan Ao",
+            "price": 500000,
+            "quantity": 1
+        }
+    ]
+}
+
+

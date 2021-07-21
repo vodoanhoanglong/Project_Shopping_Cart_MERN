@@ -10,9 +10,9 @@ const OrderSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "users",
   },
-  cart: {
-    type: Object,
-  },
+  cart: Object,
+  discount: Number,
+  totalPrice: Number,
 });
 
 module.exports = mongoose.model("orders", OrderSchema);
