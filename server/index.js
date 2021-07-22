@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 const verifyToken = require("./middleware/auth");
 const authRouter = require("./routes/auth");
@@ -29,6 +30,7 @@ connectDB();
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.use("/auth", authRouter);
 app.use("/product_action", verifyToken, productRouter);
