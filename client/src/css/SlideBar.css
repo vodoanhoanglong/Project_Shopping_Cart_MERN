@@ -1,0 +1,10 @@
+.carousel-control-prev-icon {
+  background-image: url(https://image.flaticon.com/icons/png/512/271/271220.png);
+}
+.carousel-control-next-icon {
+  background-image: url(https://image.flaticon.com/icons/png/512/271/271228.png);
+}
+
+.carousel-caption {
+  color: #000;
+}

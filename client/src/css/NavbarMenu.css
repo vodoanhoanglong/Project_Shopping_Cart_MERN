@@ -49,13 +49,13 @@ h1::after {
 .main-header {
   position: fixed;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   height: 65px;
   width: 100vw;
   padding: 0 10vw;
   color: #000;
-  z-index: 1;
+  z-index: 2;
   transition: 0.3s ease-in-out;
 }
 
@@ -64,7 +64,8 @@ h1::after {
 }
 
 .main-header ul {
-  height: 5px;
+  height: 3px;
+  margin-right: 300px;
 }
 
 .main-header a {
