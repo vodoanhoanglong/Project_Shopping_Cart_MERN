@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import "../../css/NavbarMenu.css";
+
 import Cart from "../../assets/shopping-cart.png";
 
 const NavbarMenu = () => {
@@ -40,7 +41,7 @@ const NavbarMenu = () => {
             <img src={Cart} alt="" width="20" />
           </Link>
         </div>
-        <label htmlFor="menu-btn" className={"menu-icon " + toggle}>
+        <label htmlFor="menu-btn" className="menu-icon">
           <span className="menu-icon__line"></span>
         </label>
       </header>

@@ -56,16 +56,28 @@ h1::after {
   padding: 0 10vw;
   color: #000;
   z-index: 1;
-  transition: 0.3s ease-out;
+  transition: 0.3s ease-in-out;
+}
+
+.main-header .logo {
+  height: 40px;
+}
+
+.main-header ul {
+  height: 5px;
 }
 
 .main-header a {
   text-decoration: none;
   color: inherit;
   text-transform: uppercase;
+  font-weight: bold;
+  font-family: Poppins-Medium;
+  transition: all 0.4s;
 }
 
 .main-header ul {
+  position: relative;
   display: flex;
   list-style: none;
 }
@@ -92,7 +104,7 @@ h1::after {
 }
 
 .main-header ul li a:hover {
-  background: rgba(255, 255, 255, 0.2);
+  color: #8994e1;
 }
 
 .menu-icon {
@@ -145,9 +157,8 @@ h1::after {
 
 /* </hide button menu>  */
 
-.menu-icon.scrolled,
 .main-header.scrolled {
-  height: 50px;
+  height: 55px;
   background: rgb(255, 255, 255);
   color: #000;
   box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
@@ -174,6 +185,11 @@ h1::after {
   color: white;
   padding: 3px 5px;
   border-radius: 50%;
+  transition: all 0.4s;
+}
+
+.nav-cart:hover span {
+  background: #8994e1;
 }
 
 @media screen and (max-width: 767px) {
@@ -211,6 +227,18 @@ h1::after {
     transition: opacity 0.8s 0.5s, clip-path 1s 0.5s;
     clip-path: circle(200px at top right);
   }
+
+  .main-header .nav-links li {
+    opacity: 0;
+    transform: translateX(100%);
+    width: 100%;
+    text-align: center;
+  }
+  .main-header .nav-links li a {
+    display: block;
+    padding: 2rem 0;
+  }
+
   .main-header .menu-btn:checked ~ .nav-links {
     opacity: 1;
     clip-path: circle(100% at center);
@@ -220,6 +248,11 @@ h1::after {
     transform: translateX(0);
     transition: opacity 0.4s ease-in-out,
       transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .main-header .menu-btn:checked ~ .nav-links li a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
   }
 
   .main-header .menu-btn:checked ~ .nav-links li:nth-of-type(1) {
@@ -248,15 +281,13 @@ h1::after {
     background: #fff;
     animation: openBtm 0.8s forwards;
   }
-  .main-header .nav-links li {
-    opacity: 0;
-    transform: translateX(100%);
-    width: 100%;
-    text-align: center;
+
+  .main-header .nav-cart {
+    transition: transform 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
-  .main-header .nav-links li a {
-    display: block;
-    padding: 2rem 0;
+
+  .main-header .menu-btn:checked ~ .nav-cart {
+    transform: translateX(-50vw);
   }
 }
 
