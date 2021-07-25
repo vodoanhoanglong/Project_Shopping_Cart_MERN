@@ -13,7 +13,6 @@ const NavbarMenu = () => {
       else setToggle("");
     });
   }, [toggle]);
-
   return (
     <>
       <header className={"main-header " + toggle}>
@@ -50,7 +49,7 @@ const NavbarMenu = () => {
       </div> */}
       <SlideBar />
       <div className="container">
-        <p>
+        <p className="animate__fadeInLeft">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
           id rem omnis excepturi illo? Mollitia a, eum sequi aliquid ullam
           maxime hic modi minima asperiores quasi repellat atque, iste eveniet

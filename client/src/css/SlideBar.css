@@ -5,6 +5,50 @@
   background-image: url(https://image.flaticon.com/icons/png/512/271/271228.png);
 }
 
+/* khi chuyen slide khong bi mat img */
+.carousel-item {
+  display: block;
+}
+
 .carousel-caption {
+  position: absolute;
+  text-align: left;
+  height: 60%;
+  width: 100%;
+  top: 40%;
+  left: 20%;
   color: #000;
+}
+
+.carousel-caption h3 {
+  font-family: Poppins-Regular;
+  font-size: 28px;
+  line-height: 1.2857;
+}
+
+.carousel-caption h2 {
+  font-family: PlayfairDisplay-Bold;
+  font-weight: bold;
+  font-size: 60px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: #333;
+  padding-top: 19px;
+  padding-bottom: 40px;
+}
+
+.carousel-caption button {
+  border: none;
+  height: 45px;
+  width: 150px;
+  background: #8994e1;
+  text-transform: uppercase;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+  transition: all 0.4s;
+}
+.carousel-caption button:hover {
+  background: #000;
 }
