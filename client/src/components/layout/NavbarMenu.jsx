@@ -6,6 +6,8 @@ import Cart from "../../assets/shopping-cart.png";
 
 const NavbarMenu = () => {
   const [toggle, setToggle] = useState("");
+  const [a, setA] = useState(false);
+
   useEffect(() => {
     window.addEventListener("scroll", () => {
       const scrollPos = window.scrollY;
@@ -33,8 +35,20 @@ const NavbarMenu = () => {
             <Link to="/">About</Link>
           </li>
         </ul>
-        <div className="nav-cart">
-          <span>0</span>
+        <div
+          className="nav-cart"
+          onMouseEnter={() => setA(true)}
+          onMouseLeave={() => setA(false)}
+        >
+          <span
+            className={
+              a
+                ? "animate__animated animate__heartBeat id animate__infinite"
+                : ""
+            }
+          >
+            0
+          </span>
           <Link to="/cart">
             <img src={Cart} alt="" width="20" />
           </Link>

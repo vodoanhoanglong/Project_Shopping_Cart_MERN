@@ -1,8 +1,36 @@
 .carousel-control-prev-icon {
   background-image: url(https://image.flaticon.com/icons/png/512/271/271220.png);
+  height: 32px;
+  width: 32px;
 }
 .carousel-control-next-icon {
   background-image: url(https://image.flaticon.com/icons/png/512/271/271228.png);
+  height: 32px;
+  width: 32px;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15%;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+  background: 0 0;
+  border: 0;
+  opacity: 0.3;
+  transition: opacity 0.15s ease;
+}
+
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+  opacity: 1;
 }
 
 /* khi chuyen slide khong bi mat img */
@@ -51,4 +79,100 @@
 }
 .carousel-caption button:hover {
   background: #000;
+}
+
+@media screen and (max-width: 852px) {
+  .carousel-caption {
+    top: 25%;
+  }
+  .carousel-caption h3 {
+    font-size: 30px;
+    line-height: 1;
+  }
+  .carousel-caption h2 {
+    line-height: 1;
+    font-size: 40px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .carousel-caption h3 {
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  .carousel-caption h2 {
+    font-size: 35px;
+    line-height: 1;
+    padding-top: 10px;
+    padding-bottom: 15px;
+  }
+
+  .carousel-caption button {
+    height: 40px;
+    width: 120px;
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .carousel-caption h3 {
+    font-size: 17px;
+    line-height: 1;
+  }
+
+  .carousel-caption h2 {
+    font-size: 30px;
+    line-height: 1;
+    padding-top: 7px;
+    padding-bottom: 12px;
+  }
+
+  .carousel-caption button {
+    height: 26px;
+    width: 100px;
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .carousel-caption h3 {
+    font-size: 15px;
+    line-height: 1;
+  }
+
+  .carousel-caption h2 {
+    font-size: 20px;
+    line-height: 1;
+    padding-top: 5px;
+    padding-bottom: 10px;
+  }
+
+  .carousel-caption button {
+    height: 25px;
+    width: 80px;
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .carousel-caption h3 {
+    font-size: 10px;
+    line-height: 1;
+  }
+
+  .carousel-caption h2 {
+    font-size: 18px;
+    line-height: 1;
+    padding-top: 3px;
+    padding-bottom: 2px;
+  }
+
+  .carousel-caption button {
+    height: 20px;
+    width: 55px;
+    font-size: 5px;
+  }
 }

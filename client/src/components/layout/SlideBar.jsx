@@ -1,24 +1,46 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Carousel, Button } from "react-bootstrap";
 import "../../css/SlideBar.css";
 
 export const SlideBar = () => {
+  const [a, setA] = useState(true);
+  const [pause, setPause] = useState(false);
+
   return (
-    <Carousel fade pause={false} prevLabel={null} nextLabel={null}>
+    <Carousel
+      fade
+      pause={pause}
+      prevLabel={null}
+      nextLabel={null}
+      onSlid={() => setA(!a)}
+    >
       <Carousel.Item interval="4000">
         <img
           className="d-block w-100"
           src="https://preview.colorlib.com/theme/cozastore/images/xslide-02.jpg.pagespeed.ic.__MQeyG5T4.webp"
           alt="First slide"
         />
-        <Carousel.Caption>
+
+        <Carousel.Caption
+          className={
+            a
+              ? "animate__animated animate__bounceInLeft"
+              : "animate__animated animate__bounceInRight"
+          }
+        >
           <h3>Men New Season</h3>
-          <h2 className="animate__animated animate__bounceInLeft  ">
-            Jackets & Coats
-          </h2>
-          <Button>Shop now</Button>
+
+          <h2>Jackets & Coats</h2>
+
+          <Button
+            onMouseEnter={() => setPause("hover")}
+            onMouseLeave={() => setPause(false)}
+          >
+            Shop now
+          </Button>
         </Carousel.Caption>
       </Carousel.Item>
+
       <Carousel.Item interval="4000">
         <img
           className="d-block w-100"
@@ -26,12 +48,22 @@ export const SlideBar = () => {
           alt="Second slide"
         />
 
-        <Carousel.Caption>
+        <Carousel.Caption
+          className={
+            a
+              ? "animate__animated animate__bounceInLeft"
+              : "animate__animated animate__bounceInRight"
+          }
+        >
           <h3>Women collection 2020</h3>
-          <h2 className="animate__animated animate__bounceInLeft">
-            New season
-          </h2>
-          <Button>Shop now</Button>
+
+          <h2>New season</h2>
+          <Button
+            onMouseEnter={() => setPause("hover")}
+            onMouseLeave={() => setPause(false)}
+          >
+            Shop now
+          </Button>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item interval="4000">
@@ -41,12 +73,22 @@ export const SlideBar = () => {
           alt="Third slide"
         />
 
-        <Carousel.Caption>
+        <Carousel.Caption
+          className={
+            a
+              ? "animate__animated animate__bounceInLeft"
+              : "animate__animated animate__bounceInRight"
+          }
+        >
           <h3>Men collection 2020</h3>
-          <h2 className="animate__animated animate__bounceInLeft ">
-            New arrivals
-          </h2>
-          <Button>Shop now</Button>
+
+          <h2>New arrivals</h2>
+          <Button
+            onMouseEnter={() => setPause("hover")}
+            onMouseLeave={() => setPause(false)}
+          >
+            Shop now
+          </Button>
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
