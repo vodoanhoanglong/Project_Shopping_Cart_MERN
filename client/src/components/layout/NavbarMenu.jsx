@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+
 import { Link } from "react-router-dom";
 import { SlideBar } from "./SlideBar";
 import "../../css/NavbarMenu.css";
 import Cart from "../../assets/shopping-cart.png";
+import MultiItemCarousel from "./MultiItemCarousel";
 
 const NavbarMenu = () => {
   const [toggle, setToggle] = useState("");
@@ -58,36 +60,33 @@ const NavbarMenu = () => {
         </label>
       </header>
 
-      {/* <div className="hero">
-        <h1>Hero Text</h1>
-      </div> */}
       <SlideBar />
-      <div className="container">
-        <p className="animate__fadeInLeft">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
-          id rem omnis excepturi illo? Mollitia a, eum sequi aliquid ullam
-          maxime hic modi minima asperiores quasi repellat atque, iste eveniet
-          dolorem dicta earum alias numquam tempore illo ab! Ducimus nihil,
-          adipisci repellendus deserunt laudantium doloremque, molestias
-          corporis ullam pariatur neque vitae nemo iusto nulla quisquam ratione
-          reiciendis praesentium libero quidem quas maxime. Voluptatibus id
-          eaque natus? Autem error, vitae tenetur rem accusamus quae nulla
-          necessitatibus exercitationem ea voluptatem, sunt a eum nihil atque
-          quod maxime, ratione deleniti? Error, fugit dolorum? Eum doloribus
-          magni repellendus nulla cum, velit iure doloremque tenetur id officiis
-          asperiores recusandae illum, illo a minus! Sed officia repellat
-          laudantium quis consequatur, hic ipsa cupiditate dolor, at ut,
-          quisquam et illo? Repellendus sunt in soluta eaque ipsa maxime veniam
-          esse eos accusantium aperiam? Quod tempora, in aut neque facilis quia
-          expedita, eum vero aliquam porro ipsum quasi, ducimus natus! Facere,
-          alias sed, eius dignissimos beatae a at assumenda rerum aut modi vero
-          eaque consequuntur, praesentium tempora? Blanditiis expedita fuga
-          possimus ad omnis nesciunt ut corrupti deleniti odit, voluptates
-          excepturi modi commodi repellat, reprehenderit mollitia nam nulla
-          rerum libero ipsam porro non corporis! Tempore nam molestias eaque et
-          laborum.
-        </p>
-      </div>
+      <MultiItemCarousel />
+      {/* <div>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis illo
+        doloribus deserunt ad nulla fugit tempora iusto quam! Cum incidunt illo
+        doloribus veritatis consequatur obcaecati sunt ratione excepturi
+        repellendus magni quae minus, sit perferendis a magnam aspernatur
+        eveniet natus? Dolores assumenda delectus cupiditate sed nihil qui
+        tempore aliquid corporis sunt sapiente! Cumque distinctio laboriosam
+        reprehenderit commodi impedit illum voluptates dolorem nulla.
+        Accusantium neque harum reiciendis ut perferendis molestiae, nulla
+        ducimus? Sequi provident temporibus ratione dolores dolor amet sint
+        aspernatur ad, illo nobis fuga ullam mollitia quae similique
+        consequuntur accusamus soluta, minus saepe veritatis fugiat debitis
+        voluptate! Est pariatur similique tempora id incidunt. Velit sequi
+        corrupti, esse, quia rerum in repudiandae suscipit quod officiis
+        assumenda, quam sed voluptate. Exercitationem odio eaque voluptatem
+        voluptatum possimus reiciendis eligendi, ut suscipit quaerat assumenda,
+        nostrum veniam quisquam. Expedita atque natus esse repellendus veniam
+        reprehenderit, deleniti illum assumenda quisquam suscipit in quas
+        consequatur impedit optio vel vero eum voluptas inventore cupiditate, at
+        maiores sunt asperiores laboriosam. Alias autem natus at delectus
+        perferendis optio, ad nesciunt dolores quasi. Vel, quod repellendus? Id
+        eligendi ex hic doloribus voluptatem incidunt excepturi dolorum amet,
+        veritatis quidem illum earum eaque ipsum aspernatur animi facilis. Vero
+        quasi quis quod accusamus porro doloremque.
+      </div> */}
     </>
   );
 };

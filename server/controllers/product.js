@@ -89,3 +89,13 @@ module.exports.deleteProduct = async (req, res) => {
     res.status(500).json({ success: false, message: "Server error" });
   }
 };
+
+module.exports.getTop12Item = async (req, res) => {
+  try {
+    const products = await Product.find().sort({ _id: -1 }).limit(12);
+    res.json({ success: true, products });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};

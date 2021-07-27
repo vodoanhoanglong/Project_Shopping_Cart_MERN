@@ -3,6 +3,8 @@ const router = express.Router();
 
 const controller = require("../controllers/product");
 
+router.get("/", controller.getTop12Item);
+
 router.post("/", controller.addProduct);
 
 router.put("/:id", controller.updateProduct);

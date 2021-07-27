@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState } from "react";
 import { Carousel, Button } from "react-bootstrap";
 import "../../css/SlideBar.css";
 

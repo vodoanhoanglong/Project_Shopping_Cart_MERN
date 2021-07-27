@@ -8,14 +8,21 @@ Content-Type: application/json
 }
 
 ###
+GET http://localhost:5000/product_action
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGY2NGVjNTdmMjNiYzIzY2M1ZTkzMDEiLCJpYXQiOjE2MjY4MzU1MjR9.kfSPVHQQ8DiEuZe8I6vcjIGzrBLzoFZQl5NU0p8WicQ
+
+
+
+###
 POST http://localhost:5000/product_action
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGY2NGVjNTdmMjNiYzIzY2M1ZTkzMDEiLCJpYXQiOjE2MjY4MzU1MjR9.kfSPVHQQ8DiEuZe8I6vcjIGzrBLzoFZQl5NU0p8WicQ
 
 {
-    "title": "Quan Ao 4",
+    "title": "Quan Ao 32",
     "description": "Quan dep hai",
-    "url": "img.freepik.com/free-photo/three-young-beautiful-smiling-girls-trendy-summer-casual-jeans-clothes-sexy-carefree-women-posing-positive-models-sunglasses_158538-4730.jpg?size=626&ext=jpg",
+    "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDL0r80tOnBH2ldR-m_NfdSRb0BWJOCWC0eA&usqp=CAU",
     "price": 200000
 }
 

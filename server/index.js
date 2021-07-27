@@ -33,7 +33,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/auth", authRouter);
-app.use("/product_action", verifyToken, productRouter);
+app.use("/product_action", productRouter); // thieu verifyToken
 app.use("/cart", cartRouter);
 
 const PORT = 5000;
