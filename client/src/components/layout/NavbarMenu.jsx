@@ -5,6 +5,7 @@ import { SlideBar } from "./SlideBar";
 import "../../css/NavbarMenu.css";
 import Cart from "../../assets/shopping-cart.png";
 import MultiItemCarousel from "./MultiItemCarousel";
+import Footer from "./Footer";
 
 const NavbarMenu = () => {
   const [toggle, setToggle] = useState("");
@@ -61,32 +62,23 @@ const NavbarMenu = () => {
       </header>
 
       <SlideBar />
+      <div>
+        <h2
+          style={{
+            paddingLeft: "290px",
+            marginTop: "50px",
+            fontFamily: "PlayfairDisplay-Bold",
+            fontWeight: "bold",
+            fontSize: "40px",
+            color: "black",
+            textTransform: "uppercase",
+          }}
+        >
+          New Products
+        </h2>
+      </div>
       <MultiItemCarousel />
-      {/* <div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis illo
-        doloribus deserunt ad nulla fugit tempora iusto quam! Cum incidunt illo
-        doloribus veritatis consequatur obcaecati sunt ratione excepturi
-        repellendus magni quae minus, sit perferendis a magnam aspernatur
-        eveniet natus? Dolores assumenda delectus cupiditate sed nihil qui
-        tempore aliquid corporis sunt sapiente! Cumque distinctio laboriosam
-        reprehenderit commodi impedit illum voluptates dolorem nulla.
-        Accusantium neque harum reiciendis ut perferendis molestiae, nulla
-        ducimus? Sequi provident temporibus ratione dolores dolor amet sint
-        aspernatur ad, illo nobis fuga ullam mollitia quae similique
-        consequuntur accusamus soluta, minus saepe veritatis fugiat debitis
-        voluptate! Est pariatur similique tempora id incidunt. Velit sequi
-        corrupti, esse, quia rerum in repudiandae suscipit quod officiis
-        assumenda, quam sed voluptate. Exercitationem odio eaque voluptatem
-        voluptatum possimus reiciendis eligendi, ut suscipit quaerat assumenda,
-        nostrum veniam quisquam. Expedita atque natus esse repellendus veniam
-        reprehenderit, deleniti illum assumenda quisquam suscipit in quas
-        consequatur impedit optio vel vero eum voluptas inventore cupiditate, at
-        maiores sunt asperiores laboriosam. Alias autem natus at delectus
-        perferendis optio, ad nesciunt dolores quasi. Vel, quod repellendus? Id
-        eligendi ex hic doloribus voluptatem incidunt excepturi dolorum amet,
-        veritatis quidem illum earum eaque ipsum aspernatur animi facilis. Vero
-        quasi quis quod accusamus porro doloremque.
-      </div> */}
+      <Footer />
     </>
   );
 };
