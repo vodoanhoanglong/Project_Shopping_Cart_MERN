@@ -1,0 +1,33 @@
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 100%;
+}
+
+.container .col {
+  margin-top: 25px;
+}
+
+.container h4 {
+  padding-left: 2rem;
+  font-weight: bold;
+  font-family: Poppins-Regular;
+  margin-bottom: 20px;
+}
+
+.container li {
+  list-style: none;
+  font-weight: bold;
+  font-family: Poppins-Regular;
+  font-size: 13px;
+  line-height: 1.923;
+}
+.container li a {
+  text-decoration: none;
+}
+
+.container li a:hover {
+  color: #717fe0;
+}
