@@ -1,19 +1,23 @@
+footer {
+  vertical-align: middle;
+}
+
 .container {
   margin-right: auto;
   margin-left: auto;
   padding-right: 15px;
   padding-left: 15px;
-  width: 100%;
 }
 
-.container .col {
-  margin-top: 25px;
+.container .row {
+  --bs-gutter-y: 25px;
 }
 
 .container h4 {
+  color: WHITE;
   padding-left: 2rem;
   font-weight: bold;
-  font-family: Poppins-Regular;
+  font-family: PlayfairDisplay-Bold;
   margin-bottom: 20px;
 }
 
@@ -26,8 +30,10 @@
 }
 .container li a {
   text-decoration: none;
+  color: white;
 }
 
 .container li a:hover {
+  transition: all 0.4s;
   color: #717fe0;
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../../css/Footer.css";
 
 const Footer = () => {
@@ -28,12 +29,26 @@ const Footer = () => {
             <h4>Contact</h4>
             <ul>
               <li>
-                <a href="tel:+84932765080">(+84) 932 765 080</a>
+                <Link
+                  to="#"
+                  onClick={(e) => {
+                    window.location = "tel:+84932765080";
+                    e.preventDefault();
+                  }}
+                >
+                  (+84) 932 765 080
+                </Link>
               </li>
               <li>
-                <a href="mailto:vodoanhoanglong10a9@gmail.com">
+                <Link
+                  to="#"
+                  onClick={(e) => {
+                    window.location = "mailto:vodoanhoanglong10a9@gmail.com";
+                    e.preventDefault();
+                  }}
+                >
                   vodoanhoanglong10a9@gmail.com
-                </a>
+                </Link>
               </li>
               <li>
                 <p>
