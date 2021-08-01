@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
-import { SlideBar } from "./SlideBar";
 import "../../css/NavbarMenu.css";
 import Cart from "../../assets/shopping-cart.png";
-import MultiItemCarousel from "./MultiItemCarousel";
-import Footer from "./Footer";
 
 const NavbarMenu = () => {
   const [toggle, setToggle] = useState("");
   const [a, setA] = useState(false);
+
+  const linkColor = window.location.href.slice(21);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -29,10 +28,20 @@ const NavbarMenu = () => {
         <input type="checkbox" className="menu-btn" id="menu-btn" />
         <ul className="nav-links">
           <li>
-            <Link to="/">Home</Link>
+            <Link
+              to="/"
+              style={linkColor !== "/" ? null : { color: "#717fe0" }}
+            >
+              Home
+            </Link>
           </li>
           <li>
-            <Link to="/">Shop</Link>
+            <Link
+              to="/shop"
+              style={linkColor !== "/shop" ? null : { color: "#717fe0" }}
+            >
+              Shop
+            </Link>
           </li>
           <li>
             <Link to="/">About</Link>
@@ -60,25 +69,6 @@ const NavbarMenu = () => {
           <span className="menu-icon__line"></span>
         </label>
       </header>
-
-      <SlideBar />
-      <div>
-        <h2
-          style={{
-            paddingLeft: "290px",
-            marginTop: "50px",
-            fontFamily: "PlayfairDisplay-Bold",
-            fontWeight: "bold",
-            fontSize: "40px",
-            color: "black",
-            textTransform: "uppercase",
-          }}
-        >
-          New Products
-        </h2>
-      </div>
-      <MultiItemCarousel />
-      <Footer />
     </>
   );
 };

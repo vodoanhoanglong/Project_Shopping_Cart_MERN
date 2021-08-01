@@ -1,0 +1,33 @@
+.shop-container {
+  width: 100%;
+  position: absolute;
+  margin-top: 200px;
+}
+.shop-container .d-flex {
+  justify-content: space-around;
+}
+
+.shop-container .d-flex button {
+  outline: 0 !important;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: black;
+  font-family: Poppins-Regular;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+  border-bottom: 1px solid transparent;
+  transition: all 0.4s;
+  margin-right: 20px;
+  padding: 0;
+  border-radius: unset;
+  opacity: 0.6;
+}
+
+.shop-container .d-flex button:focus,
+.shop-container .d-flex button:hover {
+  opacity: 1;
+  color: #333;
+  border-color: #797979;
+}

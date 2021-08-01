@@ -1,14 +1,16 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import NavbarMenu from "./components/layout/NavbarMenu";
 import ProductContextProvider from "./contexts/ProductContext";
+import Home from "./views/Home";
+import Shop from "./views/Shop";
 
 function App() {
   return (
     <ProductContextProvider>
       <Router>
         <Switch>
-          <NavbarMenu />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/shop" component={Shop} />
         </Switch>
       </Router>
     </ProductContextProvider>

@@ -1,16 +1,14 @@
 footer {
-  vertical-align: middle;
+  padding-top: 15px;
 }
 
 .container {
+  display: flex;
+  justify-content: center;
   margin-right: auto;
   margin-left: auto;
   padding-right: 15px;
   padding-left: 15px;
-}
-
-.container .row {
-  --bs-gutter-y: 25px;
 }
 
 .container h4 {
