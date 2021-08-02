@@ -13,6 +13,19 @@ export const productReducer = (state, action) => {
         products: [],
         productsLoading: false,
       };
+    case "PRODUCT_LOADED_ALL_SUCCESS":
+      return {
+        ...state,
+        allProducts: payload,
+        productsLoading: false,
+      };
+    case "PRODUCT_LOADED_ALL_FAIL":
+      return {
+        ...state,
+        allProducts: [],
+        productsLoading: false,
+      };
+
     default:
       return state;
   }

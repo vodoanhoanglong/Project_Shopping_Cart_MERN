@@ -20,10 +20,11 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGY2NGVjNTdmMjNiYzIzY2M1ZTkzMDEiLCJpYXQiOjE2MjY4MzU1MjR9.kfSPVHQQ8DiEuZe8I6vcjIGzrBLzoFZQl5NU0p8WicQ
 
 {
-    "title": "Quan Ao 32",
+    "title": "Square Neck Back",
     "description": "Quan dep hai",
-    "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDL0r80tOnBH2ldR-m_NfdSRb0BWJOCWC0eA&usqp=CAU",
-    "price": 200000
+    "url": "https://preview.colorlib.com/theme/cozastore/images/xproduct-16.jpg.pagespeed.ic.AbLwZITYaU.webp",
+    "price": 29.64,
+    "type": "Women"
 }
 
 ###

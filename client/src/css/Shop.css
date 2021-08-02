@@ -7,6 +7,14 @@
   justify-content: space-around;
 }
 
+.shop-container .products {
+  text-align: center;
+}
+
+.shop-container .products .row {
+  display: inline-block;
+}
+
 .shop-container .d-flex button {
   outline: 0 !important;
   border: none;

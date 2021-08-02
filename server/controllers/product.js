@@ -1,8 +1,9 @@
 const Product = require("../models/product");
-module.exports.addProduct = async (req, res) => {
-  const { title, description, url, price } = req.body;
 
-  if (!title && !description && !url && !price)
+module.exports.addProduct = async (req, res) => {
+  const { title, description, url, price, type } = req.body;
+
+  if (!title && !url && !price && !type)
     return res
       .status(400)
       .json({ success: false, message: "Content required" });
@@ -12,6 +13,7 @@ module.exports.addProduct = async (req, res) => {
       description,
       url: url.startsWith("https://") ? url : `https://${url}`,
       price,
+      type,
       user: req.userId,
     });
 
@@ -29,7 +31,7 @@ module.exports.addProduct = async (req, res) => {
 };
 
 module.exports.updateProduct = async (req, res) => {
-  const { title, description, url, price } = req.body;
+  const { title, description, url, price, type } = req.body;
   if (!title && !description && !url && !price)
     return res
       .status(400)
@@ -40,6 +42,7 @@ module.exports.updateProduct = async (req, res) => {
       description,
       url: url.startsWith("https://") ? url : `https://${url}`,
       price,
+      type,
     };
 
     const productUpdateCondition = { _id: req.params.id, user: req.userId };
@@ -90,10 +93,17 @@ module.exports.deleteProduct = async (req, res) => {
   }
 };
 
-module.exports.getTop12Item = async (req, res) => {
+module.exports.getProducts = async (req, res) => {
   try {
     const products = await Product.find().sort({ _id: -1 }).limit(12);
-    res.json({ success: true, products });
+    const allProducts = await Product.find();
+    res.json({
+      success: true,
+      type: {
+        products,
+        allProducts,
+      },
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, message: "Internal server error" });

@@ -33,7 +33,7 @@ const MultiItemCarousel = () => {
               <Card.Img variant="top" src={item.url}></Card.Img>
               <Card.Body>
                 <Card.Title>{item.title}</Card.Title>
-                <Card.Text>{item.description}</Card.Text>
+                <Card.Text>{"$ " + item.price}</Card.Text>
                 <Button variant="primary">ADD TO CART</Button>
               </Card.Body>
             </Card>

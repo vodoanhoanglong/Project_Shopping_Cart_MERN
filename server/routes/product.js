@@ -3,7 +3,7 @@ const router = express.Router();
 
 const controller = require("../controllers/product");
 
-router.get("/", controller.getTop12Item);
+router.get("/", controller.getProducts);
 
 router.post("/", controller.addProduct);
 
