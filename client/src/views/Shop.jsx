@@ -31,7 +31,7 @@ const Shop = () => {
           </div>
         </div>
         <div className="products">
-          <Row className="row-cols-1 row-cols-md-3 g-4 mx-auto mt-5">
+          <Row className="row-cols-1 row-cols-md-4 g-4 mx-auto mt-5">
             {allProducts.map((product) => (
               <Col key={product._id} className="my-2">
                 <Card style={{ width: "18rem" }}>

@@ -96,7 +96,7 @@ module.exports.deleteProduct = async (req, res) => {
 module.exports.getProducts = async (req, res) => {
   try {
     const products = await Product.find().sort({ _id: -1 }).limit(12);
-    const allProducts = await Product.find();
+    const allProducts = await Product.find().sort({ _id: -1 });
     res.json({
       success: true,
       type: {

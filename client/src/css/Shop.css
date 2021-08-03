@@ -8,11 +8,11 @@
 }
 
 .shop-container .products {
-  text-align: center;
-}
+  position: absolute;
 
-.shop-container .products .row {
-  display: inline-block;
+  width: 61%;
+  left: 19%;
+  height: 300px;
 }
 
 .shop-container .d-flex button {
