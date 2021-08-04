@@ -34,11 +34,11 @@ const Shop = () => {
           <Row className="row-cols-1 row-cols-md-4 g-4 mx-auto mt-5">
             {allProducts.map((product) => (
               <Col key={product._id} className="my-2">
-                <Card style={{ width: "18rem" }}>
+                <Card style={{ width: "19rem" }}>
                   <Card.Img variant="top" src={product.url} />
                   <Card.Body>
                     <Card.Title>{product.title}</Card.Title>
-                    <Card.Text>{product.description}</Card.Text>
+                    <Card.Text>$ {product.price}</Card.Text>
                     <Button variant="primary">ADD TO CART</Button>
                   </Card.Body>
                 </Card>
