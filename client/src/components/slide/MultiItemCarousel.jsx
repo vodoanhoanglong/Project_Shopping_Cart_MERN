@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { ProductContext } from "../../contexts/ProductContext";
 import { Card, Button } from "react-bootstrap";
 
@@ -13,8 +13,13 @@ const MultiItemCarousel = () => {
     productState: { products },
     get12Products,
   } = useContext(ProductContext);
+  const isMounted = useRef(false);
 
-  useEffect(() => get12Products(), []);
+  useEffect(() => {
+    isMounted.current = true;
+    get12Products();
+    return () => (isMounted.current = false);
+  }, []);
 
   var settings = {
     dots: false,

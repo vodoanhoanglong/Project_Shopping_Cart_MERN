@@ -3,7 +3,7 @@ import { useContext, useEffect, useRef } from "react";
 import NavbarMenu from "../components/layout/NavbarMenu";
 import { ProductContext } from "../contexts/ProductContext";
 
-import { Row, Col, Card, Button } from "react-bootstrap";
+import { Row, Col, Card } from "react-bootstrap";
 import "../css/Shop.css";
 import { Link } from "react-router-dom";
 
@@ -13,11 +13,14 @@ const Shop = () => {
     getAllProducts,
   } = useContext(ProductContext);
   const isMounted = useRef(false);
+
   useEffect(() => {
     isMounted.current = true;
     getAllProducts();
     return () => (isMounted.current = false);
   }, []);
+
+  const showProducts = (type) => {};
 
   return (
     <div>
@@ -29,7 +32,7 @@ const Shop = () => {
             <button>Women</button>
             <button>Men</button>
             <button>Shoes</button>
-            <button>Watch</button>
+            <button>Watches</button>
           </div>
           <div>
             <button>Filter</button>
@@ -42,12 +45,11 @@ const Shop = () => {
                 <Card style={{ width: "19rem" }}>
                   <div className="block-pic">
                     <Card.Img variant="top" src={product.url} />
-                    <Link to="#">QuickView</Link>
+                    <Link to="#">Quick View</Link>
                   </div>
                   <Card.Body>
                     <Card.Title>{product.title}</Card.Title>
-                    <Card.Text>$ {product.price}</Card.Text>
-                    <Button variant="primary">ADD TO CART</Button>
+                    <Card.Text>${product.price}</Card.Text>
                   </Card.Body>
                 </Card>
               </Col>

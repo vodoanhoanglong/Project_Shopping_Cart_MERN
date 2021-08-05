@@ -10,7 +10,6 @@ const ProductContextProvider = ({ children }) => {
     product: null,
     products: [],
     allProducts: [],
-    productsLoading: true,
   });
 
   const get12Products = async () => {
