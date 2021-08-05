@@ -1,18 +1,23 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef } from "react";
 
 import NavbarMenu from "../components/layout/NavbarMenu";
 import { ProductContext } from "../contexts/ProductContext";
 
 import { Row, Col, Card, Button } from "react-bootstrap";
 import "../css/Shop.css";
+import { Link } from "react-router-dom";
 
 const Shop = () => {
   const {
     productState: { allProducts },
     getAllProducts,
   } = useContext(ProductContext);
-
-  useEffect(() => getAllProducts(), []);
+  const isMounted = useRef(false);
+  useEffect(() => {
+    isMounted.current = true;
+    getAllProducts();
+    return () => (isMounted.current = false);
+  }, []);
 
   return (
     <div>
@@ -35,7 +40,10 @@ const Shop = () => {
             {allProducts.map((product) => (
               <Col key={product._id} className="my-2">
                 <Card style={{ width: "19rem" }}>
-                  <Card.Img variant="top" src={product.url} />
+                  <div className="block-pic">
+                    <Card.Img variant="top" src={product.url} />
+                    <Link to="#">QuickView</Link>
+                  </div>
                   <Card.Body>
                     <Card.Title>{product.title}</Card.Title>
                     <Card.Text>$ {product.price}</Card.Text>
