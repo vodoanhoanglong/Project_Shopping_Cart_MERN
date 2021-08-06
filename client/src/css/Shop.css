@@ -40,6 +40,10 @@
   height: 300px;
 }
 
+.shop-container .products .row {
+  transition: all 0.4s;
+}
+
 .shop-container .products .block-pic {
   position: relative;
   display: block;
