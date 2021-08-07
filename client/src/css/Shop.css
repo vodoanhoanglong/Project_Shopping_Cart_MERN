@@ -101,3 +101,13 @@
   font-size: 17px;
   font-weight: 600;
 }
+
+/* .shop-container .products .card {
+  position: absolute;
+
+  opacity: 1;
+  transform: translate3d(0px, 0px, 0px);
+  transition-property: opacity, transform;
+  transition-duration: 0.4s;
+  transition-delay: 0ms;
+} */

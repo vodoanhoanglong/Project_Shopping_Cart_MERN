@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import { Link } from "react-router-dom";
 import "../../css/NavbarMenu.css";
@@ -6,16 +6,19 @@ import Cart from "../../assets/shopping-cart.png";
 
 const NavbarMenu = () => {
   const [toggle, setToggle] = useState("");
-  const [a, setA] = useState(false);
 
   const linkColor = window.location.href.slice(21);
 
+  const isMounted = useRef(false);
+
   useEffect(() => {
+    isMounted.current = true;
     window.addEventListener("scroll", () => {
       const scrollPos = window.scrollY;
       if (scrollPos > 10) setToggle("scrolled");
       else setToggle("");
     });
+    return () => (isMounted.current = false);
   }, [toggle]);
   return (
     <>
@@ -49,18 +52,13 @@ const NavbarMenu = () => {
         </ul>
         <div
           className="nav-cart"
-          onMouseEnter={() => setA(true)}
-          onMouseLeave={() => setA(false)}
+          onMouseEnter={() =>
+            (document.getElementById("animate").className =
+              "animate__animated animate__heartBeat id animate__infinite")
+          }
+          onBlur={() => (document.getElementById("animate").className = "")}
         >
-          <span
-            className={
-              a
-                ? "animate__animated animate__heartBeat id animate__infinite"
-                : ""
-            }
-          >
-            0
-          </span>
+          <span id="animate">0</span>
           <Link to="/cart">
             <img src={Cart} alt="" width="20" />
           </Link>
