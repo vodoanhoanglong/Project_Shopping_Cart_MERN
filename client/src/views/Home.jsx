@@ -5,7 +5,7 @@ import { SlideBar } from "../components/slide/SlideBar";
 
 const Home = () => {
   return (
-    <div>
+    <div className="animate__animated animate__fadeIn">
       <NavbarMenu />
       <SlideBar />
       <div>

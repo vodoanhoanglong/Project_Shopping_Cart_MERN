@@ -54,9 +54,11 @@ const NavbarMenu = () => {
           className="nav-cart"
           onMouseEnter={() =>
             (document.getElementById("animate").className =
-              "animate__animated animate__heartBeat id animate__infinite")
+              "animate__animated animate__heartBeat animate__infinite")
           }
-          onBlur={() => (document.getElementById("animate").className = "")}
+          onMouseLeave={() =>
+            (document.getElementById("animate").className = "")
+          }
         >
           <span id="animate">0</span>
           <Link to="/cart">

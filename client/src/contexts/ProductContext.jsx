@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useState } from "react";
 import { productReducer } from "../reducers/productReducer";
 
 import axios from "axios";
@@ -11,6 +11,7 @@ const ProductContextProvider = ({ children }) => {
     products: [],
     allProducts: [],
   });
+  const [showModal, setShowModal] = useState(false);
 
   const get12Products = async () => {
     try {
@@ -42,6 +43,8 @@ const ProductContextProvider = ({ children }) => {
     productState,
     get12Products,
     getAllProducts,
+    showModal,
+    setShowModal,
   };
 
   return (

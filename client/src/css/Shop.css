@@ -51,6 +51,7 @@
 }
 
 .shop-container .products .block-pic a {
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -64,7 +65,6 @@
   font-size: 20px;
   line-height: 1.466667;
   color: #333;
-  position: absolute;
   bottom: -50px;
   left: 50%;
   transform: translateX(-50%);
