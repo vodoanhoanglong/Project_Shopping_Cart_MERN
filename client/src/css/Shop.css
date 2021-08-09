@@ -102,12 +102,66 @@
   font-weight: 600;
 }
 
-/* .shop-container .products .card {
-  position: absolute;
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+.modal-content {
+  background-color: gray;
+  margin: auto;
+  padding: 50px;
+  border: 1px solid #888;
+  width: 80%;
+  height: 90%;
+}
 
-  opacity: 1;
-  transform: translate3d(0px, 0px, 0px);
-  transition-property: opacity, transform;
-  transition-duration: 0.4s;
-  transition-delay: 0ms;
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-content .slick-slider {
+  padding: 0 0 0 0;
+  width: 40%;
+}
+
+.modal-content .slick-slider .slick-track {
+  left: 20%;
+}
+
+.modal-content .slick-slider .slick-dots li {
+  display: inline;
+}
+/* 
+.modal-content .slick-slider button {
+  z-index: 1;
+}
+.modal-content .slick-slider .slick-next {
+  right: 134px;
+}
+
+.modal-content .slick-slider .slick-prev {
+  left: 136px;
 } */

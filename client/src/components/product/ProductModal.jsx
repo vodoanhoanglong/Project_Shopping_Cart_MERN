@@ -1,17 +1,20 @@
-import React, { useContext } from "react";
+import React from "react";
 import Slider from "react-slick";
 
-import { Modal, Button } from "react-bootstrap";
-import { ProductContext } from "../../contexts/ProductContext";
-
 const ProductModal = ({ url }) => {
-  const { showModal, setShowModal } = useContext(ProductContext);
-
-  const closeDialog = () => setShowModal(false);
+  const styled = { height: "80px", width: "80px" };
 
   const settings = {
     customPaging: function (i) {
-      return <div></div>;
+      return (
+        <img
+          src={`https://s3.amazonaws.com/static.neostack.com/img/react-slick/abstract0${
+            i + 1
+          }.jpg`}
+          alt=""
+          style={styled}
+        />
+      );
     },
     dots: true,
     dotsClass: "slick-dots slick-thumb",
@@ -20,44 +23,42 @@ const ProductModal = ({ url }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
+  const modal = document.getElementById("myModal");
+  window.onclick = (e) => {
+    if (e.target === modal) modal.style.display = "none";
+  };
 
   return (
-    <>
-      <Modal show={showModal} onHide={closeDialog}>
-        <Modal.Header>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-        <Modal.Footer>
-          <Button onClick={closeDialog}>Close</Button>
-          <Button onClick={closeDialog}>Save Changes</Button>
-        </Modal.Footer>
-      </Modal>
-    </>
-
-    // <Slider {...settings}>
-    //   {/* <div>
-    //           <img src={url} alt="" />
-    //         </div> */}
-    //   <div>
-    //     <img
-    //       src="https://preview.colorlib.com/theme/cozastore/images/xproduct-detail-02.jpg.pagespeed.ic.1bDtXoN8v6.webp"
-    //       alt=""
-    //     />
-    //   </div>
-    //   <div>
-    //     <img
-    //       src="https://preview.colorlib.com/theme/cozastore/images/xproduct-detail-03.jpg.pagespeed.ic.-rPS2k8YRO.webp"
-    //       alt=""
-    //     />
-    //   </div>
-    //   <div>
-    //     <img
-    //       src="https://preview.colorlib.com/theme/cozastore/images/xproduct-detail-01.jpg.pagespeed.ic.p3moSJxG7I.webp"
-    //       alt=""
-    //     />
-    //   </div>
-    // </Slider>
+    <div id="myModal" className="modal">
+      <div className="modal-content">
+        <span className="close" onClick={() => (modal.style.display = "none")}>
+          &times;
+        </span>
+        <Slider {...settings}>
+          {/* <div>
+            <img src={url} alt="" style={styled} />
+          </div> */}
+          <div>
+            <img
+              src="https://s3.amazonaws.com/static.neostack.com/img/react-slick/abstract01.jpg"
+              alt=""
+            />
+          </div>
+          <div>
+            <img
+              src="https://s3.amazonaws.com/static.neostack.com/img/react-slick/abstract02.jpg"
+              alt=""
+            />
+          </div>
+          <div>
+            <img
+              src="https://s3.amazonaws.com/static.neostack.com/img/react-slick/abstract03.jpg"
+              alt=""
+            />
+          </div>
+        </Slider>
+      </div>
+    </div>
   );
 };
 

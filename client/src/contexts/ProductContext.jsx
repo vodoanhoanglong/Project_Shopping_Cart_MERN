@@ -11,7 +11,6 @@ const ProductContextProvider = ({ children }) => {
     products: [],
     allProducts: [],
   });
-  const [showModal, setShowModal] = useState(false);
 
   const get12Products = async () => {
     try {
@@ -43,8 +42,6 @@ const ProductContextProvider = ({ children }) => {
     productState,
     get12Products,
     getAllProducts,
-    showModal,
-    setShowModal,
   };
 
   return (
