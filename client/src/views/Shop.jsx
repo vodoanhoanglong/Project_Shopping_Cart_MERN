@@ -39,7 +39,7 @@ const Shop = () => {
             style={{ width: "19rem" }}
             onClick={() => {
               document.getElementById("myModal").style.display = "block";
-              setUrlImg(product.url);
+              setUrlImg(product);
             }}
           >
             <div className="block-pic">
@@ -114,7 +114,8 @@ const Shop = () => {
         </div>
         <div className="products">{bodyDefault}</div>
       </div>
-      <ProductModal url={urlImg} />
+
+      <ProductModal product={urlImg} />
     </div>
   );
 };
