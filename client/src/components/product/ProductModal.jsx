@@ -1,18 +1,35 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import { ProductContext } from "../../contexts/ProductContext";
 import Slider from "react-slick";
 
 const ProductModal = ({ product: { title, description, price } }) => {
   const [defaultSelect, setDefaultSelect] = useState("DEFAULT");
+  const [defaultSelect2, setDefaultSelect2] = useState("DEFAULT");
+  const [quantity, setQuantity] = useState(1);
+  const [animate, setAnimate] = useState("animate__fadeInDown");
+
+  const { cart, setCart } = useContext(ProductContext);
+
+  const regex = /^[0-9\b]+$/;
 
   const styled = { width: "550px", height: "650px" };
   const modal = document.getElementById("myModal");
-  window.onclick = (e) => {
-    if (e.target === modal) {
-      modal.style.display = "none";
-      setDefaultSelect("DEFAULT");
-    }
-  };
+
   const handleChange = (e) => setDefaultSelect(e.target.value);
+  const handleChange2 = (e) => setDefaultSelect2(e.target.value);
+
+  const handleIncrease = () => setQuantity(parseInt(quantity + 1));
+  const handleDecrease = () =>
+    quantity === typeof String
+      ? setQuantity(1)
+      : quantity <= 1
+      ? setQuantity(1)
+      : setQuantity(quantity - 1);
+  const handleChangeInput = (e) => {
+    let input = e.target.value;
+    if (!regex.test(input)) return;
+    setQuantity(parseInt(input));
+  };
 
   const settings = {
     arrows: false,
@@ -22,18 +39,31 @@ const ProductModal = ({ product: { title, description, price } }) => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true,
   };
 
+  const handleClose = () => {
+    setAnimate("animate__fadeOut");
+    setTimeout(() => {
+      modal.style.display = "none";
+      setDefaultSelect("DEFAULT");
+      setDefaultSelect2("DEFAULT");
+      setQuantity(1);
+      setAnimate("animate__fadeInDown");
+    }, 400);
+  };
+
+  const handleAddToCart = () => {
+    setCart(cart + 1);
+    handleClose();
+  };
+
+  window.onclick = (e) => (e.target === modal ? handleClose() : null);
+
   return (
-    <div id="myModal" className="modal">
+    <div id="myModal" className={"modal animate__animated " + animate}>
       <div className="modal-content">
-        <span
-          className="close"
-          onClick={() => {
-            modal.style.display = "none";
-            setDefaultSelect("DEFAULT");
-          }}
-        >
+        <span className="close" onClick={handleClose}>
           &times;
         </span>
         <div className="container-content">
@@ -94,8 +124,8 @@ const ProductModal = ({ product: { title, description, price } }) => {
               <select
                 className="form-select"
                 aria-label="Default select example"
-                value={defaultSelect}
-                onChange={handleChange}
+                value={defaultSelect2}
+                onChange={handleChange2}
               >
                 <option value="DEFAULT" disabled>
                   Choose
@@ -106,16 +136,35 @@ const ProductModal = ({ product: { title, description, price } }) => {
                 <option value="Pink">Pink</option>
               </select>
             </div>
-            <div className="information-quality">
-              <span>Quality</span>
-              <div className="quality-btn">
-                <div className="increase-btn">-</div>
-                <div className="quality-show">1</div>
-                <div className="decrease-btn">+</div>
+            <div className="information-quantity">
+              <span>Quantity</span>
+              <div className="quantity-btn">
+                <div
+                  className="decrease-btn"
+                  onClick={handleDecrease}
+                  style={{ userSelect: "none" }}
+                >
+                  -
+                </div>
+                <input
+                  className="quantity-show"
+                  value={quantity}
+                  onClick={() => setQuantity("")}
+                  onChange={handleChangeInput}
+                />
+                <div
+                  className="increase-btn"
+                  onClick={handleIncrease}
+                  style={{ userSelect: "none" }}
+                >
+                  +
+                </div>
               </div>
             </div>
-
-            <button>ADD TO CART</button>
+            <div className="container-button">
+              <button onClick={handleAddToCart}>ADD TO CART</button>
+              <i className="fas fa-heart"></i>
+            </div>
           </div>
         </div>
       </div>

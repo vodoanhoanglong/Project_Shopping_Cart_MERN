@@ -1,12 +1,14 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 
 import { Link } from "react-router-dom";
+import { ProductContext } from "../../contexts/ProductContext";
+
 import "../../css/NavbarMenu.css";
 import Cart from "../../assets/shopping-cart.png";
 
 const NavbarMenu = () => {
   const [toggle, setToggle] = useState("");
-
+  const { cart } = useContext(ProductContext);
   const linkColor = window.location.href.slice(21);
 
   const isMounted = useRef(false);
@@ -60,7 +62,7 @@ const NavbarMenu = () => {
             (document.getElementById("animate").className = "")
           }
         >
-          <span id="animate">0</span>
+          <span id="animate">{cart}</span>
           <Link to="/cart">
             <img src={Cart} alt="" width="20" />
           </Link>

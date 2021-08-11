@@ -11,6 +11,7 @@ const ProductContextProvider = ({ children }) => {
     products: [],
     allProducts: [],
   });
+  const [cart, setCart] = useState(0);
 
   const get12Products = async () => {
     try {
@@ -42,6 +43,8 @@ const ProductContextProvider = ({ children }) => {
     productState,
     get12Products,
     getAllProducts,
+    cart,
+    setCart,
   };
 
   return (

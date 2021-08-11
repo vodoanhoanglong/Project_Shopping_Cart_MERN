@@ -230,7 +230,7 @@
   cursor: pointer;
 }
 
-.container-information .information-quality {
+.container-information .information-quantity {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
@@ -238,17 +238,16 @@
   color: #333;
 }
 
-.container-information .information-quality .quality-btn {
+.container-information .information-quantity .quantity-btn {
   position: relative;
-  left: 11.3%;
+  left: 7.7%;
   display: flex;
   border: 1px solid #ced4da;
   border-radius: 3px;
 }
 
-.container-information .information-quality .increase-btn,
-.decrease-btn,
-.quality-show {
+.container-information .information-quantity .increase-btn,
+.decrease-btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -258,16 +257,21 @@
   transition: all 0.4s;
 }
 
-.container-information .information-quality .increase-btn:hover,
+.container-information .information-quantity .increase-btn:hover,
 .decrease-btn:hover {
   background: #717fe0;
   cursor: pointer;
 }
 
-.container-information .information-quality .quality-show {
+.container-information .information-quantity .quantity-show {
+  border: none;
   border-left: 1px solid #e6e6e6;
   border-right: 1px solid #e6e6e6;
   background-color: #f7f7f7;
+  text-align: center;
+  width: 46.3px;
+  height: 40px;
+  font-size: 22px;
 }
 .container-information button {
   display: flex;
@@ -282,11 +286,9 @@
   justify-content: center;
   transition: all 0.4s;
   align-items: center;
-  padding-right: 15px;
-  padding-left: 15px;
   outline: none;
   border: none;
-  margin-top: 50px;
+
   cursor: pointer;
 }
 
@@ -294,4 +296,22 @@
   border-color: #222;
   background-color: #222;
   color: #fff;
+}
+
+.container-information .container-button {
+  width: 15.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.container-information .container-button .fas {
+  font-size: 40px;
+  color: gray;
+  transition: all 0.4s;
+}
+.container-information .container-button .fas:hover {
+  cursor: pointer;
+  color: #717fe0;
 }
