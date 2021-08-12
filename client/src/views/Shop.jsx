@@ -24,6 +24,7 @@ const Shop = () => {
     isMounted.current = true;
     getAllProducts();
     return () => (isMounted.current = false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const products = allProducts.filter((item) => item.type === type);
@@ -67,7 +68,7 @@ const Shop = () => {
         <div className="d-flex">
           <div>
             <button
-              autoFocus
+              className={type === "" ? "button-focus" : ""}
               onClick={() => {
                 setType("");
                 setAnimate("animate__animated animate__fadeIn");
@@ -76,6 +77,7 @@ const Shop = () => {
               All product
             </button>
             <button
+              className={type === "Women" ? "button-focus" : ""}
               onClick={() => {
                 setType("Women");
                 handle();
@@ -84,6 +86,7 @@ const Shop = () => {
               Women
             </button>
             <button
+              className={type === "Men" ? "button-focus" : ""}
               onClick={() => {
                 setType("Men");
                 handle();
@@ -92,6 +95,7 @@ const Shop = () => {
               Men
             </button>
             <button
+              className={type === "Shoes" ? "button-focus" : ""}
               onClick={() => {
                 setType("Shoes");
                 handle();
@@ -100,6 +104,7 @@ const Shop = () => {
               Shoes
             </button>
             <button
+              className={type === "Watches" ? "button-focus" : ""}
               onClick={() => {
                 setType("Watches");
                 handle();

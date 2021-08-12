@@ -25,8 +25,13 @@
   opacity: 0.6;
 }
 
-.shop-container .d-flex button:focus,
 .shop-container .d-flex button:hover {
+  opacity: 1;
+  color: #333;
+  border-color: #797979;
+}
+
+.shop-container .d-flex .button-focus {
   opacity: 1;
   color: #333;
   border-color: #797979;
@@ -231,6 +236,7 @@
 }
 
 .container-information .information-quantity {
+  width: 72%;
   display: flex;
   align-items: center;
   margin-bottom: 20px;
@@ -239,8 +245,7 @@
 }
 
 .container-information .information-quantity .quantity-btn {
-  position: relative;
-  left: 7.7%;
+  transform: translateX(15%);
   display: flex;
   border: 1px solid #ced4da;
   border-radius: 3px;
@@ -273,6 +278,11 @@
   height: 40px;
   font-size: 22px;
 }
+
+.container-information .information-quantity .quantity-show:focus-visible {
+  outline: none;
+}
+
 .container-information button {
   display: flex;
   border-radius: 23px;

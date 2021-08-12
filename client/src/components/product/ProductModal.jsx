@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { ProductContext } from "../../contexts/ProductContext";
 import Slider from "react-slick";
 
@@ -52,6 +52,11 @@ const ProductModal = ({ product: { title, description, price } }) => {
       setAnimate("animate__fadeInDown");
     }, 400);
   };
+
+  const handleLeaveInput = () =>
+    document.getElementById("quantity-show").value === ""
+      ? setQuantity(1)
+      : null;
 
   const handleAddToCart = () => {
     setCart(cart + 1);
@@ -147,10 +152,12 @@ const ProductModal = ({ product: { title, description, price } }) => {
                   -
                 </div>
                 <input
+                  id="quantity-show"
                   className="quantity-show"
                   value={quantity}
                   onClick={() => setQuantity("")}
                   onChange={handleChangeInput}
+                  onBlur={handleLeaveInput}
                 />
                 <div
                   className="increase-btn"

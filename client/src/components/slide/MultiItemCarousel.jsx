@@ -17,6 +17,7 @@ const MultiItemCarousel = () => {
     isMounted.current = true;
     get12Products();
     return () => (isMounted.current = false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   var settings = {
