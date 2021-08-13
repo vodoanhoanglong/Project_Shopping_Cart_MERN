@@ -1,17 +1,20 @@
 import { useContext, useState, useEffect, useRef } from "react";
 
 import NavbarMenu from "../components/layout/NavbarMenu";
+import ProductModal from "../components/product/ProductModal";
+import Footer from "../components/layout/Footer";
 import { ProductContext } from "../contexts/ProductContext";
 
 import { Row, Col, Card } from "react-bootstrap";
-import "../css/Shop.css";
 import { Link } from "react-router-dom";
-import ProductModal from "../components/product/ProductModal";
+import { Pagination } from "@material-ui/lab";
+import "../css/Shop.css";
 
 const Shop = () => {
   const [type, setType] = useState("");
   const [animate, setAnimate] = useState("");
   const [urlImg, setUrlImg] = useState("");
+  const [page, setPage] = useState(1);
 
   const {
     productState: { allProducts },
@@ -24,7 +27,6 @@ const Shop = () => {
     isMounted.current = true;
     getAllProducts();
     return () => (isMounted.current = false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const products = allProducts.filter((item) => item.type === type);
@@ -32,9 +34,14 @@ const Shop = () => {
   let result = allProducts;
   if (type !== "") result = products;
 
+  const perPage = 8;
+  const start = (page - 1) * perPage;
+  const end = page * perPage;
+  const totalPage = result.length / 8 < 1 ? 1 : result.length / 8;
+
   let bodyDefault = (
     <Row className="row-cols-1 row-cols-md-4 g-4 mx-auto mt-5">
-      {result.map((product) => (
+      {result.slice(start, end).map((product) => (
         <Col key={product._id} className={"my-2 " + animate}>
           <Card
             style={{ width: "19rem" }}
@@ -61,6 +68,8 @@ const Shop = () => {
     setAnimate("animate__animated animate__zoomIn");
   };
 
+  const handleChangePage = (event, value) => setPage(value);
+
   return (
     <div className="animate__animated animate__fadeIn">
       <NavbarMenu />
@@ -71,6 +80,7 @@ const Shop = () => {
               className={type === "" ? "button-focus" : ""}
               onClick={() => {
                 setType("");
+                setPage(1);
                 setAnimate("animate__animated animate__fadeIn");
               }}
             >
@@ -80,6 +90,7 @@ const Shop = () => {
               className={type === "Women" ? "button-focus" : ""}
               onClick={() => {
                 setType("Women");
+                setPage(1);
                 handle();
               }}
             >
@@ -89,6 +100,7 @@ const Shop = () => {
               className={type === "Men" ? "button-focus" : ""}
               onClick={() => {
                 setType("Men");
+                setPage(1);
                 handle();
               }}
             >
@@ -98,6 +110,7 @@ const Shop = () => {
               className={type === "Shoes" ? "button-focus" : ""}
               onClick={() => {
                 setType("Shoes");
+                setPage(1);
                 handle();
               }}
             >
@@ -107,6 +120,7 @@ const Shop = () => {
               className={type === "Watches" ? "button-focus" : ""}
               onClick={() => {
                 setType("Watches");
+                setPage(1);
                 handle();
               }}
             >
@@ -117,9 +131,19 @@ const Shop = () => {
             <button>Filter</button>
           </div>
         </div>
-        <div className="products">{bodyDefault}</div>
+        <div className="products">
+          {bodyDefault}
+          <Pagination
+            count={totalPage}
+            size="large"
+            page={page}
+            onChange={handleChangePage}
+          />
+        </div>
+        <div className="footer">
+          <Footer />
+        </div>
       </div>
-
       <ProductModal product={urlImg} />
     </div>
   );

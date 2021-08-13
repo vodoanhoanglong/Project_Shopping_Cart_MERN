@@ -24,6 +24,7 @@ const Home = () => {
         </h2>
       </div>
       <MultiItemCarousel />
+
       <Footer />
     </div>
   );
