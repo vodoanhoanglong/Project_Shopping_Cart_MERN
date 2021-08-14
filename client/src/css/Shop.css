@@ -94,9 +94,22 @@
   color: #fff;
 }
 
+.shop-container .products .card {
+  padding-right: 0;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.shop-container .products .card-img,
+.card-img-top {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
 .shop-container .products .card-body {
   padding: 0;
   margin: 15px 0 20px 0;
+  padding-left: 5px;
 }
 .shop-container .products .card-body .card-title {
   opacity: 0.9;
@@ -205,6 +218,7 @@
   width: 12.3rem;
   display: flex;
   align-items: center;
+  margin-top: 20px;
   margin-bottom: 20px;
   font-size: 18px;
   color: #333;
@@ -238,6 +252,7 @@
   width: 72%;
   display: flex;
   align-items: center;
+  margin-top: 20px;
   margin-bottom: 20px;
   font-size: 18px;
   color: #333;
@@ -327,6 +342,7 @@
 
 .shop-container .products .MuiPagination-ul {
   justify-content: center;
+  margin-top: 20px;
 }
 
 .shop-container .products .MuiPaginationItem-page {
@@ -342,5 +358,15 @@
 }
 
 .shop-container .footer {
-  transform: translateY(400%);
+  transform: translateY(440%);
+}
+
+.container-information .MuiAlert-standardError {
+  color: red !important;
+  background-color: rgb(253, 236, 234);
+  width: 15.4rem;
+  align-items: center;
+}
+.container-information .show-alert {
+  display: none;
 }

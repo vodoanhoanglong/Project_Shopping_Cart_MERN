@@ -44,7 +44,10 @@ const Shop = () => {
       {result.slice(start, end).map((product) => (
         <Col key={product._id} className={"my-2 " + animate}>
           <Card
-            style={{ width: "19rem" }}
+            style={{
+              width: "18rem",
+              boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
+            }}
             onClick={() => {
               document.getElementById("myModal").style.display = "block";
               setUrlImg(product);

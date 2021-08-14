@@ -2,11 +2,15 @@ import { useState, useContext } from "react";
 import { ProductContext } from "../../contexts/ProductContext";
 import Slider from "react-slick";
 
-const ProductModal = ({ product: { title, description, price } }) => {
+import Alert from "@material-ui/lab/Alert";
+
+const ProductModal = ({ product: { title, description, price, url } }) => {
   const [defaultSelect, setDefaultSelect] = useState("DEFAULT");
   const [defaultSelect2, setDefaultSelect2] = useState("DEFAULT");
   const [quantity, setQuantity] = useState(1);
   const [animate, setAnimate] = useState("animate__fadeInDown");
+  const [showAlert1, setShowAlert1] = useState("show-alert");
+  const [showAlert2, setShowAlert2] = useState("show-alert");
 
   const { cart, setCart } = useContext(ProductContext);
 
@@ -15,8 +19,14 @@ const ProductModal = ({ product: { title, description, price } }) => {
   const styled = { width: "550px", height: "650px" };
   const modal = document.getElementById("myModal");
 
-  const handleChange = (e) => setDefaultSelect(e.target.value);
-  const handleChange2 = (e) => setDefaultSelect2(e.target.value);
+  const handleChange = (e) => {
+    setDefaultSelect(e.target.value);
+    if (e.target.value !== "DEFAULT") setShowAlert1("show-alert");
+  };
+  const handleChange2 = (e) => {
+    setDefaultSelect2(e.target.value);
+    if (e.target.value !== "DEFAULT") setShowAlert2("show-alert");
+  };
 
   const handleIncrease = () => setQuantity(parseInt(quantity + 1));
   const handleDecrease = () =>
@@ -39,7 +49,6 @@ const ProductModal = ({ product: { title, description, price } }) => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true,
   };
 
   const handleClose = () => {
@@ -50,6 +59,8 @@ const ProductModal = ({ product: { title, description, price } }) => {
       setDefaultSelect2("DEFAULT");
       setQuantity(1);
       setAnimate("animate__fadeInDown");
+      setShowAlert1("show-alert");
+      setShowAlert2("show-alert");
     }, 400);
   };
 
@@ -59,8 +70,12 @@ const ProductModal = ({ product: { title, description, price } }) => {
       : null;
 
   const handleAddToCart = () => {
-    setCart(cart + 1);
-    handleClose();
+    if (defaultSelect === "DEFAULT") setShowAlert1("");
+    if (defaultSelect2 === "DEFAULT") setShowAlert2("");
+    if (defaultSelect !== "DEFAULT" && defaultSelect2 !== "DEFAULT") {
+      setCart(cart + 1);
+      handleClose();
+    }
   };
 
   window.onclick = (e) => (e.target === modal ? handleClose() : null);
@@ -74,6 +89,9 @@ const ProductModal = ({ product: { title, description, price } }) => {
         <div className="container-content">
           <div className="container-slider">
             <Slider {...settings}>
+              <div>
+                <img autoFocus style={styled} alt="" src={url} />
+              </div>
               <div>
                 <img
                   style={styled}
@@ -124,6 +142,15 @@ const ProductModal = ({ product: { title, description, price } }) => {
                 <option value="XL">XL</option>
               </select>
             </div>
+            <div className={showAlert1}>
+              <Alert
+                className="animate__animated animate__shakeX"
+                severity="error"
+              >
+                Please, choose size
+              </Alert>
+            </div>
+
             <div className="information-color">
               <span>Color</span>
               <select
@@ -141,6 +168,15 @@ const ProductModal = ({ product: { title, description, price } }) => {
                 <option value="Pink">Pink</option>
               </select>
             </div>
+            <div className={showAlert2}>
+              <Alert
+                className="animate__animated animate__shakeX"
+                severity="error"
+              >
+                Please, choose color
+              </Alert>
+            </div>
+
             <div className="information-quantity">
               <span>Quantity</span>
               <div className="quantity-btn">
