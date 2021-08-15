@@ -5,10 +5,11 @@ import { ProductContext } from "../../contexts/ProductContext";
 
 import "../../css/NavbarMenu.css";
 import Cart from "../../assets/shopping-cart.png";
+import CartHover from "../cart/CartHover";
 
 const NavbarMenu = () => {
   const [toggle, setToggle] = useState("");
-  const { cart } = useContext(ProductContext);
+  const { cart, setShowCart } = useContext(ProductContext);
   const linkColor = window.location.href.slice(21);
 
   const isMounted = useRef(false);
@@ -54,13 +55,15 @@ const NavbarMenu = () => {
         </ul>
         <div
           className="nav-cart"
-          onMouseEnter={() =>
-            (document.getElementById("animate").className =
-              "animate__animated animate__heartBeat animate__infinite")
-          }
-          onMouseLeave={() =>
-            (document.getElementById("animate").className = "")
-          }
+          onMouseEnter={(event) => {
+            document.getElementById("animate").className =
+              "animate__animated animate__heartBeat animate__infinite";
+            setShowCart(event.currentTarget);
+          }}
+          onMouseLeave={() => {
+            document.getElementById("animate").className = "";
+            setShowCart(null);
+          }}
         >
           <span id="animate">{cart}</span>
           <Link to="/cart">
@@ -70,6 +73,7 @@ const NavbarMenu = () => {
         <label htmlFor="menu-btn" className="menu-icon">
           <span className="menu-icon__line"></span>
         </label>
+        <CartHover />
       </header>
     </>
   );

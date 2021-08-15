@@ -1,8 +1,10 @@
 import { useState, useContext } from "react";
 import { ProductContext } from "../../contexts/ProductContext";
-import Slider from "react-slick";
 
+import ImageGallery from "react-image-gallery";
 import Alert from "@material-ui/lab/Alert";
+
+import "../../css/ProductModal.css";
 
 const ProductModal = ({ product: { title, description, price, url } }) => {
   const [defaultSelect, setDefaultSelect] = useState("DEFAULT");
@@ -16,7 +18,6 @@ const ProductModal = ({ product: { title, description, price, url } }) => {
 
   const regex = /^[0-9\b]+$/;
 
-  const styled = { width: "550px", height: "650px" };
   const modal = document.getElementById("myModal");
 
   const handleChange = (e) => {
@@ -41,15 +42,46 @@ const ProductModal = ({ product: { title, description, price, url } }) => {
     setQuantity(parseInt(input));
   };
 
-  const settings = {
-    arrows: false,
-    dots: true,
-    fade: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
+  const images = [
+    {
+      original: url,
+      thumbnail: url,
+      originalWidth: "550",
+      originalHeight: "650",
+      thumbnailWidth: "150",
+      thumbnailHeight: "100",
+    },
+    {
+      original:
+        "https://preview.colorlib.com/theme/cozastore/images/xproduct-detail-01.jpg.pagespeed.ic.p3moSJxG7I.webp",
+      thumbnail:
+        "https://preview.colorlib.com/theme/cozastore/images/xproduct-detail-01.jpg.pagespeed.ic.p3moSJxG7I.webp",
+      originalWidth: "550",
+      originalHeight: "650",
+      thumbnailWidth: "150",
+      thumbnailHeight: "100",
+    },
+    {
+      original:
+        "https://preview.colorlib.com/theme/cozastore/images/xproduct-detail-02.jpg.pagespeed.ic.1bDtXoN8v6.webp",
+      thumbnail:
+        "https://preview.colorlib.com/theme/cozastore/images/xproduct-detail-02.jpg.pagespeed.ic.1bDtXoN8v6.webp",
+      originalWidth: "550",
+      originalHeight: "650",
+      thumbnailWidth: "150",
+      thumbnailHeight: "100",
+    },
+    {
+      original:
+        "https://preview.colorlib.com/theme/cozastore/images/xproduct-detail-03.jpg.pagespeed.ic.-rPS2k8YRO.webp",
+      thumbnail:
+        "https://preview.colorlib.com/theme/cozastore/images/xproduct-detail-03.jpg.pagespeed.ic.-rPS2k8YRO.webp",
+      originalWidth: "550",
+      originalHeight: "650",
+      thumbnailWidth: "150",
+      thumbnailHeight: "100",
+    },
+  ];
 
   const handleClose = () => {
     setAnimate("animate__fadeOut");
@@ -88,38 +120,14 @@ const ProductModal = ({ product: { title, description, price, url } }) => {
         </span>
         <div className="container-content">
           <div className="container-slider">
-            <Slider {...settings}>
-              <div>
-                <img autoFocus style={styled} alt="" src={url} />
-              </div>
-              <div>
-                <img
-                  style={styled}
-                  alt=""
-                  src={
-                    "https://preview.colorlib.com/theme/cozastore/images/xproduct-detail-01.jpg.pagespeed.ic.p3moSJxG7I.webp"
-                  }
-                />
-              </div>
-              <div>
-                <img
-                  style={styled}
-                  alt=""
-                  src={
-                    "https://preview.colorlib.com/theme/cozastore/images/xproduct-detail-02.jpg.pagespeed.ic.1bDtXoN8v6.webp"
-                  }
-                />
-              </div>
-              <div>
-                <img
-                  style={styled}
-                  alt=""
-                  src={
-                    "https://preview.colorlib.com/theme/cozastore/images/xproduct-detail-03.jpg.pagespeed.ic.-rPS2k8YRO.webp"
-                  }
-                />
-              </div>
-            </Slider>
+            <ImageGallery
+              items={images}
+              thumbnailPosition="left"
+              showNav={false}
+              showPlayButton={false}
+              showFullscreenButton={false}
+            />
+            ;
           </div>
           <div className="container-information">
             <h2 className="information-title">{title}</h2>
