@@ -1,0 +1,15 @@
+.popover-cart {
+  width: 300px;
+  height: 300px;
+  overflow-y: scroll;
+}
+.popover-cart .popover-item {
+  padding: 5px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.popover-cart .popover-item img {
+  width: 100px;
+  height: 100px;
+}

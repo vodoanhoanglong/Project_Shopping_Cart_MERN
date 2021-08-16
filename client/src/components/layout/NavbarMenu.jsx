@@ -3,13 +3,14 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import { Link } from "react-router-dom";
 import { ProductContext } from "../../contexts/ProductContext";
 
+import CartHover from "../cart/CartHover";
+
 import "../../css/NavbarMenu.css";
 import Cart from "../../assets/shopping-cart.png";
-import CartHover from "../cart/CartHover";
 
 const NavbarMenu = () => {
   const [toggle, setToggle] = useState("");
-  const { cart, setShowCart } = useContext(ProductContext);
+  const { cart, setOpenedPopover, popoverAnchor } = useContext(ProductContext);
   const linkColor = window.location.href.slice(21);
 
   const isMounted = useRef(false);
@@ -55,14 +56,15 @@ const NavbarMenu = () => {
         </ul>
         <div
           className="nav-cart"
-          onMouseEnter={(event) => {
+          ref={popoverAnchor}
+          onMouseEnter={() => {
             document.getElementById("animate").className =
               "animate__animated animate__heartBeat animate__infinite";
-            setShowCart(event.currentTarget);
+            setOpenedPopover(true);
           }}
           onMouseLeave={() => {
             document.getElementById("animate").className = "";
-            setShowCart(null);
+            setOpenedPopover(false);
           }}
         >
           <span id="animate">{cart}</span>

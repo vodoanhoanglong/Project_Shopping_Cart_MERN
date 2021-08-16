@@ -1,50 +1,70 @@
 import React, { useContext } from "react";
 
 import { ProductContext } from "../../contexts/ProductContext";
+import { CartContext } from "../../contexts/CartContext";
 
 import Popover from "@material-ui/core/Popover";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
+import "../../css/CartHover.css";
+
+const useStyles = makeStyles(() => ({
   popover: {
     pointerEvents: "none",
   },
   paper: {
-    padding: theme.spacing(1),
+    pointerEvents: "auto",
   },
 }));
 
 const CartHover = () => {
-  const { showCart, setShowCart } = useContext(ProductContext);
+  const { openedPopover, setOpenedPopover, popoverAnchor } =
+    useContext(ProductContext);
+  const { itemCart } = useContext(CartContext);
 
   const classes = useStyles();
 
-  const open = Boolean(showCart);
+  const handleShowPopover = () => setOpenedPopover(true);
+  const handleHidePopover = () => setOpenedPopover(false);
+
   return (
-    <div>
-      <Popover
-        id="mouse-over-popover"
-        className={classes.popover}
-        classes={{
-          paper: classes.paper,
-        }}
-        open={open}
-        anchorEl={showCart}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "left",
-        }}
-        onClose={() => setShowCart(null)}
-        disableRestoreFocus
-      >
-        <Typography>I use Popover.</Typography>
-      </Popover>
-    </div>
+    <Popover
+      id="mouse-over-popover"
+      className={classes.popover}
+      classes={{
+        paper: classes.paper,
+      }}
+      open={openedPopover}
+      anchorEl={popoverAnchor.current}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "left",
+      }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "left",
+      }}
+      PaperProps={{
+        onMouseEnter: handleShowPopover,
+        onMouseLeave: handleHidePopover,
+      }}
+      marginThreshold={50}
+      disableRestoreFocus
+    >
+      <div className="popover-cart">
+        {itemCart.map((item, index) => (
+          <div key={index} className="popover-item">
+            <img src={item.url} alt="" />
+            <div className="item-information">
+              <p>{item.title}</p>
+              <p>{item.totalItem}</p>
+              <p>{item.size}</p>
+              <p>{item.color}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Popover>
   );
 };
 

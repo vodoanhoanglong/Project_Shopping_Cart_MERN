@@ -1,12 +1,13 @@
 import { useState, useContext } from "react";
 import { ProductContext } from "../../contexts/ProductContext";
+import { CartContext } from "../../contexts/CartContext";
 
 import ImageGallery from "react-image-gallery";
 import Alert from "@material-ui/lab/Alert";
 
 import "../../css/ProductModal.css";
 
-const ProductModal = ({ product: { title, description, price, url } }) => {
+const ProductModal = ({ product: { _id, title, description, price, url } }) => {
   const [defaultSelect, setDefaultSelect] = useState("DEFAULT");
   const [defaultSelect2, setDefaultSelect2] = useState("DEFAULT");
   const [quantity, setQuantity] = useState(1);
@@ -14,6 +15,7 @@ const ProductModal = ({ product: { title, description, price, url } }) => {
   const [showAlert1, setShowAlert1] = useState("show-alert");
   const [showAlert2, setShowAlert2] = useState("show-alert");
 
+  const { itemCart, setItemCart } = useContext(CartContext);
   const { cart, setCart } = useContext(ProductContext);
 
   const regex = /^[0-9\b]+$/;
@@ -83,6 +85,31 @@ const ProductModal = ({ product: { title, description, price, url } }) => {
     },
   ];
 
+  const addItemPopover = () =>
+    setItemCart((prevState) => [
+      ...prevState,
+      {
+        _id,
+        url,
+        title,
+        price,
+        totalItem: quantity,
+        size: defaultSelect,
+        color: defaultSelect2,
+      },
+    ]);
+
+  const updateItemPopover = (currentQuantity) =>
+    setItemCart((prevState) => [
+      ...prevState.map((item) =>
+        item._id === _id &&
+        item.size === defaultSelect &&
+        item.color === defaultSelect2
+          ? { ...item, totalItem: currentQuantity }
+          : item
+      ),
+    ]);
+
   const handleClose = () => {
     setAnimate("animate__fadeOut");
     setTimeout(() => {
@@ -106,6 +133,17 @@ const ProductModal = ({ product: { title, description, price, url } }) => {
     if (defaultSelect2 === "DEFAULT") setShowAlert2("");
     if (defaultSelect !== "DEFAULT" && defaultSelect2 !== "DEFAULT") {
       setCart(cart + 1);
+      const addItem = itemCart.find(
+        (item) =>
+          item._id === _id &&
+          item.size === defaultSelect &&
+          item.color === defaultSelect2
+      );
+      if (!addItem) addItemPopover();
+      else {
+        let currentQuantity = addItem.totalItem + quantity;
+        updateItemPopover(currentQuantity);
+      }
       handleClose();
     }
   };
@@ -138,6 +176,7 @@ const ProductModal = ({ product: { title, description, price, url } }) => {
               <select
                 className="form-select"
                 aria-label="Default select example"
+                name="size"
                 value={defaultSelect}
                 onChange={handleChange}
               >
@@ -164,6 +203,7 @@ const ProductModal = ({ product: { title, description, price, url } }) => {
               <select
                 className="form-select"
                 aria-label="Default select example"
+                name="color"
                 value={defaultSelect2}
                 onChange={handleChange2}
               >
