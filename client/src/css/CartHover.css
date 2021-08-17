@@ -1,15 +1,67 @@
 .popover-cart {
-  width: 300px;
+  width: 350px;
   height: 300px;
+  background-color: #e3e3e3;
   overflow-y: scroll;
 }
 .popover-cart .popover-item {
   padding: 5px;
   display: flex;
-  justify-content: space-around;
 }
 
 .popover-cart .popover-item img {
   width: 100px;
-  height: 100px;
+  height: 130px;
+  margin-right: 20px;
+}
+
+.popover-cart .popover-item .item-information .item-information-child {
+  display: flex;
+  justify-content: space-around;
+}
+
+.popover-cart .popover-item .item-information h5 {
+  font-weight: bold;
+  font-family: Poppins-Regular;
+}
+.popover-cart .popover-item .item-information .price-information {
+  font-family: Poppins-SemiBold;
+  font-weight: bold;
+  font-size: 17px;
+  opacity: 0.8;
+}
+
+.footer-popover {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 70px;
+}
+
+.footer-popover button {
+  font-weight: bold;
+  border: none;
+  height: 45px;
+  width: 150px;
+  background: #8994e1;
+  text-transform: uppercase;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+  transition: all 0.4s;
+}
+
+.footer-popover button:hover {
+  background: #000;
+}
+
+.footer-popover .total-price {
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+.footer-popover .total-price strong {
+  font-size: 15px;
 }

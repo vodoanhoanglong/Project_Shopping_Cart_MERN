@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { ProductContext } from "../../contexts/ProductContext";
 import { CartContext } from "../../contexts/CartContext";
 
+import { Button } from "react-bootstrap";
 import Popover from "@material-ui/core/Popover";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -23,6 +24,11 @@ const CartHover = () => {
   const { itemCart } = useContext(CartContext);
 
   const classes = useStyles();
+
+  const totalPrice = itemCart.reduce(
+    (sum, { price, totalItem }) => sum + price * totalItem,
+    0
+  );
 
   const handleShowPopover = () => setOpenedPopover(true);
   const handleHidePopover = () => setOpenedPopover(false);
@@ -56,13 +62,22 @@ const CartHover = () => {
           <div key={index} className="popover-item">
             <img src={item.url} alt="" />
             <div className="item-information">
-              <p>{item.title}</p>
-              <p>{item.totalItem}</p>
-              <p>{item.size}</p>
-              <p>{item.color}</p>
+              <h5>{item.title}</h5>
+              <p className="price-information">${item.price}</p>
+              <div className="item-information-child">
+                <p>{item.totalItem}</p>
+                <p>{item.size}</p>
+                <p>{item.color}</p>
+              </div>
             </div>
           </div>
         ))}
+      </div>
+      <div className="footer-popover">
+        <Button>View Cart</Button>
+        <div className="total-price">
+          total price: <strong>${totalPrice}</strong>
+        </div>
       </div>
     </Popover>
   );
