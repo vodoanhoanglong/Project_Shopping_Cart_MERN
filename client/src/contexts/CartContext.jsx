@@ -4,10 +4,13 @@ export const CartContext = createContext();
 
 const CartContextProvider = ({ children }) => {
   const [itemCart, setItemCart] = useState([]);
+  const [showToastCart, setShowToastCart] = useState(false);
 
   const cartContextData = {
     itemCart,
     setItemCart,
+    showToastCart,
+    setShowToastCart,
   };
 
   return (

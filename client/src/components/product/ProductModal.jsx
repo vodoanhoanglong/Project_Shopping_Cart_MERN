@@ -15,8 +15,8 @@ const ProductModal = ({ product: { _id, title, description, price, url } }) => {
   const [showAlert1, setShowAlert1] = useState("show-alert");
   const [showAlert2, setShowAlert2] = useState("show-alert");
 
-  const { itemCart, setItemCart } = useContext(CartContext);
-  const { cart, setCart } = useContext(ProductContext);
+  const { itemCart, setItemCart, setShowToastCart } = useContext(CartContext);
+  const { cart, setCart, setOpenedPopover } = useContext(ProductContext);
 
   const regex = /^[0-9\b]+$/;
 
@@ -85,9 +85,17 @@ const ProductModal = ({ product: { _id, title, description, price, url } }) => {
     },
   ];
 
-  const addItemPopover = () =>
+  const setTimeOutPopover = () => {
+    setOpenedPopover(true);
+    setShowToastCart(true);
+    setTimeout(() => {
+      setOpenedPopover(false);
+      setShowToastCart(false);
+    }, 2500);
+  };
+
+  const addItemPopover = () => {
     setItemCart((prevState) => [
-      ...prevState,
       {
         _id,
         url,
@@ -97,9 +105,12 @@ const ProductModal = ({ product: { _id, title, description, price, url } }) => {
         size: defaultSelect,
         color: defaultSelect2,
       },
+      ...prevState,
     ]);
+    setTimeOutPopover();
+  };
 
-  const updateItemPopover = (currentQuantity) =>
+  const updateItemPopover = (currentQuantity) => {
     setItemCart((prevState) => [
       ...prevState.map((item) =>
         item._id === _id &&
@@ -109,6 +120,8 @@ const ProductModal = ({ product: { _id, title, description, price, url } }) => {
           : item
       ),
     ]);
+    setTimeOutPopover();
+  };
 
   const handleClose = () => {
     setAnimate("animate__fadeOut");

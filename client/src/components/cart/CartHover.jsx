@@ -5,6 +5,8 @@ import { CartContext } from "../../contexts/CartContext";
 
 import { Button } from "react-bootstrap";
 import Popover from "@material-ui/core/Popover";
+import Alert from "@material-ui/lab/Alert";
+import CheckIcon from "@material-ui/icons/Check";
 import { makeStyles } from "@material-ui/core/styles";
 
 import "../../css/CartHover.css";
@@ -21,7 +23,7 @@ const useStyles = makeStyles(() => ({
 const CartHover = () => {
   const { openedPopover, setOpenedPopover, popoverAnchor } =
     useContext(ProductContext);
-  const { itemCart } = useContext(CartContext);
+  const { itemCart, showToastCart } = useContext(CartContext);
 
   const classes = useStyles();
 
@@ -57,6 +59,11 @@ const CartHover = () => {
       marginThreshold={50}
       disableRestoreFocus
     >
+      {showToastCart && (
+        <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
+          Added to cart
+        </Alert>
+      )}
       <div className="popover-cart">
         {itemCart.map((item, index) => (
           <div key={index} className="popover-item">
@@ -76,7 +83,7 @@ const CartHover = () => {
       <div className="footer-popover">
         <Button>View Cart</Button>
         <div className="total-price">
-          total price: <strong>${totalPrice}</strong>
+          total price: <strong>${totalPrice.toFixed(2)}</strong>
         </div>
       </div>
     </Popover>
