@@ -8,6 +8,7 @@ import CartHover from "../cart/CartHover";
 
 import "../../css/NavbarMenu.css";
 import Cart from "../../assets/shopping-cart.png";
+import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 
 const NavbarMenu = () => {
   const [toggle, setToggle] = useState("");
@@ -47,50 +48,60 @@ const NavbarMenu = () => {
             <Link to="/">Clothes</Link>
           </h1>
         </div>
-        <input type="checkbox" className="menu-btn" id="menu-btn" />
-        <ul className="nav-links">
-          <li>
-            <Link
-              to="/"
-              style={linkColor !== "/" ? null : { color: "#717fe0" }}
-            >
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/shop"
-              style={linkColor !== "/shop" ? null : { color: "#717fe0" }}
-            >
-              Shop
-            </Link>
-          </li>
-          <li>
-            <Link to="/">About</Link>
-          </li>
-        </ul>
-        <div
-          className="nav-cart"
-          ref={popoverAnchor}
-          onMouseEnter={() => {
-            document.getElementById("animate").className =
-              "animate__animated animate__heartBeat animate__infinite";
-            setOpenedPopover(true);
-          }}
-          onMouseLeave={() => {
-            document.getElementById("animate").className = "";
-            setOpenedPopover(false);
-          }}
-        >
-          <span id="animate">{cart}</span>
-          <Link to="/cart">
-            <img src={Cart} alt="" width="20" />
+        {linkColor === "/cart" ? (
+          <Link to="/shop" className="nav-back">
+            <span>Back to shop</span> <NavigateNextIcon />
           </Link>
-        </div>
-        <label htmlFor="menu-btn" className="menu-icon">
-          <span className="menu-icon__line"></span>
-        </label>
-        <CartHover />
+        ) : (
+          <>
+            {" "}
+            <input type="checkbox" className="menu-btn" id="menu-btn" />
+            <ul className="nav-links">
+              <li>
+                <Link
+                  to="/"
+                  style={linkColor !== "/" ? null : { color: "#717fe0" }}
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/shop"
+                  style={linkColor !== "/shop" ? null : { color: "#717fe0" }}
+                >
+                  Shop
+                </Link>
+              </li>
+              <li>
+                <Link to="/">About</Link>
+              </li>
+            </ul>
+            <div
+              className="nav-cart"
+              ref={popoverAnchor}
+              onMouseEnter={() => {
+                document.getElementById("animate").className =
+                  "animate__animated animate__heartBeat animate__infinite";
+                setOpenedPopover(true);
+              }}
+              onMouseLeave={() => {
+                document.getElementById("animate").className = "";
+                setOpenedPopover(false);
+              }}
+              onBlur={() => setOpenedPopover(false)}
+            >
+              <span id="animate">{cart}</span>
+              <Link to="/cart">
+                <img src={Cart} alt="" width="20" />
+              </Link>
+            </div>
+            <label htmlFor="menu-btn" className="menu-icon">
+              <span className="menu-icon__line"></span>
+            </label>
+            <CartHover />{" "}
+          </>
+        )}
       </header>
     </>
   );

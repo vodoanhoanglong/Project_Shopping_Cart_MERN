@@ -23,6 +23,18 @@
   height: 40px;
 }
 
+.main-header .nav-back {
+  color: inherit;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: Poppins-Medium;
+  transition: all 0.4s;
+}
+
+.main-header .nav-back:hover {
+  color: #8994e1;
+}
+
 .main-header ul {
   height: 3px;
   margin-right: 300px;
