@@ -1,9 +1,12 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
 import ProductContextProvider from "./contexts/ProductContext";
+import CartContextProvider from "./contexts/CartContext";
+
 import Home from "./views/Home";
 import Shop from "./views/Shop";
-import CartContextProvider from "./contexts/CartContext";
+import Cart from "./views/Cart";
 
 function App() {
   return (
@@ -13,6 +16,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/shop" component={Shop} />
+            <Route exact path="/cart" component={Cart} />
           </Switch>
         </Router>
       </CartContextProvider>

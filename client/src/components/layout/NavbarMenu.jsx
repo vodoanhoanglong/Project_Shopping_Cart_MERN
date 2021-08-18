@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 
 import { Link } from "react-router-dom";
 import { ProductContext } from "../../contexts/ProductContext";
+import { CartContext } from "../../contexts/CartContext";
 
 import CartHover from "../cart/CartHover";
 
@@ -10,10 +11,24 @@ import Cart from "../../assets/shopping-cart.png";
 
 const NavbarMenu = () => {
   const [toggle, setToggle] = useState("");
-  const { cart, setOpenedPopover, popoverAnchor } = useContext(ProductContext);
+  const { cart, setCart, setOpenedPopover, popoverAnchor } =
+    useContext(ProductContext);
+  const { itemCart, setItemCart } = useContext(CartContext);
   const linkColor = window.location.href.slice(21);
 
   const isMounted = useRef(false);
+
+  useEffect(() => {
+    const getCountCart = JSON.parse(localStorage.getItem("countCart") || 0);
+    const getCart = JSON.parse(localStorage.getItem("cart") || []);
+    setCart(getCountCart);
+    setItemCart(getCart);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("countCart", JSON.stringify(cart));
+    localStorage.setItem("cart", JSON.stringify(itemCart));
+  }, [cart, itemCart]);
 
   useEffect(() => {
     isMounted.current = true;
