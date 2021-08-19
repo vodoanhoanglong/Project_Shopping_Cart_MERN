@@ -54,7 +54,6 @@ const NavbarMenu = () => {
           </Link>
         ) : (
           <>
-            {" "}
             <input type="checkbox" className="menu-btn" id="menu-btn" />
             <ul className="nav-links">
               <li>

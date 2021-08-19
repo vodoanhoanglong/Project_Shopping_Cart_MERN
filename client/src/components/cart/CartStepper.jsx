@@ -212,7 +212,7 @@ export default function CartStepper() {
           </Step>
         ))}
       </Stepper>
-      {/* <div>
+      <div>
         {activeStep === steps.length ? (
           <div>
             <Typography className={classes.instructions}>
@@ -246,7 +246,7 @@ export default function CartStepper() {
             </div>
           </div>
         )}
-      </div> */}
+      </div>
     </div>
   );
 }

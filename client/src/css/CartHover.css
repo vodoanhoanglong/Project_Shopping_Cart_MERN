@@ -38,7 +38,12 @@
   height: 70px;
 }
 
-.footer-popover button {
+.footer-popover a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-decoration: none;
   font-weight: bold;
   border: none;
   height: 45px;
@@ -52,7 +57,7 @@
   transition: all 0.4s;
 }
 
-.footer-popover button:hover {
+.footer-popover a:hover {
   background: #000;
 }
 

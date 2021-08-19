@@ -10,6 +10,7 @@ import CheckIcon from "@material-ui/icons/Check";
 import { makeStyles } from "@material-ui/core/styles";
 
 import "../../css/CartHover.css";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
   popover: {
@@ -81,7 +82,9 @@ const CartHover = () => {
         ))}
       </div>
       <div className="footer-popover">
-        <Button>View Cart</Button>
+        <Link to="/cart" onClick={() => setOpenedPopover(false)}>
+          View Cart
+        </Link>
         <div className="total-price">
           total price: <strong>${totalPrice.toFixed(2)}</strong>
         </div>
