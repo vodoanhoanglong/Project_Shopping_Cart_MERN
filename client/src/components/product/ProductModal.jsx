@@ -7,31 +7,22 @@ import Alert from "@material-ui/lab/Alert";
 
 import "../../css/ProductModal.css";
 
-const ProductModal = ({ product: { _id, title, description, price, url } }) => {
-  const [defaultSelect, setDefaultSelect] = useState("DEFAULT");
-  const [defaultSelect2, setDefaultSelect2] = useState("DEFAULT");
-  const [quantity, setQuantity] = useState(1);
-  const [animate, setAnimate] = useState("animate__fadeInDown");
-  const [showAlert1, setShowAlert1] = useState("show-alert");
-  const [showAlert2, setShowAlert2] = useState("show-alert");
-
-  const { itemCart, setItemCart, setShowToastCart } = useContext(CartContext);
-  const { cart, setCart, setOpenedPopover } = useContext(ProductContext);
+export const InputQuantity = (props) => {
+  const { quantity, setQuantity, totalItem, _id, size, color, setItemCart } =
+    props;
 
   const regex = /^[0-9\b]+$/;
 
-  const modal = document.getElementById("myModal");
-
-  const handleChange = (e) => {
-    setDefaultSelect(e.target.value);
-    if (e.target.value !== "DEFAULT") setShowAlert1("show-alert");
-  };
-  const handleChange2 = (e) => {
-    setDefaultSelect2(e.target.value);
-    if (e.target.value !== "DEFAULT") setShowAlert2("show-alert");
-  };
-
-  const handleIncrease = () => setQuantity(parseInt(quantity + 1));
+  const handleIncrease = () =>
+    !totalItem
+      ? setQuantity(parseInt(quantity + 1))
+      : setItemCart((prevState) => [
+          ...prevState.map((item) =>
+            item._id === _id && item.size === size && item.color === color
+              ? { ...item, totalItem: totalItem + 1 }
+              : item
+          ),
+        ]);
   const handleDecrease = () =>
     quantity === typeof String
       ? setQuantity(1)
@@ -42,6 +33,60 @@ const ProductModal = ({ product: { _id, title, description, price, url } }) => {
     let input = e.target.value;
     if (!regex.test(input)) return;
     setQuantity(parseInt(input));
+  };
+  const handleLeaveInput = () =>
+    document.getElementsByClassName("quantity-show")[0].value === ""
+      ? setQuantity(1)
+      : null;
+
+  return (
+    <div className="quantity-btn">
+      <div
+        className="decrease-btn"
+        onClick={handleDecrease}
+        style={{ userSelect: "none" }}
+      >
+        -
+      </div>
+      <input
+        // id="quantity-show"
+        className="quantity-show"
+        value={!totalItem ? quantity : totalItem}
+        onClick={() => setQuantity("")}
+        onChange={handleChangeInput}
+        onBlur={handleLeaveInput}
+      />
+      <div
+        className="increase-btn"
+        onClick={handleIncrease}
+        style={{ userSelect: "none" }}
+      >
+        +
+      </div>
+    </div>
+  );
+};
+
+const ProductModal = ({ product: { _id, title, description, price, url } }) => {
+  const [defaultSelect, setDefaultSelect] = useState("DEFAULT");
+  const [defaultSelect2, setDefaultSelect2] = useState("DEFAULT");
+  const [animate, setAnimate] = useState("animate__fadeInDown");
+  const [showAlert1, setShowAlert1] = useState("show-alert");
+  const [showAlert2, setShowAlert2] = useState("show-alert");
+
+  const { itemCart, setItemCart, setShowToastCart } = useContext(CartContext);
+  const { setCart, setOpenedPopover, quantity, setQuantity } =
+    useContext(ProductContext);
+
+  const modal = document.getElementById("myModal");
+
+  const handleChange = (e) => {
+    setDefaultSelect(e.target.value);
+    if (e.target.value !== "DEFAULT") setShowAlert1("show-alert");
+  };
+  const handleChange2 = (e) => {
+    setDefaultSelect2(e.target.value);
+    if (e.target.value !== "DEFAULT") setShowAlert2("show-alert");
   };
 
   const images = [
@@ -85,6 +130,8 @@ const ProductModal = ({ product: { _id, title, description, price, url } }) => {
     },
   ];
 
+  const updateCountCart = () => setCart((prevCart) => prevCart + quantity);
+
   const setTimeOutPopover = () => {
     setOpenedPopover(true);
     setShowToastCart(true);
@@ -107,6 +154,7 @@ const ProductModal = ({ product: { _id, title, description, price, url } }) => {
       },
       ...prevState,
     ]);
+    updateCountCart();
     setTimeOutPopover();
   };
 
@@ -120,6 +168,7 @@ const ProductModal = ({ product: { _id, title, description, price, url } }) => {
           : item
       ),
     ]);
+    updateCountCart();
     setTimeOutPopover();
   };
 
@@ -136,16 +185,10 @@ const ProductModal = ({ product: { _id, title, description, price, url } }) => {
     }, 400);
   };
 
-  const handleLeaveInput = () =>
-    document.getElementById("quantity-show").value === ""
-      ? setQuantity(1)
-      : null;
-
   const handleAddToCart = () => {
     if (defaultSelect === "DEFAULT") setShowAlert1("");
     if (defaultSelect2 === "DEFAULT") setShowAlert2("");
     if (defaultSelect !== "DEFAULT" && defaultSelect2 !== "DEFAULT") {
-      setCart(cart + 1);
       const addItem = itemCart.find(
         (item) =>
           item._id === _id &&
@@ -240,30 +283,7 @@ const ProductModal = ({ product: { _id, title, description, price, url } }) => {
 
             <div className="information-quantity">
               <span>Quantity</span>
-              <div className="quantity-btn">
-                <div
-                  className="decrease-btn"
-                  onClick={handleDecrease}
-                  style={{ userSelect: "none" }}
-                >
-                  -
-                </div>
-                <input
-                  id="quantity-show"
-                  className="quantity-show"
-                  value={quantity}
-                  onClick={() => setQuantity("")}
-                  onChange={handleChangeInput}
-                  onBlur={handleLeaveInput}
-                />
-                <div
-                  className="increase-btn"
-                  onClick={handleIncrease}
-                  style={{ userSelect: "none" }}
-                >
-                  +
-                </div>
-              </div>
+              <InputQuantity quantity={quantity} setQuantity={setQuantity} />
             </div>
             <div className="container-button">
               <button onClick={handleAddToCart}>ADD TO CART</button>

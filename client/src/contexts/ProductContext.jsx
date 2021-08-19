@@ -13,6 +13,7 @@ const ProductContextProvider = ({ children }) => {
   });
   const [cart, setCart] = useState(0);
   const [openedPopover, setOpenedPopover] = useState(false);
+  const [quantity, setQuantity] = useState(1);
 
   const popoverAnchor = useRef(null);
 
@@ -51,6 +52,8 @@ const ProductContextProvider = ({ children }) => {
     openedPopover,
     setOpenedPopover,
     popoverAnchor,
+    quantity,
+    setQuantity,
   };
 
   return (

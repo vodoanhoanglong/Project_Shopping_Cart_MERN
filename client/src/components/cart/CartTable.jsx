@@ -23,6 +23,8 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 
 import { CartContext } from "../../contexts/CartContext";
 
+import { InputQuantity } from "../product/ProductModal";
+
 // function  (name, calories, fat, carbs, protein) {
 //   return { name, calories, fat, carbs, protein };
 // }
@@ -245,7 +247,7 @@ export default function CartTable() {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  const { itemCart } = React.useContext(CartContext);
+  const { itemCart, setItemCart } = React.useContext(CartContext);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -334,7 +336,7 @@ export default function CartTable() {
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.title}
+                      key={index}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
@@ -370,9 +372,17 @@ export default function CartTable() {
                         </div>
                       </TableCell>
                       <TableCell align="center">${row.price}</TableCell>
-                      <TableCell align="center">{row.totalItem}</TableCell>
                       <TableCell align="center">
-                        ${row.price * row.totalItem}
+                        <InputQuantity
+                          totalItem={row.totalItem}
+                          _id={row._id}
+                          size={row.size}
+                          color={row.color}
+                          setItemCart={setItemCart}
+                        />
+                      </TableCell>
+                      <TableCell align="center">
+                        ${(row.price * row.totalItem).toFixed(2)}
                       </TableCell>
                       {/* <TableCell align="right">
                         ${row.price * row.totalItem}
