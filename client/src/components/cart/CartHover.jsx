@@ -3,7 +3,6 @@ import { useContext, useEffect } from "react";
 import { ProductContext } from "../../contexts/ProductContext";
 import { CartContext } from "../../contexts/CartContext";
 
-import { Button } from "react-bootstrap";
 import Popover from "@material-ui/core/Popover";
 import Alert from "@material-ui/lab/Alert";
 import CheckIcon from "@material-ui/icons/Check";
@@ -21,7 +20,9 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const CartHover = () => {
+const CartHover = (props) => {
+  const { handleClick } = props;
+
   const { openedPopover, setOpenedPopover, popoverAnchor } =
     useContext(ProductContext);
   const { itemCart, showToastCart } = useContext(CartContext);
@@ -35,6 +36,11 @@ const CartHover = () => {
 
   const handleShowPopover = () => setOpenedPopover(true);
   const handleHidePopover = () => setOpenedPopover(false);
+
+  const handleClickPopover = () => {
+    handleHidePopover();
+    handleClick();
+  };
 
   return (
     <Popover
@@ -82,7 +88,7 @@ const CartHover = () => {
         ))}
       </div>
       <div className="footer-popover">
-        <Link to="/cart" onClick={() => setOpenedPopover(false)}>
+        <Link to="/cart" onClick={handleClickPopover}>
           View Cart
         </Link>
         <div className="total-price">

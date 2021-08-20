@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { ProductContext } from "../../contexts/ProductContext";
 import { CartContext } from "../../contexts/CartContext";
 
@@ -15,7 +15,10 @@ const NavbarMenu = () => {
   const { cart, setCart, setOpenedPopover, popoverAnchor } =
     useContext(ProductContext);
   const { itemCart, setItemCart } = useContext(CartContext);
-  const linkColor = window.location.href.slice(21);
+
+  let history = useHistory();
+
+  const currentLink = window.location.href.slice(21);
 
   const isMounted = useRef(false);
 
@@ -40,6 +43,10 @@ const NavbarMenu = () => {
     });
     return () => (isMounted.current = false);
   }, [toggle]);
+
+  const handleClick = () => history.push(currentLink);
+  const handleClickBack = () => history.goBack();
+
   return (
     <>
       <header className={"main-header " + toggle}>
@@ -48,8 +55,8 @@ const NavbarMenu = () => {
             <Link to="/">Clothes</Link>
           </h1>
         </div>
-        {linkColor === "/cart" ? (
-          <Link to="/shop" className="nav-back">
+        {currentLink === "/cart" ? (
+          <Link to="/shop" className="nav-back" onClick={handleClickBack}>
             <span>Back to shop</span> <NavigateNextIcon />
           </Link>
         ) : (
@@ -59,7 +66,7 @@ const NavbarMenu = () => {
               <li>
                 <Link
                   to="/"
-                  style={linkColor !== "/" ? null : { color: "#717fe0" }}
+                  style={currentLink !== "/" ? null : { color: "#717fe0" }}
                 >
                   Home
                 </Link>
@@ -67,7 +74,7 @@ const NavbarMenu = () => {
               <li>
                 <Link
                   to="/shop"
-                  style={linkColor !== "/shop" ? null : { color: "#717fe0" }}
+                  style={currentLink !== "/shop" ? null : { color: "#717fe0" }}
                 >
                   Shop
                 </Link>
@@ -91,14 +98,14 @@ const NavbarMenu = () => {
               onBlur={() => setOpenedPopover(false)}
             >
               <span id="animate">{cart}</span>
-              <Link to="/cart">
+              <Link to="/cart" onClick={handleClick}>
                 <img src={Cart} alt="" width="20" />
               </Link>
             </div>
             <label htmlFor="menu-btn" className="menu-icon">
               <span className="menu-icon__line"></span>
             </label>
-            <CartHover />{" "}
+            <CartHover handleClick={handleClick} />
           </>
         )}
       </header>
