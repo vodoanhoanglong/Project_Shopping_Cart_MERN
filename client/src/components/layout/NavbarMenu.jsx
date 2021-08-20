@@ -12,8 +12,10 @@ import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 
 const NavbarMenu = () => {
   const [toggle, setToggle] = useState("");
+
   const { cart, setCart, setOpenedPopover, popoverAnchor } =
     useContext(ProductContext);
+
   const { itemCart, setItemCart } = useContext(CartContext);
 
   let history = useHistory();

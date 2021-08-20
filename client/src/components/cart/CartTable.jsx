@@ -247,7 +247,7 @@ export default function CartTable() {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  const { itemCart, setItemCart } = React.useContext(CartContext);
+  const { itemCart } = React.useContext(CartContext);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -374,11 +374,8 @@ export default function CartTable() {
                       <TableCell align="center">${row.price}</TableCell>
                       <TableCell align="center">
                         <InputQuantity
-                          totalItem={row.totalItem}
-                          _id={row._id}
-                          size={row.size}
-                          color={row.color}
-                          setItemCart={setItemCart}
+                          total={row.totalItem}
+                          information={row}
                         />
                       </TableCell>
                       <TableCell align="center">

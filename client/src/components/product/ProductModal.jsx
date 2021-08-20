@@ -8,27 +8,56 @@ import Alert from "@material-ui/lab/Alert";
 import "../../css/ProductModal.css";
 
 export const InputQuantity = (props) => {
-  const { quantity, setQuantity, totalItem, _id, size, color, setItemCart } =
-    props;
+  const { total, information } = props;
+
+  const { quantity, setQuantity, setCart } = useContext(ProductContext);
+  const { itemCart, setItemCart } = useContext(CartContext);
 
   const regex = /^[0-9\b]+$/;
 
+  const handleSetItemCart = (type = null) => {
+    setItemCart((prevState) => [
+      ...prevState.map((item) =>
+        item._id === information._id &&
+        item.size === information.size &&
+        item.color === information.color
+          ? {
+              ...item,
+              totalItem:
+                type === "increase"
+                  ? total + 1
+                  : type === "decrease"
+                  ? total - 1
+                  : 1,
+            }
+          : item
+      ),
+    ]);
+    setCart((prevCart) =>
+      type === "increase"
+        ? prevCart + 1
+        : type === "decrease"
+        ? prevCart - 1
+        : prevCart
+    );
+  };
+
   const handleIncrease = () =>
-    !totalItem
+    !total
       ? setQuantity(parseInt(quantity + 1))
-      : setItemCart((prevState) => [
-          ...prevState.map((item) =>
-            item._id === _id && item.size === size && item.color === color
-              ? { ...item, totalItem: totalItem + 1 }
-              : item
-          ),
-        ]);
+      : handleSetItemCart("increase");
+
   const handleDecrease = () =>
-    quantity === typeof String
-      ? setQuantity(1)
-      : quantity <= 1
-      ? setQuantity(1)
-      : setQuantity(quantity - 1);
+    !total
+      ? quantity === typeof String
+        ? setQuantity(1)
+        : quantity <= 1
+        ? setQuantity(1)
+        : setQuantity(quantity - 1)
+      : total <= 1
+      ? handleSetItemCart()
+      : handleSetItemCart("decrease");
+
   const handleChangeInput = (e) => {
     let input = e.target.value;
     if (!regex.test(input)) return;
@@ -49,9 +78,8 @@ export const InputQuantity = (props) => {
         -
       </div>
       <input
-        // id="quantity-show"
         className="quantity-show"
-        value={!totalItem ? quantity : totalItem}
+        value={!total ? quantity : total}
         onClick={() => setQuantity("")}
         onChange={handleChangeInput}
         onBlur={handleLeaveInput}
@@ -283,7 +311,7 @@ const ProductModal = ({ product: { _id, title, description, price, url } }) => {
 
             <div className="information-quantity">
               <span>Quantity</span>
-              <InputQuantity quantity={quantity} setQuantity={setQuantity} />
+              <InputQuantity />
             </div>
             <div className="container-button">
               <button onClick={handleAddToCart}>ADD TO CART</button>

@@ -14,8 +14,8 @@ const Cart = () => {
       <div className="container-cart">
         <CartStepper />
         <CartTable />
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 };
