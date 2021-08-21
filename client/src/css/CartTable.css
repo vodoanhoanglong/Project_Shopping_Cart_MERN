@@ -1,3 +1,37 @@
 .quantity-btn-cart {
   display: flex;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+}
+
+.increase-btn-cart,
+.decrease-btn-cart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 46.3px;
+  height: 40px;
+  font-size: 22px;
+  transition: all 0.4s;
+}
+
+.increase-btn-cart:hover,
+.decrease-btn-cart:hover {
+  background: #717fe0;
+  cursor: pointer;
+}
+
+.quantity-show-cart {
+  border: none;
+  border-left: 1px solid #e6e6e6;
+  border-right: 1px solid #e6e6e6;
+  background-color: #f7f7f7;
+  text-align: center;
+  width: 46.3px;
+  height: 40px;
+  font-size: 22px;
+}
+
+.quantity-show-cart:focus-visible {
+  outline: none;
 }

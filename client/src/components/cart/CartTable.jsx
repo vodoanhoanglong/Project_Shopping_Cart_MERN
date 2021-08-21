@@ -22,6 +22,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 
 import { CartContext } from "../../contexts/CartContext";
+import "../../css/CartTable.css";
 
 const InputCart = (props) => {
   const { _id, size, color, totalItem } = props;
@@ -426,12 +427,16 @@ export default function CartTable() {
                       </TableCell>
                       <TableCell align="center">${row.price}</TableCell>
                       <TableCell align="center">
-                        <InputCart
-                          _id={row._id}
-                          color={row.color}
-                          size={row.size}
-                          totalItem={row.totalItem}
-                        />
+                        <div
+                          style={{ display: "flex", justifyContent: "center" }}
+                        >
+                          <InputCart
+                            _id={row._id}
+                            color={row.color}
+                            size={row.size}
+                            totalItem={row.totalItem}
+                          />
+                        </div>
                       </TableCell>
                       <TableCell align="center">
                         ${(row.price * row.totalItem).toFixed(2)}
