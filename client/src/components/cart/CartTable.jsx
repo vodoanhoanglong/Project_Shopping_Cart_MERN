@@ -23,27 +23,80 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 
 import { CartContext } from "../../contexts/CartContext";
 
-import { InputQuantity } from "../product/ProductModal";
+const InputCart = (props) => {
+  const { _id, size, color, totalItem } = props;
 
-// function  (name, calories, fat, carbs, protein) {
-//   return { name, calories, fat, carbs, protein };
-// }
+  const { setItemCart } = React.useContext(CartContext);
 
-// const rows = [
-//   createData("Cupcake", 305, 3.7, 67, 4.3),
-//   createData("Donut", 452, 25.0, 51, 4.9),
-//   createData("Eclair", 262, 16.0, 24, 6.0),
-//   createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-//   createData("Gingerbread", 356, 16.0, 49, 3.9),
-//   createData("Honeycomb", 408, 3.2, 87, 6.5),
-//   createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-//   createData("Jelly Bean", 375, 0.0, 94, 0.0),
-//   createData("KitKat", 518, 26.0, 65, 7.0),
-//   createData("Lollipop", 392, 0.2, 98, 0.0),
-//   createData("Marshmallow", 318, 0, 81, 2.0),
-//   createData("Nougat", 360, 19.0, 9, 37.0),
-//   createData("Oreo", 437, 18.0, 63, 4.0),
-// ];
+  const [total, setTotal] = React.useState(totalItem);
+  const [totalLeave, setTotalLeave] = React.useState();
+
+  React.useEffect(() => {
+    setItemCart((prevState) => [
+      ...prevState.map((item) =>
+        item._id === _id && item.size === size && item.color === color
+          ? {
+              ...item,
+              totalItem: total,
+            }
+          : item
+      ),
+    ]);
+  }, [total]);
+
+  const regex = /^[0-9\b]+$/;
+
+  const handleIncrease = () => setTotal(total + 1);
+
+  const handleDecrease = () =>
+    total === typeof String
+      ? setTotal(1)
+      : total <= 1
+      ? setTotal(1)
+      : setTotal(total - 1);
+
+  const handleChangeInput = (e) => {
+    let input = e.target.value;
+    if (!regex.test(input)) return;
+    setTotal(parseInt(input));
+  };
+
+  const handleLeaveInput = () =>
+    document.getElementById(_id + color + size).value === ""
+      ? setTotal(totalLeave)
+      : null;
+
+  const handleOnClickInput = () => {
+    setTotalLeave(total);
+    setTotal("");
+  };
+  return (
+    <div className="quantity-btn-cart">
+      <div
+        className="decrease-btn-cart"
+        onClick={handleDecrease}
+        style={{ userSelect: "none" }}
+      >
+        -
+      </div>
+      <input
+        id={_id + color + size}
+        className="quantity-show-cart"
+        value={total}
+        onClick={handleOnClickInput}
+        onChange={handleChangeInput}
+        onBlur={handleLeaveInput}
+      />
+      <div
+        className="increase-btn-cart"
+        onClick={handleIncrease}
+        style={{ userSelect: "none" }}
+      >
+        +
+      </div>
+    </div>
+  );
+};
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -373,9 +426,11 @@ export default function CartTable() {
                       </TableCell>
                       <TableCell align="center">${row.price}</TableCell>
                       <TableCell align="center">
-                        <InputQuantity
-                          total={row.totalItem}
-                          information={row}
+                        <InputCart
+                          _id={row._id}
+                          color={row.color}
+                          size={row.size}
+                          totalItem={row.totalItem}
                         />
                       </TableCell>
                       <TableCell align="center">

@@ -7,94 +7,6 @@ import Alert from "@material-ui/lab/Alert";
 
 import "../../css/ProductModal.css";
 
-export const InputQuantity = (props) => {
-  const { total, information } = props;
-
-  const { quantity, setQuantity, setCart } = useContext(ProductContext);
-  const { itemCart, setItemCart } = useContext(CartContext);
-
-  const regex = /^[0-9\b]+$/;
-
-  const handleSetItemCart = (type = null) => {
-    setItemCart((prevState) => [
-      ...prevState.map((item) =>
-        item._id === information._id &&
-        item.size === information.size &&
-        item.color === information.color
-          ? {
-              ...item,
-              totalItem:
-                type === "increase"
-                  ? total + 1
-                  : type === "decrease"
-                  ? total - 1
-                  : 1,
-            }
-          : item
-      ),
-    ]);
-    setCart((prevCart) =>
-      type === "increase"
-        ? prevCart + 1
-        : type === "decrease"
-        ? prevCart - 1
-        : prevCart
-    );
-  };
-
-  const handleIncrease = () =>
-    !total
-      ? setQuantity(parseInt(quantity + 1))
-      : handleSetItemCart("increase");
-
-  const handleDecrease = () =>
-    !total
-      ? quantity === typeof String
-        ? setQuantity(1)
-        : quantity <= 1
-        ? setQuantity(1)
-        : setQuantity(quantity - 1)
-      : total <= 1
-      ? handleSetItemCart()
-      : handleSetItemCart("decrease");
-
-  const handleChangeInput = (e) => {
-    let input = e.target.value;
-    if (!regex.test(input)) return;
-    setQuantity(parseInt(input));
-  };
-  const handleLeaveInput = () =>
-    document.getElementsByClassName("quantity-show")[0].value === ""
-      ? setQuantity(1)
-      : null;
-
-  return (
-    <div className="quantity-btn">
-      <div
-        className="decrease-btn"
-        onClick={handleDecrease}
-        style={{ userSelect: "none" }}
-      >
-        -
-      </div>
-      <input
-        className="quantity-show"
-        value={!total ? quantity : total}
-        onClick={() => setQuantity("")}
-        onChange={handleChangeInput}
-        onBlur={handleLeaveInput}
-      />
-      <div
-        className="increase-btn"
-        onClick={handleIncrease}
-        style={{ userSelect: "none" }}
-      >
-        +
-      </div>
-    </div>
-  );
-};
-
 const ProductModal = ({ product: { _id, title, description, price, url } }) => {
   const [defaultSelect, setDefaultSelect] = useState("DEFAULT");
   const [defaultSelect2, setDefaultSelect2] = useState("DEFAULT");
@@ -107,6 +19,7 @@ const ProductModal = ({ product: { _id, title, description, price, url } }) => {
     useContext(ProductContext);
 
   const modal = document.getElementById("myModal");
+  const regex = /^[0-9\b]+$/;
 
   const handleChange = (e) => {
     setDefaultSelect(e.target.value);
@@ -116,6 +29,28 @@ const ProductModal = ({ product: { _id, title, description, price, url } }) => {
     setDefaultSelect2(e.target.value);
     if (e.target.value !== "DEFAULT") setShowAlert2("show-alert");
   };
+
+  const handleIncrease = () => setQuantity(quantity + 1);
+
+  const handleDecrease = () =>
+    quantity === typeof String
+      ? setQuantity(1)
+      : quantity <= 1
+      ? setQuantity(1)
+      : setQuantity(quantity - 1);
+
+  const handleChangeInput = (e) => {
+    let input = e.target.value;
+    if (!regex.test(input)) return;
+    setQuantity(parseInt(input));
+  };
+
+  const handleLeaveInput = () =>
+    document.getElementById("quantity-show").value === ""
+      ? setQuantity(1)
+      : null;
+
+  const handleOnClickInput = () => setQuantity("");
 
   const images = [
     {
@@ -311,7 +246,30 @@ const ProductModal = ({ product: { _id, title, description, price, url } }) => {
 
             <div className="information-quantity">
               <span>Quantity</span>
-              <InputQuantity />
+              <div className="quantity-btn">
+                <div
+                  className="decrease-btn"
+                  onClick={handleDecrease}
+                  style={{ userSelect: "none" }}
+                >
+                  -
+                </div>
+                <input
+                  id="quantity-show"
+                  className="quantity-show"
+                  value={quantity}
+                  onClick={handleOnClickInput}
+                  onChange={handleChangeInput}
+                  onBlur={handleLeaveInput}
+                />
+                <div
+                  className="increase-btn"
+                  onClick={handleIncrease}
+                  style={{ userSelect: "none" }}
+                >
+                  +
+                </div>
+              </div>
             </div>
             <div className="container-button">
               <button onClick={handleAddToCart}>ADD TO CART</button>

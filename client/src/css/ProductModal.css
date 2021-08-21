@@ -135,7 +135,7 @@
 }
 
 .container-information .information-quantity .increase-btn,
-.decrease-btn {
+.container-information .information-quantity .decrease-btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -146,7 +146,7 @@
 }
 
 .container-information .information-quantity .increase-btn:hover,
-.decrease-btn:hover {
+.container-information .information-quantity .decrease-btn:hover {
   background: #717fe0;
   cursor: pointer;
 }

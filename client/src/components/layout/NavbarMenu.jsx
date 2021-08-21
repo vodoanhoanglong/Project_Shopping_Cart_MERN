@@ -58,7 +58,16 @@ const NavbarMenu = () => {
           </h1>
         </div>
         {currentLink === "/cart" ? (
-          <Link to="/shop" className="nav-back" onClick={handleClickBack}>
+          <Link
+            to="/shop"
+            className="nav-back"
+            onClick={handleClickBack}
+            onMouseEnter={() =>
+              setCart(
+                itemCart.reduce((sum, { totalItem }) => sum + totalItem, 0)
+              )
+            }
+          >
             <span>Back to shop</span> <NavigateNextIcon />
           </Link>
         ) : (
