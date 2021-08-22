@@ -20,6 +20,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import { CartContext } from "../../contexts/CartContext";
 import "../../css/CartTable.css";
@@ -421,7 +422,13 @@ export default function CartTable() {
                             <p>
                               <b> {row.title} </b>
                             </p>
-                            <p> {row.color} </p>
+                            <div className="size-color-cart">
+                              <span>{row.color}</span>
+                              <span>&nbsp;/&nbsp;</span>
+                              <span>{row.size}</span>
+                              &nbsp;
+                              <ExpandMoreIcon />
+                            </div>
                           </div>
                         </div>
                       </TableCell>
