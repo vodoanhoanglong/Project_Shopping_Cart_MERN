@@ -7,9 +7,18 @@ import Alert from "@material-ui/lab/Alert";
 
 import "../../css/ProductModal.css";
 
-const ProductModal = ({ product: { _id, title, description, price, url } }) => {
-  const [defaultSelect, setDefaultSelect] = useState("DEFAULT");
-  const [defaultSelect2, setDefaultSelect2] = useState("DEFAULT");
+const ProductModal = (props) => {
+  const {
+    _id,
+    size,
+    color,
+    product: { title, description, price, url },
+  } = props;
+
+  const [defaultSelect, setDefaultSelect] = useState(!size ? "DEFAULT" : size);
+  const [defaultSelect2, setDefaultSelect2] = useState(
+    !color ? "DEFAULT" : color
+  );
   const [animate, setAnimate] = useState("animate__fadeInDown");
   const [showAlert1, setShowAlert1] = useState("show-alert");
   const [showAlert2, setShowAlert2] = useState("show-alert");
@@ -111,6 +120,7 @@ const ProductModal = ({ product: { _id, title, description, price, url } }) => {
         url,
         title,
         price,
+        description,
         totalItem: quantity,
         size: defaultSelect,
         color: defaultSelect2,
@@ -167,6 +177,21 @@ const ProductModal = ({ product: { _id, title, description, price, url } }) => {
     }
   };
 
+  const handleUpdateToCart = () => {
+    setItemCart((prevState) => [
+      ...prevState.map((item) =>
+        item._id === _id && item.size === size && item.color === color
+          ? {
+              ...item,
+              size: defaultSelect,
+              color: defaultSelect2,
+            }
+          : item
+      ),
+    ]);
+    handleClose();
+  };
+
   window.onclick = (e) => (e.target === modal ? handleClose() : null);
 
   return (
@@ -199,23 +224,27 @@ const ProductModal = ({ product: { _id, title, description, price, url } }) => {
                 value={defaultSelect}
                 onChange={handleChange}
               >
-                <option value="DEFAULT" disabled>
-                  Choose
-                </option>
+                {!size && (
+                  <option value="DEFAULT" disabled>
+                    Choose
+                  </option>
+                )}
                 <option value="S">S</option>
                 <option value="M">M</option>
                 <option value="L">L</option>
                 <option value="XL">XL</option>
               </select>
             </div>
-            <div className={showAlert1}>
-              <Alert
-                className="animate__animated animate__shakeX"
-                severity="error"
-              >
-                Please, choose size
-              </Alert>
-            </div>
+            {!size && (
+              <div className={showAlert1}>
+                <Alert
+                  className="animate__animated animate__shakeX"
+                  severity="error"
+                >
+                  Please, choose size
+                </Alert>
+              </div>
+            )}
 
             <div className="information-color">
               <span>Color</span>
@@ -226,53 +255,61 @@ const ProductModal = ({ product: { _id, title, description, price, url } }) => {
                 value={defaultSelect2}
                 onChange={handleChange2}
               >
-                <option value="DEFAULT" disabled>
-                  Choose
-                </option>
+                {!color && (
+                  <option value="DEFAULT" disabled>
+                    Choose
+                  </option>
+                )}
                 <option value="Red">Red</option>
                 <option value="Blue">Blue</option>
                 <option value="Yellow">Yellow</option>
                 <option value="Pink">Pink</option>
               </select>
             </div>
-            <div className={showAlert2}>
-              <Alert
-                className="animate__animated animate__shakeX"
-                severity="error"
-              >
-                Please, choose color
-              </Alert>
-            </div>
+            {!color && (
+              <div className={showAlert2}>
+                <Alert
+                  className="animate__animated animate__shakeX"
+                  severity="error"
+                >
+                  Please, choose color
+                </Alert>
+              </div>
+            )}
 
-            <div className="information-quantity">
-              <span>Quantity</span>
-              <div className="quantity-btn">
-                <div
-                  className="decrease-btn"
-                  onClick={handleDecrease}
-                  style={{ userSelect: "none" }}
-                >
-                  -
-                </div>
-                <input
-                  id="quantity-show"
-                  className="quantity-show"
-                  value={quantity}
-                  onClick={handleOnClickInput}
-                  onChange={handleChangeInput}
-                  onBlur={handleLeaveInput}
-                />
-                <div
-                  className="increase-btn"
-                  onClick={handleIncrease}
-                  style={{ userSelect: "none" }}
-                >
-                  +
+            {!size && (
+              <div className="information-quantity">
+                <span>Quantity</span>
+                <div className="quantity-btn">
+                  <div
+                    className="decrease-btn"
+                    onClick={handleDecrease}
+                    style={{ userSelect: "none" }}
+                  >
+                    -
+                  </div>
+                  <input
+                    id="quantity-show"
+                    className="quantity-show"
+                    value={quantity}
+                    onClick={handleOnClickInput}
+                    onChange={handleChangeInput}
+                    onBlur={handleLeaveInput}
+                  />
+                  <div
+                    className="increase-btn"
+                    onClick={handleIncrease}
+                    style={{ userSelect: "none" }}
+                  >
+                    +
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
             <div className="container-button">
-              <button onClick={handleAddToCart}>ADD TO CART</button>
+              <button onClick={!size ? handleAddToCart : handleUpdateToCart}>
+                {!size ? "ADD TO CART" : "UPDATE TO CART"}
+              </button>
               <i className="fas fa-heart"></i>
             </div>
           </div>

@@ -24,6 +24,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import { CartContext } from "../../contexts/CartContext";
 import "../../css/CartTable.css";
+import ProductModal from "../product/ProductModal";
 
 const InputCart = (props) => {
   const { _id, size, color, totalItem } = props;
@@ -422,7 +423,14 @@ export default function CartTable() {
                             <p>
                               <b> {row.title} </b>
                             </p>
-                            <div className="size-color-cart">
+                            <div
+                              className="size-color-cart"
+                              onClick={() =>
+                                (document.getElementById(
+                                  "myModal"
+                                ).style.display = "block")
+                              }
+                            >
                               <span>{row.color}</span>
                               <span>&nbsp;/&nbsp;</span>
                               <span>{row.size}</span>
@@ -448,9 +456,12 @@ export default function CartTable() {
                       <TableCell align="center">
                         ${(row.price * row.totalItem).toFixed(2)}
                       </TableCell>
-                      {/* <TableCell align="right">
-                        ${row.price * row.totalItem}
-                      </TableCell> */}
+                      <ProductModal
+                        _id={row._id}
+                        size={row.size}
+                        color={row.color}
+                        product={row}
+                      />
                     </TableRow>
                   );
                 })}
