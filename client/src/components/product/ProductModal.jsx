@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { ProductContext } from "../../contexts/ProductContext";
 import { CartContext } from "../../contexts/CartContext";
 
@@ -12,6 +12,7 @@ const ProductModal = (props) => {
     _id,
     size,
     color,
+    totalItem,
     product: { title, description, price, url },
   } = props;
 
@@ -19,6 +20,13 @@ const ProductModal = (props) => {
   const [defaultSelect2, setDefaultSelect2] = useState(
     !color ? "DEFAULT" : color
   );
+
+  // khi truyền props xuống để làm constructor cho State thì nên dùng useEffect
+  useEffect(() => {
+    setDefaultSelect(size);
+    setDefaultSelect2(color);
+  }, [size, color]);
+
   const [animate, setAnimate] = useState("animate__fadeInDown");
   const [showAlert1, setShowAlert1] = useState("show-alert");
   const [showAlert2, setShowAlert2] = useState("show-alert");
@@ -149,8 +157,10 @@ const ProductModal = (props) => {
     setAnimate("animate__fadeOut");
     setTimeout(() => {
       modal.style.display = "none";
-      setDefaultSelect("DEFAULT");
-      setDefaultSelect2("DEFAULT");
+      if (!size) {
+        setDefaultSelect("DEFAULT");
+        setDefaultSelect2("DEFAULT");
+      }
       setQuantity(1);
       setAnimate("animate__fadeInDown");
       setShowAlert1("show-alert");
@@ -178,17 +188,44 @@ const ProductModal = (props) => {
   };
 
   const handleUpdateToCart = () => {
+    let result = null;
+
     setItemCart((prevState) => [
-      ...prevState.map((item) =>
-        item._id === _id && item.size === size && item.color === color
-          ? {
-              ...item,
-              size: defaultSelect,
-              color: defaultSelect2,
-            }
-          : item
-      ),
+      ...prevState.map((item) => {
+        if (
+          item._id === _id &&
+          size === defaultSelect &&
+          color === defaultSelect2
+        ) {
+          result = itemCart.findIndex(
+            (itemChild) =>
+              itemChild._id === _id &&
+              itemChild.size === defaultSelect &&
+              itemChild.color === defaultSelect2
+          );
+          console.log(item.totalItem);
+          return {
+            ...item,
+            size: defaultSelect,
+            color: defaultSelect2,
+            totalItem: item.totalItem + totalItem,
+          };
+        } else if (
+          item._id === _id &&
+          item.size === size &&
+          item.color === color
+        )
+          return {
+            ...item,
+            size: defaultSelect,
+            color: defaultSelect2,
+          };
+        else return item;
+      }),
     ]);
+
+    if (result !== null)
+      setItemCart((prevState) => [...prevState.splice(result, 1)]);
     handleClose();
   };
 

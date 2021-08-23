@@ -147,7 +147,7 @@ const Shop = () => {
           <Footer />
         </div>
       </div>
-      <ProductModal product={urlImg} />
+      <ProductModal _id={urlImg._id} product={urlImg} />
     </div>
   );
 };

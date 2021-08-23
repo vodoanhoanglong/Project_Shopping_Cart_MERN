@@ -302,7 +302,7 @@ export default function CartTable() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
+  const [information, setInformation] = React.useState("");
   const { itemCart } = React.useContext(CartContext);
 
   const handleRequestSort = (event, property) => {
@@ -425,15 +425,16 @@ export default function CartTable() {
                             </p>
                             <div
                               className="size-color-cart"
-                              onClick={() =>
-                                (document.getElementById(
+                              onClick={() => {
+                                document.getElementById(
                                   "myModal"
-                                ).style.display = "block")
-                              }
+                                ).style.display = "block";
+                                setInformation(row);
+                              }}
                             >
-                              <span>{row.color}</span>
-                              <span>&nbsp;/&nbsp;</span>
                               <span>{row.size}</span>
+                              <span>&nbsp;/&nbsp;</span>
+                              <span>{row.color}</span>
                               &nbsp;
                               <ExpandMoreIcon />
                             </div>
@@ -456,12 +457,6 @@ export default function CartTable() {
                       <TableCell align="center">
                         ${(row.price * row.totalItem).toFixed(2)}
                       </TableCell>
-                      <ProductModal
-                        _id={row._id}
-                        size={row.size}
-                        color={row.color}
-                        product={row}
-                      />
                     </TableRow>
                   );
                 })}
@@ -483,10 +478,13 @@ export default function CartTable() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      {/* <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      /> */}
+      <ProductModal
+        _id={information._id}
+        size={information.size}
+        color={information.color}
+        totalItem={information.totalItem}
+        product={information}
+      />
     </div>
   );
 }
