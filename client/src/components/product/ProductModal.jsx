@@ -12,7 +12,6 @@ const ProductModal = (props) => {
     _id,
     size,
     color,
-    totalItem,
     product: { title, description, price, url },
   } = props;
 
@@ -21,12 +20,6 @@ const ProductModal = (props) => {
     !color ? "DEFAULT" : color
   );
 
-  // khi truyền props xuống để làm constructor cho State thì nên dùng useEffect
-  useEffect(() => {
-    setDefaultSelect(size);
-    setDefaultSelect2(color);
-  }, [size, color]);
-
   const [animate, setAnimate] = useState("animate__fadeInDown");
   const [showAlert1, setShowAlert1] = useState("show-alert");
   const [showAlert2, setShowAlert2] = useState("show-alert");
@@ -34,6 +27,12 @@ const ProductModal = (props) => {
   const { itemCart, setItemCart, setShowToastCart } = useContext(CartContext);
   const { setCart, setOpenedPopover, quantity, setQuantity } =
     useContext(ProductContext);
+
+  // khi truyền props xuống để làm constructor cho State thì nên dùng useEffect
+  useEffect(() => {
+    setDefaultSelect(size);
+    setDefaultSelect2(color);
+  }, [size, color]);
 
   const modal = document.getElementById("myModal");
   const regex = /^[0-9\b]+$/;
@@ -160,6 +159,9 @@ const ProductModal = (props) => {
       if (!size) {
         setDefaultSelect("DEFAULT");
         setDefaultSelect2("DEFAULT");
+      } else {
+        setDefaultSelect(size);
+        setDefaultSelect2(color);
       }
       setQuantity(1);
       setAnimate("animate__fadeInDown");
@@ -188,44 +190,41 @@ const ProductModal = (props) => {
   };
 
   const handleUpdateToCart = () => {
-    let result = null;
+    const resultTotalItem = itemCart.find(
+      (item) =>
+        item._id === _id &&
+        item.size === defaultSelect &&
+        item.color === defaultSelect2
+    );
+    if (resultTotalItem) {
+      const resultSearchItem = itemCart.indexOf(resultTotalItem);
+      itemCart.splice(resultSearchItem, 1);
+      setItemCart(itemCart);
 
+      setItemCart((prevState) => [
+        ...prevState.map((item) =>
+          item._id === _id && item.size === size && item.color === color
+            ? {
+                ...item,
+                size: defaultSelect,
+                color: defaultSelect2,
+                totalItem: item.totalItem + resultTotalItem.totalItem,
+              }
+            : item
+        ),
+      ]);
+    }
     setItemCart((prevState) => [
-      ...prevState.map((item) => {
-        if (
-          item._id === _id &&
-          size === defaultSelect &&
-          color === defaultSelect2
-        ) {
-          result = itemCart.findIndex(
-            (itemChild) =>
-              itemChild._id === _id &&
-              itemChild.size === defaultSelect &&
-              itemChild.color === defaultSelect2
-          );
-          console.log(item.totalItem);
-          return {
-            ...item,
-            size: defaultSelect,
-            color: defaultSelect2,
-            totalItem: item.totalItem + totalItem,
-          };
-        } else if (
-          item._id === _id &&
-          item.size === size &&
-          item.color === color
-        )
-          return {
-            ...item,
-            size: defaultSelect,
-            color: defaultSelect2,
-          };
-        else return item;
-      }),
+      ...prevState.map((item) =>
+        item._id === _id && item.size === size && item.color === color
+          ? {
+              ...item,
+              size: defaultSelect,
+              color: defaultSelect2,
+            }
+          : item
+      ),
     ]);
-
-    if (result !== null)
-      setItemCart((prevState) => [...prevState.splice(result, 1)]);
     handleClose();
   };
 

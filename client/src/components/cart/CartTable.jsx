@@ -47,6 +47,11 @@ const InputCart = (props) => {
     ]);
   }, [total]);
 
+  //khi size color update trùng nhau thì cập nhật lại số lượng cho cả InputCart và ProductModal
+  React.useEffect(() => {
+    setTotal(totalItem);
+  }, [totalItem]);
+
   const regex = /^[0-9\b]+$/;
 
   const handleIncrease = () => setTotal(total + 1);
@@ -451,6 +456,7 @@ export default function CartTable() {
                             color={row.color}
                             size={row.size}
                             totalItem={row.totalItem}
+                            product={information}
                           />
                         </div>
                       </TableCell>
@@ -482,7 +488,6 @@ export default function CartTable() {
         _id={information._id}
         size={information.size}
         color={information.color}
-        totalItem={information.totalItem}
         product={information}
       />
     </div>
