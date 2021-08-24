@@ -66,3 +66,20 @@
   cursor: pointer;
   color: white;
 }
+
+.MuiTableRow-root.Mui-selected,
+.MuiTableRow-root.Mui-selected:hover {
+  background: #eeeeee !important;
+}
+
+.MuiIconButton-colorSecondary {
+  transition: all 0.4s !important;
+}
+
+.MuiIconButton-colorSecondary:hover {
+  background: #ced2e6 !important;
+}
+
+.MuiCheckbox-colorSecondary.Mui-checked {
+  color: #717fe0;
+}

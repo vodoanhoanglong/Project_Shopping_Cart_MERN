@@ -218,8 +218,8 @@ const useToolbarStyles = makeStyles((theme) => ({
   highlight:
     theme.palette.type === "light"
       ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+          color: "black",
+          backgroundColor: "#eeeeee",
         }
       : {
           color: theme.palette.text.primary,
@@ -246,6 +246,7 @@ const EnhancedTableToolbar = (props) => {
           color="inherit"
           variant="subtitle1"
           component="div"
+          style={{ fontWeight: "bold" }}
         >
           {numSelected} selected
         </Typography>
@@ -286,6 +287,9 @@ const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 750,
   },
+  selected: {
+    backgroundColor: "#607d8b",
+  },
   visuallyHidden: {
     border: 0,
     clip: "rect(0 0 0 0)",
@@ -318,7 +322,7 @@ export default function CartTable() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = itemCart.map((n) => n.title);
+      const newSelecteds = itemCart.map((n) => n._id + n.size + n.color);
       setSelected(newSelecteds);
       return;
     }
@@ -387,13 +391,13 @@ export default function CartTable() {
               {stableSort(itemCart, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.title);
+                  const idItem = row._id + row.size + row.color;
+                  const isItemSelected = isSelected(idItem);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.title)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
@@ -402,6 +406,7 @@ export default function CartTable() {
                     >
                       <TableCell padding="checkbox">
                         <Checkbox
+                          onClick={(event) => handleClick(event, idItem)}
                           checked={isItemSelected}
                           inputProps={{ "aria-labelledby": labelId }}
                         />
