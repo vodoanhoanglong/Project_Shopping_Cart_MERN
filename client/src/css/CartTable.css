@@ -1,3 +1,8 @@
+.header-title {
+  font-size: 13.5px;
+  vertical-align: middle;
+}
+
 .quantity-btn-cart {
   display: flex;
   border: 1px solid #ced4da;

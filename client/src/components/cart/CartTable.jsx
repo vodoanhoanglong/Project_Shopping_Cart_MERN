@@ -198,7 +198,7 @@ function EnhancedTableHead(props) {
                 )}
               </TableSortLabel>
             ) : (
-              <span> {headCell.label}</span>
+              <span className="header-title">{headCell.label}</span>
             )}
           </TableCell>
         ))}
@@ -239,7 +239,7 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
-  const { numSelected } = props;
+  const { numSelected, itemRemoved } = props;
 
   return (
     <Toolbar
@@ -270,7 +270,7 @@ const EnhancedTableToolbar = (props) => {
 
       {numSelected > 0 && (
         <Tooltip title="Delete">
-          <IconButton aria-label="delete">
+          <IconButton aria-label="delete" onClick={itemRemoved}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
@@ -281,6 +281,7 @@ const EnhancedTableToolbar = (props) => {
 
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
+  itemRemoved: PropTypes.func.isRequired,
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -319,7 +320,7 @@ export default function CartTable() {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [information, setInformation] = React.useState("");
-  const { itemCart } = React.useContext(CartContext);
+  const { itemCart, setItemCart } = React.useContext(CartContext);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -369,6 +370,19 @@ export default function CartTable() {
     setDense(event.target.checked);
   };
 
+  // bug o day
+  const handleDeleteItem = () => {
+    const removeItems = itemCart.filter((item) => {
+      const checkItemSelected = selected.indexOf(
+        item._id + item.size + item.color
+      );
+      if (checkItemSelected !== -1)
+        setSelected((prevState) => prevState.splice(checkItemSelected, 1));
+      return checkItemSelected === -1;
+    });
+    setItemCart(removeItems);
+  };
+
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   const emptyRows =
@@ -377,7 +391,10 @@ export default function CartTable() {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar
+          numSelected={selected.length}
+          itemRemoved={handleDeleteItem}
+        />
         <TableContainer>
           <Table
             className={classes.table}
@@ -472,7 +489,9 @@ export default function CartTable() {
                           />
                         </div>
                       </TableCell>
-                      <TableCell align="center">${row.totalPrice}</TableCell>
+                      <TableCell align="center">
+                        ${row.totalPrice.toFixed(2)}
+                      </TableCell>
                     </TableRow>
                   );
                 })}
