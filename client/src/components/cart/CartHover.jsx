@@ -29,8 +29,8 @@ const CartHover = (props) => {
 
   const classes = useStyles();
 
-  const totalPrice = itemCart.reduce(
-    (sum, { price, totalItem }) => sum + price * totalItem,
+  const ResultTotalPrice = itemCart.reduce(
+    (sum, { totalPrice }) => sum + totalPrice,
     0
   );
 
@@ -92,7 +92,7 @@ const CartHover = (props) => {
           View Cart
         </Link>
         <div className="total-price">
-          total price: <strong>${totalPrice.toFixed(2)}</strong>
+          total price: <strong>${ResultTotalPrice.toFixed(2)}</strong>
         </div>
       </div>
     </Popover>

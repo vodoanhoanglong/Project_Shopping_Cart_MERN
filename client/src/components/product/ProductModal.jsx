@@ -131,6 +131,7 @@ const ProductModal = (props) => {
         totalItem: quantity,
         size: defaultSelect,
         color: defaultSelect2,
+        totalPrice: price * quantity,
       },
       ...prevState,
     ]);
@@ -144,7 +145,11 @@ const ProductModal = (props) => {
         item._id === _id &&
         item.size === defaultSelect &&
         item.color === defaultSelect2
-          ? { ...item, totalItem: currentQuantity }
+          ? {
+              ...item,
+              totalItem: currentQuantity,
+              totalPrice: item.price * currentQuantity,
+            }
           : item
       ),
     ]);
@@ -209,6 +214,8 @@ const ProductModal = (props) => {
                 size: defaultSelect,
                 color: defaultSelect2,
                 totalItem: item.totalItem + resultTotalItem.totalItem,
+                totalPrice:
+                  item.price * (item.totalItem + resultTotalItem.totalItem),
               }
             : item
         ),

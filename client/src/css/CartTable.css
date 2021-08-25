@@ -81,5 +81,5 @@
 }
 
 .MuiCheckbox-colorSecondary.Mui-checked {
-  color: #717fe0;
+  color: #717fe0 !important;
 }
