@@ -88,3 +88,14 @@
 .MuiCheckbox-colorSecondary.Mui-checked {
   color: #717fe0 !important;
 }
+
+.MuiPaginationItem-page {
+  transition: all 0.4s !important;
+}
+.MuiPaginationItem-page.Mui-selected {
+  background: #333 !important;
+  color: white;
+}
+.MuiPaginationItem-page:hover {
+  background: #717fe0 !important;
+}

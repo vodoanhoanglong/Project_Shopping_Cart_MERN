@@ -209,23 +209,6 @@
   color: #717fe0;
 }
 
-.shop-container .products .MuiPagination-ul {
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.shop-container .products .MuiPaginationItem-page {
-  transition: all 0.4s !important;
-}
-
-.shop-container .products .MuiPaginationItem-page.Mui-selected {
-  background: #333 !important;
-  color: white;
-}
-.shop-container .products .MuiPaginationItem-page:hover {
-  background: #717fe0 !important;
-}
-
 .shop-container .footer {
   transform: translateY(440%);
 }

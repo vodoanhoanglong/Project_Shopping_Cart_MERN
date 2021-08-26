@@ -37,7 +37,7 @@ const Shop = () => {
   const perPage = 8;
   const start = (page - 1) * perPage;
   const end = page * perPage;
-  const totalPage = Math.ceil(result.length / 8);
+  const totalPage = Math.ceil(result.length / perPage);
 
   let bodyDefault = (
     <Row className="row-cols-1 row-cols-md-4 g-4 mx-auto mt-5">

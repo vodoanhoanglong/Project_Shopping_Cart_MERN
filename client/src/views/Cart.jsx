@@ -6,8 +6,11 @@ import CartTable from "../components/cart/CartTable";
 import "../css/Cart.css";
 import NavbarMenu from "../components/layout/NavbarMenu";
 import CartStepper from "../components/cart/CartStepper";
+import { CartContext } from "../contexts/CartContext";
 
 const Cart = () => {
+  const { itemCart } = React.useContext(CartContext);
+
   return (
     <div className="animate__animated animate__fadeIn">
       <NavbarMenu />

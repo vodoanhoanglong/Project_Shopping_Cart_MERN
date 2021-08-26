@@ -25,6 +25,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { CartContext } from "../../contexts/CartContext";
 import "../../css/CartTable.css";
 import ProductModal from "../product/ProductModal";
+import { Pagination } from "@material-ui/lab";
 
 const InputCart = (props) => {
   const { _id, size, color, totalItem } = props;
@@ -316,11 +317,15 @@ export default function CartTable() {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("price");
   const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [page, setPage] = React.useState(1);
   const [information, setInformation] = React.useState("");
+
   const { itemCart, setItemCart } = React.useContext(CartContext);
+
+  const perPage = 5;
+  const start = (page - 1) * perPage;
+  const end = page * perPage;
+  const totalPage = Math.ceil(itemCart.length / perPage);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -357,18 +362,7 @@ export default function CartTable() {
     setSelected(newSelected);
   };
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
-  const handleChangeDense = (event) => {
-    setDense(event.target.checked);
-  };
+  const handleChangePage = (event, value) => setPage(value);
 
   const handleDeleteItem = () => {
     const removeItemsSelected = [];
@@ -381,12 +375,17 @@ export default function CartTable() {
       prevState.filter((item) => !removeItemsSelected.includes(item))
     );
     setItemCart(removeItems);
+
+    // const lengthCart =
+    //   itemCart.length % perPage !== 0 ? itemCart.length / perPage : 0;
+    // console.log(lengthCart, totalPage);
+    // if (lengthCart === 0) return;
+    // if (totalPage === 1) setPage(totalPage);
+    // if (Math.ceil(lengthCart) === totalPage) return;
+    // setPage(totalPage - 1);
   };
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
-
-  const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, itemCart.length - page * rowsPerPage);
 
   return (
     <div className={classes.root}>
@@ -413,7 +412,7 @@ export default function CartTable() {
             />
             <TableBody>
               {stableSort(itemCart, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .slice(start, end)
                 .map((row, index) => {
                   const idItem = row._id + row.size + row.color;
                   const isItemSelected = isSelected(idItem);
@@ -495,22 +494,14 @@ export default function CartTable() {
                     </TableRow>
                   );
                 })}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: 53 * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
             </TableBody>
           </Table>
         </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={itemCart.length}
-          rowsPerPage={rowsPerPage}
+        <Pagination
+          count={totalPage}
+          size="large"
           page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
+          onChange={handleChangePage}
         />
       </Paper>
       <ProductModal
