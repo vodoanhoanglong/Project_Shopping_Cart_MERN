@@ -370,16 +370,16 @@ export default function CartTable() {
     setDense(event.target.checked);
   };
 
-  // bug o day
   const handleDeleteItem = () => {
+    const removeItemsSelected = [];
     const removeItems = itemCart.filter((item) => {
-      const checkItemSelected = selected.indexOf(
-        item._id + item.size + item.color
-      );
-      if (checkItemSelected !== -1)
-        setSelected((prevState) => prevState.splice(checkItemSelected, 1));
-      return checkItemSelected === -1;
+      const idItem = item._id + item.size + item.color;
+      if (selected.indexOf(idItem) !== -1) removeItemsSelected.push(idItem);
+      return selected.indexOf(idItem) === -1;
     });
+    setSelected((prevState) =>
+      prevState.filter((item) => !removeItemsSelected.includes(item))
+    );
     setItemCart(removeItems);
   };
 
@@ -496,7 +496,7 @@ export default function CartTable() {
                   );
                 })}
               {emptyRows > 0 && (
-                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
+                <TableRow style={{ height: 53 * emptyRows }}>
                   <TableCell colSpan={6} />
                 </TableRow>
               )}
