@@ -364,6 +364,9 @@ export default function CartTable() {
 
   const handleChangePage = (event, value) => setPage(value);
 
+  const handleChangePageDeleted = () =>
+    page === totalPage ? setPage(totalPage - 1) : null;
+
   const handleDeleteItem = () => {
     const removeItemsSelected = [];
     const removeItems = itemCart.filter((item) => {
@@ -375,14 +378,7 @@ export default function CartTable() {
       prevState.filter((item) => !removeItemsSelected.includes(item))
     );
     setItemCart(removeItems);
-
-    // const lengthCart =
-    //   itemCart.length % perPage !== 0 ? itemCart.length / perPage : 0;
-    // console.log(lengthCart, totalPage);
-    // if (lengthCart === 0) return;
-    // if (totalPage === 1) setPage(totalPage);
-    // if (Math.ceil(lengthCart) === totalPage) return;
-    // setPage(totalPage - 1);
+    if ((itemCart.length - 1) % perPage === 0) handleChangePageDeleted();
   };
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
