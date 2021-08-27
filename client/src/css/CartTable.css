@@ -104,3 +104,31 @@
   justify-content: flex-end;
   height: 50px;
 }
+
+.cart-table-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  color: #333;
+  font-family: Arial-Black, Arial;
+  text-transform: capitalize;
+}
+
+.cart-table-header button {
+  border: none;
+  height: 45px;
+  width: 150px;
+  background: #8994e1;
+  text-transform: capitalize;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+  color: white;
+  border-bottom-left-radius: 2rem;
+  font-weight: bold;
+  font-size: 20px;
+  transition: all 0.4s;
+}
+.cart-table-header button:hover {
+  background: #000;
+}

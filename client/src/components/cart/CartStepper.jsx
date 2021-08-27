@@ -13,6 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import PaymentIcon from "@material-ui/icons/Payment";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
+import { CartContext } from "../../contexts/CartContext";
 
 const useQontoStepIconStyles = makeStyles({
   root: {
@@ -183,16 +184,10 @@ function getStepContent(step) {
 
 export default function CartStepper() {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(1);
+
+  const { activeStep, setActiveStep } = React.useContext(CartContext);
+
   const steps = getSteps();
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
 
   const handleReset = () => {
     setActiveStep(0);
@@ -212,7 +207,7 @@ export default function CartStepper() {
           </Step>
         ))}
       </Stepper>
-      <div>
+      {/* <div>
         {activeStep === steps.length ? (
           <div>
             <Typography className={classes.instructions}>
@@ -246,7 +241,7 @@ export default function CartStepper() {
             </div>
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 }

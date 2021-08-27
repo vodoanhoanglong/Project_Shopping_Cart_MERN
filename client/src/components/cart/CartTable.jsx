@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
-import { lighten, makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
-import TablePagination from "@material-ui/core/TablePagination";
+
 import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -16,16 +16,15 @@ import Paper from "@material-ui/core/Paper";
 import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
+
 import DeleteIcon from "@material-ui/icons/Delete";
-import FilterListIcon from "@material-ui/icons/FilterList";
+
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import { CartContext } from "../../contexts/CartContext";
+import { Pagination } from "@material-ui/lab";
 import "../../css/CartTable.css";
 import ProductModal from "../product/ProductModal";
-import { Pagination } from "@material-ui/lab";
 
 const InputCart = (props) => {
   const { _id, size, color, totalItem } = props;
@@ -240,7 +239,7 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
-  const { numSelected, itemRemoved } = props;
+  const { numSelected, itemRemoved, totalBill, handleNext, handleBack } = props;
 
   return (
     <Toolbar
@@ -259,14 +258,12 @@ const EnhancedTableToolbar = (props) => {
           {numSelected} selected
         </Typography>
       ) : (
-        <Typography
-          className={classes.title}
-          variant="h6"
-          id="tableTitle"
-          component="div"
-        >
-          Your Cart
-        </Typography>
+        <div className="cart-table-header">
+          <h3>
+            Total bill: <b>${totalBill.toFixed(2)}</b>
+          </h3>
+          <button onClick={handleNext}>Payment</button>
+        </div>
       )}
 
       {numSelected > 0 && (
@@ -283,6 +280,9 @@ const EnhancedTableToolbar = (props) => {
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
   itemRemoved: PropTypes.func.isRequired,
+  totalBill: PropTypes.number.isRequired,
+  handleNext: PropTypes.func.isRequired,
+  handleBack: PropTypes.func.isRequired,
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -320,12 +320,26 @@ export default function CartTable() {
   const [page, setPage] = React.useState(1);
   const [information, setInformation] = React.useState("");
 
-  const { itemCart, setItemCart } = React.useContext(CartContext);
+  const { itemCart, setItemCart, activeStep, setActiveStep } =
+    React.useContext(CartContext);
 
   const perPage = 5;
   const start = (page - 1) * perPage;
   const end = page * perPage;
   const totalPage = Math.ceil(itemCart.length / perPage);
+
+  const resultTotalPrice = itemCart.reduce(
+    (sum, { totalPrice }) => sum + totalPrice,
+    0
+  );
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -389,6 +403,9 @@ export default function CartTable() {
         <EnhancedTableToolbar
           numSelected={selected.length}
           itemRemoved={handleDeleteItem}
+          totalBill={resultTotalPrice}
+          handleNext={handleNext}
+          handleBack={handleBack}
         />
         <TableContainer>
           <Table
@@ -473,7 +490,10 @@ export default function CartTable() {
                       <TableCell align="center">${row.price}</TableCell>
                       <TableCell align="center">
                         <div
-                          style={{ display: "flex", justifyContent: "center" }}
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                          }}
                         >
                           <InputCart
                             _id={row._id}
