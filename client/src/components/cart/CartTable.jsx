@@ -384,7 +384,7 @@ export default function CartTable() {
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root + " cart-table"}>
       <Paper className={classes.paper}>
         <EnhancedTableToolbar
           numSelected={selected.length}

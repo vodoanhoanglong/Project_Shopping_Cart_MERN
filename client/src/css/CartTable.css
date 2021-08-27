@@ -99,3 +99,8 @@
 .MuiPaginationItem-page:hover {
   background: #717fe0 !important;
 }
+.cart-table .MuiPagination-root {
+  display: flex;
+  justify-content: flex-end;
+  height: 50px;
+}

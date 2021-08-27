@@ -14,11 +14,14 @@ const Cart = () => {
   return (
     <div className="animate__animated animate__fadeIn">
       <NavbarMenu />
-      <div className="container-cart">
+      <div
+        className="container-cart"
+        style={!itemCart.length ? { height: "100vh" } : null}
+      >
         <CartStepper />
         <CartTable />
-        <Footer />
       </div>
+      <Footer />
     </div>
   );
 };
