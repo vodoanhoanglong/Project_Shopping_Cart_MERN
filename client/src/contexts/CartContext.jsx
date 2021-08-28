@@ -7,6 +7,14 @@ const CartContextProvider = ({ children }) => {
   const [showToastCart, setShowToastCart] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
 
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
   const cartContextData = {
     itemCart,
     setItemCart,
@@ -14,6 +22,8 @@ const CartContextProvider = ({ children }) => {
     setShowToastCart,
     activeStep,
     setActiveStep,
+    handleNext,
+    handleBack,
   };
 
   return (

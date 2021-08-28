@@ -239,10 +239,11 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
-  const { numSelected, itemRemoved, totalBill, handleNext, handleBack } = props;
+  const { numSelected, itemRemoved, totalBill, handleNext } = props;
 
   return (
     <Toolbar
+      style={{ backgroundColor: "#f7f8fa" }}
       className={clsx(classes.root, {
         [classes.highlight]: numSelected > 0,
       })}
@@ -282,7 +283,6 @@ EnhancedTableToolbar.propTypes = {
   itemRemoved: PropTypes.func.isRequired,
   totalBill: PropTypes.number.isRequired,
   handleNext: PropTypes.func.isRequired,
-  handleBack: PropTypes.func.isRequired,
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -320,8 +320,7 @@ export default function CartTable() {
   const [page, setPage] = React.useState(1);
   const [information, setInformation] = React.useState("");
 
-  const { itemCart, setItemCart, activeStep, setActiveStep } =
-    React.useContext(CartContext);
+  const { itemCart, setItemCart, handleNext } = React.useContext(CartContext);
 
   const perPage = 5;
   const start = (page - 1) * perPage;
@@ -332,14 +331,6 @@ export default function CartTable() {
     (sum, { totalPrice }) => sum + totalPrice,
     0
   );
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -405,7 +396,6 @@ export default function CartTable() {
           itemRemoved={handleDeleteItem}
           totalBill={resultTotalPrice}
           handleNext={handleNext}
-          handleBack={handleBack}
         />
         <TableContainer>
           <Table

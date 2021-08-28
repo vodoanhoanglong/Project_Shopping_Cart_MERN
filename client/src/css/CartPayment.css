@@ -1,0 +1,19 @@
+.container-cart-form {
+  display: flex;
+  justify-content: center;
+  background-color: #ffff;
+}
+
+.container-cart-form h4 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #000;
+  line-height: 25px;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 8px;
+  margin-bottom: 15px;
+}
+
+.container-cart-form .input-cart {
+  width: 100%;
+}
