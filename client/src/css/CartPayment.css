@@ -30,8 +30,21 @@ input[type="number"]::-webkit-outer-spin-button {
   position: relative;
 }
 
-.container-cart-form .icon-input-complete {
-  color: green;
+.container-cart-form .input-length-icon {
+  text-align: center;
   position: absolute;
   right: 1%;
+  bottom: -20%;
+}
+
+.container-cart-form .input-length-icon .icon-input-complete {
+  font-size: 20px;
+  color: green;
+}
+
+.container-cart-form .input-length-icon p {
+  font-size: 13px;
+}
+.container-cart-form .MuiInputBase-input {
+  padding-right: 40px;
 }
