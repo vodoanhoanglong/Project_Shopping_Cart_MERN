@@ -1,36 +1,54 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useState } from "react";
+
 import TextField from "@material-ui/core/TextField";
+import DoneIcon from "@material-ui/icons/Done";
 
 import "../../css/CartPayment.css";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& > *": {
-      margin: theme.spacing(1),
-      width: "100%",
-    },
-  },
-}));
-
 const CartPayment = () => {
-  const classes = useStyles();
-
   return (
     <div className="container-cart-form animate__animated animate__fadeIn">
-      <form className={classes.root} noValidate autoComplete="off">
+      <form className="form-information-user">
         <h4>Delivery address</h4>
-        {/* <div className="input-cart"> */}
-        <TextField id="filled-basic-name" label="Full name" fullWidth />
-        {/* </div> */}
-
-        {/* <div className="input-cart"> */}
-        <TextField id="filled-basic-phone" label="Phone number" />
-        {/* </div> */}
-
-        {/* <div className="input-cart"> */}
-        <TextField id="filled-basic-address" label="Street address" />
-        {/* </div> */}
+        <div className="input-cart">
+          <TextField
+            id="filled-basic-name"
+            label="Full name"
+            fullWidth
+            margin="dense"
+            inputProps={{
+              maxLength: 40,
+              minLength: 2,
+              pattern: "\\D*",
+            }}
+            required
+          />
+          <DoneIcon className="icon-input-complete" />
+        </div>
+        <div className="input-cart">
+          <TextField
+            id="filled-basic-phone"
+            label="Phone number"
+            fullWidth
+            margin="dense"
+            inputProps={{
+              maxLength: 12,
+              minLength: 10,
+              pattern: "[0][0-9]{9,11}",
+            }}
+            required
+          />
+        </div>
+        <div className="input-cart">
+          <TextField
+            id="filled-basic-address"
+            label="Address"
+            fullWidth
+            margin="dense"
+            required
+          />
+        </div>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );

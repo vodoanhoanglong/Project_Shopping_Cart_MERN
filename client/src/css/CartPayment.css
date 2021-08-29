@@ -14,6 +14,24 @@
   margin-bottom: 15px;
 }
 
+.container-cart-form .form-information-user {
+  display: block;
+  width: 35%;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 .container-cart-form .input-cart {
-  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.container-cart-form .icon-input-complete {
+  color: green;
+  position: absolute;
+  right: 1%;
 }
