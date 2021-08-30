@@ -4,6 +4,9 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
 import { makeStyles } from "@material-ui/core/styles";
 
 import TextField from "@material-ui/core/TextField";
@@ -18,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     margin: theme.spacing(1, 1, 0, 0),
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
   },
 }));
 
@@ -36,7 +42,9 @@ const CartPayment = () => {
     couponCode: false,
     paymentMethod: false,
   });
-  const [value, setValue] = useState("");
+  const [valueRadio, setValueRadio] = useState("");
+  const [valueCardNumber, setValueCardNumber] = useState("");
+  const [disabled, setDisabled] = useState(true);
 
   const classes = useStyles();
 
@@ -57,7 +65,16 @@ const CartPayment = () => {
     else setIcon((prevIcon) => ({ ...prevIcon, [inputName]: true }));
   };
 
-  const handleRadioChange = (event) => setValue(event.target.value);
+  const handleChangePaymentMethod = (e) =>
+    !/^[0-9]*$/.test(e.target.value)
+      ? null
+      : setValueCardNumber(e.target.value);
+
+  const handleRadioChange = (e) => {
+    if (e.target.value === "online") setDisabled(false);
+    else setDisabled(true);
+    setValueRadio(e.target.value);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -65,9 +82,9 @@ const CartPayment = () => {
     if (couponCode !== "HOANGLONGDEPZAIVCL" && couponCode !== "")
       setError((prevError) => ({ ...prevError, couponCode: true }));
     else setError((prevError) => ({ ...prevError, couponCode: false }));
-    if (value === "offline")
+    if (valueRadio === "offline")
       setError((prevError) => ({ ...prevError, paymentMethod: false }));
-    else if (value === "online")
+    else if (valueRadio === "online")
       setError((prevError) => ({ ...prevError, paymentMethod: false }));
     else setError((prevError) => ({ ...prevError, paymentMethod: true }));
   };
@@ -166,7 +183,7 @@ const CartPayment = () => {
               <RadioGroup
                 aria-label="quiz"
                 name="quiz"
-                value={value}
+                value={valueRadio}
                 onChange={handleRadioChange}
               >
                 <FormControlLabel
@@ -211,6 +228,36 @@ const CartPayment = () => {
                 </div>
               )}
             </FormControl>
+            <TextField
+              id="filled-basic-card-number"
+              label="Card number"
+              fullWidth
+              margin="dense"
+              name="cardNumber"
+              value={valueCardNumber}
+              disabled={disabled}
+              inputProps={{
+                minLength: 9,
+                maxLength: 19,
+              }}
+              onChange={handleChangePaymentMethod}
+              required
+            />
+            <InputLabel id="demo-simple-select-required-label">Age</InputLabel>
+            <Select
+              labelId="demo-simple-select-required-label"
+              id="demo-simple-select-required"
+              value={10}
+              onChange={handleChange}
+              className={classes.selectEmpty}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>Ten</MenuItem>
+              <MenuItem value={20}>Twenty</MenuItem>
+              <MenuItem value={30}>Thirty</MenuItem>
+            </Select>
           </div>
         </div>
         <div className="container-button-payment">
