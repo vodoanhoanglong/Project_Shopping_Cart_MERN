@@ -1,9 +1,25 @@
 import React, { useState } from "react";
 
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import { makeStyles } from "@material-ui/core/styles";
+
 import TextField from "@material-ui/core/TextField";
 import DoneIcon from "@material-ui/icons/Done";
+import Alert from "@material-ui/lab/Alert";
 
 import "../../css/CartPayment.css";
+
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(3),
+  },
+  button: {
+    margin: theme.spacing(1, 1, 0, 0),
+  },
+}));
 
 const CartPayment = () => {
   const [length, setLength] = useState({
@@ -16,6 +32,13 @@ const CartPayment = () => {
     phone: false,
     address: false,
   });
+  const [error, setError] = useState({
+    couponCode: false,
+    paymentMethod: false,
+  });
+  const [value, setValue] = useState("");
+
+  const classes = useStyles();
 
   const regexFullName = /^[^0-9\b]{2,40}$/;
   const regexPhone = /^[0][0-9\b]+$/;
@@ -34,66 +57,165 @@ const CartPayment = () => {
     else setIcon((prevIcon) => ({ ...prevIcon, [inputName]: true }));
   };
 
+  const handleRadioChange = (event) => setValue(event.target.value);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const couponCode = document.getElementById("filled-basic-coupon").value;
+    if (couponCode !== "HOANGLONGDEPZAIVCL" && couponCode !== "")
+      setError((prevError) => ({ ...prevError, couponCode: true }));
+    else setError((prevError) => ({ ...prevError, couponCode: false }));
+    if (value === "offline")
+      setError((prevError) => ({ ...prevError, paymentMethod: false }));
+    else if (value === "online")
+      setError((prevError) => ({ ...prevError, paymentMethod: false }));
+    else setError((prevError) => ({ ...prevError, paymentMethod: true }));
+  };
+
   return (
-    <div className="container-cart-form animate__animated animate__fadeIn">
-      <form className="form-information-user">
-        <h4>Delivery address</h4>
-        <div className="input-cart">
-          <TextField
-            id="filled-basic-name"
-            label="Full name"
-            fullWidth
-            margin="dense"
-            name="fullName"
-            inputProps={{
-              maxLength: 40,
-              minLength: 2,
-              pattern: "\\D*",
-            }}
-            required
-            onChange={handleChange(regexFullName)}
-          />
-          <div className="input-length-icon">
-            {icon.fullName && <DoneIcon className="icon-input-complete" />}
-            <p>{length.fullName}/40</p>
+    <div className="animate__animated animate__fadeIn">
+      <form onSubmit={handleSubmit}>
+        <div className="container-cart-form">
+          <div className="form-information-user">
+            <h4>Delivery address</h4>
+            <div className="input-cart">
+              <TextField
+                id="filled-basic-name"
+                label="Full name"
+                fullWidth
+                margin="dense"
+                name="fullName"
+                inputProps={{
+                  maxLength: 40,
+                  minLength: 2,
+                  pattern: "\\D*",
+                }}
+                required
+                onChange={handleChange(regexFullName)}
+              />
+              <div className="input-length-icon">
+                {icon.fullName && <DoneIcon className="icon-input-complete" />}
+                <p>{length.fullName}/40</p>
+              </div>
+            </div>
+            <div className="input-cart">
+              <TextField
+                id="filled-basic-phone"
+                label="Phone number"
+                fullWidth
+                margin="dense"
+                name="phone"
+                inputProps={{
+                  maxLength: 12,
+                  minLength: 10,
+                  pattern: "[0][0-9]{9,11}",
+                }}
+                required
+                onChange={handleChange(regexPhone)}
+              />
+              <div className="input-length-icon">
+                {icon.phone && <DoneIcon className="icon-input-complete" />}
+                <p>{length.phone}/12</p>
+              </div>
+            </div>
+            <div className="input-cart">
+              <TextField
+                id="filled-basic-address"
+                label="Address"
+                fullWidth
+                margin="dense"
+                name="address"
+                onChange={handleChange(regexAddress)}
+                required
+              />
+              <div className="input-length-icon">
+                {icon.address && <DoneIcon className="icon-input-complete" />}
+                <p>{length.address}/120</p>
+              </div>
+            </div>
+
+            <TextField
+              id="filled-basic-coupon"
+              label="Coupon CODE"
+              fullWidth
+              margin="dense"
+              name="couponCode"
+              inputProps={{
+                minLength: 6,
+              }}
+            />
+            {error.couponCode && (
+              <div className="show-alert">
+                <Alert
+                  className="animate__animated animate__shakeX"
+                  severity="error"
+                >
+                  Invalid Coupon CODE
+                </Alert>
+              </div>
+            )}
+          </div>
+
+          <div className="payment-method">
+            <h4>Payment method</h4>
+            <FormControl
+              component="fieldset"
+              error={error.paymentMethod}
+              className={classes.formControl}
+            >
+              <RadioGroup
+                aria-label="quiz"
+                name="quiz"
+                value={value}
+                onChange={handleRadioChange}
+              >
+                <FormControlLabel
+                  style={{ marginBottom: 20 }}
+                  value="offline"
+                  control={<Radio />}
+                  label={
+                    <>
+                      <img
+                        src="//img.ltwebstatic.com/images2_pi/2018/06/06/15282728403108279621.png"
+                        className="payment-src"
+                        alt=""
+                      ></img>
+                      <span className="payment-des">Payment on delivery</span>
+                    </>
+                  }
+                />
+                <FormControlLabel
+                  style={{ marginBottom: 20 }}
+                  value="online"
+                  control={<Radio />}
+                  label={
+                    <>
+                      <img
+                        src="//img.ltwebstatic.com/images2_pi/2018/06/06/1528271145618709979.png"
+                        className="payment-src"
+                        alt=""
+                      ></img>
+                      <span className="payment-des">Credit/Debit card</span>
+                    </>
+                  }
+                />
+              </RadioGroup>
+              {error.paymentMethod && (
+                <div className="show-alert">
+                  <Alert
+                    className="animate__animated animate__shakeX"
+                    severity="error"
+                  >
+                    Please choose a payment method
+                  </Alert>
+                </div>
+              )}
+            </FormControl>
           </div>
         </div>
-        <div className="input-cart">
-          <TextField
-            id="filled-basic-phone"
-            label="Phone number"
-            fullWidth
-            margin="dense"
-            name="phone"
-            inputProps={{
-              maxLength: 12,
-              minLength: 10,
-              pattern: "[0][0-9]{9,11}",
-            }}
-            required
-            onChange={handleChange(regexPhone)}
-          />
-          <div className="input-length-icon">
-            {icon.phone && <DoneIcon className="icon-input-complete" />}
-            <p>{length.phone}/12</p>
-          </div>
+        <div className="container-button-payment">
+          <button>Submit</button>
         </div>
-        <div className="input-cart">
-          <TextField
-            id="filled-basic-address"
-            label="Address"
-            fullWidth
-            margin="dense"
-            name="address"
-            onChange={handleChange(regexAddress)}
-            required
-          />
-          <div className="input-length-icon">
-            {icon.address && <DoneIcon className="icon-input-complete" />}
-            <p>{length.address}/120</p>
-          </div>
-        </div>
-        <button type="submit">Submit</button>
       </form>
     </div>
   );
