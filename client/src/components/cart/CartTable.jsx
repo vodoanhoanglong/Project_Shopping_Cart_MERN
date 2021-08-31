@@ -263,7 +263,7 @@ const EnhancedTableToolbar = (props) => {
           <h3>
             Total bill: <b>${totalBill.toFixed(2)}</b>
           </h3>
-          <button onClick={handleNext}>Payment</button>
+          <button onClick={handleNext}>Order</button>
         </div>
       )}
 

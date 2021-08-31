@@ -55,6 +55,10 @@ input[type="number"]::-webkit-outer-spin-button {
   padding-right: 40px;
 }
 
+.container-cart-form .MuiRadio-colorSecondary.Mui-checked {
+  color: #717fe0;
+}
+
 .container-button-payment {
   display: flex;
   justify-content: center;
@@ -97,4 +101,12 @@ input[type="number"]::-webkit-outer-spin-button {
   padding-left: 12px;
   font-size: 14px;
   vertical-align: middle;
+}
+
+.button-stepper {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
 }

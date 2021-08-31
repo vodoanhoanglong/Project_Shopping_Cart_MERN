@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
@@ -13,11 +13,16 @@ import TextField from "@material-ui/core/TextField";
 import DoneIcon from "@material-ui/icons/Done";
 import Alert from "@material-ui/lab/Alert";
 
+import { CartContext } from "../../contexts/CartContext";
+
 import "../../css/CartPayment.css";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(3),
+  },
+  formControlSelected: {
+    minWidth: 120,
   },
   button: {
     margin: theme.spacing(1, 1, 0, 0),
@@ -45,12 +50,32 @@ const CartPayment = () => {
   const [valueRadio, setValueRadio] = useState("");
   const [valueCardNumber, setValueCardNumber] = useState("");
   const [disabled, setDisabled] = useState(true);
+  const [date, setDate] = useState({
+    month: "",
+    year: "",
+  });
+
+  const { itemCart, handleNext, handleBack } = useContext(CartContext);
+
+  const resultTotalPrice = itemCart.reduce(
+    (sum, { totalPrice }) => sum + totalPrice,
+    0
+  );
 
   const classes = useStyles();
+
+  const coupon = "HOANGLONGDEPZAIVCL";
 
   const regexFullName = /^[^0-9\b]{2,40}$/;
   const regexPhone = /^[0][0-9\b]+$/;
   const regexAddress = /[A-Za-z0-9'\.\-\s\,]{30,120}$/;
+
+  const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  const years = [];
+
+  const yearCurrent = new Date().getFullYear();
+  const yearFuture = yearCurrent + 28;
+  for (let year = yearCurrent; year < yearFuture; year++) years.push(year);
 
   const handleChange = (regex) => (e) => {
     const inputName = e.target.name;
@@ -72,14 +97,27 @@ const CartPayment = () => {
 
   const handleRadioChange = (e) => {
     if (e.target.value === "online") setDisabled(false);
-    else setDisabled(true);
+    else {
+      setDisabled(true);
+      setValueCardNumber("");
+      setDate({
+        month: "",
+        year: "",
+      });
+    }
     setValueRadio(e.target.value);
+  };
+
+  const handleChangeSelected = (e) => {
+    const inputName = e.target.name;
+    const inputValue = e.target.value;
+    setDate((prevDate) => ({ ...prevDate, [inputName]: inputValue }));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const couponCode = document.getElementById("filled-basic-coupon").value;
-    if (couponCode !== "HOANGLONGDEPZAIVCL" && couponCode !== "")
+    if (couponCode !== coupon && couponCode !== "")
       setError((prevError) => ({ ...prevError, couponCode: true }));
     else setError((prevError) => ({ ...prevError, couponCode: false }));
     if (valueRadio === "offline")
@@ -91,6 +129,10 @@ const CartPayment = () => {
 
   return (
     <div className="animate__animated animate__fadeIn">
+      <div className="button-stepper">
+        <button onClick={handleBack}>Back</button>
+        <button onClick={handleNext}>Payment</button>
+      </div>
       <form onSubmit={handleSubmit}>
         <div className="container-cart-form">
           <div className="form-information-user">
@@ -171,6 +213,9 @@ const CartPayment = () => {
                 </Alert>
               </div>
             )}
+            <h3 style={{ marginTop: 30 }}>
+              Total bill: <b>${resultTotalPrice.toFixed(2)}</b>
+            </h3>
           </div>
 
           <div className="payment-method">
@@ -241,23 +286,56 @@ const CartPayment = () => {
                 maxLength: 19,
               }}
               onChange={handleChangePaymentMethod}
-              required
+              required={!disabled}
             />
-            <InputLabel id="demo-simple-select-required-label">Age</InputLabel>
-            <Select
-              labelId="demo-simple-select-required-label"
-              id="demo-simple-select-required"
-              value={10}
-              onChange={handleChange}
-              className={classes.selectEmpty}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
+            <h6 style={{ marginTop: 20, opacity: disabled ? 0.5 : 1 }}>
+              Expiration date
+            </h6>
+            <div>
+              <FormControl
+                className={classes.formControlSelected}
+                disabled={disabled}
+                required={!disabled}
+              >
+                <InputLabel id="month-label">Month</InputLabel>
+                <Select
+                  labelId="month-label"
+                  id="month-select-required"
+                  value={date.month}
+                  name="month"
+                  onChange={handleChangeSelected}
+                  className={classes.selectEmpty}
+                >
+                  {months.map((month, index) => (
+                    <MenuItem key={index} value={month}>
+                      {month}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl
+                className={classes.formControlSelected}
+                style={{ marginLeft: 50 }}
+                disabled={disabled}
+                required={!disabled}
+              >
+                <InputLabel id="year-label">Year</InputLabel>
+                <Select
+                  labelId="year-label"
+                  id="year-select-required"
+                  value={date.year}
+                  name="year"
+                  onChange={handleChangeSelected}
+                  className={classes.selectEmpty}
+                >
+                  {years.map((year, index) => (
+                    <MenuItem key={index} value={year}>
+                      {year}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
           </div>
         </div>
         <div className="container-button-payment">
