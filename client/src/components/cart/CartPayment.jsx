@@ -1,347 +1,99 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import Button from "@material-ui/core/Button";
+
 import { makeStyles } from "@material-ui/core/styles";
-
-import TextField from "@material-ui/core/TextField";
-import DoneIcon from "@material-ui/icons/Done";
-import Alert from "@material-ui/lab/Alert";
-
+import "../../css/CartPayment.css";
 import { CartContext } from "../../contexts/CartContext";
 
-import "../../css/CartPayment.css";
-
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(3),
+const useStyles = makeStyles({
+  root: {
+    minWidth: 275,
   },
-  formControlSelected: {
-    minWidth: 120,
+  bullet: {
+    display: "inline-block",
+    margin: "0 2px",
+    transform: "scale(0.8)",
   },
-  button: {
-    margin: theme.spacing(1, 1, 0, 0),
+  title: {
+    fontSize: 14,
   },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
+  pos: {
+    marginBottom: 12,
   },
-}));
+});
 
 const CartPayment = () => {
-  const [length, setLength] = useState({
-    fullName: 0,
-    phone: 0,
-    address: 0,
-  });
-  const [icon, setIcon] = useState({
-    fullName: false,
-    phone: false,
-    address: false,
-  });
-  const [error, setError] = useState({
-    couponCode: false,
-    paymentMethod: false,
-  });
-  const [valueRadio, setValueRadio] = useState("");
-  const [valueCardNumber, setValueCardNumber] = useState("");
-  const [disabled, setDisabled] = useState(true);
-  const [date, setDate] = useState({
-    month: "",
-    year: "",
-  });
-
-  const { itemCart, handleNext, handleBack } = useContext(CartContext);
-
-  const resultTotalPrice = itemCart.reduce(
-    (sum, { totalPrice }) => sum + totalPrice,
-    0
-  );
-
   const classes = useStyles();
 
-  const coupon = "HOANGLONGDEPZAIVCL";
+  const { itemCart, date } = useContext(CartContext);
+  const fullName = document.getElementById("filled-basic-name").value;
+  const phone = document.getElementById("filled-basic-phone").value;
+  const address = document.getElementById("filled-basic-address").value;
+  const coupon =
+    document.getElementById("filled-basic-coup") !== null
+      ? document.getElementById("filled-basic-coup").value
+      : false;
+  const creditCard =
+    document.getElementById("filled-basic-card-number") !== null
+      ? document.getElementById("filled-basic-card-number").value
+      : false;
+  let totalBill = itemCart.reduce((sum, { totalPrice }) => sum + totalPrice, 0);
+  if (coupon !== null) totalBill = totalBill - (totalBill * 10) / 100;
 
-  const regexFullName = /^[^0-9\b]{2,40}$/;
-  const regexPhone = /^[0][0-9\b]+$/;
-  const regexAddress = /[A-Za-z0-9'\.\-\s\,]{30,120}$/;
+  let today = new Date();
+  const dd = String(today.getDate()).padStart(2, "0");
+  const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+  const yyyy = today.getFullYear();
 
-  const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  const years = [];
-
-  const yearCurrent = new Date().getFullYear();
-  const yearFuture = yearCurrent + 28;
-  for (let year = yearCurrent; year < yearFuture; year++) years.push(year);
-
-  const handleChange = (regex) => (e) => {
-    const inputName = e.target.name;
-    const inputLength = e.target.value.length;
-    const inputValue = e.target.value;
-    setLength((prevLength) => ({
-      ...prevLength,
-      [inputName]: inputLength,
-    }));
-    if (!regex.test(inputValue) || inputValue === "")
-      setIcon((prevIcon) => ({ ...prevIcon, [inputName]: false }));
-    else setIcon((prevIcon) => ({ ...prevIcon, [inputName]: true }));
-  };
-
-  const handleChangePaymentMethod = (e) =>
-    !/^[0-9]*$/.test(e.target.value)
-      ? null
-      : setValueCardNumber(e.target.value);
-
-  const handleRadioChange = (e) => {
-    if (e.target.value === "online") setDisabled(false);
-    else {
-      setDisabled(true);
-      setValueCardNumber("");
-      setDate({
-        month: "",
-        year: "",
-      });
-    }
-    setValueRadio(e.target.value);
-  };
-
-  const handleChangeSelected = (e) => {
-    const inputName = e.target.name;
-    const inputValue = e.target.value;
-    setDate((prevDate) => ({ ...prevDate, [inputName]: inputValue }));
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const couponCode = document.getElementById("filled-basic-coupon").value;
-    if (couponCode !== coupon && couponCode !== "")
-      setError((prevError) => ({ ...prevError, couponCode: true }));
-    else setError((prevError) => ({ ...prevError, couponCode: false }));
-    if (valueRadio === "offline")
-      setError((prevError) => ({ ...prevError, paymentMethod: false }));
-    else if (valueRadio === "online")
-      setError((prevError) => ({ ...prevError, paymentMethod: false }));
-    else setError((prevError) => ({ ...prevError, paymentMethod: true }));
-  };
+  today = dd + "/" + mm + "/" + yyyy;
 
   return (
-    <div className="animate__animated animate__fadeIn">
-      <div className="button-stepper">
-        <button onClick={handleBack}>Back</button>
-        <button onClick={handleNext}>Payment</button>
-      </div>
-      <form onSubmit={handleSubmit}>
-        <div className="container-cart-form">
-          <div className="form-information-user">
-            <h4>Delivery address</h4>
-            <div className="input-cart">
-              <TextField
-                id="filled-basic-name"
-                label="Full name"
-                fullWidth
-                margin="dense"
-                name="fullName"
-                inputProps={{
-                  maxLength: 40,
-                  minLength: 2,
-                  pattern: "\\D*",
-                }}
-                required
-                onChange={handleChange(regexFullName)}
-              />
-              <div className="input-length-icon">
-                {icon.fullName && <DoneIcon className="icon-input-complete" />}
-                <p>{length.fullName}/40</p>
-              </div>
-            </div>
-            <div className="input-cart">
-              <TextField
-                id="filled-basic-phone"
-                label="Phone number"
-                fullWidth
-                margin="dense"
-                name="phone"
-                inputProps={{
-                  maxLength: 12,
-                  minLength: 10,
-                  pattern: "[0][0-9]{9,11}",
-                }}
-                required
-                onChange={handleChange(regexPhone)}
-              />
-              <div className="input-length-icon">
-                {icon.phone && <DoneIcon className="icon-input-complete" />}
-                <p>{length.phone}/12</p>
-              </div>
-            </div>
-            <div className="input-cart">
-              <TextField
-                id="filled-basic-address"
-                label="Address"
-                fullWidth
-                margin="dense"
-                name="address"
-                onChange={handleChange(regexAddress)}
-                required
-              />
-              <div className="input-length-icon">
-                {icon.address && <DoneIcon className="icon-input-complete" />}
-                <p>{length.address}/120</p>
-              </div>
-            </div>
-
-            <TextField
-              id="filled-basic-coupon"
-              label="Coupon CODE"
-              fullWidth
-              margin="dense"
-              name="couponCode"
-              inputProps={{
-                minLength: 6,
-              }}
-            />
-            {error.couponCode && (
-              <div className="show-alert">
-                <Alert
-                  className="animate__animated animate__shakeX"
-                  severity="error"
-                >
-                  Invalid Coupon CODE
-                </Alert>
-              </div>
-            )}
-            <h3 style={{ marginTop: 30 }}>
-              Total bill: <b>${resultTotalPrice.toFixed(2)}</b>
-            </h3>
-          </div>
-
-          <div className="payment-method">
-            <h4>Payment method</h4>
-            <FormControl
-              component="fieldset"
-              error={error.paymentMethod}
-              className={classes.formControl}
-            >
-              <RadioGroup
-                aria-label="quiz"
-                name="quiz"
-                value={valueRadio}
-                onChange={handleRadioChange}
-              >
-                <FormControlLabel
-                  style={{ marginBottom: 20 }}
-                  value="offline"
-                  control={<Radio />}
-                  label={
-                    <>
-                      <img
-                        src="//img.ltwebstatic.com/images2_pi/2018/06/06/15282728403108279621.png"
-                        className="payment-src"
-                        alt=""
-                      ></img>
-                      <span className="payment-des">Payment on delivery</span>
-                    </>
-                  }
-                />
-                <FormControlLabel
-                  style={{ marginBottom: 20 }}
-                  value="online"
-                  control={<Radio />}
-                  label={
-                    <>
-                      <img
-                        src="//img.ltwebstatic.com/images2_pi/2018/06/06/1528271145618709979.png"
-                        className="payment-src"
-                        alt=""
-                      ></img>
-                      <span className="payment-des">Credit/Debit card</span>
-                    </>
-                  }
-                />
-              </RadioGroup>
-              {error.paymentMethod && (
-                <div className="show-alert">
-                  <Alert
-                    className="animate__animated animate__shakeX"
-                    severity="error"
-                  >
-                    Please choose a payment method
-                  </Alert>
-                </div>
+    <div
+      className="animate__animated animate__fadeIn"
+      style={{ height: "70vh", backgroundColor: "#F7F8FA" }}
+    >
+      <div className="container-card-bill-information">
+        <Card className={classes.root}>
+          <CardContent>
+            <h2>Bill Information</h2>
+            <div className="card-bill-information">
+              <p>
+                <b>Full name:</b> {fullName}
+              </p>
+              <p>
+                <b>Phone number:</b> {phone}
+              </p>
+              <p>
+                <b>Address:</b> {address}
+              </p>
+              {creditCard && (
+                <p>
+                  <b>Credit card number:</b> {creditCard}
+                </p>
               )}
-            </FormControl>
-            <TextField
-              id="filled-basic-card-number"
-              label="Card number"
-              fullWidth
-              margin="dense"
-              name="cardNumber"
-              value={valueCardNumber}
-              disabled={disabled}
-              inputProps={{
-                minLength: 9,
-                maxLength: 19,
-              }}
-              onChange={handleChangePaymentMethod}
-              required={!disabled}
-            />
-            <h6 style={{ marginTop: 20, opacity: disabled ? 0.5 : 1 }}>
-              Expiration date
-            </h6>
-            <div>
-              <FormControl
-                className={classes.formControlSelected}
-                disabled={disabled}
-                required={!disabled}
-              >
-                <InputLabel id="month-label">Month</InputLabel>
-                <Select
-                  labelId="month-label"
-                  id="month-select-required"
-                  value={date.month}
-                  name="month"
-                  onChange={handleChangeSelected}
-                  className={classes.selectEmpty}
-                >
-                  {months.map((month, index) => (
-                    <MenuItem key={index} value={month}>
-                      {month}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-              <FormControl
-                className={classes.formControlSelected}
-                style={{ marginLeft: 50 }}
-                disabled={disabled}
-                required={!disabled}
-              >
-                <InputLabel id="year-label">Year</InputLabel>
-                <Select
-                  labelId="year-label"
-                  id="year-select-required"
-                  value={date.year}
-                  name="year"
-                  onChange={handleChangeSelected}
-                  className={classes.selectEmpty}
-                >
-                  {years.map((year, index) => (
-                    <MenuItem key={index} value={year}>
-                      {year}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+              {creditCard && (
+                <p>
+                  <b>Expiration date of Credit card:</b> {date.month}/
+                  {date.year}
+                </p>
+              )}
+              <p>
+                <b>Payment day:</b> {today}
+              </p>
+              <h5>
+                <b>Total:</b> ${totalBill.toFixed(2)}
+              </h5>
             </div>
-          </div>
-        </div>
-        <div className="container-button-payment">
-          <button>Submit</button>
-        </div>
-      </form>
+          </CardContent>
+          <CardActions>
+            <Button size="small">Learn More</Button>
+          </CardActions>
+        </Card>
+      </div>
     </div>
   );
 };

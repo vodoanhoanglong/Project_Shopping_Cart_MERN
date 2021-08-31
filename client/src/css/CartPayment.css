@@ -1,112 +1,15 @@
-.container-cart-form {
+.container-card-bill-information {
   display: flex;
   justify-content: center;
-  background-color: #ffff;
 }
 
-.container-cart-form h4 {
-  font-size: 22px;
-  font-weight: 700;
-  color: #000;
-  line-height: 25px;
-  border-bottom: 1px solid #e5e5e5;
-  padding-bottom: 8px;
-  margin-bottom: 15px;
-}
-
-.container-cart-form .form-information-user {
-  display: block;
-  width: 35%;
-}
-
-.container-cart-form .payment-method {
-  margin-left: 50px;
-  padding-left: 50px;
-  border-left: 1px solid #c5c5c5;
-}
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-.container-cart-form .input-cart {
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.container-cart-form .input-length-icon {
+.container-card-information h2 {
   text-align: center;
-  position: absolute;
-  right: 1%;
-  bottom: -20%;
-}
-
-.container-cart-form .input-length-icon .icon-input-complete {
-  font-size: 20px;
-  color: green;
-}
-
-.container-cart-form .input-length-icon p {
-  font-size: 13px;
-}
-.container-cart-form .MuiInputBase-input {
-  padding-right: 40px;
-}
-
-.container-cart-form .MuiRadio-colorSecondary.Mui-checked {
-  color: #717fe0;
-}
-
-.container-button-payment {
-  display: flex;
-  justify-content: center;
-  background-color: #ffff;
-}
-
-.container-button-payment button {
-  margin-top: 50px;
-  display: flex;
-  border-radius: 23px;
-  background-color: #717fe0;
-  text-transform: uppercase;
-  min-width: 180px;
-  height: 50px;
-  font-family: Poppins-Medium;
-  font-size: 20px;
   font-weight: bold;
-  line-height: 1.466667;
-  color: #fff;
-  justify-content: center;
-  transition: all 0.4s;
-  align-items: center;
-  outline: none;
-  border: none;
-  cursor: pointer;
+  font-family: Poppins-Medium;
 }
 
-.container-button-payment button:hover {
-  border-color: #222;
-  background-color: #222;
-  color: #fff;
-}
-
-.payment-src {
-  width: 60px;
-  vertical-align: middle;
-}
-
-.payment-des {
-  padding-left: 12px;
-  font-size: 14px;
-  vertical-align: middle;
-}
-
-.button-stepper {
-  display: flex;
-  justify-content: space-between;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 10px;
+.container-card-bill-information .card-bill-information {
+  margin-top: 30px;
+  font-family: Poppins-Medium;
 }

@@ -1,12 +1,14 @@
 import React from "react";
 
-import CartTable from "../components/cart/CartTable";
-
-import "../css/Cart.css";
 import NavbarMenu from "../components/layout/NavbarMenu";
 import CartStepper from "../components/cart/CartStepper";
-import { CartContext } from "../contexts/CartContext";
+import CartTable from "../components/cart/CartTable";
+import CartOrder from "../components/cart/CartOrder";
 import CartPayment from "../components/cart/CartPayment";
+
+import { CartContext } from "../contexts/CartContext";
+
+import "../css/Cart.css";
 
 const Cart = () => {
   const { activeStep } = React.useContext(CartContext);
@@ -19,8 +21,10 @@ const Cart = () => {
         {activeStep === 0 ? (
           <CartTable />
         ) : activeStep === 1 ? (
+          <CartOrder />
+        ) : (
           <CartPayment />
-        ) : null}
+        )}
       </div>
     </div>
   );

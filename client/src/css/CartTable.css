@@ -114,7 +114,7 @@
   text-transform: capitalize;
 }
 
-.container-cart button {
+.cart-table-header button {
   border: none;
   height: 45px;
   width: 150px;
@@ -129,6 +129,6 @@
   font-size: 20px;
   transition: all 0.4s;
 }
-.container-cart button:hover {
+.cart-table-header button:hover {
   background: #000;
 }

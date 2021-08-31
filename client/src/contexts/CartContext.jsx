@@ -6,6 +6,10 @@ const CartContextProvider = ({ children }) => {
   const [itemCart, setItemCart] = useState([]);
   const [showToastCart, setShowToastCart] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
+  const [date, setDate] = useState({
+    month: "",
+    year: "",
+  });
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -24,6 +28,8 @@ const CartContextProvider = ({ children }) => {
     setActiveStep,
     handleNext,
     handleBack,
+    date,
+    setDate,
   };
 
   return (
