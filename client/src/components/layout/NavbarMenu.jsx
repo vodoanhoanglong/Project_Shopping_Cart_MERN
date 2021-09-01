@@ -16,7 +16,7 @@ const NavbarMenu = () => {
   const { cart, setCart, setOpenedPopover, popoverAnchor } =
     useContext(ProductContext);
 
-  const { itemCart, setItemCart } = useContext(CartContext);
+  const { itemCart, setItemCart, setActiveStep } = useContext(CartContext);
 
   let history = useHistory();
 
@@ -47,7 +47,10 @@ const NavbarMenu = () => {
   }, [toggle]);
 
   const handleClick = () => history.push(currentLink);
-  const handleClickBack = () => history.goBack();
+  const handleClickBack = () => {
+    history.goBack();
+    setActiveStep(0);
+  };
 
   return (
     <>

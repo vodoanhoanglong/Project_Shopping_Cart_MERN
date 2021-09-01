@@ -3,7 +3,8 @@ import React, { useContext } from "react";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Carousel from "react-multi-carousel";
+
+import CartSlider from "./CartSlider";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { CartContext } from "../../contexts/CartContext";
@@ -28,24 +29,6 @@ const useStyles = makeStyles({
   },
 });
 
-const responsive = {
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 3,
-    slidesToSlide: 3, // optional, default to 1.
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2,
-    slidesToSlide: 2, // optional, default to 1.
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1,
-    slidesToSlide: 1, // optional, default to 1.
-  },
-};
-
 const CartPayment = () => {
   const classes = useStyles();
 
@@ -67,12 +50,12 @@ const CartPayment = () => {
   return (
     <div
       className="animate__animated animate__fadeIn"
-      style={{ height: "70vh", backgroundColor: "#F7F8FA" }}
+      style={{ height: "100vh", backgroundColor: "#F7F8FA" }}
     >
       <div className="container-card-bill-information">
-        <Card className={classes.root}>
+        <Card className={classes.root} style={{ width: "40%" }}>
           <CardContent>
-            <h2>Bill Information</h2>
+            <h1>Bill Information</h1>
             <div className="card-bill-information">
               <p>
                 <b>Full name:</b> {value.fullName}
@@ -97,39 +80,25 @@ const CartPayment = () => {
               <p>
                 <b>Payment day:</b> {today}
               </p>
-              <h5>
-                <b>Total:</b> ${totalBill.toFixed(2)}
-              </h5>
+              <h2>
+                <b style={{ marginRight: 30 }}>
+                  Total: ${totalBill.toFixed(2)}
+                </b>
+                {value.couponCode !== "" ? (
+                  <span className="payment-discount">10% OFF</span>
+                ) : null}
+              </h2>
             </div>
           </CardContent>
           <CardActions>
             <div className="container-button-payment-finished">
               <button onClick={handleBack}>Back</button>
-              <button onClick={handleNext}>Complete Bill</button>
+              <button onClick={handleNext}>Complete</button>
             </div>
           </CardActions>
         </Card>
       </div>
-      <div className="container-card-bill-information">
-        <Carousel
-          swipeable={false}
-          draggable={false}
-          responsive={responsive}
-          ssr={true} // means to render carousel on server-side.
-          autoPlaySpeed={1000}
-          keyBoardControl={true}
-          customTransition="all .5"
-          transitionDuration={500}
-          containerClass="carousel-container"
-          removeArrowOnDeviceType={["tablet", "mobile"]}
-        >
-          {itemCart.map((item, index) => (
-            <div key={index}>
-              <img src={item.url} alt="" style={{ width: 120, height: 120 }} />
-            </div>
-          ))}
-        </Carousel>
-      </div>
+      <CartSlider />
     </div>
   );
 };

@@ -13,6 +13,8 @@ import TextField from "@material-ui/core/TextField";
 import DoneIcon from "@material-ui/icons/Done";
 import Alert from "@material-ui/lab/Alert";
 
+import CartSlider from "./CartSlider";
+
 import { CartContext } from "../../contexts/CartContext";
 
 import "../../css/CartOrder.css";
@@ -143,7 +145,10 @@ const CartOrder = () => {
   };
 
   return (
-    <div className="animate__animated animate__fadeIn">
+    <div
+      className="animate__animated animate__fadeIn"
+      style={{ height: "100vh" }}
+    >
       <form onSubmit={handleSubmit}>
         <div className="container-cart-form">
           <div className="form-information-user">
@@ -359,6 +364,7 @@ const CartOrder = () => {
           <button type="submit">Payment</button>
         </div>
       </form>
+      <CartSlider />
     </div>
   );
 };

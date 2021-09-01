@@ -1,0 +1,21 @@
+.react-multi-carousel-list {
+  width: 50%;
+}
+
+.title-cart {
+  border-bottom: 1px solid #c5c5c5;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.total-item-cart-slider {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.3);
+  font-weight: 700;
+  font-family: Poppins-Medium;
+  font-size: 15px;
+  color: #fff;
+  text-align: center;
+  width: 94%;
+  bottom: 0;
+}
