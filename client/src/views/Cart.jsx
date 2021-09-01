@@ -22,9 +22,9 @@ const Cart = () => {
           <CartTable />
         ) : activeStep === 1 ? (
           <CartOrder />
-        ) : (
+        ) : activeStep === 2 ? (
           <CartPayment />
-        )}
+        ) : null}
       </div>
     </div>
   );

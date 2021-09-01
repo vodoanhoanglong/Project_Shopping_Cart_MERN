@@ -3,11 +3,13 @@ import React, { useContext } from "react";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
+import Carousel from "react-multi-carousel";
 
 import { makeStyles } from "@material-ui/core/styles";
-import "../../css/CartPayment.css";
 import { CartContext } from "../../contexts/CartContext";
+
+import "react-multi-carousel/lib/styles.css";
+import "../../css/CartPayment.css";
 
 const useStyles = makeStyles({
   root: {
@@ -26,23 +28,34 @@ const useStyles = makeStyles({
   },
 });
 
+const responsive = {
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3,
+    slidesToSlide: 3, // optional, default to 1.
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+    slidesToSlide: 2, // optional, default to 1.
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+    slidesToSlide: 1, // optional, default to 1.
+  },
+};
+
 const CartPayment = () => {
   const classes = useStyles();
 
-  const { itemCart, date } = useContext(CartContext);
-  const fullName = document.getElementById("filled-basic-name").value;
-  const phone = document.getElementById("filled-basic-phone").value;
-  const address = document.getElementById("filled-basic-address").value;
-  const coupon =
-    document.getElementById("filled-basic-coup") !== null
-      ? document.getElementById("filled-basic-coup").value
-      : false;
-  const creditCard =
-    document.getElementById("filled-basic-card-number") !== null
-      ? document.getElementById("filled-basic-card-number").value
-      : false;
+  const { itemCart, value, date, handleNext, handleBack } =
+    useContext(CartContext);
+
+  const creditCard = value.cardNumber !== "" ? true : false;
+
   let totalBill = itemCart.reduce((sum, { totalPrice }) => sum + totalPrice, 0);
-  if (coupon !== null) totalBill = totalBill - (totalBill * 10) / 100;
+  if (value.couponCode !== "") totalBill = totalBill - (totalBill * 10) / 100;
 
   let today = new Date();
   const dd = String(today.getDate()).padStart(2, "0");
@@ -62,17 +75,17 @@ const CartPayment = () => {
             <h2>Bill Information</h2>
             <div className="card-bill-information">
               <p>
-                <b>Full name:</b> {fullName}
+                <b>Full name:</b> {value.fullName}
               </p>
               <p>
-                <b>Phone number:</b> {phone}
+                <b>Phone number:</b> {value.phone}
               </p>
               <p>
-                <b>Address:</b> {address}
+                <b>Address:</b> {value.address}
               </p>
               {creditCard && (
                 <p>
-                  <b>Credit card number:</b> {creditCard}
+                  <b>Credit card number:</b> {value.cardNumber}
                 </p>
               )}
               {creditCard && (
@@ -90,9 +103,32 @@ const CartPayment = () => {
             </div>
           </CardContent>
           <CardActions>
-            <Button size="small">Learn More</Button>
+            <div className="container-button-payment-finished">
+              <button onClick={handleBack}>Back</button>
+              <button onClick={handleNext}>Complete Bill</button>
+            </div>
           </CardActions>
         </Card>
+      </div>
+      <div className="container-card-bill-information">
+        <Carousel
+          swipeable={false}
+          draggable={false}
+          responsive={responsive}
+          ssr={true} // means to render carousel on server-side.
+          autoPlaySpeed={1000}
+          keyBoardControl={true}
+          customTransition="all .5"
+          transitionDuration={500}
+          containerClass="carousel-container"
+          removeArrowOnDeviceType={["tablet", "mobile"]}
+        >
+          {itemCart.map((item, index) => (
+            <div key={index}>
+              <img src={item.url} alt="" style={{ width: 120, height: 120 }} />
+            </div>
+          ))}
+        </Carousel>
       </div>
     </div>
   );

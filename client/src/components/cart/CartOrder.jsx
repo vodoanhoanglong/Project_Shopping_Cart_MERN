@@ -33,26 +33,26 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CartOrder = () => {
-  const [length, setLength] = useState({
-    fullName: 0,
-    phone: 0,
-    address: 0,
-  });
-  const [icon, setIcon] = useState({
-    fullName: false,
-    phone: false,
-    address: false,
-  });
   const [error, setError] = useState({
     couponCode: false,
     paymentMethod: false,
   });
-  const [valueRadio, setValueRadio] = useState("");
-  const [valueCardNumber, setValueCardNumber] = useState("");
-  const [disabled, setDisabled] = useState(true);
 
-  const { itemCart, date, setDate, handleNext, handleBack } =
-    useContext(CartContext);
+  const {
+    itemCart,
+    value,
+    setValue,
+    date,
+    setDate,
+    length,
+    setLength,
+    icon,
+    setIcon,
+    disabled,
+    setDisabled,
+    handleNext,
+    handleBack,
+  } = useContext(CartContext);
 
   const resultTotalPrice = itemCart.reduce(
     (sum, { totalPrice }) => sum + totalPrice,
@@ -82,6 +82,7 @@ const CartOrder = () => {
       ...prevLength,
       [inputName]: inputLength,
     }));
+    setValue((prevValue) => ({ ...prevValue, [inputName]: inputValue }));
     if (!regex.test(inputValue) || inputValue === "")
       setIcon((prevIcon) => ({ ...prevIcon, [inputName]: false }));
     else setIcon((prevIcon) => ({ ...prevIcon, [inputName]: true }));
@@ -90,19 +91,25 @@ const CartOrder = () => {
   const handleChangePaymentMethod = (e) =>
     !/^[0-9]*$/.test(e.target.value)
       ? null
-      : setValueCardNumber(e.target.value);
+      : setValue((prevValue) => ({
+          ...prevValue,
+          [e.target.name]: e.target.value,
+        }));
 
   const handleRadioChange = (e) => {
     if (e.target.value === "online") setDisabled(false);
     else {
       setDisabled(true);
-      setValueCardNumber("");
+      setValue((prevValue) => ({ ...prevValue, cardNumber: "" }));
       setDate({
         month: "",
         year: "",
       });
     }
-    setValueRadio(e.target.value);
+    setValue((prevValue) => ({
+      ...prevValue,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const handleChangeSelected = (e) => {
@@ -111,20 +118,26 @@ const CartOrder = () => {
     setDate((prevDate) => ({ ...prevDate, [inputName]: inputValue }));
   };
 
+  const handleChangeCouponCode = (e) =>
+    setValue((prevValue) => ({
+      ...prevValue,
+      [e.target.name]: e.target.value,
+    }));
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const couponCode = document.getElementById("filled-basic-coupon").value;
+    const couponCode = value.couponCode;
     if (couponCode !== coupon && couponCode !== "")
       setError((prevError) => ({ ...prevError, couponCode: true }));
     else setError((prevError) => ({ ...prevError, couponCode: false }));
-    if (valueRadio === "offline")
+    if (value.radio === "offline")
       setError((prevError) => ({ ...prevError, paymentMethod: false }));
-    else if (valueRadio === "online")
+    else if (value.radio === "online")
       setError((prevError) => ({ ...prevError, paymentMethod: false }));
     else setError((prevError) => ({ ...prevError, paymentMethod: true }));
     if (
-      (valueRadio !== "" && couponCode === coupon) ||
-      (valueRadio !== "" && couponCode === "")
+      (value.radio !== "" && couponCode === coupon) ||
+      (value.radio !== "" && couponCode === "")
     )
       handleNext();
   };
@@ -142,6 +155,7 @@ const CartOrder = () => {
                 fullWidth
                 margin="dense"
                 name="fullName"
+                value={value.fullName}
                 inputProps={{
                   maxLength: 40,
                   minLength: 2,
@@ -162,6 +176,7 @@ const CartOrder = () => {
                 fullWidth
                 margin="dense"
                 name="phone"
+                value={value.phone}
                 inputProps={{
                   maxLength: 12,
                   minLength: 10,
@@ -182,6 +197,7 @@ const CartOrder = () => {
                 fullWidth
                 margin="dense"
                 name="address"
+                value={value.address}
                 onChange={handleChange(regexAddress)}
                 required
               />
@@ -197,9 +213,11 @@ const CartOrder = () => {
               fullWidth
               margin="dense"
               name="couponCode"
+              value={value.couponCode}
               inputProps={{
                 minLength: 6,
               }}
+              onChange={handleChangeCouponCode}
             />
             {error.couponCode && (
               <div className="show-alert">
@@ -225,8 +243,8 @@ const CartOrder = () => {
             >
               <RadioGroup
                 aria-label="quiz"
-                name="quiz"
-                value={valueRadio}
+                name="radio"
+                value={value.radio}
                 onChange={handleRadioChange}
               >
                 <FormControlLabel
@@ -277,7 +295,7 @@ const CartOrder = () => {
               fullWidth
               margin="dense"
               name="cardNumber"
-              value={valueCardNumber}
+              value={value.cardNumber}
               disabled={disabled}
               inputProps={{
                 minLength: 9,
