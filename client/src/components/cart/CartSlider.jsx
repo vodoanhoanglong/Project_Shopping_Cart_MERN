@@ -58,15 +58,10 @@ const CartSlider = () => {
         swipeable
       >
         {itemCart.map((item, index) => (
-          <>
+          <div key={index}>
             <span className="total-item-cart-slider">x{item.totalItem}</span>
-            <img
-              key={index}
-              src={item.url}
-              alt=""
-              style={{ width: 180, height: 200 }}
-            />
-          </>
+            <img src={item.url} alt="" style={{ width: 180, height: 200 }} />
+          </div>
         ))}
       </Carousel>
     </>

@@ -25,8 +25,8 @@ const NavbarMenu = () => {
   const isMounted = useRef(false);
 
   useEffect(() => {
-    const getCountCart = JSON.parse(localStorage.getItem("countCart") || 0);
-    const getCart = JSON.parse(localStorage.getItem("cart") || []);
+    const getCountCart = JSON.parse(localStorage.getItem("countCart")) || 0;
+    const getCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(getCountCart);
     setItemCart(getCart);
   }, []);

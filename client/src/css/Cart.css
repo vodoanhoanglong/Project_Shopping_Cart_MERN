@@ -2,3 +2,78 @@
   background: #f7f8fa;
   padding-top: 150px;
 }
+
+.animate-completed {
+  width: 20%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.animate-completed h1 {
+  color: green;
+  font-weight: bold;
+  font-family: Poppins-Medium;
+}
+
+.animate-completed .container-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.animate-completed .container-button a {
+  display: flex;
+  border-radius: 30px;
+  background-color: #717fe0;
+  text-transform: uppercase;
+  min-width: 250px;
+  height: 60px;
+  font-family: Poppins-Medium;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.466667;
+  color: #fff;
+  justify-content: center;
+  transition: all 0.4s;
+  align-items: center;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.animate-completed .container-button a:hover {
+  border-color: #222;
+  background-color: #222;
+  color: #fff;
+}
+
+.swirl-in-fwd {
+  -webkit-animation: swirl-in-fwd 0.6s ease-out both;
+  animation: swirl-in-fwd 0.6s ease-out both;
+}
+
+@-webkit-keyframes swirl-in-fwd {
+  0% {
+    -webkit-transform: rotate(-540deg) scale(0);
+    transform: rotate(-540deg) scale(0);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotate(0) scale(1);
+    transform: rotate(0) scale(1);
+    opacity: 1;
+  }
+}
+@keyframes swirl-in-fwd {
+  0% {
+    -webkit-transform: rotate(-540deg) scale(0);
+    transform: rotate(-540deg) scale(0);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotate(0) scale(1);
+    transform: rotate(0) scale(1);
+    opacity: 1;
+  }
+}
