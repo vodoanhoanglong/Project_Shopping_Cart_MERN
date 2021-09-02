@@ -16,11 +16,7 @@ import "../css/Cart.css";
 const Cart = () => {
   const { activeStep, setActiveStep } = React.useContext(CartContext);
 
-  const handleClick = () => {
-    setActiveStep(0);
-    localStorage.removeItem("countCart");
-    localStorage.removeItem("cart");
-  };
+  const handleClick = () => setActiveStep(0);
 
   return (
     <div className="animate__animated animate__fadeIn">
@@ -43,6 +39,7 @@ const Cart = () => {
             <h1 className="animate__animated animate__fadeIn">
               COMPLETED BILL
             </h1>
+
             <div className="container-button">
               <Link to="/" onClick={handleClick}>
                 Go to Home page

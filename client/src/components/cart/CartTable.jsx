@@ -1,4 +1,8 @@
 import React from "react";
+
+import ProductModal from "../product/ProductModal";
+import { Link } from "react-router-dom";
+
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,7 +11,6 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
-
 import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -18,13 +21,14 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 
 import DeleteIcon from "@material-ui/icons/Delete";
-
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import { CartContext } from "../../contexts/CartContext";
+import { ProductContext } from "../../contexts/ProductContext";
 import { Pagination } from "@material-ui/lab";
+
+import CartEmpty from "../../assets/empty-cart.png";
 import "../../css/CartTable.css";
-import ProductModal from "../product/ProductModal";
 
 const InputCart = (props) => {
   const { _id, size, color, totalItem } = props;
@@ -321,6 +325,7 @@ export default function CartTable() {
   const [information, setInformation] = React.useState("");
 
   const { itemCart, setItemCart, handleNext } = React.useContext(CartContext);
+  const { setCart } = React.useContext(ProductContext);
 
   const perPage = 5;
   const start = (page - 1) * perPage;
@@ -388,134 +393,159 @@ export default function CartTable() {
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
-  return (
-    <div className={classes.root + " cart-table"}>
-      <Paper className={classes.paper}>
-        <EnhancedTableToolbar
-          numSelected={selected.length}
-          itemRemoved={handleDeleteItem}
-          totalBill={resultTotalPrice}
-          handleNext={handleNext}
-        />
-        <TableContainer>
-          <Table
-            className={classes.table}
-            aria-labelledby="tableTitle"
-            size="medium"
-            aria-label="enhanced table"
+  const emptyCart = (
+    <>
+      <div className="container-cart img">
+        <img src={CartEmpty} alt="" style={{ width: 360, height: 300 }} />
+        <h1>Cart is empty</h1>
+        <div className="empty-cart-btn">
+          <Link
+            to="/shop"
+            onClick={setCart(
+              itemCart.reduce((sum, { totalItem }) => sum + totalItem, 0)
+            )}
           >
-            <EnhancedTableHead
-              classes={classes}
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
-              rowCount={itemCart.length}
-            />
-            <TableBody>
-              {stableSort(itemCart, getComparator(order, orderBy))
-                .slice(start, end)
-                .map((row, index) => {
-                  const idItem = row._id + row.size + row.color;
-                  const isItemSelected = isSelected(idItem);
-                  const labelId = `enhanced-table-checkbox-${index}`;
+            Shop Now
+          </Link>
+        </div>
+      </div>
+    </>
+  );
 
-                  return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={index}
-                      selected={isItemSelected}
-                    >
-                      <TableCell padding="checkbox">
-                        <Checkbox
-                          onClick={(event) => handleClick(event, idItem)}
-                          checked={isItemSelected}
-                          inputProps={{ "aria-labelledby": labelId }}
-                        />
-                      </TableCell>
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
-                      >
-                        <div
-                          style={{
-                            display: "flex",
-                            marginTop: 10,
-                            marginBottom: 10,
-                          }}
+  return (
+    <div>
+      {itemCart.length !== 0 ? (
+        <div className={classes.root + " cart-table"}>
+          <Paper className={classes.paper}>
+            <EnhancedTableToolbar
+              numSelected={selected.length}
+              itemRemoved={handleDeleteItem}
+              totalBill={resultTotalPrice}
+              handleNext={handleNext}
+            />
+            <TableContainer>
+              <Table
+                className={classes.table}
+                aria-labelledby="tableTitle"
+                size="medium"
+                aria-label="enhanced table"
+              >
+                <EnhancedTableHead
+                  classes={classes}
+                  numSelected={selected.length}
+                  order={order}
+                  orderBy={orderBy}
+                  onSelectAllClick={handleSelectAllClick}
+                  onRequestSort={handleRequestSort}
+                  rowCount={itemCart.length}
+                />
+                <TableBody>
+                  {stableSort(itemCart, getComparator(order, orderBy))
+                    .slice(start, end)
+                    .map((row, index) => {
+                      const idItem = row._id + row.size + row.color;
+                      const isItemSelected = isSelected(idItem);
+                      const labelId = `enhanced-table-checkbox-${index}`;
+
+                      return (
+                        <TableRow
+                          hover
+                          role="checkbox"
+                          aria-checked={isItemSelected}
+                          tabIndex={-1}
+                          key={index}
+                          selected={isItemSelected}
                         >
-                          <img
-                            src={row.url}
-                            alt=""
-                            style={{ width: 100, height: 130 }}
-                          />
-                          <div style={{ marginLeft: 10 }}>
-                            <p>
-                              <b> {row.title} </b>
-                            </p>
+                          <TableCell padding="checkbox">
+                            <Checkbox
+                              onClick={(event) => handleClick(event, idItem)}
+                              checked={isItemSelected}
+                              inputProps={{ "aria-labelledby": labelId }}
+                            />
+                          </TableCell>
+                          <TableCell
+                            component="th"
+                            id={labelId}
+                            scope="row"
+                            padding="none"
+                          >
                             <div
-                              className="size-color-cart"
-                              onClick={() => {
-                                document.getElementById(
-                                  "myModal"
-                                ).style.display = "block";
-                                setInformation(row);
+                              style={{
+                                display: "flex",
+                                marginTop: 10,
+                                marginBottom: 10,
                               }}
                             >
-                              <span>{row.size}</span>
-                              <span>&nbsp;/&nbsp;</span>
-                              <span>{row.color}</span>
-                              &nbsp;
-                              <ExpandMoreIcon />
+                              <img
+                                src={row.url}
+                                alt=""
+                                style={{ width: 100, height: 130 }}
+                              />
+                              <div style={{ marginLeft: 10 }}>
+                                <p>
+                                  <b> {row.title} </b>
+                                </p>
+                                <div
+                                  className="size-color-cart"
+                                  onClick={() => {
+                                    document.getElementById(
+                                      "myModal"
+                                    ).style.display = "block";
+                                    setInformation(row);
+                                  }}
+                                >
+                                  <span>{row.size}</span>
+                                  <span>&nbsp;/&nbsp;</span>
+                                  <span>{row.color}</span>
+                                  &nbsp;
+                                  <ExpandMoreIcon />
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                        </div>
-                      </TableCell>
-                      <TableCell align="center">${row.price}</TableCell>
-                      <TableCell align="center">
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                          }}
-                        >
-                          <InputCart
-                            _id={row._id}
-                            color={row.color}
-                            size={row.size}
-                            totalItem={row.totalItem}
-                            product={information}
-                          />
-                        </div>
-                      </TableCell>
-                      <TableCell align="center">
-                        ${row.totalPrice.toFixed(2)}
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <Pagination
-          count={totalPage}
-          size="large"
-          page={page}
-          onChange={handleChangePage}
-        />
-      </Paper>
-      <ProductModal
-        _id={information._id}
-        size={information.size}
-        color={information.color}
-        product={information}
-      />
+                          </TableCell>
+                          <TableCell align="center">${row.price}</TableCell>
+                          <TableCell align="center">
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                              }}
+                            >
+                              <InputCart
+                                _id={row._id}
+                                color={row.color}
+                                size={row.size}
+                                totalItem={row.totalItem}
+                                product={information}
+                              />
+                            </div>
+                          </TableCell>
+                          <TableCell align="center">
+                            ${row.totalPrice.toFixed(2)}
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <Pagination
+              count={totalPage}
+              size="large"
+              page={page}
+              onChange={handleChangePage}
+            />
+          </Paper>
+          <ProductModal
+            _id={information._id}
+            size={information.size}
+            color={information.color}
+            product={information}
+          />
+        </div>
+      ) : (
+        emptyCart
+      )}
     </div>
   );
 }

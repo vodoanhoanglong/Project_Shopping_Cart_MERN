@@ -14,10 +14,13 @@ const ProductModal = (props) => {
     color,
     product: { title, description, price, url },
   } = props;
+  console.log(undefined === size);
 
-  const [defaultSelect, setDefaultSelect] = useState(!size ? "DEFAULT" : size);
+  const [defaultSelect, setDefaultSelect] = useState(
+    size === undefined ? "DEFAULT" : size
+  );
   const [defaultSelect2, setDefaultSelect2] = useState(
-    !color ? "DEFAULT" : color
+    color === undefined ? "DEFAULT" : color
   );
 
   const [animate, setAnimate] = useState("animate__fadeInDown");
@@ -30,8 +33,10 @@ const ProductModal = (props) => {
 
   // khi truyền props xuống để làm constructor cho State thì nên dùng useEffect
   useEffect(() => {
-    setDefaultSelect(size);
-    setDefaultSelect2(color);
+    if (size !== undefined) {
+      setDefaultSelect(size);
+      setDefaultSelect2(color);
+    }
   }, [size, color]);
 
   const modal = document.getElementById("myModal");
@@ -161,7 +166,7 @@ const ProductModal = (props) => {
     setAnimate("animate__fadeOut");
     setTimeout(() => {
       modal.style.display = "none";
-      if (!size) {
+      if (size === undefined) {
         setDefaultSelect("DEFAULT");
         setDefaultSelect2("DEFAULT");
       } else {
@@ -196,10 +201,10 @@ const ProductModal = (props) => {
 
   const handleUpdateToCart = () => {
     const resultTotalItem = itemCart.find(
-      (item) =>
-        item._id === _id &&
-        item.size === defaultSelect &&
-        item.color === defaultSelect2
+      (itemUpdate) =>
+        itemUpdate._id === _id &&
+        itemUpdate.size === defaultSelect &&
+        itemUpdate.color === defaultSelect2
     );
     if (resultTotalItem) {
       const resultSearchItem = itemCart.indexOf(resultTotalItem);
@@ -267,7 +272,7 @@ const ProductModal = (props) => {
                 value={defaultSelect}
                 onChange={handleChange}
               >
-                {!size && (
+                {size === undefined && (
                   <option value="DEFAULT" disabled>
                     Choose
                   </option>
@@ -278,7 +283,7 @@ const ProductModal = (props) => {
                 <option value="XL">XL</option>
               </select>
             </div>
-            {!size && (
+            {size === undefined && (
               <div className={showAlert1}>
                 <Alert
                   className="animate__animated animate__shakeX"
@@ -298,7 +303,7 @@ const ProductModal = (props) => {
                 value={defaultSelect2}
                 onChange={handleChange2}
               >
-                {!color && (
+                {color === undefined && (
                   <option value="DEFAULT" disabled>
                     Choose
                   </option>
@@ -309,7 +314,7 @@ const ProductModal = (props) => {
                 <option value="Pink">Pink</option>
               </select>
             </div>
-            {!color && (
+            {color === undefined && (
               <div className={showAlert2}>
                 <Alert
                   className="animate__animated animate__shakeX"
@@ -320,7 +325,7 @@ const ProductModal = (props) => {
               </div>
             )}
 
-            {!size && (
+            {size === undefined && (
               <div className="information-quantity">
                 <span>Quantity</span>
                 <div className="quantity-btn">
@@ -350,8 +355,12 @@ const ProductModal = (props) => {
               </div>
             )}
             <div className="container-button">
-              <button onClick={!size ? handleAddToCart : handleUpdateToCart}>
-                {!size ? "ADD TO CART" : "UPDATE TO CART"}
+              <button
+                onClick={
+                  size === undefined ? handleAddToCart : handleUpdateToCart
+                }
+              >
+                {size === undefined ? "ADD TO CART" : "UPDATE TO CART"}
               </button>
               <i className="fas fa-heart"></i>
             </div>

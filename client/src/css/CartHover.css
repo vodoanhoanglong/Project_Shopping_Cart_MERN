@@ -4,6 +4,24 @@
   background-color: #f7f8fa;
   overflow-y: scroll;
 }
+
+.popover-cart-empty {
+  padding-top: 30px;
+  width: 250px;
+  height: 250px;
+  background-color: #f7f8fa;
+  text-align: center;
+}
+
+.popover-cart-empty h4 {
+  margin-top: 20px;
+  color: black;
+  font-weight: bold;
+  padding-left: 25px;
+  text-transform: uppercase;
+  font-family: Poppins-Medium;
+}
+
 .popover-cart .popover-item {
   padding: 5px;
   display: flex;

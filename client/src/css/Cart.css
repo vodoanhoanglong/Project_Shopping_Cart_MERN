@@ -21,7 +21,7 @@
   margin-top: 100px;
 }
 
-.animate-completed .container-button a {
+.container-cart a {
   display: flex;
   border-radius: 30px;
   background-color: #717fe0;
@@ -42,7 +42,7 @@
   text-decoration: none;
 }
 
-.animate-completed .container-button a:hover {
+.container-cart a:hover {
   border-color: #222;
   background-color: #222;
   color: #fff;

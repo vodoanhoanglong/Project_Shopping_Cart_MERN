@@ -47,6 +47,12 @@ const CartPayment = () => {
 
   today = dd + "/" + mm + "/" + yyyy;
 
+  const handleClick = () => {
+    localStorage.removeItem("countCart");
+    localStorage.removeItem("cart");
+    handleNext();
+  };
+
   return (
     <div
       className="animate__animated animate__fadeIn"
@@ -93,7 +99,7 @@ const CartPayment = () => {
           <CardActions>
             <div className="container-button-payment-finished">
               <button onClick={handleBack}>Back</button>
-              <button onClick={handleNext}>Complete</button>
+              <button onClick={handleClick}>Complete</button>
             </div>
           </CardActions>
         </Card>

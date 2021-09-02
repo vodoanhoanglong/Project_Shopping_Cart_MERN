@@ -132,3 +132,24 @@
 .cart-table-header button:hover {
   background: #000;
 }
+
+.container-cart.img {
+  padding-top: 50px;
+  text-align: center;
+}
+
+.container-cart.img h1 {
+  margin-top: 50px;
+  color: black;
+  font-weight: bold;
+  padding-left: 25px;
+  text-transform: uppercase;
+  font-family: Poppins-Medium;
+}
+
+.empty-cart-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  padding-left: 20px;
+}

@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 
 import { ProductContext } from "../../contexts/ProductContext";
 import { CartContext } from "../../contexts/CartContext";
@@ -9,6 +9,8 @@ import CheckIcon from "@material-ui/icons/Check";
 import { makeStyles } from "@material-ui/core/styles";
 
 import "../../css/CartHover.css";
+import CartEmpty from "../../assets/empty-cart.png";
+
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
@@ -26,6 +28,7 @@ const CartHover = (props) => {
   const { openedPopover, setOpenedPopover, popoverAnchor } =
     useContext(ProductContext);
   const { itemCart, showToastCart } = useContext(CartContext);
+  const { cart } = useContext(ProductContext);
 
   const classes = useStyles();
 
@@ -41,6 +44,13 @@ const CartHover = (props) => {
     handleHidePopover();
     handleClick();
   };
+
+  const emptyCart = (
+    <div className="popover-cart-empty">
+      <img src={CartEmpty} alt="" style={{ width: 150, height: 150 }} />
+      <h4>Cart is empty</h4>
+    </div>
+  );
 
   return (
     <Popover
@@ -66,35 +76,41 @@ const CartHover = (props) => {
       marginThreshold={50}
       disableRestoreFocus
     >
-      {showToastCart && (
-        <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
-          Added to cart
-        </Alert>
-      )}
-      <div className="popover-cart">
-        {itemCart.map((item, index) => (
-          <div key={index} className="popover-item">
-            <img src={item.url} alt="" />
-            <div className="item-information">
-              <h5>{item.title}</h5>
-              <p className="price-information">${item.price}</p>
-              <div className="item-information-child">
-                <p>{item.totalItem}</p>
-                <p>{item.size}</p>
-                <p>{item.color}</p>
+      {cart !== 0 ? (
+        <>
+          <div className="popover-cart">
+            {showToastCart && (
+              <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
+                Added to cart
+              </Alert>
+            )}
+            {itemCart.map((item, index) => (
+              <div key={index} className="popover-item">
+                <img src={item.url} alt="" />
+                <div className="item-information">
+                  <h5>{item.title}</h5>
+                  <p className="price-information">${item.price}</p>
+                  <div className="item-information-child">
+                    <p>{item.totalItem}</p>
+                    <p>{item.size}</p>
+                    <p>{item.color}</p>
+                  </div>
+                </div>
               </div>
+            ))}
+          </div>
+          <div className="footer-popover">
+            <Link to="/cart" onClick={handleClickPopover}>
+              View Cart
+            </Link>
+            <div className="total-price">
+              total price: <strong>${resultTotalPrice.toFixed(2)}</strong>
             </div>
           </div>
-        ))}
-      </div>
-      <div className="footer-popover">
-        <Link to="/cart" onClick={handleClickPopover}>
-          View Cart
-        </Link>
-        <div className="total-price">
-          total price: <strong>${resultTotalPrice.toFixed(2)}</strong>
-        </div>
-      </div>
+        </>
+      ) : (
+        emptyCart
+      )}
     </Popover>
   );
 };
