@@ -14,13 +14,10 @@ const ProductModal = (props) => {
     color,
     product: { title, description, price, url },
   } = props;
-  console.log(undefined === size);
 
-  const [defaultSelect, setDefaultSelect] = useState(
-    size === undefined ? "DEFAULT" : size
-  );
+  const [defaultSelect, setDefaultSelect] = useState(!size ? "DEFAULT" : size);
   const [defaultSelect2, setDefaultSelect2] = useState(
-    color === undefined ? "DEFAULT" : color
+    !color ? "DEFAULT" : color
   );
 
   const [animate, setAnimate] = useState("animate__fadeInDown");
@@ -166,7 +163,7 @@ const ProductModal = (props) => {
     setAnimate("animate__fadeOut");
     setTimeout(() => {
       modal.style.display = "none";
-      if (size === undefined) {
+      if (!size) {
         setDefaultSelect("DEFAULT");
         setDefaultSelect2("DEFAULT");
       } else {
@@ -206,7 +203,22 @@ const ProductModal = (props) => {
         itemUpdate.size === defaultSelect &&
         itemUpdate.color === defaultSelect2
     );
-    if (resultTotalItem) {
+    if (
+      !resultTotalItem ||
+      (size === defaultSelect && color === defaultSelect2)
+    ) {
+      setItemCart((prevState) => [
+        ...prevState.map((item) =>
+          item._id === _id && item.size === size && item.color === color
+            ? {
+                ...item,
+                size: defaultSelect,
+                color: defaultSelect2,
+              }
+            : item
+        ),
+      ]);
+    } else {
       const resultSearchItem = itemCart.indexOf(resultTotalItem);
       itemCart.splice(resultSearchItem, 1);
       setItemCart(itemCart);
@@ -226,17 +238,6 @@ const ProductModal = (props) => {
         ),
       ]);
     }
-    setItemCart((prevState) => [
-      ...prevState.map((item) =>
-        item._id === _id && item.size === size && item.color === color
-          ? {
-              ...item,
-              size: defaultSelect,
-              color: defaultSelect2,
-            }
-          : item
-      ),
-    ]);
     handleClose();
   };
 
@@ -272,7 +273,7 @@ const ProductModal = (props) => {
                 value={defaultSelect}
                 onChange={handleChange}
               >
-                {size === undefined && (
+                {!size && (
                   <option value="DEFAULT" disabled>
                     Choose
                   </option>
@@ -283,7 +284,7 @@ const ProductModal = (props) => {
                 <option value="XL">XL</option>
               </select>
             </div>
-            {size === undefined && (
+            {!size && (
               <div className={showAlert1}>
                 <Alert
                   className="animate__animated animate__shakeX"
@@ -303,7 +304,7 @@ const ProductModal = (props) => {
                 value={defaultSelect2}
                 onChange={handleChange2}
               >
-                {color === undefined && (
+                {!color && (
                   <option value="DEFAULT" disabled>
                     Choose
                   </option>
@@ -314,7 +315,7 @@ const ProductModal = (props) => {
                 <option value="Pink">Pink</option>
               </select>
             </div>
-            {color === undefined && (
+            {!color && (
               <div className={showAlert2}>
                 <Alert
                   className="animate__animated animate__shakeX"
@@ -325,7 +326,7 @@ const ProductModal = (props) => {
               </div>
             )}
 
-            {size === undefined && (
+            {!size && (
               <div className="information-quantity">
                 <span>Quantity</span>
                 <div className="quantity-btn">
@@ -355,12 +356,8 @@ const ProductModal = (props) => {
               </div>
             )}
             <div className="container-button">
-              <button
-                onClick={
-                  size === undefined ? handleAddToCart : handleUpdateToCart
-                }
-              >
-                {size === undefined ? "ADD TO CART" : "UPDATE TO CART"}
+              <button onClick={!size ? handleAddToCart : handleUpdateToCart}>
+                {!size ? "ADD TO CART" : "UPDATE TO CART"}
               </button>
               <i className="fas fa-heart"></i>
             </div>

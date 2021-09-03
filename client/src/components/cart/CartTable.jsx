@@ -375,7 +375,7 @@ export default function CartTable() {
   const handleChangePage = (event, value) => setPage(value);
 
   const handleChangePageDeleted = () =>
-    page === totalPage ? setPage(totalPage - 1) : null;
+    page > totalPage ? setPage(totalPage) : null;
 
   const handleDeleteItem = () => {
     const removeItemsSelected = [];
@@ -388,8 +388,9 @@ export default function CartTable() {
       prevState.filter((item) => !removeItemsSelected.includes(item))
     );
     setItemCart(removeItems);
-    if ((itemCart.length - 1) % perPage === 0) handleChangePageDeleted();
   };
+
+  if (itemCart.length % perPage === 0) handleChangePageDeleted();
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
