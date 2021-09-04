@@ -4,12 +4,42 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
 module.exports.register = async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, confirmPassword, email } = req.body;
+  if (email) {
+    try {
+      const user = await User.findOne({ username: email });
+      let accessToken;
+      if (user) {
+        accessToken = jwt.sign(
+          { userId: user._id },
+          process.env.ACCESS_TOKEN_SECRET
+        );
+        return res.json({ success: true, accessToken });
+      }
 
-  if (!username || !password)
+      const newUser = new User({ username: email });
+      await newUser.save();
+
+      accessToken = jwt.sign(
+        { userId: newUser._id },
+        process.env.ACCESS_TOKEN_SECRET
+      );
+
+      return res.json({
+        success: true,
+        message: "User created successfully",
+        accessToken,
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ success: false, message: "Server error" });
+    }
+  }
+
+  if (!username || !password || !confirmPassword)
     return res
       .status(400)
-      .json({ success: false, message: "Missing username or password" });
+      .json({ success: false, message: "Please fill out completely" });
   try {
     const user = await User.findOne({ username });
 
@@ -43,7 +73,7 @@ module.exports.login = async (req, res) => {
   if (!username || !password)
     return res
       .status(400)
-      .json({ success: false, message: "Missing username or password" });
+      .json({ success: false, message: "Please fill out completely" });
   try {
     const user = await User.findOne({ username });
     if (!user)

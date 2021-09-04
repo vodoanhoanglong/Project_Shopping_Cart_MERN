@@ -1,7 +1,9 @@
-import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import { useState, useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
+import GoogleLogin from "react-google-login";
+import FacebookLogin from "react-facebook-login";
+
 import clsx from "clsx";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -14,6 +16,9 @@ import IconButton from "@material-ui/core/IconButton";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Alert from "@material-ui/lab/Alert";
+
+import IconGG from "../../assets/google.png";
+import IconFB from "../../assets/facebook.png";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 const LoginForm = () => {
   // Context
-  const { loginUser } = useContext(AuthContext);
+  const { loginUser, registerUser } = useContext(AuthContext);
 
   // Local state
   const [loginForm, setLoginForm] = useState({
@@ -68,6 +73,29 @@ const LoginForm = () => {
         setAlert({ message: loginData.message });
         setTimeout(() => setAlert(null), 5000);
       }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const responseGoogle = async (response) => {
+    if (!response.profileObj) return;
+    try {
+      const registerData = await registerUser(response.profileObj);
+      if (!registerData.success) setAlert(registerData.message);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const responseFacebook = async (response) => {
+    const loginFB = {
+      email: response.email ? response.email : response.userID,
+    };
+    if (!response.email) return;
+    try {
+      const registerData = await registerUser(loginFB);
+      if (!registerData.success) setAlert(registerData.message);
     } catch (error) {
       console.log(error);
     }
@@ -121,9 +149,36 @@ const LoginForm = () => {
             </Alert>
           </div>
         )}
-        <Button className="button-submit" type="submit">
+        <button className="button-submit" type="submit">
           Login
-        </Button>
+        </button>
+        <h5>Or SignIn with</h5>
+        <div className="container-btn-api">
+          <GoogleLogin
+            clientId="455854470240-d6stpuonh3g1jh4ob8m6mn4bssg7uc48.apps.googleusercontent.com"
+            render={(renderProps) => (
+              <button
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+                className="button-api-login"
+              >
+                <img src={IconGG} alt="" style={{ width: 36, height: 36 }} />
+              </button>
+            )}
+            buttonText="Login"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy={"single_host_origin"}
+          />
+          <FacebookLogin
+            appId="165707709038185"
+            fields="name,email,picture"
+            textButton=""
+            cssClass="button-api-login"
+            icon={<img src={IconFB} alt="" style={{ width: 42, height: 42 }} />}
+            callback={responseFacebook}
+          />
+        </div>
       </form>
       <p>
         Don't have account?&nbsp;

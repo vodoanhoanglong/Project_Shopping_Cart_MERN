@@ -14,12 +14,12 @@ const AuthContextProvider = ({ children }) => {
 
   // Authenticate user
   const loadUser = async () => {
-    if (localStorage[LOCAL_STORAGE_TOKEN_NAME]) {
+    if (localStorage[LOCAL_STORAGE_TOKEN_NAME])
       setAuthToken(localStorage[LOCAL_STORAGE_TOKEN_NAME]);
-    }
 
     try {
       const response = await axios.get(`${apiUrl}/auth`);
+      console.log(response.data);
       if (response.data.success) {
         dispatch({
           type: "SET_AUTH",

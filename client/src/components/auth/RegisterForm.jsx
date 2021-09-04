@@ -1,5 +1,3 @@
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -57,21 +55,36 @@ const RegisterForm = () => {
       [event.target.name]: event.target.value,
     });
 
+  const setTypeAlert = (message) => {
+    setAlert({ message });
+    setTimeout(() => setAlert(null), 5000);
+  };
+
   const register = async (event) => {
     event.preventDefault();
 
-    if (password !== confirmPassword) {
-      setAlert({ message: "Passwords do not match" });
-      setTimeout(() => setAlert(null), 5000);
+    if (username !== "" && username.length < 8) {
+      setTypeAlert("Username must be 8 characters or more");
+      return;
+    }
+
+    if (password !== "" && password.length < 8) {
+      setTypeAlert("Password must be 8 characters or more");
+      return;
+    }
+
+    if (
+      password !== "" &&
+      confirmPassword !== "" &&
+      password !== confirmPassword
+    ) {
+      setTypeAlert("Passwords do not match");
       return;
     }
 
     try {
       const registerData = await registerUser(registerForm);
-      if (!registerData.success) {
-        setAlert({ message: registerData.message });
-        setTimeout(() => setAlert(null), 5000);
-      }
+      if (!registerData.success) setTypeAlert(registerData.message);
     } catch (error) {
       console.log(error);
     }
@@ -140,10 +153,10 @@ const RegisterForm = () => {
 
         <FormControl className={clsx(classes.margin, classes.textField)}>
           <InputLabel htmlFor="standard-adornment-password">
-            Password
+            Password confirm
           </InputLabel>
           <Input
-            id="filled-basic-password"
+            id="filled-basic-password-confirm"
             type={registerForm.showPasswordConfirm ? "text" : "password"}
             name="confirmPassword"
             value={confirmPassword}
@@ -176,9 +189,9 @@ const RegisterForm = () => {
             </Alert>
           </div>
         )}
-        <Button className="button-submit" type="submit">
+        <button className="button-submit" type="submit">
           Register
-        </Button>
+        </button>
       </form>
       <p>
         Already have account?&nbsp;

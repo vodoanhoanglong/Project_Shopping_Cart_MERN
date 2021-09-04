@@ -90,6 +90,7 @@
   background-color: #222;
   color: #fff;
 }
+
 .container-login a {
   text-decoration: none;
   transition: all 0.4s;
@@ -98,4 +99,15 @@
 
 .container-login a:hover {
   color: #717fe0;
+}
+
+.container-login .container-btn-api {
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.container-login .button-api-login {
+  background: transparent;
+  border: none;
 }
