@@ -3,7 +3,34 @@ import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import AlertMessage from "../layout/AlertMessage";
+import clsx from "clsx";
+
+import { makeStyles } from "@material-ui/core/styles";
+import Input from "@material-ui/core/Input";
+import InputLabel from "@material-ui/core/InputLabel";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import FormControl from "@material-ui/core/FormControl";
+import TextField from "@material-ui/core/TextField";
+import IconButton from "@material-ui/core/IconButton";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import Alert from "@material-ui/lab/Alert";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+  },
+  margin: {
+    margin: theme.spacing(1),
+  },
+  withoutLabel: {
+    marginTop: theme.spacing(3),
+  },
+  textField: {
+    width: "100%",
+  },
+}));
 
 const RegisterForm = () => {
   // Context
@@ -14,7 +41,11 @@ const RegisterForm = () => {
     username: "",
     password: "",
     confirmPassword: "",
+    showPassword: false,
+    showPasswordConfirm: false,
   });
+
+  const classes = useStyles();
 
   const [alert, setAlert] = useState(null);
 
@@ -30,7 +61,7 @@ const RegisterForm = () => {
     event.preventDefault();
 
     if (password !== confirmPassword) {
-      setAlert({ type: "danger", message: "Passwords do not match" });
+      setAlert({ message: "Passwords do not match" });
       setTimeout(() => setAlert(null), 5000);
       return;
     }
@@ -38,7 +69,7 @@ const RegisterForm = () => {
     try {
       const registerData = await registerUser(registerForm);
       if (!registerData.success) {
-        setAlert({ type: "danger", message: registerData.message });
+        setAlert({ message: registerData.message });
         setTimeout(() => setAlert(null), 5000);
       }
     } catch (error) {
@@ -46,54 +77,114 @@ const RegisterForm = () => {
     }
   };
 
-  return (
-    <>
-      <Form className="my-4" onSubmit={register}>
-        <AlertMessage info={alert} />
+  const handleClickShowPassword = () => {
+    setRegisterForm({
+      ...registerForm,
+      showPassword: !registerForm.showPassword,
+    });
+  };
 
-        <Form.Group>
-          <Form.Control
-            type="text"
-            placeholder="Username"
-            name="username"
-            required
-            value={username}
-            onChange={onChangeRegisterForm}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Control
-            type="password"
-            placeholder="Password"
+  const handleClickShowPasswordConfirm = () => {
+    setRegisterForm({
+      ...registerForm,
+      showPasswordConfirm: !registerForm.showPasswordConfirm,
+    });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  return (
+    <div className="container-login animate__animated animate__fadeIn">
+      <form className="login-form" onSubmit={register}>
+        <h1>Register</h1>
+        <TextField
+          id="filled-basic-username"
+          label="User name"
+          autoComplete="off"
+          fullWidth
+          margin="dense"
+          name="username"
+          value={username}
+          onChange={onChangeRegisterForm}
+        />
+        <FormControl className={clsx(classes.margin, classes.textField)}>
+          <InputLabel htmlFor="standard-adornment-password">
+            Password
+          </InputLabel>
+          <Input
+            id="filled-basic-password"
+            type={registerForm.showPassword ? "text" : "password"}
             name="password"
-            required
             value={password}
             onChange={onChangeRegisterForm}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  style={{ color: "white" }}
+                >
+                  {registerForm.showPassword ? (
+                    <Visibility />
+                  ) : (
+                    <VisibilityOff />
+                  )}
+                </IconButton>
+              </InputAdornment>
+            }
           />
-        </Form.Group>
-        <Form.Group>
-          <Form.Control
-            type="password"
-            placeholder="Confirm Password"
+        </FormControl>
+
+        <FormControl className={clsx(classes.margin, classes.textField)}>
+          <InputLabel htmlFor="standard-adornment-password">
+            Password
+          </InputLabel>
+          <Input
+            id="filled-basic-password"
+            type={registerForm.showPasswordConfirm ? "text" : "password"}
             name="confirmPassword"
-            required
             value={confirmPassword}
             onChange={onChangeRegisterForm}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPasswordConfirm}
+                  onMouseDown={handleMouseDownPassword}
+                  style={{ color: "white" }}
+                >
+                  {registerForm.showPasswordConfirm ? (
+                    <Visibility />
+                  ) : (
+                    <VisibilityOff />
+                  )}
+                </IconButton>
+              </InputAdornment>
+            }
           />
-        </Form.Group>
-        <Button variant="success" type="submit">
+        </FormControl>
+        {alert && (
+          <div className="show-alert">
+            <Alert
+              className="animate__animated animate__shakeX"
+              severity="error"
+            >
+              {alert.message}
+            </Alert>
+          </div>
+        )}
+        <Button className="button-submit" type="submit">
           Register
         </Button>
-      </Form>
+      </form>
       <p>
-        Already have an account?
-        <Link to="/login">
-          <Button variant="info" size="sm" className="ml-2">
-            Login
-          </Button>
-        </Link>
+        Already have account?&nbsp;
+        <Link to="/login">Login now</Link>
       </p>
-    </>
+    </div>
   );
 };
 

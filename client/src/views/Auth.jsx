@@ -5,6 +5,8 @@ import LoginForm from "../components/auth/LoginForm";
 import RegisterForm from "../components/auth/RegisterForm";
 import { AuthContext } from "../contexts/AuthContext";
 
+import "../css/Auth.css";
+
 const Auth = ({ authRoute }) => {
   const {
     authState: { isAuthenticated },
@@ -22,11 +24,11 @@ const Auth = ({ authRoute }) => {
     );
 
   return (
-    <div className="landing">
-      <div className="dark-overlay">
-        <div className="landing-inner">
-          <h1>LearnIt</h1>
-          <h4>Keep track of what you are learning</h4>
+    <div className="animate__animated animate__fadeIn">
+      <div className="landing">
+        <div className="dark-overlay">
+          <h1>Dragon's Store</h1>
+          <h4>Reasonable place to shop</h4>
           {body}
         </div>
       </div>

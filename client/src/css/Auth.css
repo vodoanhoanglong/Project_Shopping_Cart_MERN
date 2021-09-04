@@ -1,0 +1,101 @@
+.landing {
+  position: relative;
+  background: url("../assets/background-login.jpg") no-repeat center
+    center/cover;
+  height: 100vh;
+}
+
+.dark-overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.65);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.dark-overlay h1,
+.dark-overlay h4 {
+  line-height: 2;
+  font-family: Poppins-Medium;
+}
+
+.container-login {
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
+  padding: 70px;
+}
+
+.login-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.login-form .MuiInputLabel-animated {
+  color: white;
+}
+
+.login-form .MuiFormLabel-root.Mui-focused {
+  color: #717fe0;
+}
+
+.login-form .MuiInputBase-inputMarginDense,
+.login-form .MuiInputBase-input:focus {
+  color: white;
+  border-color: #717fe0;
+}
+
+.login-form .MuiInput-underline:before {
+  border-color: white;
+}
+
+.login-form .MuiInput-underline:hover:not(.Mui-disabled):before {
+  border-color: #717fe0;
+}
+
+.login-form .MuiInputBase-root {
+  color: white;
+}
+
+.login-form .button-submit {
+  display: flex;
+  border-radius: 23px;
+  background-color: #717fe0;
+  text-transform: uppercase;
+  min-width: 180px;
+  height: 50px;
+  font-family: Poppins-Medium;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.466667;
+  color: #fff;
+  justify-content: center;
+  transition: all 0.4s;
+  align-items: center;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.login-form .button-submit:hover {
+  border-color: #222;
+  background-color: #222;
+  color: #fff;
+}
+.container-login a {
+  text-decoration: none;
+  transition: all 0.4s;
+  font-weight: bold;
+}
+
+.container-login a:hover {
+  color: #717fe0;
+}
