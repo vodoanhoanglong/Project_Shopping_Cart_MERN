@@ -390,7 +390,8 @@ export default function CartTable() {
     setItemCart(removeItems);
   };
 
-  if (itemCart.length % perPage === 0) handleChangePageDeleted();
+  if (itemCart.length !== 0 && itemCart.length % perPage === 0)
+    handleChangePageDeleted();
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 

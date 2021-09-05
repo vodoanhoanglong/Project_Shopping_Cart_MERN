@@ -1,4 +1,6 @@
 import { createContext, useState } from "react";
+import { apiUrl } from "./constants";
+import axios from "axios";
 
 export const CartContext = createContext();
 
@@ -38,6 +40,16 @@ const CartContextProvider = ({ children }) => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+  const cartUser = async (item) => {
+    try {
+      const response = await axios.post(`${apiUrl}/cart`, item);
+      return response.data;
+    } catch (error) {
+      if (error.response.data) return error.response.data;
+      else return { success: false, message: error.message };
+    }
+  };
+
   const cartContextData = {
     itemCart,
     setItemCart,
@@ -57,6 +69,7 @@ const CartContextProvider = ({ children }) => {
     setIcon,
     disabled,
     setDisabled,
+    cartUser,
   };
 
   return (

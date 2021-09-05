@@ -48,16 +48,18 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGY2N
 ###
 POST http://localhost:5000/cart
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGY2NGVjNTdmMjNiYzIzY2M1ZTkzMDEiLCJpYXQiOjE2MjY4MzU1MjR9.kfSPVHQQ8DiEuZe8I6vcjIGzrBLzoFZQl5NU0p8WicQ
+
 
 {
-    "cartItem": [
+    "cart": [
         {
-            "title": "Quan Ao 2",
+            "title": "Quan Ao 4",
             "price": 200000,
             "quantity": 2
         },
         {
-            "title": "Quan Ao",
+            "title": "Quan Ao 4",
             "price": 500000,
             "quantity": 1
         }

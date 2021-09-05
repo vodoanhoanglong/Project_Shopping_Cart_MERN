@@ -1,11 +1,14 @@
 const Cart = require("../models/Order");
 
 module.exports = async (req, res) => {
+  const { cart, user, totalPrice, discount, userInformation } = req.body;
   try {
     const newCart = new Cart({
-      user: "60f64ec57f23bc23cc5e9301",
-      cart: req.body,
-      totalPrice: 100000,
+      user,
+      userInformation,
+      cart,
+      discount,
+      totalPrice,
     });
 
     await newCart.save();

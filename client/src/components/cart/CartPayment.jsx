@@ -8,6 +8,7 @@ import CartSlider from "./CartSlider";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { CartContext } from "../../contexts/CartContext";
+import { AuthContext } from "../../contexts/AuthContext";
 
 import "react-multi-carousel/lib/styles.css";
 import "../../css/CartPayment.css";
@@ -32,8 +33,11 @@ const useStyles = makeStyles({
 const CartPayment = () => {
   const classes = useStyles();
 
-  const { itemCart, value, date, handleNext, handleBack } =
+  const { itemCart, value, date, handleNext, handleBack, cartUser } =
     useContext(CartContext);
+  const {
+    authState: { user },
+  } = useContext(AuthContext);
 
   const creditCard = value.cardNumber !== "" ? true : false;
 
@@ -47,7 +51,35 @@ const CartPayment = () => {
 
   today = dd + "/" + mm + "/" + yyyy;
 
-  const handleClick = () => {
+  const handleClick = async () => {
+    const cart = itemCart.map((item) => ({
+      id: item._id,
+      title: item.title,
+      price: item.price,
+      color: item.color,
+      size: item.size,
+      quantity: item.totalItem,
+    }));
+
+    const userInformation = {
+      fullName: value.fullName,
+      phone: value.phone,
+      address: value.address,
+      cardNumber: creditCard && value.cardNumber,
+      expiration: creditCard && `${date.month}/${date.year}`,
+    };
+
+    let cartInformation = {
+      user: user._id,
+      userInformation,
+      cart,
+      discount: value.couponCode ? 10 : 0,
+      totalPrice: totalBill.toFixed(2),
+    };
+
+    const cartUserData = await cartUser(cartInformation);
+    if (cartUserData.success) console.log(cartUserData);
+    else return;
     localStorage.removeItem("countCart");
     localStorage.removeItem("cart");
     handleNext();

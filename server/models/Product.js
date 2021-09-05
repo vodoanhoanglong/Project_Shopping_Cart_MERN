@@ -23,7 +23,7 @@ const ProductSchema = new Schema({
   },
   user: {
     type: Schema.Types.ObjectId,
-    ref: "user",
+    ref: "users",
   },
 });
 module.exports = mongoose.model("products", ProductSchema);

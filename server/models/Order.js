@@ -10,6 +10,7 @@ const OrderSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "users",
   },
+  userInformation: Object,
   cart: Object,
   discount: Number,
   totalPrice: Number,

@@ -3,6 +3,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
+const verifyToken = require("./middleware/auth");
+
 const authRouter = require("./routes/auth");
 const productRouter = require("./routes/product");
 const cartRouter = require("./routes/cart");
@@ -33,7 +35,7 @@ app.use(cors());
 
 app.use("/auth", authRouter);
 app.use("/product_action", productRouter); // thieu verifyToken
-app.use("/cart", cartRouter);
+app.use("/cart", verifyToken, cartRouter);
 
 const PORT = 5000;
 
