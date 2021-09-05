@@ -152,7 +152,7 @@ const LoginForm = () => {
         <button className="button-submit" type="submit">
           Login
         </button>
-        <h5>Or SignIn with</h5>
+        <h5>Or login with</h5>
         <div className="container-btn-api">
           <GoogleLogin
             clientId="455854470240-d6stpuonh3g1jh4ob8m6mn4bssg7uc48.apps.googleusercontent.com"

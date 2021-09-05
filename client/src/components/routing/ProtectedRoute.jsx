@@ -14,7 +14,12 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
         isAuthenticated ? (
           <Component {...rest} {...props} />
         ) : (
-          <Redirect to="/login" />
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: { referrer: "/cart" },
+            }}
+          />
         )
       }
     />

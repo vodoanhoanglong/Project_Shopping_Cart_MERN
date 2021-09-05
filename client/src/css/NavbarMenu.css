@@ -142,9 +142,19 @@
   background: #000;
 }
 
+.container-icon {
+  display: flex;
+}
+
+.nav-user {
+  cursor: pointer;
+  position: relative;
+}
+
 .nav-cart {
   cursor: pointer;
   position: relative;
+  margin-left: 20px;
 }
 
 .nav-cart span {
@@ -253,11 +263,11 @@
     animation: openBtm 0.8s forwards;
   }
 
-  .main-header .nav-cart {
+  .main-header .container-icon {
     transition: transform 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
-  .main-header .menu-btn:checked ~ .nav-cart {
+  .main-header .menu-btn:checked ~ .container-icon {
     transform: translateX(-50vw);
   }
 }

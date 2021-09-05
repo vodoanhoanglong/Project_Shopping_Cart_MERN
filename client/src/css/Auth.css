@@ -110,4 +110,6 @@
 .container-login .button-api-login {
   background: transparent;
   border: none;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }

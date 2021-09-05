@@ -8,6 +8,7 @@ import CartHover from "../cart/CartHover";
 
 import "../../css/NavbarMenu.css";
 import Cart from "../../assets/shopping-cart.png";
+import User from "../../assets/user.png";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 
 const NavbarMenu = () => {
@@ -47,6 +48,7 @@ const NavbarMenu = () => {
   }, [toggle]);
 
   const handleClick = () => history.push(currentLink);
+
   const handleClickBack = () => {
     history.goBack();
     setActiveStep(0);
@@ -97,25 +99,33 @@ const NavbarMenu = () => {
                 <Link to="/">About</Link>
               </li>
             </ul>
-            <div
-              className="nav-cart"
-              ref={popoverAnchor}
-              onMouseEnter={() => {
-                document.getElementById("animate").className =
-                  "animate__animated animate__heartBeat animate__infinite";
-                setOpenedPopover(true);
-              }}
-              onMouseLeave={() => {
-                document.getElementById("animate").className = "";
-                setOpenedPopover(false);
-              }}
-              onBlur={() => setOpenedPopover(false)}
-            >
-              <span id="animate">{cart}</span>
-              <Link to="/cart" onClick={handleClick}>
-                <img src={Cart} alt="" width="20" />
-              </Link>
+            <div className="container-icon">
+              <div className="nav-user">
+                <Link to="/user">
+                  <img src={User} alt="" width="20" />
+                </Link>
+              </div>
+              <div
+                className="nav-cart"
+                ref={popoverAnchor}
+                onMouseEnter={() => {
+                  document.getElementById("animate").className =
+                    "animate__animated animate__heartBeat animate__infinite";
+                  setOpenedPopover(true);
+                }}
+                onMouseLeave={() => {
+                  document.getElementById("animate").className = "";
+                  setOpenedPopover(false);
+                }}
+                onBlur={() => setOpenedPopover(false)}
+              >
+                <span id="animate">{cart}</span>
+                <Link to="/cart" onClick={handleClick}>
+                  <img src={Cart} alt="" width="20" />
+                </Link>
+              </div>
             </div>
+
             <label htmlFor="menu-btn" className="menu-icon">
               <span className="menu-icon__line"></span>
             </label>
