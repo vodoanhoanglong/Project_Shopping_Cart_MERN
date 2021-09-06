@@ -52,15 +52,6 @@ const CartPayment = () => {
   today = dd + "/" + mm + "/" + yyyy;
 
   const handleClick = async () => {
-    const cart = itemCart.map((item) => ({
-      id: item._id,
-      title: item.title,
-      price: item.price,
-      color: item.color,
-      size: item.size,
-      quantity: item.totalItem,
-    }));
-
     const userInformation = {
       fullName: value.fullName,
       phone: value.phone,
@@ -69,17 +60,16 @@ const CartPayment = () => {
       expiration: creditCard && `${date.month}/${date.year}`,
     };
 
-    let cartInformation = {
+    const cartInformation = {
       user: user._id,
       userInformation,
-      cart,
+      cart: itemCart,
       discount: value.couponCode ? 10 : 0,
       totalPrice: totalBill.toFixed(2),
     };
 
     const cartUserData = await cartUser(cartInformation);
-    if (cartUserData.success) console.log(cartUserData);
-    else return;
+    if (!cartUserData.success) return;
     localStorage.removeItem("countCart");
     localStorage.removeItem("cart");
     handleNext();

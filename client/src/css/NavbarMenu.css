@@ -173,6 +173,12 @@
   background: #8994e1;
 }
 
+.MuiTooltip-tooltip {
+  background-color: #333 !important;
+  width: 350px;
+  height: 300px;
+}
+
 @media screen and (max-width: 767px) {
   .main-header .menu-icon {
     display: block;

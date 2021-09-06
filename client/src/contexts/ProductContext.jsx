@@ -16,6 +16,7 @@ const ProductContextProvider = ({ children }) => {
   const [quantity, setQuantity] = useState(1);
 
   const popoverAnchor = useRef(null);
+  const popperAnchor = useRef(null);
 
   const get12Products = async () => {
     try {
@@ -52,6 +53,7 @@ const ProductContextProvider = ({ children }) => {
     openedPopover,
     setOpenedPopover,
     popoverAnchor,
+    popperAnchor,
     quantity,
     setQuantity,
   };
