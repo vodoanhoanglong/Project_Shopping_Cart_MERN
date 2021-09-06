@@ -55,36 +55,15 @@ const RegisterForm = () => {
       [event.target.name]: event.target.value,
     });
 
-  const setTypeAlert = (message) => {
-    setAlert({ message });
-    setTimeout(() => setAlert(null), 5000);
-  };
-
   const register = async (event) => {
     event.preventDefault();
 
-    if (username !== "" && username.length < 8) {
-      setTypeAlert("Username must be 8 characters or more");
-      return;
-    }
-
-    if (password !== "" && password.length < 8) {
-      setTypeAlert("Password must be 8 characters or more");
-      return;
-    }
-
-    if (
-      password !== "" &&
-      confirmPassword !== "" &&
-      password !== confirmPassword
-    ) {
-      setTypeAlert("Passwords do not match");
-      return;
-    }
-
     try {
       const registerData = await registerUser(registerForm);
-      if (!registerData.success) setTypeAlert(registerData.message);
+      if (!registerData.success) {
+        setAlert({ message: registerData.message });
+        setTimeout(() => setAlert(null), 5000);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -114,7 +93,7 @@ const RegisterForm = () => {
         <h1>Register</h1>
         <TextField
           id="filled-basic-username"
-          label="User name"
+          label="Email address"
           autoComplete="off"
           fullWidth
           margin="dense"

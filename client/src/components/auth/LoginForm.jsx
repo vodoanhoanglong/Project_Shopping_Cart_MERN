@@ -107,7 +107,7 @@ const LoginForm = () => {
         <h1>Login</h1>
         <TextField
           id="filled-basic-username"
-          label="User name"
+          label="Email address"
           autoComplete="off"
           fullWidth
           margin="dense"

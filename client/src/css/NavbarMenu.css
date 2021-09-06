@@ -175,8 +175,12 @@
 
 .MuiTooltip-tooltip {
   background-color: #333 !important;
-  width: 350px;
-  height: 300px;
+}
+.MuiTooltip-popperArrow {
+  margin-top: 10px;
+}
+.MuiTooltip-arrow {
+  color: #333 !important;
 }
 
 @media screen and (max-width: 767px) {

@@ -5,19 +5,19 @@ import { ProductContext } from "../../contexts/ProductContext";
 import { CartContext } from "../../contexts/CartContext";
 
 import CartHover from "../cart/CartHover";
+import UserHover from "../user/UserHover";
 
 import "../../css/NavbarMenu.css";
 import Cart from "../../assets/shopping-cart.png";
 import User from "../../assets/user.png";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
-import UserHover from "../user/UserHover";
-
 import Tooltip from "@material-ui/core/Tooltip";
+import Zoom from "@material-ui/core/Zoom";
 
 const NavbarMenu = () => {
   const [toggle, setToggle] = useState("");
 
-  const { cart, setCart, setOpenedPopover, popoverAnchor, popperAnchor } =
+  const { cart, setCart, setOpenedPopover, popoverAnchor } =
     useContext(ProductContext);
 
   const { itemCart, setItemCart, setActiveStep } = useContext(CartContext);
@@ -104,7 +104,12 @@ const NavbarMenu = () => {
             </ul>
             <div className="container-icon">
               <div className="nav-user">
-                <Tooltip title={<UserHover />} interactive arrow>
+                <Tooltip
+                  title={<UserHover />}
+                  interactive
+                  arrow
+                  TransitionComponent={Zoom}
+                >
                   <Link to="/user">
                     <img src={User} alt="" width="20" />
                   </Link>

@@ -1,0 +1,42 @@
+.tooltip-user {
+  padding-top: 5px;
+}
+
+.tooltip-user a {
+  color: white;
+  font-weight: bold;
+  font-family: Poppins-Medium;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.4s;
+}
+
+.tooltip-user a:hover {
+  color: #717fe0;
+}
+
+.tooltip-user .user-choice,
+.tooltip-user .logout-choice {
+  margin-left: 5px;
+  font-weight: bold;
+  font-family: Poppins-Medium;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+.tooltip-user .user-choice .profile:hover,
+.tooltip-user .user-choice .order:hover,
+.tooltip-user .user-choice .coupon-code:hover,
+.tooltip-user .logout-choice:hover {
+  color: #717fe0;
+}
+
+.tooltip-user .logout-choice {
+  margin-top: 15px;
+}
+
+.tooltip-user .user-choice {
+  padding-top: 15px;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+}
