@@ -6,6 +6,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
   const {
     authState: { isAuthenticated },
   } = useContext(AuthContext);
+
   return (
     <Route
       {...rest}
@@ -16,7 +17,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
           <Redirect
             to={{
               pathname: "/login",
-              state: { referrer: "/cart" },
+              state: { referrer: rest.path },
             }}
           />
         )

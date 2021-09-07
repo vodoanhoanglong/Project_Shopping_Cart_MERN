@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { ProductContext } from "../../contexts/ProductContext";
 import { CartContext } from "../../contexts/CartContext";
+import { UserContext } from "../../contexts/UserContext";
 
 import CartHover from "../cart/CartHover";
 import UserHover from "../user/UserHover";
@@ -21,6 +22,8 @@ const NavbarMenu = () => {
     useContext(ProductContext);
 
   const { itemCart, setItemCart, setActiveStep } = useContext(CartContext);
+
+  const { setChoice } = useContext(UserContext);
 
   let history = useHistory();
 
@@ -57,24 +60,29 @@ const NavbarMenu = () => {
     setActiveStep(0);
   };
 
+  const handleMouseEnter = () =>
+    setCart(itemCart.reduce((sum, { totalItem }) => sum + totalItem, 0));
+
   return (
     <>
       <header className={"main-header " + toggle}>
         <div className="logo">
           <h1>
-            <Link to="/">Clothes</Link>
+            <Link
+              to="/"
+              onClick={handleClickBack}
+              onMouseEnter={handleMouseEnter}
+            >
+              Clothes
+            </Link>
           </h1>
         </div>
-        {currentLink === "/cart" ? (
+        {currentLink === "/cart" || currentLink === "/user" ? (
           <Link
             to="/shop"
             className="nav-back"
             onClick={handleClickBack}
-            onMouseEnter={() =>
-              setCart(
-                itemCart.reduce((sum, { totalItem }) => sum + totalItem, 0)
-              )
-            }
+            onMouseEnter={handleMouseEnter}
           >
             <span>Back to shop</span> <NavigateNextIcon />
           </Link>
@@ -103,7 +111,7 @@ const NavbarMenu = () => {
               </li>
             </ul>
             <div className="container-icon">
-              <div className="nav-user">
+              <div className="nav-user" onClick={() => setChoice("profile")}>
                 <Tooltip
                   title={<UserHover />}
                   interactive

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { AuthContext } from "../../contexts/AuthContext";
+import { UserContext } from "../../contexts/UserContext";
 
 import "../../css/UserHover.css";
 
@@ -9,6 +10,10 @@ const UserHover = () => {
   const {
     authState: { isAuthenticated, user },
   } = React.useContext(AuthContext);
+
+  const { setChoice } = React.useContext(UserContext);
+
+  const handleClick = (type) => (e) => setChoice(type);
 
   return (
     <div className="tooltip-user">
@@ -20,9 +25,15 @@ const UserHover = () => {
         <>
           <h5> {user.username.split("@")[0]} </h5>
           <div className="user-choice">
-            <p className="profile">My Profile</p>
-            <p className="order">My Order</p>
-            <p className="coupon-code">My Coupon Code</p>
+            <p className="profile" onClick={handleClick("profile")}>
+              My Profile
+            </p>
+            <p className="order" onClick={handleClick("order")}>
+              My Order
+            </p>
+            <p className="coupon-code" onClick={handleClick("coupon")}>
+              My Coupon Code
+            </p>
           </div>
           <div className="logout-choice">
             <p>Log Out</p>

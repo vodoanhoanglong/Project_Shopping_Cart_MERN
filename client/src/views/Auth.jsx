@@ -20,8 +20,10 @@ const Auth = ({ authRoute }) => {
     currentLocation = location.state.referrer;
   } catch (error) {}
 
-  if (isAuthenticated && currentLocation) return <Redirect to="/cart" />;
-
+  if (isAuthenticated && currentLocation === "/user")
+    return <Redirect to="/user" />;
+  if (isAuthenticated && currentLocation === "/cart")
+    return <Redirect to="/cart" />;
   if (isAuthenticated) return <Redirect to="/" />;
   else
     body = (

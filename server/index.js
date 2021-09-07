@@ -6,6 +6,7 @@ const cors = require("cors");
 const verifyToken = require("./middleware/auth");
 
 const authRouter = require("./routes/auth");
+const userRouter = require("./routes/user");
 const productRouter = require("./routes/product");
 const cartRouter = require("./routes/cart");
 
@@ -34,6 +35,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/auth", authRouter);
+app.use("/user", verifyToken, userRouter);
 app.use("/product_action", productRouter); // thieu verifyToken
 app.use("/cart", verifyToken, cartRouter);
 

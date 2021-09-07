@@ -7,13 +7,18 @@ const UserSchema = new Schema({
     required: true,
     unique: true,
   },
-  password: {
-    type: String,
-  },
+  password: String,
+
   createAt: {
     type: Date,
     default: Date.now(),
   },
+  fullName: String,
+  phone: String,
+  address: String,
+  gender: String,
+  dateOfBirth: Date,
+  couponCode: String,
 });
 
 module.exports = mongoose.model("users", UserSchema);

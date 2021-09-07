@@ -1,0 +1,54 @@
+.profile form {
+  margin-top: 50px;
+}
+
+.profile .input-user {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.profile .input-length-icon {
+  text-align: center;
+  position: absolute;
+  right: 1%;
+  bottom: -20%;
+}
+
+.profile .input-length-icon .icon-input-complete {
+  font-size: 20px;
+  color: green;
+}
+
+.profile .input-length-icon p {
+  font-size: 13px;
+}
+.profile .MuiInputBase-input {
+  padding-right: 40px;
+}
+
+.profile .select-user {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.profile .select-user .MuiGrid-justify-content-xs-space-around {
+  justify-content: flex-end;
+}
+
+.profile .btn-user {
+  margin-top: 100px;
+  border: none;
+  height: 45px;
+  width: 150px;
+  background: #8994e1;
+  text-transform: uppercase;
+  border-radius: 25px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  transition: all 0.4s;
+}
+.profile .btn-user:hover {
+  background: #000;
+}

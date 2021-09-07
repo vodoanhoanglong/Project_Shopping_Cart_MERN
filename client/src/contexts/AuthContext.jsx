@@ -18,7 +18,7 @@ const AuthContextProvider = ({ children }) => {
       setAuthToken(localStorage[LOCAL_STORAGE_TOKEN_NAME]);
 
     try {
-      const response = await axios.get(`${apiUrl}/auth`);
+      const response = await axios.get(`${apiUrl}/user`);
       if (response.data.success) {
         dispatch({
           type: "SET_AUTH",

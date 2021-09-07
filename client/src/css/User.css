@@ -1,0 +1,50 @@
+.container-user {
+  padding-top: 200px;
+  width: 67%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.container-user .menu-list-user {
+  padding-top: 100px;
+  position: absolute;
+  left: 0;
+}
+
+.container-user h2,
+.container-user h1 {
+  color: #333;
+  font-weight: bold;
+  font-family: Poppins-Medium;
+}
+
+.container-user .menu-list-user div,
+.container-user .menu-list-user h2 {
+  cursor: pointer;
+  line-height: 2;
+  transition: all 0.4s;
+}
+.container-user .menu-list-user div:hover,
+.container-user .menu-list-user h2:hover {
+  color: #717fe0;
+}
+
+.container-user .menu-list-user div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 120%;
+}
+
+.container-user .menu-list-user .focus-user h2 {
+  color: #717fe0;
+}
+.container-user .menu-list-user .focus-user {
+  color: #717fe0;
+}
+
+.container-user .content-user {
+  width: 40%;
+  text-align: center;
+}
