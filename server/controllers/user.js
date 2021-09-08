@@ -15,7 +15,7 @@ module.exports.getUser = async (req, res) => {
 };
 
 module.exports.saveUser = async (req, res) => {
-  const { fullName, phone, address, gender, dateOfBirth } = req.body;
+  const { _id, fullName, phone, address, gender, dateOfBirth } = req.body;
 
   try {
     let updatedUser = {
@@ -25,7 +25,7 @@ module.exports.saveUser = async (req, res) => {
       gender,
       dateOfBirth,
     };
-    const userUpdateCondition = { _id: req.params.id };
+    const userUpdateCondition = { _id };
 
     updatedUser = await User.findOneAndUpdate(
       userUpdateCondition,

@@ -24,7 +24,7 @@
   font-size: 13px;
 }
 .profile .MuiInputBase-input {
-  padding-right: 40px;
+  padding-right: 70px;
 }
 
 .profile .select-user {
@@ -51,4 +51,15 @@
 }
 .profile .btn-user:hover {
   background: #000;
+}
+
+.profile .information-user {
+  margin-top: 60px;
+  text-align: left;
+  font-family: Poppins-Medium;
+  color: #333;
+}
+
+.profile .information-user h4 {
+  line-height: 2;
 }

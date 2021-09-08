@@ -5,6 +5,6 @@ const router = express.Router();
 const controller = require("../controllers/user");
 
 router.get("/", controller.getUser);
-router.put("/:id", controller.saveUser);
+router.put("/", controller.saveUser);
 
 module.exports = router;

@@ -1,16 +1,25 @@
-import { createContext, useState, useReducer, useEffect } from "react";
-import { authReducer } from "../reducers/authReducer";
-import { apiUrl, LOCAL_STORAGE_TOKEN_NAME } from "./constants";
+import { createContext, useState } from "react";
+import { apiUrl } from "./constants";
 import axios from "axios";
-import setAuthToken from "../utils/setAuthToken";
 
 export const UserContext = createContext();
 
 const UserContextProvider = ({ children }) => {
   const [choice, setChoice] = useState(null);
 
+  const saveInformationUser = async (userForm) => {
+    try {
+      const response = await axios.put(`${apiUrl}/user`, userForm);
+      if (response.data.success) return response.data;
+    } catch (error) {
+      if (error.response.data) return error.response.data;
+      else return { success: false, message: error.message };
+    }
+  };
+
   // Context data
   const userContextData = {
+    saveInformationUser,
     choice,
     setChoice,
   };

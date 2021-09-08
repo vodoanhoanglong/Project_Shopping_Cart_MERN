@@ -90,6 +90,7 @@ const AuthContextProvider = ({ children }) => {
     registerUser,
     logoutUser,
     authState,
+    loadUser,
   };
 
   // Return provider

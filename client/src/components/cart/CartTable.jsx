@@ -403,7 +403,7 @@ export default function CartTable() {
         <div className="empty-cart-btn">
           <Link
             to="/shop"
-            onClick={() =>
+            onMouseEnter={() =>
               setCart(
                 itemCart.reduce((sum, { totalItem }) => sum + totalItem, 0)
               )

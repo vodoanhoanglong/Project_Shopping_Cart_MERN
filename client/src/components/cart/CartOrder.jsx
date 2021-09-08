@@ -66,7 +66,7 @@ const CartOrder = () => {
   const coupon = "HOANGLONGDEPZAIVCL";
 
   const regexFullName = /^[^0-9\b]{2,40}$/;
-  const regexPhone = /^[0][0-9\b]+$/;
+  const regexPhone = /^[0][0-9\b]{9,11}$/;
   const regexAddress = /[A-Za-z0-9'\.\-\s\,]{30,120}$/;
 
   const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];

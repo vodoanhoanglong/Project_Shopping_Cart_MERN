@@ -59,12 +59,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
   text-decoration: none;
   background-color: #fff;
   border-radius: 20px;
   min-width: 139px;
   height: 40px;
+  font-weight: bold;
   font-family: Poppins-Regular;
   font-size: 20px;
   line-height: 1.466667;
