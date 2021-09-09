@@ -38,6 +38,7 @@ const Profile = () => {
   const { saveInformationUser } = React.useContext(UserContext);
 
   const [active, setActive] = React.useState(!user.fullName ? "add" : "edit");
+  const [disabled, setDisabled] = React.useState(true);
 
   const [value, setValue] = React.useState(
     user.fullName
@@ -83,10 +84,6 @@ const Profile = () => {
     !user.dateOfBirth ? null : new Date(user.dateOfBirth)
   );
 
-  React.useEffect(() => {
-    loadUser();
-  }, [active]);
-
   const classes = useStyles();
 
   const saveUser = async (e) => {
@@ -102,11 +99,12 @@ const Profile = () => {
     };
 
     setActive("edit");
-    try {
-      await saveInformationUser(userForm);
-    } catch (error) {
-      console.log(error);
-    }
+    console.log("updated");
+    // try {
+    //   await saveInformationUser(userForm);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   const handleDateChange = (date) => setSelectedDate(date);
@@ -119,6 +117,18 @@ const Profile = () => {
   const regexFullName = /^[^0-9\b]{2,40}$/;
   const regexPhone = /^[0][0-9\b]{9,11}$/;
   const regexAddress = /[A-Za-z0-9'\.\-\s\,]{30,120}$/;
+
+  const checkUpdate = () =>
+    !selectedDate || !selectedDate.getTime()
+      ? setDisabled(true)
+      : value.fullName === user.fullName &&
+        value.phone === user.phone &&
+        value.address === user.address &&
+        gender === user.gender &&
+        new Date(selectedDate).toLocaleDateString("vi-VN") ===
+          new Date(user.dateOfBirth).toLocaleDateString("vi-VN")
+      ? setDisabled(true)
+      : setDisabled(false);
 
   const handleChange = (regex) => (e) => {
     const inputName = e.target.name;
@@ -133,6 +143,11 @@ const Profile = () => {
       setIcon((prevIcon) => ({ ...prevIcon, [inputName]: false }));
     else setIcon((prevIcon) => ({ ...prevIcon, [inputName]: true }));
   };
+
+  React.useEffect(() => {
+    if (active === "add" || active === "update-cancel") loadUser();
+    if (active === "update-cancel") checkUpdate();
+  }, [active, handleChangeSelected, handleDateChange, handleChange]);
 
   return (
     <div className="profile animate__animated animate__fadeIn">
@@ -246,7 +261,11 @@ const Profile = () => {
               Cancel
             </Button>
           )}
-          <Button className="btn-user" type="submit">
+          <Button
+            className="btn-user"
+            type="submit"
+            disabled={active === "update-cancel" && disabled}
+          >
             {active === "update-cancel" ? "Update" : "Save"}
           </Button>
         </form>

@@ -32,6 +32,9 @@
   justify-content: space-between;
   align-items: center;
 }
+.profile .MuiSelect-select.MuiSelect-select {
+  text-align: left;
+}
 .profile .select-user .MuiGrid-justify-content-xs-space-around {
   justify-content: flex-end;
 }
