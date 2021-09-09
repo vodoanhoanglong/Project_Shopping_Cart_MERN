@@ -25,15 +25,23 @@ const UserHover = () => {
         <>
           <h5> {user.username.split("@")[0]} </h5>
           <div className="user-choice">
-            <p className="profile" onClick={handleClick("profile")}>
-              My Profile
-            </p>
-            <p className="order" onClick={handleClick("order")}>
-              My Order
-            </p>
-            <p className="coupon-code" onClick={handleClick("coupon")}>
-              My Coupon Code
-            </p>
+            <Link
+              to="/user"
+              className="profile"
+              onClick={handleClick("profile")}
+            >
+              <p>My Profile</p>
+            </Link>
+            <Link to="/user" className="order" onClick={handleClick("order")}>
+              <p>My Order</p>
+            </Link>
+            <Link
+              to="/user"
+              className="coupon-code"
+              onClick={handleClick("coupon")}
+            >
+              <p>My Coupon Code</p>
+            </Link>
           </div>
           <div className="logout-choice">
             <p>Log Out</p>

@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Cart = require("../models/Order");
 
 module.exports.getUser = async (req, res) => {
   try {
@@ -8,6 +9,20 @@ module.exports.getUser = async (req, res) => {
         .status(400)
         .json({ success: false, message: "User not found" });
     res.json({ success: true, user });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};
+
+module.exports.getOrder = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const usersOrder = await Cart.find({ user: id });
+    res.json({
+      success: true,
+      order: usersOrder[0].cart,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, message: "Internal server error" });

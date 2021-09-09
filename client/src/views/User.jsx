@@ -11,8 +11,8 @@ import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 
 const User = () => {
   const { choice, setChoice } = React.useContext(UserContext);
-
   const handleClick = (type) => (e) => setChoice(type);
+
   return (
     <div className="animate__animated animate__fadeIn">
       <NavbarMenu />

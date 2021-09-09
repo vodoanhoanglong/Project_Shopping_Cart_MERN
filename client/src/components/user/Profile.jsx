@@ -99,12 +99,11 @@ const Profile = () => {
     };
 
     setActive("edit");
-    console.log("updated");
-    // try {
-    //   await saveInformationUser(userForm);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      await saveInformationUser(userForm);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleDateChange = (date) => setSelectedDate(date);
@@ -145,9 +144,9 @@ const Profile = () => {
   };
 
   React.useEffect(() => {
-    if (active === "add" || active === "update-cancel") loadUser();
+    if (active === "edit") loadUser();
     if (active === "update-cancel") checkUpdate();
-  }, [active, handleChangeSelected, handleDateChange, handleChange]);
+  }, [active, value, gender, selectedDate]);
 
   return (
     <div className="profile animate__animated animate__fadeIn">

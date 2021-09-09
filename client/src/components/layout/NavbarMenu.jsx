@@ -111,14 +111,14 @@ const NavbarMenu = () => {
               </li>
             </ul>
             <div className="container-icon">
-              <div className="nav-user" onClick={() => setChoice("profile")}>
+              <div className="nav-user">
                 <Tooltip
                   title={<UserHover />}
                   interactive
                   arrow
                   TransitionComponent={Zoom}
                 >
-                  <Link to="/user">
+                  <Link to="/user" onClick={() => setChoice("profile")}>
                     <img src={User} alt="" width="20" />
                   </Link>
                 </Tooltip>

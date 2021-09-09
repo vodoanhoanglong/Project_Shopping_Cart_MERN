@@ -16,6 +16,7 @@ import Alert from "@material-ui/lab/Alert";
 import CartSlider from "./CartSlider";
 
 import { CartContext } from "../../contexts/CartContext";
+import { AuthContext } from "../../contexts/AuthContext";
 
 import "../../css/CartOrder.css";
 
@@ -41,6 +42,10 @@ const CartOrder = () => {
   });
 
   const {
+    authState: { user },
+  } = useContext(AuthContext);
+
+  const {
     itemCart,
     value,
     setValue,
@@ -55,6 +60,29 @@ const CartOrder = () => {
     handleNext,
     handleBack,
   } = useContext(CartContext);
+
+  React.useEffect(() => {
+    if (user.fullName) {
+      setValue((prevValue) => ({
+        ...prevValue,
+        fullName: user.fullName,
+        phone: user.phone,
+        address: user.address,
+      }));
+      setLength({
+        fullName: user.fullName.length,
+        phone: user.phone.length,
+        address: user.address.length,
+      });
+      setIcon({
+        fullName: true,
+        phone: true,
+        address: true,
+      });
+    }
+  }, []);
+
+  console.log(true);
 
   const resultTotalPrice = itemCart.reduce(
     (sum, { totalPrice }) => sum + totalPrice,

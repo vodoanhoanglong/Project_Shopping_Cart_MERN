@@ -164,9 +164,8 @@ function EnhancedTableHead(props) {
     rowCount,
     onRequestSort,
   } = props;
-  const createSortHandler = (property) => (event) => {
+  const createSortHandler = (property) => (event) =>
     onRequestSort(event, property);
-  };
 
   return (
     <TableHead>
@@ -415,7 +414,6 @@ export default function CartTable() {
       </div>
     </>
   );
-
   return (
     <div>
       {itemCart.length !== 0 ? (
