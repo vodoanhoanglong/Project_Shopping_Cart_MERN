@@ -4,6 +4,7 @@ import Carousel from "react-multi-carousel";
 
 import { CartContext } from "../../contexts/CartContext";
 
+import "react-multi-carousel/lib/styles.css";
 import "../../css/CartSlider.css";
 
 const CartSlider = () => {
@@ -16,7 +17,7 @@ const CartSlider = () => {
         arrows
         autoPlaySpeed={3000}
         centerMode={false}
-        containerClass="container"
+        containerClass="carousel-container"
         dotListClass=""
         draggable
         focusOnSelect={false}
@@ -59,7 +60,10 @@ const CartSlider = () => {
       >
         {itemCart.map((item, index) => (
           <div key={index}>
-            <span className="total-item-cart-slider">x{item.totalItem}</span>
+            <span className="total-item-cart-slider">
+              {item.size}&nbsp;-&nbsp;{item.color}&nbsp;-&nbsp;x
+              {item.totalItem}
+            </span>
             <img src={item.url} alt="" style={{ width: 180, height: 200 }} />
           </div>
         ))}

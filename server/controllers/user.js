@@ -21,7 +21,7 @@ module.exports.getOrder = async (req, res) => {
     const usersOrder = await Cart.find({ user: id });
     res.json({
       success: true,
-      order: usersOrder[0].cart,
+      order: usersOrder,
     });
   } catch (error) {
     console.log(error);

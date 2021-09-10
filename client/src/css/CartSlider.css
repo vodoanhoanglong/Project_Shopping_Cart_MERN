@@ -1,5 +1,7 @@
-.react-multi-carousel-list {
+.container-cart .react-multi-carousel-list {
   width: 50%;
+  margin: 0 auto;
+  margin-top: 50px;
 }
 
 .title-cart {

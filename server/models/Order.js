@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const OrderSchema = new Schema({
   createAt: {
-    type: Date,
-    default: Date.now(),
+    type: String,
+    default: new Date(Date.now()).toLocaleString(),
   },
   user: {
     type: Schema.Types.ObjectId,

@@ -10,7 +10,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { CartContext } from "../../contexts/CartContext";
 import { AuthContext } from "../../contexts/AuthContext";
 
-import "react-multi-carousel/lib/styles.css";
 import "../../css/CartPayment.css";
 
 const useStyles = makeStyles({
