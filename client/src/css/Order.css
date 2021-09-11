@@ -24,12 +24,21 @@
 
 .user-order .MuiPaginationItem-page {
   transition: all 0.4s !important;
+  color: white;
 }
 
 .user-order .MuiPaginationItem-page.Mui-selected {
-  background: #333 !important;
-  color: white;
+  background: white !important;
+  color: black;
 }
 .user-order .MuiPaginationItem-page:hover {
   background: #717fe0 !important;
+}
+
+.empty-order {
+  margin-top: 70px;
+}
+
+.empty-order img {
+  margin-bottom: 30px;
 }

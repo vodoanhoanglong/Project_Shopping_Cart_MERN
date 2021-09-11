@@ -23,6 +23,18 @@
   height: 40px;
 }
 
+.main-header .nav-back-user {
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: Poppins-Medium;
+  transition: all 0.4s;
+}
+
+.main-header .nav-back-user:hover {
+  color: #8994e1;
+}
+
 .main-header .nav-back {
   color: inherit;
   text-transform: uppercase;
@@ -128,6 +140,13 @@
   transform: translateY(7px);
 }
 
+.main-header.user-scrolled.scrolled {
+  height: 55px;
+  background: #333;
+  color: #000;
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
+    rgba(17, 17, 26, 0.1) 0px 0px 8px;
+}
 .main-header.scrolled {
   height: 55px;
   background: rgb(255, 255, 255);

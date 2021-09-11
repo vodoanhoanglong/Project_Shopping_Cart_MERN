@@ -82,8 +82,6 @@ const CartOrder = () => {
     }
   }, []);
 
-  console.log(true);
-
   const resultTotalPrice = itemCart.reduce(
     (sum, { totalPrice }) => sum + totalPrice,
     0

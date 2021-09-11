@@ -14,9 +14,9 @@ const User = () => {
   const handleClick = (type) => (e) => setChoice(type);
 
   return (
-    <div className="animate__animated animate__fadeIn">
+    <div className="landing-user animate__animated animate__fadeIn">
       <NavbarMenu />
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <div className="dark-overlay-user">
         <div className="container-user">
           <div className="menu-list-user">
             <div

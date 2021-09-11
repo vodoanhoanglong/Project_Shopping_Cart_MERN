@@ -24,7 +24,36 @@
   font-size: 13px;
 }
 .profile .MuiInputBase-input {
+  color: white;
   padding-right: 70px;
+}
+
+.profile .MuiInputLabel-marginDense {
+  color: white;
+}
+
+.profile .MuiInput-underline:before {
+  border-color: #fff;
+}
+
+.profile .MuiInput-underline:hover:not(.Mui-disabled):before {
+  border-color: white;
+}
+
+.profile .MuiFormLabel-root {
+  color: white;
+}
+
+.profile .MuiSvgIcon-root {
+  color: white;
+}
+
+.profile .MuiIconButton-root {
+  transition: all 0.4s;
+}
+
+.profile .MuiIconButton-root:hover {
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .profile .select-user {
@@ -52,15 +81,16 @@
   font-size: 20px;
   transition: all 0.4s;
 }
+
 .profile .btn-user:hover {
-  background: #000;
+  background: #333;
 }
 
 .profile .information-user {
   margin-top: 60px;
   text-align: left;
   font-family: Poppins-Medium;
-  color: #333;
+  color: white;
 }
 
 .profile .information-user h4 {

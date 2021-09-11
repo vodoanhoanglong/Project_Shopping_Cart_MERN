@@ -4,12 +4,14 @@ import { UserContext } from "../../contexts/UserContext";
 import { Pagination } from "@material-ui/lab";
 
 import Carousel from "react-multi-carousel";
+
+import emptyOrder from "../../assets/empty-order.png";
 import "react-multi-carousel/lib/styles.css";
 import "../../css/Order.css";
 
 const Order = () => {
   const {
-    orderState: { orderLoading, order },
+    orderState: { order },
     getOrder,
   } = React.useContext(UserContext);
   const {
@@ -29,7 +31,7 @@ const Order = () => {
   return (
     <div className="animate__animated animate__fadeIn">
       <h1>My Order</h1>
-      {orderLoading ? (
+      {order.length ? (
         <div className="user-order">
           {order.slice(start, end).map((item, index) => (
             <div className="user-all-order" key={index}>
@@ -102,13 +104,19 @@ const Order = () => {
             </div>
           ))}
           <Pagination
+            style={{ marginBottom: 50, marginTop: 50 }}
             count={totalPage}
             size="large"
             page={page}
             onChange={handleChangePage}
           />
         </div>
-      ) : null}
+      ) : (
+        <div className="empty-order">
+          <img src={emptyOrder} alt="" style={{ width: 180, height: 180 }} />
+          <h1>You don't have any orders</h1>
+        </div>
+      )}
     </div>
   );
 };

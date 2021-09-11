@@ -7,7 +7,6 @@ export const UserContext = createContext();
 
 const UserContextProvider = ({ children }) => {
   const [orderState, dispatch] = useReducer(userReducer, {
-    orderLoading: false,
     order: [],
   });
 

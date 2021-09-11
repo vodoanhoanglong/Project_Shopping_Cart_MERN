@@ -1,5 +1,23 @@
+.landing-user {
+  position: relative;
+  background: url("../assets/background-user.jpg") no-repeat center center/cover;
+  height: 150vh;
+}
+
+.dark-overlay-user {
+  position: absolute;
+  height: 150vh;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+
 .container-user {
-  padding-top: 200px;
+  margin-top: 200px;
   width: 67%;
   display: flex;
   justify-content: center;
@@ -14,7 +32,6 @@
 
 .container-user h2,
 .container-user h1 {
-  color: #333;
   font-weight: bold;
   font-family: Poppins-Medium;
 }

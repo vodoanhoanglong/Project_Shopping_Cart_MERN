@@ -4,13 +4,11 @@ export const userReducer = (state, action) => {
     case "ORDER_LOADED_SUCCESS":
       return {
         ...state,
-        orderLoading: true,
         order: payload,
       };
     case "ORDER_LOADED_FAIL":
       return {
         ...state,
-        orderLoading: false,
         order: [],
       };
     default:

@@ -65,9 +65,15 @@ const NavbarMenu = () => {
 
   return (
     <>
-      <header className={"main-header " + toggle}>
+      <header
+        className={
+          currentLink !== "/user"
+            ? "main-header " + toggle
+            : "main-header user-scrolled " + toggle
+        }
+      >
         <div className="logo">
-          <h1>
+          <h1 style={{ color: currentLink === "/user" && "white" }}>
             <Link
               to="/"
               onClick={handleClickBack}
@@ -80,7 +86,7 @@ const NavbarMenu = () => {
         {currentLink === "/cart" || currentLink === "/user" ? (
           <Link
             to="/shop"
-            className="nav-back"
+            className={currentLink === "/user" ? "nav-back-user" : "nav-back"}
             onClick={handleClickBack}
             onMouseEnter={handleMouseEnter}
           >
