@@ -17,10 +17,12 @@ const UserSchema = new Schema({
   address: String,
   gender: String,
   dateOfBirth: Date,
-  couponCode: {
-    name: { type: String, unique: true },
-    status: { type: Boolean, default: false },
-  },
+  couponCode: [
+    {
+      name: { type: String, unique: true },
+      status: { type: Boolean, default: false },
+    },
+  ],
 });
 
 module.exports = mongoose.model("users", UserSchema);
