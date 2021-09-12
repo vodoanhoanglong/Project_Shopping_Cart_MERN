@@ -8,7 +8,6 @@ const UserSchema = new Schema({
     unique: true,
   },
   password: String,
-
   createAt: {
     type: Date,
     default: Date.now(),
@@ -18,7 +17,10 @@ const UserSchema = new Schema({
   address: String,
   gender: String,
   dateOfBirth: Date,
-  couponCode: String,
+  couponCode: {
+    name: { type: String, unique: true },
+    status: { type: Boolean, default: false },
+  },
 });
 
 module.exports = mongoose.model("users", UserSchema);

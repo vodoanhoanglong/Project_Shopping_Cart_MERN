@@ -30,7 +30,8 @@ module.exports.getOrder = async (req, res) => {
 };
 
 module.exports.saveUser = async (req, res) => {
-  const { _id, fullName, phone, address, gender, dateOfBirth } = req.body;
+  const { _id, fullName, phone, address, gender, dateOfBirth, couponCode } =
+    req.body;
 
   try {
     let updatedUser = {
@@ -40,11 +41,24 @@ module.exports.saveUser = async (req, res) => {
       gender,
       dateOfBirth,
     };
+
+    const checkCouponCode = await User.find(
+      {},
+      { couponCode: { $elemMatch: { name: couponCode.name } } }
+    );
+    console.log(checkCouponCode);
+    if (checkCouponCode)
+      return res
+        .status(401)
+        .json({ success: false, message: "You already has this coupon code" });
+
+    let updateCoupon = { couponCode };
+
     const userUpdateCondition = { _id };
 
     updatedUser = await User.findOneAndUpdate(
       userUpdateCondition,
-      updatedUser,
+      !couponCode ? updatedUser : updateCoupon,
       {
         new: true,
       }

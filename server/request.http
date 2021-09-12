@@ -1,10 +1,9 @@
 
-POST http://localhost:5000/auth/login
+POST http://localhost:5000/auth/register
 Content-Type: application/json
 
 {
-    "username": "hoanglong",
-    "password": "longloi123"
+    "email": "vodoanhoanglong10a0@gmail.com"
 }
 
 ###
@@ -67,6 +66,16 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGY2N
 }
 
 ###
-GET http://localhost:5000/user/6138d06169d21f15b014a40a
+PUT http://localhost:5000/user
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGY2NGVjNTdmMjNiYzIzY2M1ZTkzMDEiLCJpYXQiOjE2MjY4MzU1MjR9.kfSPVHQQ8DiEuZe8I6vcjIGzrBLzoFZQl5NU0p8WicQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTNkN2NkYTc1ZmZmMjM5MTQ0OWUxNzIiLCJpYXQiOjE2MzE0MjQ1NDl9.RT1lsRtxgk1vlGcZ2f2so1pNElVSdSnamkZ9KXHc8os
+
+{
+    "_id": "6139c409a6a20c06944f5197",
+    "couponCode": 
+        {
+            "name": "HOANGLONG"
+        }
+        
+    
+}
