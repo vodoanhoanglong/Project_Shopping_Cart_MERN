@@ -73,7 +73,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTNkN
 {
     "_id": "6139c409a6a20c06944f5197",
     "couponCode": 
-        {
-            "name": "HOANGLONG5"
-        }
+                    {
+                "name": "HOANGLONG"
+            }
 }

@@ -4,7 +4,7 @@ import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
-import TableFooter from "@material-ui/core/TableFooter";
+import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
@@ -12,6 +12,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Pagination } from "@material-ui/lab";
 
 import { AuthContext } from "../../contexts/AuthContext";
+
+import "../../css/Coupon.css";
 
 const useStyles = makeStyles({
   table: {
@@ -38,19 +40,31 @@ export default function Coupon() {
     setPage(newPage);
   };
 
+  const headTable = ["Code", "Status"];
+
   return (
-    <div className="profile animate__animated animate__fadeIn">
+    <div className="coupon animate__animated animate__fadeIn">
       <h1>My Coupon</h1>
       <TableContainer component={Paper} style={{ marginTop: 70 }}>
         <Table className={classes.table} aria-label="custom pagination table">
+          <TableHead>
+            <TableRow>
+              {headTable.map((label, index) => (
+                <TableCell key={index} align="center">
+                  <h5>{label}</h5>
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
           <TableBody>
             {totalPage > 0 ? (
               user.couponCode.slice(start, end).map((row) => (
                 <TableRow key={row.name}>
-                  <TableCell component="th" scope="row">
-                    {row.name}
-                  </TableCell>
-                  <TableCell style={{ width: 160 }} align="right">
+                  <TableCell align="center">{row.name}</TableCell>
+                  <TableCell
+                    align="center"
+                    style={{ color: row.status ? "gray" : "green" }}
+                  >
                     {row.status ? "Used" : "Not use"}
                   </TableCell>
                 </TableRow>

@@ -1,0 +1,21 @@
+.coupon .MuiPaper-root {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+}
+
+.coupon .MuiTableCell-head,
+.coupon .MuiTableCell-body {
+  color: white;
+  font-weight: bold;
+}
+
+.coupon .MuiPaginationItem-page.Mui-selected {
+  background: white !important;
+  color: black !important;
+}
+
+.coupon .MuiPaginationItem-root {
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
