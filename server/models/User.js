@@ -21,6 +21,7 @@ const UserSchema = new Schema({
     {
       name: { type: String, unique: true },
       status: { type: Boolean, default: false },
+      discount: Number,
     },
   ],
 });

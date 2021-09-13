@@ -32,16 +32,21 @@ const useStyles = makeStyles({
 const CartPayment = () => {
   const classes = useStyles();
 
-  const { itemCart, value, date, handleNext, handleBack, cartUser } =
+  const { itemCart, value, setValue, date, handleNext, handleBack, cartUser } =
     useContext(CartContext);
   const {
     authState: { user },
   } = useContext(AuthContext);
 
+  const coupon = (passingValue) =>
+    user.couponCode.find((code) => passingValue === code.name);
+
   const creditCard = value.cardNumber !== "" ? true : false;
 
   let totalBill = itemCart.reduce((sum, { totalPrice }) => sum + totalPrice, 0);
-  if (value.couponCode !== "") totalBill = totalBill - (totalBill * 10) / 100;
+  if (value.couponCode !== "")
+    totalBill =
+      totalBill - (totalBill * coupon(value.couponCode).discount) / 100;
 
   let today = new Date();
   const dd = String(today.getDate()).padStart(2, "0");
@@ -63,7 +68,7 @@ const CartPayment = () => {
       user: user._id,
       userInformation,
       cart: itemCart,
-      discount: value.couponCode ? 10 : 0,
+      discount: value.couponCode ? coupon(value.couponCode).discount : 0,
       totalPrice: totalBill.toFixed(2),
     };
 
@@ -72,6 +77,7 @@ const CartPayment = () => {
     localStorage.removeItem("countCart");
     localStorage.removeItem("cart");
     handleNext();
+    setValue((prevValue) => ({ ...prevValue, couponCode: "" }));
   };
 
   return (
@@ -112,7 +118,9 @@ const CartPayment = () => {
                   Total: ${totalBill.toFixed(2)}
                 </b>
                 {value.couponCode !== "" ? (
-                  <span className="payment-discount">10% OFF</span>
+                  <span className="payment-discount">
+                    {coupon(value.couponCode).discount}% OFF
+                  </span>
                 ) : null}
               </h2>
             </div>

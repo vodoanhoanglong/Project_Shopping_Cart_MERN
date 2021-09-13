@@ -41,26 +41,34 @@ module.exports.saveUser = async (req, res) => {
       gender,
       dateOfBirth,
     };
+    if (!couponCode.status) {
+      const checkCouponCode = await User.find({
+        couponCode: { $elemMatch: { name: couponCode.name } },
+      });
+      if (checkCouponCode.length !== 0)
+        return res.status(401).json({
+          success: false,
+          message: "You already has this coupon code",
+        });
+    }
 
-    const checkCouponCode = await User.find({
-      couponCode: { $elemMatch: { name: couponCode.name } },
-    });
-    if (checkCouponCode.length !== 0)
-      return res
-        .status(401)
-        .json({ success: false, message: "You already has this coupon code" });
+    const updateCoupon = { couponCode };
 
-    let updateCoupon = { couponCode };
-
-    const userUpdateCondition = { _id };
-
+    const userUpdateCondition = !couponCode.status
+      ? { _id }
+      : { _id, "couponCode.name": couponCode.name };
     updatedUser = await User.findOneAndUpdate(
       userUpdateCondition,
-      !couponCode ? updatedUser : { $addToSet: updateCoupon },
+      !couponCode
+        ? updatedUser
+        : !couponCode.status
+        ? { $addToSet: updateCoupon }
+        : { $set: { "couponCode.$.status": couponCode.status } },
       {
         new: true,
       }
     );
+
     if (!updatedUser)
       return res
         .status(401)

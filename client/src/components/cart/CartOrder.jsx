@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 const CartOrder = () => {
   const [error, setError] = useState({
     couponCode: false,
+    message: "",
     paymentMethod: false,
   });
 
@@ -89,7 +90,8 @@ const CartOrder = () => {
 
   const classes = useStyles();
 
-  const coupon = "HOANGLONGDEPZAIVCL";
+  const coupon = (passingValue) =>
+    user.couponCode.find((code) => passingValue === code.name);
 
   const regexFullName = /^[^0-9\b]{2,40}$/;
   const regexPhone = /^[0][0-9\b]{9,11}$/;
@@ -155,16 +157,29 @@ const CartOrder = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const couponCode = value.couponCode;
-    if (couponCode !== coupon && couponCode !== "")
-      setError((prevError) => ({ ...prevError, couponCode: true }));
+    if (!coupon(couponCode) && couponCode !== "")
+      setError((prevError) => ({
+        ...prevError,
+        message: "Invalid Coupon CODE",
+        couponCode: true,
+      }));
+    else if (couponCode !== "" && coupon(couponCode).status)
+      setError((prevError) => ({
+        ...prevError,
+        message: "You Were Use This Discount CODE",
+        couponCode: true,
+      }));
     else setError((prevError) => ({ ...prevError, couponCode: false }));
     if (value.radio === "offline")
       setError((prevError) => ({ ...prevError, paymentMethod: false }));
     else if (value.radio === "online")
       setError((prevError) => ({ ...prevError, paymentMethod: false }));
     else setError((prevError) => ({ ...prevError, paymentMethod: true }));
+
     if (
-      (value.radio !== "" && couponCode === coupon) ||
+      (value.radio !== "" &&
+        coupon(couponCode) &&
+        !coupon(couponCode).status) ||
       (value.radio !== "" && couponCode === "")
     )
       handleNext();
@@ -241,6 +256,7 @@ const CartOrder = () => {
             <TextField
               id="filled-basic-coupon"
               label="Coupon CODE"
+              autoComplete="off"
               fullWidth
               margin="dense"
               name="couponCode"
@@ -256,7 +272,7 @@ const CartOrder = () => {
                   className="animate__animated animate__shakeX"
                   severity="error"
                 >
-                  Invalid Coupon CODE
+                  {error.message}
                 </Alert>
               </div>
             )}

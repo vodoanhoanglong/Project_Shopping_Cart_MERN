@@ -5,6 +5,7 @@
 
 .coupon .MuiTableCell-head,
 .coupon .MuiTableCell-body {
+  text-transform: uppercase;
   color: white;
   font-weight: bold;
 }

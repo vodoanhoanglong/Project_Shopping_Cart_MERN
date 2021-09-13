@@ -7,6 +7,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import ImportExportIcon from "@material-ui/icons/ImportExport";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Pagination } from "@material-ui/lab";
@@ -20,10 +21,16 @@ const useStyles = makeStyles({
     minWidth: 500,
   },
 });
+const sortStatus = (array, bySort) => {
+  return array.sort((a, b) =>
+    !a.status === bySort ? -1 : a.status === bySort ? 1 : 0
+  );
+};
 
 export default function Coupon() {
   const classes = useStyles();
   const [page, setPage] = React.useState(1);
+  const [sortBy, setSortBy] = React.useState(true);
 
   const {
     authState: { user },
@@ -36,11 +43,13 @@ export default function Coupon() {
     ? Math.ceil(user.couponCode.length / perPage)
     : 0;
 
+  const handleChangeSortBy = () => setSortBy(!sortBy);
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
-  const headTable = ["Code", "Status"];
+  const headTable = ["Code", "Discount"];
 
   return (
     <div className="coupon animate__animated animate__fadeIn">
@@ -54,21 +63,33 @@ export default function Coupon() {
                   <h5>{label}</h5>
                 </TableCell>
               ))}
+              <TableCell
+                align="center"
+                onClick={handleChangeSortBy}
+                style={{ cursor: "pointer" }}
+              >
+                <h5>
+                  Status <ImportExportIcon />
+                </h5>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {totalPage > 0 ? (
-              user.couponCode.slice(start, end).map((row) => (
-                <TableRow key={row.name}>
-                  <TableCell align="center">{row.name}</TableCell>
-                  <TableCell
-                    align="center"
-                    style={{ color: row.status ? "gray" : "green" }}
-                  >
-                    {row.status ? "Used" : "Not use"}
-                  </TableCell>
-                </TableRow>
-              ))
+              sortStatus(user.couponCode, sortBy)
+                .slice(start, end)
+                .map((row) => (
+                  <TableRow key={row.name}>
+                    <TableCell align="center">{row.name}</TableCell>
+                    <TableCell align="center">{row.discount}%</TableCell>
+                    <TableCell
+                      align="center"
+                      style={{ color: row.status ? "gray" : "green" }}
+                    >
+                      {row.status ? "Expired" : "Can be used"}
+                    </TableCell>
+                  </TableRow>
+                ))
             ) : (
               <h1>Hi</h1>
             )}
