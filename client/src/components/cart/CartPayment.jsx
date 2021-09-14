@@ -9,6 +9,7 @@ import CartSlider from "./CartSlider";
 import { makeStyles } from "@material-ui/core/styles";
 import { CartContext } from "../../contexts/CartContext";
 import { AuthContext } from "../../contexts/AuthContext";
+import { UserContext } from "../../contexts/UserContext";
 
 import "../../css/CartPayment.css";
 
@@ -37,6 +38,8 @@ const CartPayment = () => {
   const {
     authState: { user },
   } = useContext(AuthContext);
+
+  const { saveInformationUser } = useContext(UserContext);
 
   const coupon = (passingValue) =>
     user.couponCode.find((code) => passingValue === code.name);
@@ -72,6 +75,15 @@ const CartPayment = () => {
       totalPrice: totalBill.toFixed(2),
     };
 
+    const userDisabledCoupon = {
+      _id: user._id,
+      couponCode: {
+        name: value.couponCode,
+        status: true,
+      },
+    };
+
+    await saveInformationUser(userDisabledCoupon);
     const cartUserData = await cartUser(cartInformation);
     if (!cartUserData.success) return;
     localStorage.removeItem("countCart");
