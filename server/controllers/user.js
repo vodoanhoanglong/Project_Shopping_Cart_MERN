@@ -18,7 +18,7 @@ module.exports.getUser = async (req, res) => {
 module.exports.getOrder = async (req, res) => {
   const { id } = req.params;
   try {
-    const usersOrder = await Cart.find({ user: id });
+    const usersOrder = await Cart.find({ user: id }).sort({ _id: -1 });
     res.json({
       success: true,
       order: usersOrder,

@@ -9,7 +9,7 @@ import CheckIcon from "@material-ui/icons/Check";
 import { makeStyles } from "@material-ui/core/styles";
 
 import "../../css/CartHover.css";
-import CartEmpty from "../../assets/empty-cart.png";
+import CartEmpty from "../../assets/empty-cart-hover.png";
 
 import { Link } from "react-router-dom";
 
@@ -53,37 +53,15 @@ const CartHover = (props) => {
   );
 
   return (
-    <Popover
-      id="mouse-over-popover"
-      className={classes.popover}
-      classes={{
-        paper: classes.paper,
-      }}
-      open={openedPopover}
-      anchorEl={popoverAnchor.current}
-      anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "left",
-      }}
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "left",
-      }}
-      PaperProps={{
-        onMouseEnter: handleShowPopover,
-        onMouseLeave: handleHidePopover,
-      }}
-      marginThreshold={50}
-      disableRestoreFocus
-    >
+    <div className="tooltip-cart">
       {cart !== 0 ? (
         <>
           <div className="popover-cart">
-            {showToastCart && (
+            {/* {showToastCart && (
               <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
                 Added to cart
               </Alert>
-            )}
+            )} */}
             {itemCart.map((item, index) => (
               <div key={index} className="popover-item">
                 <img src={item.url} alt="" />
@@ -111,7 +89,7 @@ const CartHover = (props) => {
       ) : (
         emptyCart
       )}
-    </Popover>
+    </div>
   );
 };
 

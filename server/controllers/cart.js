@@ -1,9 +1,11 @@
 const Cart = require("../models/Order");
 
 module.exports = async (req, res) => {
-  const { cart, user, totalPrice, discount, userInformation } = req.body;
+  const { createAt, cart, user, totalPrice, discount, userInformation } =
+    req.body;
   try {
     const newCart = new Cart({
+      createAt,
       user,
       userInformation,
       cart,

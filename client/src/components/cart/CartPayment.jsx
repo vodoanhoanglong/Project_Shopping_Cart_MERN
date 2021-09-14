@@ -37,6 +37,7 @@ const CartPayment = () => {
     useContext(CartContext);
   const {
     authState: { user },
+    loadUser,
   } = useContext(AuthContext);
 
   const { saveInformationUser } = useContext(UserContext);
@@ -68,6 +69,7 @@ const CartPayment = () => {
     };
 
     const cartInformation = {
+      createAt: new Date(Date.now()).toLocaleString(),
       user: user._id,
       userInformation,
       cart: itemCart,
@@ -90,6 +92,7 @@ const CartPayment = () => {
     localStorage.removeItem("cart");
     handleNext();
     setValue((prevValue) => ({ ...prevValue, couponCode: "" }));
+    await loadUser();
   };
 
   return (

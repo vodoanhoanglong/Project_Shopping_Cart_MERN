@@ -1,21 +1,26 @@
-.popover-cart {
-  width: 350px;
-  height: 300px;
-  background-color: #f7f8fa;
+.tooltip-cart {
+  padding-top: 5px;
   overflow-y: scroll;
 }
+
+/* .popover-cart {
+  width: 350px;
+  height: 300px;
+  background-color: #333333;
+  overflow-y: scroll;
+} */
 
 .popover-cart-empty {
   padding-top: 30px;
   width: 250px;
   height: 250px;
-  background-color: #f7f8fa;
+  background-color: #333333;
   text-align: center;
 }
 
 .popover-cart-empty h4 {
   margin-top: 20px;
-  color: black;
+  color: white;
   font-weight: bold;
   padding-left: 25px;
   text-transform: uppercase;

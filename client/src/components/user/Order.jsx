@@ -37,6 +37,8 @@ const Order = () => {
             <div className="user-all-order" key={index}>
               <div className="header-order">
                 <h4>{item.createAt}</h4>
+                {item.discount !== 0 && <h4>-{item.discount}%</h4>}
+                <h4>${item.totalPrice}</h4>
               </div>
               <Carousel
                 additionalTransfrom={0}
@@ -90,6 +92,8 @@ const Order = () => {
                       style={{ width: "93%" }}
                       className="total-item-cart-slider"
                     >
+                      ${product.price}
+                      <br />
                       {product.size}&nbsp;-&nbsp;{product.color}&nbsp;-&nbsp;x
                       {product.totalItem}
                     </span>

@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { ProductContext } from "../../contexts/ProductContext";
 import { CartContext } from "../../contexts/CartContext";
 import { UserContext } from "../../contexts/UserContext";
+// import { withStyles } from "@material-ui/core/styles";
 
 import CartHover from "../cart/CartHover";
 import UserHover from "../user/UserHover";
@@ -14,6 +15,15 @@ import User from "../../assets/user.png";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import Tooltip from "@material-ui/core/Tooltip";
 import Zoom from "@material-ui/core/Zoom";
+
+// const CustomTooltip = withStyles((theme) => ({
+//   tooltip: {
+//     backgroundColor: theme.palette.common.white,
+//     color: "rgba(0, 0, 0, 0.87)",
+//     width: 1200,
+//     boxShadow: theme.shadows[5],
+//   },
+// }))(Tooltip);
 
 const NavbarMenu = () => {
   const [toggle, setToggle] = useState("");
@@ -145,16 +155,22 @@ const NavbarMenu = () => {
                 onBlur={() => setOpenedPopover(false)}
               >
                 <span id="animate">{cart}</span>
-                <Link to="/cart" onClick={handleClick}>
-                  <img src={Cart} alt="" width="20" />
-                </Link>
+                <Tooltip
+                  title={<CartHover handleClick={handleClick} />}
+                  interactive
+                  arrow
+                  TransitionComponent={Zoom}
+                >
+                  <Link to="/cart" onClick={handleClick}>
+                    <img src={Cart} alt="" width="20" />
+                  </Link>
+                </Tooltip>
               </div>
             </div>
 
             <label htmlFor="menu-btn" className="menu-icon">
               <span className="menu-icon__line"></span>
             </label>
-            <CartHover handleClick={handleClick} />
           </>
         )}
       </header>
