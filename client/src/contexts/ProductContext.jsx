@@ -1,4 +1,4 @@
-import { createContext, useReducer, useState, useRef } from "react";
+import { createContext, useReducer, useState } from "react";
 import { productReducer } from "../reducers/productReducer";
 
 import axios from "axios";
@@ -14,9 +14,6 @@ const ProductContextProvider = ({ children }) => {
   const [cart, setCart] = useState(0);
   const [openedPopover, setOpenedPopover] = useState(false);
   const [quantity, setQuantity] = useState(1);
-
-  const popoverAnchor = useRef(null);
-  const popperAnchor = useRef(null);
 
   const get12Products = async () => {
     try {
@@ -52,8 +49,6 @@ const ProductContextProvider = ({ children }) => {
     setCart,
     openedPopover,
     setOpenedPopover,
-    popoverAnchor,
-    popperAnchor,
     quantity,
     setQuantity,
   };

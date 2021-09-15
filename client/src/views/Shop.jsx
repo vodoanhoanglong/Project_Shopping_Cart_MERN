@@ -4,11 +4,15 @@ import NavbarMenu from "../components/layout/NavbarMenu";
 import ProductModal from "../components/product/ProductModal";
 import Footer from "../components/layout/Footer";
 import { ProductContext } from "../contexts/ProductContext";
+import { CartContext } from "../contexts/CartContext";
 
 import { Row, Col, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Pagination } from "@material-ui/lab";
+import Snackbar from "@material-ui/core/Snackbar";
 import "../css/Shop.css";
+import Alert from "@material-ui/lab/Alert";
+import CheckIcon from "@material-ui/icons/Check";
 
 const Shop = () => {
   const [type, setType] = useState("");
@@ -16,6 +20,7 @@ const Shop = () => {
   const [urlImg, setUrlImg] = useState("");
   const [page, setPage] = useState(1);
 
+  const { showToastCart } = useContext(CartContext);
   const {
     productState: { allProducts },
     getAllProducts,
@@ -147,6 +152,19 @@ const Shop = () => {
           <Footer />
         </div>
       </div>
+      <Snackbar
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        open={showToastCart}
+        message={
+          <div className="toast-cart">
+            <CheckIcon
+              style={{ color: "green", paddingRight: 2 }}
+              fontSize="medium"
+            />
+            Added to cart
+          </div>
+        }
+      />
       <ProductModal _id={urlImg._id} product={urlImg} />
     </div>
   );

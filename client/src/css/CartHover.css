@@ -1,14 +1,11 @@
 .tooltip-cart {
   padding-top: 5px;
-  overflow-y: scroll;
 }
 
-/* .popover-cart {
-  width: 350px;
+.popover-cart {
   height: 300px;
-  background-color: #333333;
   overflow-y: scroll;
-} */
+}
 
 .popover-cart-empty {
   padding-top: 30px;
@@ -39,6 +36,8 @@
 }
 
 .popover-cart .popover-item .item-information .item-information-child {
+  font-size: 12px;
+  font-weight: bold;
   display: flex;
   justify-content: space-around;
 }
@@ -58,6 +57,7 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  text-align: center;
   height: 70px;
 }
 
@@ -67,6 +67,7 @@
   align-items: center;
   color: white;
   text-decoration: none;
+  font-size: 18px;
   font-weight: bold;
   border: none;
   height: 45px;
@@ -84,12 +85,13 @@
   background: #000;
 }
 
-.footer-popover .total-price {
+.footer-popover .total-price p {
   font-size: 12px;
   font-weight: bold;
   text-transform: uppercase;
-  opacity: 0.8;
+  color: white;
 }
 .footer-popover .total-price strong {
-  font-size: 15px;
+  font-size: 18px;
+  opacity: 0.8;
 }

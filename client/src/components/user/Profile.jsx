@@ -20,6 +20,8 @@ import DoneIcon from "@material-ui/icons/Done";
 
 import "../../css/Profile.css";
 
+const couponCode = { name: "LOVEYOUSOMUCH", discount: 10 };
+
 const useStyles = makeStyles((theme) => ({
   formControlSelected: {
     minWidth: 120,
@@ -96,6 +98,7 @@ const Profile = () => {
       address: value.address,
       gender,
       dateOfBirth: selectedDate,
+      couponCode,
     };
 
     setActive("edit");
@@ -153,6 +156,9 @@ const Profile = () => {
       <h1>My Profile</h1>
       {active === "add" || active === "update-cancel" ? (
         <form onSubmit={saveUser}>
+          {active === "add" && (
+            <h1>Enter information to receive 1 coupon code</h1>
+          )}
           <div className="input-user">
             <TextField
               id="full-name"

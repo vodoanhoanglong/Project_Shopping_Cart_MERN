@@ -4,7 +4,6 @@ import { Link, useHistory } from "react-router-dom";
 import { ProductContext } from "../../contexts/ProductContext";
 import { CartContext } from "../../contexts/CartContext";
 import { UserContext } from "../../contexts/UserContext";
-// import { withStyles } from "@material-ui/core/styles";
 
 import CartHover from "../cart/CartHover";
 import UserHover from "../user/UserHover";
@@ -16,19 +15,10 @@ import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import Tooltip from "@material-ui/core/Tooltip";
 import Zoom from "@material-ui/core/Zoom";
 
-// const CustomTooltip = withStyles((theme) => ({
-//   tooltip: {
-//     backgroundColor: theme.palette.common.white,
-//     color: "rgba(0, 0, 0, 0.87)",
-//     width: 1200,
-//     boxShadow: theme.shadows[5],
-//   },
-// }))(Tooltip);
-
 const NavbarMenu = () => {
   const [toggle, setToggle] = useState("");
 
-  const { cart, setCart, setOpenedPopover, popoverAnchor } =
+  const { cart, setCart, setOpenedPopover, openedPopover } =
     useContext(ProductContext);
 
   const { itemCart, setItemCart, setActiveStep } = useContext(CartContext);
@@ -63,7 +53,10 @@ const NavbarMenu = () => {
     return () => (isMounted.current = false);
   }, [toggle]);
 
-  const handleClick = () => history.push(currentLink);
+  const handleClick = () => {
+    setOpenedPopover(false);
+    history.push(currentLink);
+  };
 
   const handleClickBack = () => {
     history.goBack();
@@ -73,17 +66,21 @@ const NavbarMenu = () => {
   const handleMouseEnter = () =>
     setCart(itemCart.reduce((sum, { totalItem }) => sum + totalItem, 0));
 
+  const navbarScroll =
+    currentLink !== "/user" ? "main-header " : "main-header user-scrolled ";
+
+  const navbarColor = currentLink === "/user" && "white";
+
+  const navbarMenu = currentLink === "/user" ? "nav-back-user" : "nav-back";
+
+  const navbarColorItem = (string) =>
+    currentLink !== string ? null : { color: "#717fe0" };
+
   return (
     <>
-      <header
-        className={
-          currentLink !== "/user"
-            ? "main-header " + toggle
-            : "main-header user-scrolled " + toggle
-        }
-      >
+      <header className={navbarScroll + toggle}>
         <div className="logo">
-          <h1 style={{ color: currentLink === "/user" && "white" }}>
+          <h1 style={{ color: navbarColor }}>
             <Link
               to="/"
               onClick={handleClickBack}
@@ -96,7 +93,7 @@ const NavbarMenu = () => {
         {currentLink === "/cart" || currentLink === "/user" ? (
           <Link
             to="/shop"
-            className={currentLink === "/user" ? "nav-back-user" : "nav-back"}
+            className={navbarMenu}
             onClick={handleClickBack}
             onMouseEnter={handleMouseEnter}
           >
@@ -107,23 +104,19 @@ const NavbarMenu = () => {
             <input type="checkbox" className="menu-btn" id="menu-btn" />
             <ul className="nav-links">
               <li>
-                <Link
-                  to="/"
-                  style={currentLink !== "/" ? null : { color: "#717fe0" }}
-                >
+                <Link to="/" style={navbarColorItem("/")}>
                   Home
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/shop"
-                  style={currentLink !== "/shop" ? null : { color: "#717fe0" }}
-                >
+                <Link to="/shop" style={navbarColorItem("/shop")}>
                   Shop
                 </Link>
               </li>
               <li>
-                <Link to="/">About</Link>
+                <Link to="/" style={navbarColorItem("/about")}>
+                  About
+                </Link>
               </li>
             </ul>
             <div className="container-icon">
@@ -142,7 +135,6 @@ const NavbarMenu = () => {
 
               <div
                 className="nav-cart"
-                ref={popoverAnchor}
                 onMouseEnter={() => {
                   document.getElementById("animate").className =
                     "animate__animated animate__heartBeat animate__infinite";
@@ -152,13 +144,13 @@ const NavbarMenu = () => {
                   document.getElementById("animate").className = "";
                   setOpenedPopover(false);
                 }}
-                onBlur={() => setOpenedPopover(false)}
               >
                 <span id="animate">{cart}</span>
                 <Tooltip
                   title={<CartHover handleClick={handleClick} />}
                   interactive
                   arrow
+                  open={openedPopover}
                   TransitionComponent={Zoom}
                 >
                   <Link to="/cart" onClick={handleClick}>

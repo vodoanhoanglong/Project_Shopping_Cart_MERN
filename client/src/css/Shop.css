@@ -135,3 +135,19 @@
 .shop-container .products .MuiPaginationItem-page:hover {
   background: #717fe0 !important;
 }
+
+.toast-cart {
+  color: #333;
+  text-transform: uppercase;
+  font-weight: bold;
+  display: flex;
+  background-color: #b5e6b5;
+  align-items: center;
+}
+.MuiSnackbarContent-message {
+  padding: 0 !important;
+}
+.MuiSnackbarContent-root {
+  min-width: 104px !important;
+  background-color: #b5e6b5 !important;
+}

@@ -3,41 +3,23 @@ import { useContext } from "react";
 import { ProductContext } from "../../contexts/ProductContext";
 import { CartContext } from "../../contexts/CartContext";
 
-import Popover from "@material-ui/core/Popover";
-import Alert from "@material-ui/lab/Alert";
-import CheckIcon from "@material-ui/icons/Check";
-import { makeStyles } from "@material-ui/core/styles";
-
 import "../../css/CartHover.css";
 import CartEmpty from "../../assets/empty-cart-hover.png";
 
 import { Link } from "react-router-dom";
 
-const useStyles = makeStyles(() => ({
-  popover: {
-    pointerEvents: "none",
-  },
-  paper: {
-    pointerEvents: "auto",
-  },
-}));
-
 const CartHover = (props) => {
   const { handleClick } = props;
 
-  const { openedPopover, setOpenedPopover, popoverAnchor } =
-    useContext(ProductContext);
-  const { itemCart, showToastCart } = useContext(CartContext);
+  const { setOpenedPopover } = useContext(ProductContext);
+  const { itemCart } = useContext(CartContext);
   const { cart } = useContext(ProductContext);
-
-  const classes = useStyles();
 
   const resultTotalPrice = itemCart.reduce(
     (sum, { totalPrice }) => sum + totalPrice,
     0
   );
 
-  const handleShowPopover = () => setOpenedPopover(true);
   const handleHidePopover = () => setOpenedPopover(false);
 
   const handleClickPopover = () => {
@@ -53,15 +35,13 @@ const CartHover = (props) => {
   );
 
   return (
-    <div className="tooltip-cart">
+    <div
+      className="tooltip-cart"
+      onMouseEnter={() => (document.getElementById("animate").className = "")}
+    >
       {cart !== 0 ? (
         <>
           <div className="popover-cart">
-            {/* {showToastCart && (
-              <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
-                Added to cart
-              </Alert>
-            )} */}
             {itemCart.map((item, index) => (
               <div key={index} className="popover-item">
                 <img src={item.url} alt="" />
@@ -82,7 +62,8 @@ const CartHover = (props) => {
               View Cart
             </Link>
             <div className="total-price">
-              total price: <strong>${resultTotalPrice.toFixed(2)}</strong>
+              <p>total price:</p>
+              <strong>${resultTotalPrice.toFixed(2)}</strong>
             </div>
           </div>
         </>
