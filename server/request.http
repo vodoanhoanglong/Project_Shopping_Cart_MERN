@@ -3,7 +3,7 @@ POST http://localhost:5000/auth/register
 Content-Type: application/json
 
 {
-    "email": "vodoanhoanglong10a9@gmail.com"
+    "email": "6051071067@st.utc2.edu.vn"
 }
 
 ###
@@ -68,13 +68,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGY2N
 ###
 PUT http://localhost:5000/user
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQyYjgzY2E1MGYyYjQzYTAwNmE2ODgiLCJpYXQiOjE2MzE3NjI1MTZ9.uO0_Is0ibiGP3gHGKdGt07I-FYGZJKk3-aSxgHumvbg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQyYzE3ZjFkZWJmMDNhOTg5NTUxNjYiLCJpYXQiOjE2MzE3NjUxMTF9.6W7_-cYJdUAEoJjJV9BM0cBUVsKSU_3XwGsp9unbdeo
 
 {
-    "_id": "6142b83ca50f2b43a006a688",
+    "_id": "6142c17f1debf03a98955166",
     "couponCode": 
             {
-                "name": "HOANGLONGTEst1",
-                "discount": 30
+                "name": "LOVEYOUHATEYOU",
+                "discount": 20
             }
 }

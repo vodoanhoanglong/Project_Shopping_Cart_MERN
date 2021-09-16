@@ -4,6 +4,9 @@
 
 .popover-cart {
   height: 300px;
+}
+
+.popover-cart.popover-cart-scroll {
   overflow-y: scroll;
 }
 

@@ -33,7 +33,7 @@ const CartHover = (props) => {
       <h4>Cart is empty</h4>
     </div>
   );
-
+  const showScroll = itemCart.length > 2 && "popover-cart-scroll";
   return (
     <div
       className="tooltip-cart"
@@ -41,7 +41,7 @@ const CartHover = (props) => {
     >
       {cart !== 0 ? (
         <>
-          <div className="popover-cart">
+          <div className={"popover-cart " + showScroll}>
             {itemCart.map((item, index) => (
               <div key={index} className="popover-item">
                 <img src={item.url} alt="" />

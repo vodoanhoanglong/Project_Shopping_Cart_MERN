@@ -2,6 +2,7 @@ import React from "react";
 
 import { AuthContext } from "../../contexts/AuthContext";
 import { UserContext } from "../../contexts/UserContext";
+import { CartContext } from "../../contexts/CartContext";
 
 import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from "@date-io/date-fns";
@@ -19,6 +20,7 @@ import TextField from "@material-ui/core/TextField";
 import DoneIcon from "@material-ui/icons/Done";
 
 import "../../css/Profile.css";
+import ShowToast from "../layout/ShowToast";
 
 const couponCode = { name: "LOVEYOUSOMUCH", discount: 10 };
 
@@ -36,6 +38,8 @@ const Profile = () => {
     authState: { user },
     loadUser,
   } = React.useContext(AuthContext);
+
+  const { setShowToastCart } = React.useContext(CartContext);
 
   const { saveInformationUser } = React.useContext(UserContext);
 
@@ -106,7 +110,11 @@ const Profile = () => {
 
     try {
       await saveInformationUser(userForm);
-      if (active === "add") await saveInformationUser(addCouponCode);
+      if (active === "add") {
+        await saveInformationUser(addCouponCode);
+        setShowToastCart(true);
+        setTimeout(() => setShowToastCart(false), 3000);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -161,7 +169,10 @@ const Profile = () => {
       {active === "add" || active === "update-cancel" ? (
         <form onSubmit={saveUser}>
           {active === "add" && (
-            <h1>Enter information to receive 1 coupon code</h1>
+            <h2>
+              Enter your information to receive a 10% discount code for your
+              order
+            </h2>
           )}
           <div className="input-user">
             <TextField
@@ -305,6 +316,7 @@ const Profile = () => {
           </div>
         </div>
       )}
+      <ShowToast title="Received a coupon CODE" />
     </div>
   );
 };

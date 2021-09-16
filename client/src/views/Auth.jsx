@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Redirect, useLocation } from "react-router-dom";
 
 import LoginForm from "../components/auth/LoginForm";
@@ -32,7 +32,6 @@ const Auth = ({ authRoute }) => {
         {authRoute === "register" && <RegisterForm />}
       </>
     );
-
   return (
     <div className="animate__animated animate__fadeIn">
       <div className="landing">

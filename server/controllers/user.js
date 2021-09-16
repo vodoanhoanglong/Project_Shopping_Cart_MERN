@@ -44,6 +44,7 @@ module.exports.saveUser = async (req, res) => {
     if (couponCode) {
       if (!couponCode.status) {
         const checkCouponCode = await User.find({
+          _id,
           couponCode: { $elemMatch: { name: couponCode.name } },
         });
         if (checkCouponCode.length !== 0)
