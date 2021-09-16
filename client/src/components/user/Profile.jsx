@@ -98,15 +98,19 @@ const Profile = () => {
       address: value.address,
       gender,
       dateOfBirth: selectedDate,
+    };
+    const addCouponCode = {
+      _id: user._id,
       couponCode,
     };
 
-    setActive("edit");
     try {
       await saveInformationUser(userForm);
+      if (active === "add") await saveInformationUser(addCouponCode);
     } catch (error) {
       console.log(error);
     }
+    setActive("edit");
   };
 
   const handleDateChange = (date) => setSelectedDate(date);

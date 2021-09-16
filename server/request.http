@@ -3,7 +3,7 @@ POST http://localhost:5000/auth/register
 Content-Type: application/json
 
 {
-    "email": "vodoanhoanglong10a0@gmail.com"
+    "email": "vodoanhoanglong10a9@gmail.com"
 }
 
 ###
@@ -68,14 +68,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGY2N
 ###
 PUT http://localhost:5000/user
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTNkN2NkYTc1ZmZmMjM5MTQ0OWUxNzIiLCJpYXQiOjE2MzE0MjQ1NDl9.RT1lsRtxgk1vlGcZ2f2so1pNElVSdSnamkZ9KXHc8os
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQyYjgzY2E1MGYyYjQzYTAwNmE2ODgiLCJpYXQiOjE2MzE3NjI1MTZ9.uO0_Is0ibiGP3gHGKdGt07I-FYGZJKk3-aSxgHumvbg
 
 {
-    "_id": "6139c409a6a20c06944f5197",
+    "_id": "6142b83ca50f2b43a006a688",
     "couponCode": 
             {
-                "name": "AAAAAAAAAAAA2",
+                "name": "HOANGLONGTEst1",
                 "discount": 30
-               
             }
 }

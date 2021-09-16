@@ -15,6 +15,7 @@ import { Pagination } from "@material-ui/lab";
 import { AuthContext } from "../../contexts/AuthContext";
 
 import "../../css/Coupon.css";
+import CouponEmpty from "../../assets/coupon.png";
 
 const useStyles = makeStyles({
   table: {
@@ -54,29 +55,29 @@ export default function Coupon() {
   return (
     <div className="coupon animate__animated animate__fadeIn">
       <h1>My Coupon</h1>
-      <TableContainer component={Paper} style={{ marginTop: 70 }}>
-        <Table className={classes.table} aria-label="custom pagination table">
-          <TableHead>
-            <TableRow>
-              {headTable.map((label, index) => (
-                <TableCell key={index} align="center">
-                  <h5>{label}</h5>
+      {totalPage > 0 ? (
+        <TableContainer component={Paper} style={{ marginTop: 70 }}>
+          <Table className={classes.table} aria-label="custom pagination table">
+            <TableHead>
+              <TableRow>
+                {headTable.map((label, index) => (
+                  <TableCell key={index} align="center">
+                    <h5>{label}</h5>
+                  </TableCell>
+                ))}
+                <TableCell
+                  align="center"
+                  onClick={handleChangeSortBy}
+                  style={{ cursor: "pointer" }}
+                >
+                  <h5>
+                    Status <ImportExportIcon />
+                  </h5>
                 </TableCell>
-              ))}
-              <TableCell
-                align="center"
-                onClick={handleChangeSortBy}
-                style={{ cursor: "pointer" }}
-              >
-                <h5>
-                  Status <ImportExportIcon />
-                </h5>
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {totalPage > 0 ? (
-              sortStatus(user.couponCode, sortBy)
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {sortStatus(user.couponCode, sortBy)
                 .slice(start, end)
                 .map((row) => (
                   <TableRow key={row.name}>
@@ -89,23 +90,26 @@ export default function Coupon() {
                       {row.status ? "Expired" : "Can be used"}
                     </TableCell>
                   </TableRow>
-                ))
-            ) : (
-              <h1>Hi</h1>
-            )}
-          </TableBody>
-        </Table>
-        <Pagination
-          count={totalPage}
-          size="large"
-          page={page}
-          onChange={handleChangePage}
-          style={{
-            display: "flex",
-            justifyContent: "flex-end",
-          }}
-        />
-      </TableContainer>
+                ))}
+            </TableBody>
+          </Table>
+          <Pagination
+            count={totalPage}
+            size="large"
+            page={page}
+            onChange={handleChangePage}
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+            }}
+          />
+        </TableContainer>
+      ) : (
+        <div className="empty-order">
+          <img src={CouponEmpty} alt="" style={{ width: 180, height: 180 }} />
+          <h1>You don't have a discount code</h1>
+        </div>
+      )}
     </div>
   );
 }
