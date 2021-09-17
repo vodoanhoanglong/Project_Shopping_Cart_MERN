@@ -8,6 +8,8 @@ import { ProductContext } from "../contexts/ProductContext";
 import { Row, Col, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Pagination } from "@material-ui/lab";
+import { CartContext } from "../contexts/CartContext";
+import { UserContext } from "../contexts/UserContext";
 
 import "../css/Shop.css";
 import ShowToast from "../components/layout/ShowToast";
@@ -22,6 +24,9 @@ const Shop = () => {
     productState: { allProducts },
     getAllProducts,
   } = useContext(ProductContext);
+  const { showToastCart } = useContext(CartContext);
+
+  const { toastLogoutUser } = useContext(UserContext);
 
   const isMounted = useRef(false);
 
@@ -149,7 +154,8 @@ const Shop = () => {
           <Footer />
         </div>
       </div>
-      <ShowToast title="Added to cart" />
+      <ShowToast title="Added to cart" showToast={showToastCart} />
+      <ShowToast title="Logout success" showToast={toastLogoutUser} />
       <ProductModal _id={urlImg._id} product={urlImg} />
     </div>
   );

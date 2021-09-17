@@ -39,7 +39,7 @@ const Profile = () => {
     loadUser,
   } = React.useContext(AuthContext);
 
-  const { setShowToastCart } = React.useContext(CartContext);
+  const [showToastCoupon, setShowToastCoupon] = React.useState(false);
 
   const { saveInformationUser } = React.useContext(UserContext);
 
@@ -112,8 +112,8 @@ const Profile = () => {
       await saveInformationUser(userForm);
       if (active === "add") {
         await saveInformationUser(addCouponCode);
-        setShowToastCart(true);
-        setTimeout(() => setShowToastCart(false), 3000);
+        setShowToastCoupon(true);
+        setTimeout(() => setShowToastCoupon(false), 3000);
       }
     } catch (error) {
       console.log(error);
@@ -316,7 +316,7 @@ const Profile = () => {
           </div>
         </div>
       )}
-      <ShowToast title="Received a coupon CODE" />
+      <ShowToast title="Received a coupon CODE" showToast={showToastCoupon} />
     </div>
   );
 };

@@ -40,7 +40,7 @@
 .container-user .menu-list-user h2 {
   cursor: pointer;
   line-height: 2;
-  transition: all 0.4s;
+  transition: all 0.3s;
 }
 .container-user .menu-list-user div:hover,
 .container-user .menu-list-user h2:hover {

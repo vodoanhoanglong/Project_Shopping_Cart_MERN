@@ -3,8 +3,6 @@ import React from "react";
 import Snackbar from "@material-ui/core/Snackbar";
 import CheckIcon from "@material-ui/icons/Check";
 
-import { CartContext } from "../../contexts/CartContext";
-
 import Slide from "@material-ui/core/Slide";
 
 function SlideTransition(props) {
@@ -12,11 +10,10 @@ function SlideTransition(props) {
 }
 
 const ShowToast = (props) => {
-  const { showToastCart } = React.useContext(CartContext);
   return (
     <Snackbar
       anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-      open={showToastCart}
+      open={props.showToast}
       TransitionComponent={SlideTransition}
       message={
         <div className="toast-cart">

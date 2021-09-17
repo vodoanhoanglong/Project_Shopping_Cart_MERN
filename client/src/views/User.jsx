@@ -1,5 +1,6 @@
 import React from "react";
 import { UserContext } from "../contexts/UserContext";
+import { AuthContext } from "../contexts/AuthContext";
 
 import NavbarMenu from "../components/layout/NavbarMenu";
 import Profile from "../components/user/Profile";
@@ -8,9 +9,12 @@ import Coupon from "../components/user/Coupon";
 
 import "../css/User.css";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 const User = () => {
   const { choice, setChoice } = React.useContext(UserContext);
+  const { logoutUser } = React.useContext(AuthContext);
+
   const handleClick = (type) => (e) => setChoice(type);
 
   return (
@@ -39,6 +43,10 @@ const User = () => {
             >
               <h2>My Coupon</h2>
               <ArrowForwardIosIcon />
+            </div>
+            <div onClick={() => logoutUser()}>
+              <h2>Logout</h2>
+              <ExitToAppIcon />
             </div>
           </div>
           <div className="content-user">

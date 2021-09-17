@@ -23,7 +23,7 @@ const NavbarMenu = () => {
 
   const { itemCart, setItemCart, setActiveStep } = useContext(CartContext);
 
-  const { setChoice } = useContext(UserContext);
+  const { setChoice, openedUser, setOpenedUser } = useContext(UserContext);
 
   let history = useHistory();
 
@@ -61,6 +61,7 @@ const NavbarMenu = () => {
   const handleClickBack = () => {
     history.goBack();
     setActiveStep(0);
+    setOpenedUser(false);
   };
 
   const handleMouseEnter = () =>
@@ -120,11 +121,17 @@ const NavbarMenu = () => {
               </li>
             </ul>
             <div className="container-icon">
-              <div className="nav-user">
+              <div
+                className="nav-user"
+                onMouseEnter={() => setOpenedUser(true)}
+                onMouseLeave={() => setOpenedUser(false)}
+                onBlur={() => setOpenedUser(false)}
+              >
                 <Tooltip
                   title={<UserHover />}
                   interactive
                   arrow
+                  open={openedUser}
                   TransitionComponent={Zoom}
                 >
                   <Link to="/user" onClick={() => setChoice("profile")}>

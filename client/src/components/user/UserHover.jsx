@@ -9,17 +9,30 @@ import "../../css/UserHover.css";
 const UserHover = () => {
   const {
     authState: { isAuthenticated, user },
+    logoutUser,
   } = React.useContext(AuthContext);
 
-  const { setChoice } = React.useContext(UserContext);
+  const { setChoice, setOpenedUser, setToastLogoutUser } =
+    React.useContext(UserContext);
 
   const handleClick = (type) => (e) => setChoice(type);
+
+  const handleClickLogout = () => {
+    logoutUser();
+    setToastLogoutUser(true);
+    setTimeout(() => {
+      setToastLogoutUser(false);
+      setOpenedUser(false);
+    }, 3000);
+  };
 
   return (
     <div className="tooltip-user">
       {!isAuthenticated ? (
         <h5>
-          <Link to="/login">Login / Register</Link>
+          <Link to="/login" onClick={() => setOpenedUser(false)}>
+            Login / Register
+          </Link>
         </h5>
       ) : (
         <>
@@ -43,7 +56,7 @@ const UserHover = () => {
               <p>My Coupon Code</p>
             </Link>
           </div>
-          <div className="logout-choice">
+          <div className="logout-choice" onClick={handleClickLogout}>
             <p>Log Out</p>
           </div>
         </>

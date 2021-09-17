@@ -11,6 +11,8 @@ const UserContextProvider = ({ children }) => {
   });
 
   const [choice, setChoice] = useState(null);
+  const [openedUser, setOpenedUser] = useState(false);
+  const [toastLogoutUser, setToastLogoutUser] = useState(false);
 
   const saveInformationUser = async (userForm) => {
     try {
@@ -42,6 +44,10 @@ const UserContextProvider = ({ children }) => {
     getOrder,
     choice,
     setChoice,
+    openedUser,
+    setOpenedUser,
+    setToastLogoutUser,
+    toastLogoutUser,
   };
 
   // Return provider
