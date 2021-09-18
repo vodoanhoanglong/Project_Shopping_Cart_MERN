@@ -11,7 +11,6 @@ const validateEmail = (email) => {
 
 module.exports.register = async (req, res) => {
   const { username, password, confirmPassword, email } = req.body;
-  console.log(email);
   if (email) {
     try {
       const user = await User.findOne({ username: email });

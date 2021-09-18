@@ -5,6 +5,7 @@ import AuthContextProvider from "./contexts/AuthContext";
 import UserContextProvider from "./contexts/UserContext";
 import ProductContextProvider from "./contexts/ProductContext";
 import CartContextProvider from "./contexts/CartContext";
+import FavoritesContextProvider from "./contexts/FavoritesContext";
 import ProtectedRoute from "./components/routing/ProtectedRoute";
 
 import Home from "./views/Home";
@@ -19,24 +20,26 @@ function App() {
       <ProductContextProvider>
         <UserContextProvider>
           <CartContextProvider>
-            <Router>
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/shop" component={Shop} />
-                <Route
-                  exact
-                  path="/login"
-                  render={(props) => <Auth {...props} authRoute="login" />}
-                />
-                <Route
-                  exact
-                  path="/register"
-                  render={(props) => <Auth {...props} authRoute="register" />}
-                />
-                <ProtectedRoute exact path="/user" component={User} />
-                <ProtectedRoute exact path="/cart" component={Cart} />
-              </Switch>
-            </Router>
+            <FavoritesContextProvider>
+              <Router>
+                <Switch>
+                  <Route exact path="/" component={Home} />
+                  <Route exact path="/shop" component={Shop} />
+                  <Route
+                    exact
+                    path="/login"
+                    render={(props) => <Auth {...props} authRoute="login" />}
+                  />
+                  <Route
+                    exact
+                    path="/register"
+                    render={(props) => <Auth {...props} authRoute="register" />}
+                  />
+                  <ProtectedRoute exact path="/user" component={User} />
+                  <ProtectedRoute exact path="/cart" component={Cart} />
+                </Switch>
+              </Router>
+            </FavoritesContextProvider>
           </CartContextProvider>
         </UserContextProvider>
       </ProductContextProvider>

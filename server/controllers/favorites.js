@@ -1,18 +1,41 @@
 const Favorites = require("../models/favorites");
-const Product = require("../models/product");
 
 module.exports.getFavoritesList = async (req, res) => {
   try {
-    const favoritesList = await Favorites.find({ user: req.userId }).sort({
-      _id: -1,
-    });
+    const favoritesList = await Favorites.find({ user: req.userId })
+      .populate("product")
+      .sort({
+        _id: -1,
+      });
     res.json({
       success: true,
-      type: favoritesList,
+      favorites: favoritesList,
     });
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};
+
+module.exports.findFavorites = async (req, res) => {
+  try {
+    const foundFavorites = await Favorites.find({
+      user: req.userId,
+      product: req.params.id,
+    });
+    if (!foundFavorites.length)
+      return res.json({
+        success: false,
+        message: "Favorites product or Authorized not found",
+      });
+    res.json({
+      success: true,
+      message: "Found favorites product successfully",
+      favorites: foundFavorites,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 };
 
@@ -49,12 +72,10 @@ module.exports.deleteFavoritesList = async (req, res) => {
     );
 
     if (!deletedFavorites)
-      return res
-        .status(401)
-        .json({
-          success: false,
-          message: "Favorites product or Authorized not found",
-        });
+      return res.status(401).json({
+        success: false,
+        message: "Favorites product or Authorized not found",
+      });
 
     res.json({
       success: true,

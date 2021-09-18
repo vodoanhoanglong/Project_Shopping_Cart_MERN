@@ -78,3 +78,22 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQyY
                 "discount": 20
             }
 }
+
+###
+POST http://localhost:5000/favorites/6107590bf24d640adc8160ef
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQ0MzIzZDQ2NDg2MjFiMzgwYThkM2UiLCJpYXQiOjE2MzE4OTE0MDV9.jCdcLvSz23SYubCcprRRwp5xUFswHEoGDv-4tfRQ_-Y
+
+###
+GET http://localhost:5000/favorites/find_favorite/61075887f24d640adc8160e9
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQ0MzIzZDQ2NDg2MjFiMzgwYThkM2UiLCJpYXQiOjE2MzE4OTE0MDV9.jCdcLvSz23SYubCcprRRwp5xUFswHEoGDv-4tfRQ_-Y
+
+
+###
+GET http://localhost:5000/favorites
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQ0MzIzZDQ2NDg2MjFiMzgwYThkM2UiLCJpYXQiOjE2MzE4OTE0MDV9.jCdcLvSz23SYubCcprRRwp5xUFswHEoGDv-4tfRQ_-Y
+
+
+
