@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
+
 import { ProductContext } from "../../contexts/ProductContext";
 import { CartContext } from "../../contexts/CartContext";
-import { FavoritesContext } from "../../contexts/FavoritesContext";
 
 import ImageGallery from "react-image-gallery";
 import Alert from "@material-ui/lab/Alert";
@@ -24,19 +24,10 @@ const ProductModal = (props) => {
   const [animate, setAnimate] = useState("animate__fadeInDown");
   const [showAlert1, setShowAlert1] = useState("show-alert");
   const [showAlert2, setShowAlert2] = useState("show-alert");
-  const [colorFavorites, setColorFavorites] = useState(null);
 
   const { itemCart, setItemCart, setShowToastCart } = useContext(CartContext);
   const { setCart, setOpenedPopover, quantity, setQuantity } =
     useContext(ProductContext);
-  const {
-    setNewFavorites,
-    addFavorites,
-    deleteFavorites,
-    favoritesState: { favorites },
-    checkFavoritesProduct,
-    getFavorites,
-  } = useContext(FavoritesContext);
 
   // khi truyền props xuống để làm constructor cho State thì nên dùng useEffect
   useEffect(() => {
@@ -171,7 +162,6 @@ const ProductModal = (props) => {
 
   const handleClose = () => {
     setAnimate("animate__fadeOut");
-    setColorFavorites(null);
     setTimeout(() => {
       modal.style.display = "none";
       if (!size) {
@@ -250,34 +240,6 @@ const ProductModal = (props) => {
       ]);
     }
     handleClose();
-  };
-
-  const changeColorHeart = async () => {
-    try {
-      const result = await checkFavoritesProduct(_id);
-      console.log(result.success);
-      if (result.success) document.getElementById(_id).style.color = "#8994e1";
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  changeColorHeart();
-
-  const handleFavoritesList = async () => {
-    try {
-      const result = await checkFavoritesProduct(_id);
-
-      if (result.success) {
-        await deleteFavorites(_id);
-        setColorFavorites(null);
-      } else {
-        await addFavorites(_id);
-        setColorFavorites({ color: "#717fe0" });
-      }
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   window.onclick = (e) => (e.target === modal ? handleClose() : null);
@@ -398,12 +360,11 @@ const ProductModal = (props) => {
               <button onClick={!size ? handleAddToCart : handleUpdateToCart}>
                 {!size ? "ADD TO CART" : "UPDATE TO CART"}
               </button>
-              <i
-                id={_id}
+              {/* <i
                 className="fas fa-heart"
                 style={colorFavorites}
                 onClick={handleFavoritesList}
-              ></i>
+              ></i> */}
             </div>
           </div>
         </div>

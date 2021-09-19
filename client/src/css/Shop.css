@@ -25,6 +25,21 @@
   opacity: 0.6;
 }
 
+.shop-container .icon-heart {
+  display: flex;
+  justify-content: space-between;
+}
+.shop-container .icon-heart .fas {
+  padding-top: 3px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+
+.shop-container .icon-heart .fas:hover {
+  color: #717fe0;
+}
+
 .shop-container .d-flex button:hover {
   opacity: 1;
   color: #333;
@@ -110,6 +125,7 @@
   padding: 0;
   margin: 15px 0 20px 0;
   padding-left: 5px;
+  padding-right: 5px;
 }
 .shop-container .products .card-body .card-title {
   opacity: 0.9;
@@ -150,4 +166,16 @@
 .MuiSnackbarContent-root {
   min-width: 104px !important;
   background-color: #b5e6b5 !important;
+}
+
+.dialog-login {
+  color: #3f51b5;
+  width: 100%;
+  display: inherit;
+  align-items: inherit;
+  justify-content: inherit;
+  text-decoration: none;
+}
+.dialog-login:hover {
+  color: #3f51b5;
 }

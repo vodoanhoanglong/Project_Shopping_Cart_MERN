@@ -50,6 +50,13 @@ const UserHover = () => {
             </Link>
             <Link
               to="/user"
+              className="favorites"
+              onClick={handleClick("favorites")}
+            >
+              <p>My Favorites</p>
+            </Link>
+            <Link
+              to="/user"
               className="coupon-code"
               onClick={handleClick("coupon")}
             >

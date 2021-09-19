@@ -199,7 +199,7 @@
   margin-top: 50px;
 }
 
-.container-information .container-button .fas {
+/* .container-information .container-button .fas {
   font-size: 40px;
   color: gray;
   transition: all 0.4s;
@@ -207,7 +207,7 @@
 .container-information .container-button .fas:hover {
   cursor: pointer;
   color: #717fe0;
-}
+} */
 
 .shop-container .footer {
   transform: translateY(440%);

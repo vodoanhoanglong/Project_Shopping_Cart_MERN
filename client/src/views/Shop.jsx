@@ -5,14 +5,14 @@ import ProductModal from "../components/product/ProductModal";
 import Footer from "../components/layout/Footer";
 import { ProductContext } from "../contexts/ProductContext";
 
-import { Row, Col, Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Row, Col } from "react-bootstrap";
 import { Pagination } from "@material-ui/lab";
 import { CartContext } from "../contexts/CartContext";
 import { UserContext } from "../contexts/UserContext";
 
 import "../css/Shop.css";
 import ShowToast from "../components/layout/ShowToast";
+import CardProduct from "../components/product/CardProduct";
 
 const Shop = () => {
   const [type, setType] = useState("");
@@ -24,8 +24,8 @@ const Shop = () => {
     productState: { allProducts },
     getAllProducts,
   } = useContext(ProductContext);
-  const { showToastCart } = useContext(CartContext);
 
+  const { showToastCart } = useContext(CartContext);
   const { toastLogoutUser } = useContext(UserContext);
 
   const isMounted = useRef(false);
@@ -50,25 +50,7 @@ const Shop = () => {
     <Row className="row-cols-1 row-cols-md-4 g-4 mx-auto mt-5">
       {result.slice(start, end).map((product) => (
         <Col key={product._id} className={"my-2 " + animate}>
-          <Card
-            style={{
-              width: "18rem",
-              boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
-            }}
-            onClick={() => {
-              document.getElementById("myModal").style.display = "block";
-              setUrlImg(product);
-            }}
-          >
-            <div className="block-pic">
-              <Card.Img variant="top" src={product.url} />
-              <Link to="#">Quick View</Link>
-            </div>
-            <Card.Body>
-              <Card.Title>{product.title}</Card.Title>
-              <Card.Text>${product.price}</Card.Text>
-            </Card.Body>
-          </Card>
+          <CardProduct product={product} setUrlImg={setUrlImg} />
         </Col>
       ))}
     </Row>

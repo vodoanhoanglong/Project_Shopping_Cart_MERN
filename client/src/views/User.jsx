@@ -6,6 +6,7 @@ import NavbarMenu from "../components/layout/NavbarMenu";
 import Profile from "../components/user/Profile";
 import Order from "../components/user/Order";
 import Coupon from "../components/user/Coupon";
+import Favorites from "../components/user/Favorites";
 
 import "../css/User.css";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
@@ -38,6 +39,13 @@ const User = () => {
               <ArrowForwardIosIcon />
             </div>
             <div
+              className={choice === "favorites" ? "focus-user" : null}
+              onClick={handleClick("favorites")}
+            >
+              <h2>My Favorites</h2>
+              <ArrowForwardIosIcon />
+            </div>
+            <div
               className={choice === "coupon" ? "focus-user" : null}
               onClick={handleClick("coupon")}
             >
@@ -54,6 +62,8 @@ const User = () => {
               <Profile />
             ) : choice === "order" ? (
               <Order />
+            ) : choice === "favorites" ? (
+              <Favorites />
             ) : choice === "coupon" ? (
               <Coupon />
             ) : (
