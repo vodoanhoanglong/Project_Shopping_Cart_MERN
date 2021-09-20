@@ -1,3 +1,8 @@
+.coupon {
+  width: 100vh;
+  text-align: left;
+}
+
 .coupon .MuiPaper-root {
   background: rgba(0, 0, 0, 0.3);
   border-radius: 20px;

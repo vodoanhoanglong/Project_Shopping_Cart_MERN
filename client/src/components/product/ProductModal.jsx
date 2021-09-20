@@ -360,11 +360,6 @@ const ProductModal = (props) => {
               <button onClick={!size ? handleAddToCart : handleUpdateToCart}>
                 {!size ? "ADD TO CART" : "UPDATE TO CART"}
               </button>
-              {/* <i
-                className="fas fa-heart"
-                style={colorFavorites}
-                onClick={handleFavoritesList}
-              ></i> */}
             </div>
           </div>
         </div>

@@ -3,12 +3,19 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { FavoritesContext } from "../../contexts/FavoritesContext";
+
+import ShowToast from "../layout/ShowToast";
 import DialogCard from "./DialogCard";
 
 const CardProduct = (props) => {
   const { product, setUrlImg } = props;
 
+  const [animate, setAnimate] = React.useState("");
   const [open, setOpen] = React.useState(false);
+  const [showToast, setShowToast] = React.useState({
+    added: false,
+    deleted: false,
+  });
   const [colorFavorites, setColorFavorites] = React.useState(null);
 
   const {
@@ -27,6 +34,15 @@ const CardProduct = (props) => {
     }
   };
 
+  const changeShowToast = (type) => {
+    if (type === "added") setAnimate("animate__animated animate__heartBeat");
+    else setAnimate("");
+    setShowToast((prevState) => ({ ...prevState, [type]: true }));
+    setTimeout(() => {
+      setShowToast((prevState) => ({ ...prevState, [type]: false }));
+    }, 3000);
+  };
+
   const handleFavoritesList = async () => {
     if (!isAuthenticated) return setOpen(true);
     try {
@@ -34,13 +50,20 @@ const CardProduct = (props) => {
       if (result.success) {
         await deleteFavorites(product._id);
         setColorFavorites(null);
+        changeShowToast("deleted");
       } else {
         await addFavorites(product._id);
         setColorFavorites({ color: "#717fe0" });
+        changeShowToast("added");
       }
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleClick = () => {
+    document.getElementById("myModal").style.display = "block";
+    setUrlImg(product);
   };
 
   React.useEffect(() => {
@@ -58,13 +81,7 @@ const CardProduct = (props) => {
       >
         <div className="block-pic">
           <Card.Img variant="top" src={product.url} />
-          <Link
-            to="#"
-            onClick={() => {
-              document.getElementById("myModal").style.display = "block";
-              setUrlImg(product);
-            }}
-          >
+          <Link to="#" onClick={handleClick}>
             Quick View
           </Link>
         </div>
@@ -73,7 +90,7 @@ const CardProduct = (props) => {
           <div className="icon-heart">
             <Card.Text>${product.price}</Card.Text>
             <i
-              className="fas fa-heart"
+              className={"fas fa-heart " + animate}
               style={colorFavorites}
               onClick={handleFavoritesList}
             ></i>
@@ -81,6 +98,8 @@ const CardProduct = (props) => {
         </Card.Body>
       </Card>
       <DialogCard open={open} setOpen={setOpen} />
+      <ShowToast title="Added favorites" showToast={showToast.added} />
+      <ShowToast title="Deleted favorites" showToast={showToast.deleted} />
     </div>
   );
 };

@@ -194,7 +194,7 @@
 .container-information .container-button {
   width: 15.4rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin-top: 50px;
 }

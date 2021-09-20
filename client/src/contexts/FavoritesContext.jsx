@@ -1,4 +1,4 @@
-import { createContext, useState, useReducer, useEffect } from "react";
+import { createContext, useReducer } from "react";
 import { favoritesReducer } from "../reducers/favoritesReducer";
 import { apiUrl } from "./constants";
 import axios from "axios";
@@ -9,8 +9,6 @@ const FavoritesContextProvider = ({ children }) => {
   const [favoritesState, dispatch] = useReducer(favoritesReducer, {
     favorites: [],
   });
-
-  const [newFavorites, setNewFavorites] = useState(0);
 
   const addFavorites = async (productId) => {
     try {
@@ -61,8 +59,6 @@ const FavoritesContextProvider = ({ children }) => {
     addFavorites,
     getFavorites,
     deleteFavorites,
-    newFavorites,
-    setNewFavorites,
     checkFavoritesProduct,
   };
 
