@@ -55,3 +55,21 @@
 .favorites .block-pic:hover > img {
   transform: scale(1.1);
 }
+
+.favorites .MuiPagination-root {
+  width: 95%;
+  margin-top: 50px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.favorites .MuiPaginationItem-page.Mui-selected {
+  background: white !important;
+  color: black !important;
+}
+
+.favorites .MuiPaginationItem-root {
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

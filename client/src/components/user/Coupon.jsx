@@ -107,7 +107,7 @@ export default function Coupon() {
       ) : (
         <div className="empty-order">
           <img src={CouponEmpty} alt="" style={{ width: 180, height: 180 }} />
-          <h1>You don't have a discount code</h1>
+          <h1>You don't have any discount code</h1>
         </div>
       )}
     </div>
