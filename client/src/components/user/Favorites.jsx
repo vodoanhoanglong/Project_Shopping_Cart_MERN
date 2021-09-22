@@ -99,7 +99,7 @@ const Favorites = () => {
           />
           <ShowToast title="Deleted success" showToast={showToast} />
           <ShowToast title="Added to cart" showToast={showToastCart} />
-          <ProductModal _id={view._id} product={view} />{" "}
+          <ProductModal _id={view._id} product={view} />
         </>
       ) : (
         <div className="empty-order">

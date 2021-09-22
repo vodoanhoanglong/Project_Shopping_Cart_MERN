@@ -1,14 +1,59 @@
 .slider {
-  text-align: center;
+  text-align: left;
+  padding-left: 290px;
+  width: 95%;
+  margin: 50px 0 50px 0;
 }
-
-.slick-slider {
-  padding: 10px 120px 50px 100px;
-  width: 80%;
-  display: inline-block;
-}
-
 .card {
-  padding-right: 20px;
   border: none;
+}
+
+.slider .block-pic {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+.slider .block-pic a {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  background-color: #fff;
+  border-radius: 20px;
+  min-width: 139px;
+  height: 40px;
+  font-weight: bold;
+  font-family: Poppins-Regular;
+  font-size: 15px;
+  color: #333;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 0.4s;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.slider .block-pic img {
+  transition: transform 0.9s ease;
+}
+
+.slider .block-pic:hover > a {
+  bottom: 30px;
+}
+
+.slider .block-pic:hover > img {
+  transform: scale(1.1);
+}
+
+.slider .block-pic a:hover {
+  border-color: #222;
+  background-color: #222;
+  color: #fff;
+}
+
+.slider p {
+  font-weight: bold;
 }
