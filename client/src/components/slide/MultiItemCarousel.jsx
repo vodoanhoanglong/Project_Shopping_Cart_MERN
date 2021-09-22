@@ -84,7 +84,13 @@ const MultiItemCarousel = () => {
         swipeable
       >
         {products.map((item, index) => (
-          <Card style={{ width: "18rem" }} key={item._id}>
+          <Card
+            style={{
+              width: "19rem",
+              boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
+            }}
+            key={item._id}
+          >
             <div className="block-pic">
               <Card.Img variant="top" src={item.url}></Card.Img>
               <Link to="#" onClick={(e) => handleClick(e, item)}>

@@ -49,7 +49,7 @@ const CartHover = (props) => {
                   <h5>{item.title}</h5>
                   <p className="price-information">${item.price}</p>
                   <div className="item-information-child">
-                    <p>{item.totalItem}</p>
+                    <p>x{item.totalItem}</p>
                     <p>{item.size}</p>
                     <p>{item.color}</p>
                   </div>

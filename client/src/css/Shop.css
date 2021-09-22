@@ -67,6 +67,8 @@
   position: relative;
   display: block;
   overflow: hidden;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .shop-container .products .block-pic a {
@@ -76,7 +78,6 @@
   align-items: center;
   text-decoration: none;
   background-color: #fff;
-  border-radius: 20px;
   min-width: 139px;
   height: 40px;
   font-weight: bold;
@@ -113,6 +114,7 @@
   padding-right: 0;
   margin-bottom: 20px;
   border-radius: 10px;
+  border: none;
 }
 
 .shop-container .products .card-img,
