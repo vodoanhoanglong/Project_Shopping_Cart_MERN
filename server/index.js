@@ -11,6 +11,7 @@ const productRouter = require("./routes/product");
 const cartRouter = require("./routes/cart");
 const favoritesRouter = require("./routes/favorites");
 const commentRouter = require("./routes/comment");
+const ratingRouter = require("./routes/rating");
 
 const connectDB = async () => {
   try {
@@ -37,6 +38,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/auth", authRouter);
+app.use("/rating", ratingRouter);
 app.use("/user", verifyToken, userRouter);
 app.use("/product_action", productRouter); // thieu verifyToken
 app.use("/cart", verifyToken, cartRouter);

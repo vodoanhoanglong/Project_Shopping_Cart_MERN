@@ -135,3 +135,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQ0M
 {
     "content": "Haha from Long 12a09"
 }
+
+
+###
+GET  http://localhost:5000/rating/all_rating/61075969f24d640adc8160f5
+Content-Type: application/json

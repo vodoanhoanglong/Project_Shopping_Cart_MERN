@@ -2,9 +2,11 @@ const Comment = require("../models/comment");
 
 module.exports.getComment = async (req, res) => {
   try {
-    const commentList = await Comment.find({ product: req.params.id }).sort({
-      _id: -1,
-    });
+    const commentList = await Comment.find({ product: req.params.id })
+      .populate("user")
+      .sort({
+        _id: -1,
+      });
     res.json({
       success: true,
       comment: commentList,

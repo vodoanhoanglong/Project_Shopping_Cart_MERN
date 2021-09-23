@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
-
+const verifyToken = require("../middleware/auth");
 const controller = require("../controllers/rating");
 
-router.get("/", controller.getRating);
-router.post("/", controller.addRating);
-router.put("/", controller.updateRating);
+router.get("/all_rating/:id", controller.getAllRating);
+router.get("/:id", verifyToken, controller.getRating);
+router.post("/:id", verifyToken, controller.addRating);
+router.put("/:id", verifyToken, controller.updateRating);
 
 module.exports = router;
