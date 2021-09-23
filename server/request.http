@@ -97,3 +97,41 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQ0M
 
 
 
+###
+PUT http://localhost:5000/comment/61075969f24d640adc8160f5
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQ0MzIzZDQ2NDg2MjFiMzgwYThkM2UiLCJpYXQiOjE2MzIzNzAwMDB9._RmUA8RpsKBvlR32nknCR8QK543LQuD1XYS1aHecUd0
+
+{
+    "_id": "614bfa8186fcdd2364562d9c",
+   
+    "feedback": {
+        
+        "content": "form long 12a7"
+    }
+}
+
+###
+GET http://localhost:5000/comment/61075969f24d640adc8160f5
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQ0MmVmZTQ2NDg2MjFiMzgwYThkMjkiLCJpYXQiOjE2MzIzNjQ1Mjh9.AkJbRMLgAiG640aoDnO5jA2L1G0Tme5iUQYJ_mPrt6c
+
+
+###
+DELETE  http://localhost:5000/comment/61075969f24d640adc8160f5
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQ0MzIzZDQ2NDg2MjFiMzgwYThkM2UiLCJpYXQiOjE2MzIzNzA0NTJ9.ENqx3SZln2VYjiUBTj-K5V6Kxe9uxNiKos1O3brfjts
+
+{
+    "_id": "614bfa8186fcdd2364562d9c",
+    "_idFeedback": "614bfebeafb46d15109689ee"
+}
+
+###
+POST  http://localhost:5000/comment/61075969f24d640adc8160f5
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQ0MmVmZTQ2NDg2MjFiMzgwYThkMjkiLCJpYXQiOjE2MzIzNjQ1Mjh9.AkJbRMLgAiG640aoDnO5jA2L1G0Tme5iUQYJ_mPrt6c
+
+{
+    "content": "Haha from Long 12a09"
+}
