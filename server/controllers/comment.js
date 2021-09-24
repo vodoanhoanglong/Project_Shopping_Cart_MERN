@@ -40,38 +40,22 @@ module.exports.addComment = async (req, res) => {
 };
 
 module.exports.updateComment = async (req, res) => {
-  const { _id, _idFeedback, content, feedback } = req.body;
+  const { _id, content } = req.body;
 
   {
     try {
       let updateComment = {
         content,
       };
-      const commentUpdateCondition =
-        feedback && !_idFeedback
-          ? {
-              _id,
-              product: req.params.id,
-            }
-          : !_idFeedback
-          ? {
-              _id,
-              product: req.params.id,
-              user: req.userId,
-            }
-          : {
-              _id,
-              "feedback._id": _idFeedback,
-              "feedback.user": req.userId,
-              product: req.params.id,
-            };
+      const commentUpdateCondition = {
+        _id,
+        product: req.params.id,
+        user: req.userId,
+      };
+
       updateComment = await Comment.findOneAndUpdate(
         commentUpdateCondition,
-        feedback && !_idFeedback
-          ? { $addToSet: { feedback } }
-          : !_idFeedback
-          ? updateComment
-          : { $set: { "feedback.$.content": feedback.content } },
+        updateComment,
         { new: true }
       );
 
@@ -94,20 +78,13 @@ module.exports.updateComment = async (req, res) => {
 };
 
 module.exports.deleteComment = async (req, res) => {
-  console.log(req.userId);
-  const { _id, _idFeedback } = req.body;
+  const { _id } = req.body;
   try {
-    const commentDeleteCondition = !_idFeedback
-      ? {
-          _id,
-          product: req.params.id,
-          user: req.userId,
-        }
-      : {
-          "feedback._id": _idFeedback,
-          product: req.params.id,
-          "feedback.user": req.userId,
-        };
+    const commentDeleteCondition = {
+      _id,
+      product: req.params.id,
+      user: req.userId,
+    };
 
     const deletedComment = await Comment.findOneAndDelete(
       commentDeleteCondition

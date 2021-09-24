@@ -3,6 +3,7 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { FavoritesContext } from "../../contexts/FavoritesContext";
+import { ProductContext } from "../../contexts/ProductContext";
 
 import ShowToast from "../layout/ShowToast";
 import DialogCard from "./DialogCard";
@@ -23,6 +24,7 @@ const CardProduct = (props) => {
   } = React.useContext(AuthContext);
   const { addFavorites, deleteFavorites, checkFavoritesProduct } =
     React.useContext(FavoritesContext);
+  const { setOpenDialog } = React.useContext(ProductContext);
 
   const changeColorHeart = async () => {
     try {
@@ -62,7 +64,8 @@ const CardProduct = (props) => {
   };
 
   const handleClick = () => {
-    document.getElementById("myModal").style.display = "block";
+    // document.getElementById("myModal").style.display = "block";
+    setOpenDialog(true);
     setUrlImg(product);
   };
 

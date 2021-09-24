@@ -324,7 +324,7 @@ export default function CartTable() {
   const [information, setInformation] = React.useState("");
 
   const { itemCart, setItemCart, handleNext } = React.useContext(CartContext);
-  const { setCart } = React.useContext(ProductContext);
+  const { setCart, setOpenDialog } = React.useContext(ProductContext);
 
   const perPage = 5;
   const start = (page - 1) * perPage;
@@ -490,9 +490,10 @@ export default function CartTable() {
                                 <div
                                   className="size-color-cart"
                                   onClick={() => {
-                                    document.getElementById(
-                                      "myModal"
-                                    ).style.display = "block";
+                                    // document.getElementById(
+                                    //   "myModal"
+                                    // ).style.display = "block";
+                                    setOpenDialog(true);
                                     setInformation(row);
                                   }}
                                 >

@@ -6,6 +6,7 @@ import ProductModal from "../product/ProductModal";
 import { CartContext } from "../../contexts/CartContext";
 import { Card, Row, Col } from "react-bootstrap";
 import { FavoritesContext } from "../../contexts/FavoritesContext";
+import { ProductContext } from "../../contexts/ProductContext";
 import { Pagination } from "@material-ui/lab";
 
 import FavoritesEmpty from "../../assets/empty-favorites.png";
@@ -23,14 +24,15 @@ const Favorites = () => {
     getFavorites,
     deleteFavorites,
   } = React.useContext(FavoritesContext);
-
+  const { setOpenDialog } = React.useContext(ProductContext);
   React.useEffect(() => getFavorites(), [showToast]);
 
   const handleHover = () => setAnimate("animate__animated animate__zoomIn");
 
   const handleClick = (event, product) => {
     setView(product);
-    document.getElementById("myModal").style.display = "block";
+    // document.getElementById("myModal").style.display = "block";
+    setOpenDialog(true);
   };
 
   const handleDelete = async (event, productId) => {

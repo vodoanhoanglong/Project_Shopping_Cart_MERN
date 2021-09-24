@@ -14,6 +14,7 @@ const ProductContextProvider = ({ children }) => {
   const [cart, setCart] = useState(0);
   const [openedPopover, setOpenedPopover] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [openDialog, setOpenDialog] = useState(false);
 
   const get12Products = async () => {
     try {
@@ -51,6 +52,8 @@ const ProductContextProvider = ({ children }) => {
     setOpenedPopover,
     quantity,
     setQuantity,
+    openDialog,
+    setOpenDialog,
   };
 
   return (

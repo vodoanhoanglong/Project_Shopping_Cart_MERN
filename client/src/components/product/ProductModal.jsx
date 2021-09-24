@@ -1,14 +1,31 @@
-import { useState, useContext, useEffect } from "react";
-
+import React, { useState, useContext, useEffect } from "react";
 import { ProductContext } from "../../contexts/ProductContext";
 import { CartContext } from "../../contexts/CartContext";
 
+import Rating from "./Rating";
+import DialogRating from "./DialogRating";
+
 import ImageGallery from "react-image-gallery";
 import Alert from "@material-ui/lab/Alert";
-
+import Slide from "@material-ui/core/Slide";
 import "../../css/ProductModal.css";
+import { Dialog } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="down" ref={ref} {...props} />;
+});
+
+const useStyles = makeStyles({
+  paperWidthSm: {
+    maxWidth: "unset",
+    width: "75%",
+  },
+});
 
 const ProductModal = (props) => {
+  const classes = useStyles();
+
   const {
     _id,
     size,
@@ -16,18 +33,24 @@ const ProductModal = (props) => {
     product: { title, description, price, url },
   } = props;
 
+  const [rating, setRating] = useState(false);
   const [defaultSelect, setDefaultSelect] = useState(!size ? "DEFAULT" : size);
   const [defaultSelect2, setDefaultSelect2] = useState(
     !color ? "DEFAULT" : color
   );
 
-  const [animate, setAnimate] = useState("animate__fadeInDown");
   const [showAlert1, setShowAlert1] = useState("show-alert");
   const [showAlert2, setShowAlert2] = useState("show-alert");
 
   const { itemCart, setItemCart, setShowToastCart } = useContext(CartContext);
-  const { setCart, setOpenedPopover, quantity, setQuantity } =
-    useContext(ProductContext);
+  const {
+    setCart,
+    setOpenedPopover,
+    quantity,
+    setQuantity,
+    openDialog,
+    setOpenDialog,
+  } = useContext(ProductContext);
 
   // khi truyền props xuống để làm constructor cho State thì nên dùng useEffect
   useEffect(() => {
@@ -37,7 +60,7 @@ const ProductModal = (props) => {
     }
   }, [size, color]);
 
-  const modal = document.getElementById("myModal");
+  // const modal = document.getElementById("myModal");
   const regex = /^[0-9\b]+$/;
 
   const handleChange = (e) => {
@@ -161,9 +184,10 @@ const ProductModal = (props) => {
   };
 
   const handleClose = () => {
-    setAnimate("animate__fadeOut");
+    // setAnimate("animate__fadeOut");
+    setOpenDialog(false);
     setTimeout(() => {
-      modal.style.display = "none";
+      // modal.style.display = "none";
       if (!size) {
         setDefaultSelect("DEFAULT");
         setDefaultSelect2("DEFAULT");
@@ -172,7 +196,7 @@ const ProductModal = (props) => {
         setDefaultSelect2(color);
       }
       setQuantity(1);
-      setAnimate("animate__fadeInDown");
+      // setAnimate("animate__fadeInDown");
       setShowAlert1("show-alert");
       setShowAlert2("show-alert");
     }, 400);
@@ -242,10 +266,19 @@ const ProductModal = (props) => {
     handleClose();
   };
 
-  window.onclick = (e) => (e.target === modal ? handleClose() : null);
+  const handleClickRating = () => setRating(true);
+
+  // window.onclick = (e) => (e.target === modal ? handleClose() : null);
 
   return (
-    <div id="myModal" className={"modal animate__animated " + animate}>
+    <Dialog
+      onClose={handleClose}
+      aria-labelledby="customized-dialog-title"
+      open={openDialog}
+      TransitionComponent={Transition}
+      transitionDuration={400}
+      classes={{ paperWidthSm: classes.paperWidthSm }}
+    >
       <div className="modal-content">
         <span className="close" onClick={handleClose}>
           &times;
@@ -263,6 +296,11 @@ const ProductModal = (props) => {
           </div>
           <div className="container-information">
             <h2 className="information-title">{title}</h2>
+            <div className="rating">
+              <Rating rating={rating} />
+              <button onClick={handleClickRating}>50 ratings</button>
+            </div>
+
             <strong>${price}</strong>
             <p> {description} </p>
             <div className="information-size">
@@ -364,7 +402,8 @@ const ProductModal = (props) => {
           </div>
         </div>
       </div>
-    </div>
+      <DialogRating open={rating} setOpen={setRating} />
+    </Dialog>
   );
 };
 

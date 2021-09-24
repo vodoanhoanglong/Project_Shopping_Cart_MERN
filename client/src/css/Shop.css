@@ -85,6 +85,7 @@
   font-size: 20px;
   line-height: 1.466667;
   color: #333;
+  border-radius: 30px;
   bottom: -50px;
   left: 50%;
   transform: translateX(-50%);
@@ -98,6 +99,10 @@
 
 .shop-container .products .block-pic:hover > a {
   bottom: 30px;
+}
+
+.shop-container .products .block-pic a:focus {
+  display: none;
 }
 
 .shop-container .products .block-pic:hover > img {

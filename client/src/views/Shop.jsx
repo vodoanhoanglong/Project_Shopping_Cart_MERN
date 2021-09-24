@@ -56,9 +56,7 @@ const Shop = () => {
     </Row>
   );
 
-  const handle = () => {
-    setAnimate("animate__animated animate__zoomIn");
-  };
+  const handle = () => setAnimate("animate__animated animate__zoomIn");
 
   const handleChangePage = (event, value) => setPage(value);
 
@@ -130,6 +128,7 @@ const Shop = () => {
             size="large"
             page={page}
             onChange={handleChangePage}
+            onClick={handle}
           />
         </div>
         <div className="footer">
