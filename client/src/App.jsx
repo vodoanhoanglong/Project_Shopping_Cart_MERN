@@ -6,6 +6,7 @@ import UserContextProvider from "./contexts/UserContext";
 import ProductContextProvider from "./contexts/ProductContext";
 import CartContextProvider from "./contexts/CartContext";
 import FavoritesContextProvider from "./contexts/FavoritesContext";
+import RatingContextProvider from "./contexts/RatingContext";
 import ProtectedRoute from "./components/routing/ProtectedRoute";
 
 import Home from "./views/Home";
@@ -21,24 +22,28 @@ function App() {
         <UserContextProvider>
           <CartContextProvider>
             <FavoritesContextProvider>
-              <Router>
-                <Switch>
-                  <Route exact path="/" component={Home} />
-                  <Route exact path="/shop" component={Shop} />
-                  <Route
-                    exact
-                    path="/login"
-                    render={(props) => <Auth {...props} authRoute="login" />}
-                  />
-                  <Route
-                    exact
-                    path="/register"
-                    render={(props) => <Auth {...props} authRoute="register" />}
-                  />
-                  <ProtectedRoute exact path="/user" component={User} />
-                  <ProtectedRoute exact path="/cart" component={Cart} />
-                </Switch>
-              </Router>
+              <RatingContextProvider>
+                <Router>
+                  <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/shop" component={Shop} />
+                    <Route
+                      exact
+                      path="/login"
+                      render={(props) => <Auth {...props} authRoute="login" />}
+                    />
+                    <Route
+                      exact
+                      path="/register"
+                      render={(props) => (
+                        <Auth {...props} authRoute="register" />
+                      )}
+                    />
+                    <ProtectedRoute exact path="/user" component={User} />
+                    <ProtectedRoute exact path="/cart" component={Cart} />
+                  </Switch>
+                </Router>
+              </RatingContextProvider>
             </FavoritesContextProvider>
           </CartContextProvider>
         </UserContextProvider>

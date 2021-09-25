@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import { ProductContext } from "../../contexts/ProductContext";
 import { CartContext } from "../../contexts/CartContext";
-
-import Rating from "./Rating";
+import { RatingContext } from "../../contexts/RatingContext";
+import HoverRating from "./HoverRating";
 import DialogRating from "./DialogRating";
 
 import ImageGallery from "react-image-gallery";
@@ -51,6 +51,17 @@ const ProductModal = (props) => {
     openDialog,
     setOpenDialog,
   } = useContext(ProductContext);
+
+  const {
+    ratingState: { allRatings },
+    getAllRating,
+  } = React.useContext(RatingContext);
+
+  React.useEffect(() => getAllRating(_id), []);
+
+  const valueRating =
+    allRatings.reduce((sum, { rating }) => sum + rating, 0) /
+      allRatings.length || 0;
 
   // khi truyền props xuống để làm constructor cho State thì nên dùng useEffect
   useEffect(() => {
@@ -297,8 +308,10 @@ const ProductModal = (props) => {
           <div className="container-information">
             <h2 className="information-title">{title}</h2>
             <div className="rating">
-              <Rating rating={rating} />
-              <button onClick={handleClickRating}>50 ratings</button>
+              <HoverRating _id={_id} />
+              <button onClick={handleClickRating}>
+                {allRatings.length} ratings
+              </button>
             </div>
 
             <strong>${price}</strong>
@@ -402,7 +415,7 @@ const ProductModal = (props) => {
           </div>
         </div>
       </div>
-      <DialogRating open={rating} setOpen={setRating} />
+      <DialogRating open={rating} setOpen={setRating} title={title} _id={_id} />
     </Dialog>
   );
 };

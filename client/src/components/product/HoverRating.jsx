@@ -3,6 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Rating from "@material-ui/lab/Rating";
 import Box from "@material-ui/core/Box";
 
+import { RatingContext } from "../../contexts/RatingContext";
+
 const labels = {
   1: "Useless",
   2: "Poor",
@@ -20,33 +22,28 @@ const useStyles = makeStyles({
 });
 
 export default function HoverRating(props) {
-  const { rating } = props;
-
-  const [value, setValue] = React.useState(2);
-  const [hover, setHover] = React.useState(-1);
   const classes = useStyles();
+
+  const {
+    ratingState: { allRatings },
+  } = React.useContext(RatingContext);
+
+  const valueRating =
+    allRatings.reduce((sum, { rating }) => sum + rating, 0) /
+      allRatings.length || 0;
 
   return (
     <div className={classes.root}>
       <Rating
         name="hover-feedback"
-        value={value}
-        precision={1}
-        readOnly={rating ? false : true}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-        onChangeActive={(event, newHover) => {
-          setHover(newHover);
-        }}
+        value={parseFloat(valueRating.toFixed(1))}
+        precision={0.1}
+        readOnly={true}
       />
-      {rating ? (
-        <div>
-          {value !== null && (
-            <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>
-          )}
-        </div>
-      ) : null}
+
+      <div style={{ marginLeft: 10, fontWeight: "bold" }}>
+        {valueRating.toFixed(1)}
+      </div>
     </div>
   );
 }

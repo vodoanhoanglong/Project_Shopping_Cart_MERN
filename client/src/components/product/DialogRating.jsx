@@ -1,5 +1,6 @@
 import React from "react";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+import Rating from "@material-ui/lab/Rating";
 import Dialog from "@material-ui/core/Dialog";
 import MuiDialogTitle from "@material-ui/core/DialogTitle";
 import MuiDialogContent from "@material-ui/core/DialogContent";
@@ -8,6 +9,9 @@ import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 
 import "../../css/DialogRating.css";
+import HoverRating from "./HoverRating";
+import Comment from "./Comment";
+import { RatingContext } from "../../contexts/RatingContext";
 
 const styles = (theme) => ({
   root: {
@@ -19,6 +23,18 @@ const styles = (theme) => ({
     right: theme.spacing(1),
     top: theme.spacing(1),
     color: theme.palette.grey[500],
+  },
+});
+
+const useStyles = makeStyles({
+  root: {
+    width: 200,
+    display: "flex",
+    alignItems: "center",
+  },
+  paperWidthSm: {
+    maxWidth: "unset",
+    width: "50%",
   },
 });
 
@@ -47,7 +63,17 @@ const DialogContent = withStyles((theme) => ({
 }))(MuiDialogContent);
 
 export default function DialogRating(props) {
+  const classes = useStyles();
+
+  const { title, _id } = props;
   const { open, setOpen } = props;
+
+  const {
+    ratingState: { rating },
+    getRatingUser,
+  } = React.useContext(RatingContext);
+
+  React.useEffect(() => getRatingUser(_id), []);
 
   const handleClose = () => setOpen(false);
 
@@ -57,11 +83,24 @@ export default function DialogRating(props) {
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
+        classes={{ paperWidthSm: classes.paperWidthSm }}
       >
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          All Rating
+          <p style={{ textAlign: "center" }}>All Rating</p>
+          <p style={{ paddingLeft: 2 }}>{title}</p>
+          <HoverRating _id={_id} />
         </DialogTitle>
-        <DialogContent dividers></DialogContent>
+        <DialogContent dividers>
+          {/* {rating.map((item, index) =><div  key={index} className={classes.root}>
+      <Rating
+        name="hover-feedback"
+        value={item}
+        precision={1}
+
+      />)}
+    
+    </div> */}
+        </DialogContent>
       </Dialog>
     </div>
   );

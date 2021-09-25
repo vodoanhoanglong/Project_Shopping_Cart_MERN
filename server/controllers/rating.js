@@ -2,7 +2,9 @@ const Rating = require("../models/rating");
 
 module.exports.getAllRating = async (req, res) => {
   try {
-    const ratingAllList = await Rating.find({ product: req.params.id });
+    const ratingAllList = await Rating.find({ product: req.params.id })
+      .populate("user")
+      .sort({ _id: -1 });
 
     res.json({
       success: true,
@@ -19,7 +21,9 @@ module.exports.getRating = async (req, res) => {
     const ratingList = await Rating.find({
       product: req.params.id,
       user: req.userId,
-    });
+    })
+      .populate("user")
+      .sort({ _id: -1 });
     res.json({
       success: true,
       ratingList,
