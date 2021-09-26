@@ -308,7 +308,7 @@ const ProductModal = (props) => {
           <div className="container-information">
             <h2 className="information-title">{title}</h2>
             <div className="rating">
-              <HoverRating _id={_id} />
+              <HoverRating _id={_id} valueRating={valueRating} />
               <button onClick={handleClickRating}>
                 {allRatings.length} ratings
               </button>
@@ -415,7 +415,13 @@ const ProductModal = (props) => {
           </div>
         </div>
       </div>
-      <DialogRating open={rating} setOpen={setRating} title={title} _id={_id} />
+      <DialogRating
+        open={rating}
+        setOpen={setRating}
+        title={title}
+        _id={_id}
+        valueRating={valueRating}
+      />
     </Dialog>
   );
 };

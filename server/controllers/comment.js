@@ -1,15 +1,35 @@
 const Comment = require("../models/comment");
 
-module.exports.getComment = async (req, res) => {
+module.exports.getAllComment = async (req, res) => {
   try {
-    const commentList = await Comment.find({ product: req.params.id })
+    const commentAllList = await Comment.find({ product: req.params.id })
       .populate("user")
       .sort({
         _id: -1,
       });
     res.json({
       success: true,
-      comment: commentList,
+      commentAllList,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};
+
+module.exports.getComment = async (req, res) => {
+  try {
+    const commentList = await Comment.find({
+      product: req.params.id,
+      user: req.body.idUser,
+    })
+      .populate("user")
+      .sort({
+        _id: -1,
+      });
+    res.json({
+      success: true,
+      commentList,
     });
   } catch (error) {
     console.log(error);

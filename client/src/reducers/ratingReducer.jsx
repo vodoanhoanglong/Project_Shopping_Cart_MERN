@@ -22,6 +22,26 @@ export const ratingReducer = (state, action) => {
         allRatings: [],
       };
 
+    case "COMMENT_LOADED_SUCCESS":
+      return {
+        ...state,
+        comment: payload,
+      };
+    case "COMMENT_LOADED_FAIL":
+      return {
+        ...state,
+        comment: [],
+      };
+    case "COMMENT_LOADED_ALL_SUCCESS":
+      return {
+        ...state,
+        allComments: payload,
+      };
+    case "COMMENT_LOADED_ALL_FAIL":
+      return {
+        ...state,
+        allComments: [],
+      };
     default:
       return state;
   }

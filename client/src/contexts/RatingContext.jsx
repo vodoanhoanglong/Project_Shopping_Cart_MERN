@@ -10,7 +10,40 @@ const RatingContextProvider = ({ children }) => {
   const [ratingState, dispatch] = useReducer(ratingReducer, {
     rating: [],
     allRatings: [],
+    comment: [],
+    allComments: [],
   });
+
+  const getCommentUser = async (productId, userId) => {
+    try {
+      const response = await axios.get(
+        `${apiUrl}/comment/${productId}`,
+        userId
+      );
+      if (response.data.success) return response.data.commentList.content;
+      // dispatch({
+      //   type: "COMMENT_LOADED_SUCCESS",
+      //   payload: response.data.commentList,
+      // });
+    } catch (error) {
+      dispatch({ type: "COMMENT_LOADED_FAIL" });
+    }
+  };
+
+  const getAllComment = async (productId) => {
+    try {
+      const response = await axios.get(
+        `${apiUrl}/comment/all_comment/${productId}`
+      );
+      if (response.data.success)
+        dispatch({
+          type: "COMMENT_LOADED_ALL_SUCCESS",
+          payload: response.data.commentAllList,
+        });
+    } catch (error) {
+      dispatch({ type: "COMMENT_LOADED_ALL_FAIL" });
+    }
+  };
 
   const getRatingUser = async (productId) => {
     try {
@@ -64,6 +97,8 @@ const RatingContextProvider = ({ children }) => {
     getAllRating,
     addRating,
     updateRating,
+    getCommentUser,
+    getAllComment,
   };
 
   return (

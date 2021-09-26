@@ -1,5 +1,7 @@
 import React from "react";
+import { RatingContext } from "../../contexts/RatingContext";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
+
 import Rating from "@material-ui/lab/Rating";
 import Dialog from "@material-ui/core/Dialog";
 import MuiDialogTitle from "@material-ui/core/DialogTitle";
@@ -7,11 +9,11 @@ import MuiDialogContent from "@material-ui/core/DialogContent";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
-
-import "../../css/DialogRating.css";
 import HoverRating from "./HoverRating";
 import Comment from "./Comment";
-import { RatingContext } from "../../contexts/RatingContext";
+
+import "../../css/DialogRating.css";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 const styles = (theme) => ({
   root: {
@@ -29,7 +31,6 @@ const styles = (theme) => ({
 const useStyles = makeStyles({
   root: {
     width: 200,
-    display: "flex",
     alignItems: "center",
   },
   paperWidthSm: {
@@ -65,18 +66,19 @@ const DialogContent = withStyles((theme) => ({
 export default function DialogRating(props) {
   const classes = useStyles();
 
-  const { title, _id } = props;
+  const { title, _id, valueRating } = props;
   const { open, setOpen } = props;
 
   const {
-    ratingState: { rating },
-    getRatingUser,
+    ratingState: { allRatings },
+    getAllRating,
   } = React.useContext(RatingContext);
 
-  React.useEffect(() => getRatingUser(_id), []);
+  React.useEffect(() => getAllRating(_id), []);
 
   const handleClose = () => setOpen(false);
 
+  console.log();
   return (
     <div className="rating-dialog">
       <Dialog
@@ -88,18 +90,24 @@ export default function DialogRating(props) {
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
           <p style={{ textAlign: "center" }}>All Rating</p>
           <p style={{ paddingLeft: 2 }}>{title}</p>
-          <HoverRating _id={_id} />
+          <HoverRating _id={_id} valueRating={valueRating} />
         </DialogTitle>
         <DialogContent dividers>
-          {/* {rating.map((item, index) =><div  key={index} className={classes.root}>
-      <Rating
-        name="hover-feedback"
-        value={item}
-        precision={1}
-
-      />)}
-    
-    </div> */}
+          {allRatings.map((userRating, indexRating) => (
+            <div key={indexRating} className={classes.root}>
+              <AccountCircleIcon />
+              <b style={{ paddingLeft: 5 }}>
+                {userRating.user.username.split("@")[0]}
+              </b>
+              <Rating
+                name="hover-feedback"
+                value={userRating.rating}
+                precision={1}
+                readOnly
+              />
+              {/* <Comment idProduct={_id} idUser={userRating.user._id} /> */}
+            </div>
+          ))}
         </DialogContent>
       </Dialog>
     </div>

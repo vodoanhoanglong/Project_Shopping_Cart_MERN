@@ -43,7 +43,7 @@ app.use("/user", verifyToken, userRouter);
 app.use("/product_action", productRouter); // thieu verifyToken
 app.use("/cart", verifyToken, cartRouter);
 app.use("/favorites", verifyToken, favoritesRouter);
-app.use("/comment", verifyToken, commentRouter);
+app.use("/comment", commentRouter);
 
 const PORT = 5000;
 

@@ -24,13 +24,7 @@ const useStyles = makeStyles({
 export default function HoverRating(props) {
   const classes = useStyles();
 
-  const {
-    ratingState: { allRatings },
-  } = React.useContext(RatingContext);
-
-  const valueRating =
-    allRatings.reduce((sum, { rating }) => sum + rating, 0) /
-      allRatings.length || 0;
+  const { valueRating } = props;
 
   return (
     <div className={classes.root}>

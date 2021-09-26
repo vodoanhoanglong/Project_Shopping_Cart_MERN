@@ -12,12 +12,6 @@ const CommentSchema = new Schema({
     ref: "users",
   },
   content: String,
-  feedback: [
-    {
-      user: { type: Schema.Types.ObjectId, ref: "users" },
-      content: String,
-    },
-  ],
 });
 
 module.exports = mongoose.model("comments", CommentSchema);
