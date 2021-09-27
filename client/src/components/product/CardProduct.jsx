@@ -64,7 +64,6 @@ const CardProduct = (props) => {
   };
 
   const handleClick = () => {
-    // document.getElementById("myModal").style.display = "block";
     setOpenDialog(true);
     setUrlImg(product);
   };

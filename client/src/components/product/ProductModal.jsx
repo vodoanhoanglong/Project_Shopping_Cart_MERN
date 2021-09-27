@@ -33,7 +33,7 @@ const ProductModal = (props) => {
     product: { title, description, price, url },
   } = props;
 
-  const [rating, setRating] = useState(false);
+  const [showRating, setShowRating] = useState(false);
   const [defaultSelect, setDefaultSelect] = useState(!size ? "DEFAULT" : size);
   const [defaultSelect2, setDefaultSelect2] = useState(
     !color ? "DEFAULT" : color
@@ -71,7 +71,6 @@ const ProductModal = (props) => {
     }
   }, [size, color]);
 
-  // const modal = document.getElementById("myModal");
   const regex = /^[0-9\b]+$/;
 
   const handleChange = (e) => {
@@ -195,10 +194,8 @@ const ProductModal = (props) => {
   };
 
   const handleClose = () => {
-    // setAnimate("animate__fadeOut");
     setOpenDialog(false);
     setTimeout(() => {
-      // modal.style.display = "none";
       if (!size) {
         setDefaultSelect("DEFAULT");
         setDefaultSelect2("DEFAULT");
@@ -207,7 +204,6 @@ const ProductModal = (props) => {
         setDefaultSelect2(color);
       }
       setQuantity(1);
-      // setAnimate("animate__fadeInDown");
       setShowAlert1("show-alert");
       setShowAlert2("show-alert");
     }, 400);
@@ -277,9 +273,7 @@ const ProductModal = (props) => {
     handleClose();
   };
 
-  const handleClickRating = () => setRating(true);
-
-  // window.onclick = (e) => (e.target === modal ? handleClose() : null);
+  const handleClickRating = () => setShowRating(true);
 
   return (
     <Dialog
@@ -416,8 +410,8 @@ const ProductModal = (props) => {
         </div>
       </div>
       <DialogRating
-        open={rating}
-        setOpen={setRating}
+        open={showRating}
+        setOpen={setShowRating}
         title={title}
         _id={_id}
         valueRating={valueRating}

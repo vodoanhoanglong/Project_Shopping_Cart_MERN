@@ -2,10 +2,19 @@ const Rating = require("../models/rating");
 
 module.exports.getAllRating = async (req, res) => {
   try {
-    const ratingAllList = await Rating.find({ product: req.params.id })
+    let ratingAllList = await Rating.find({ product: req.params.id })
       .populate("user")
       .sort({ _id: -1 });
 
+    // if (req.userId) {
+    //   console.log(true);
+    //   const userRating = await Rating.find({
+    //     product: req.params.id,
+    //     userId: req.userId,
+    //   });
+    //   ratingAllList.filter((rating) => rating.user._id !== req.userId);
+    //   ratingAllList = [...userRating, ...ratingAllList];
+    // }
     res.json({
       success: true,
       ratingAllList,
@@ -21,9 +30,8 @@ module.exports.getRating = async (req, res) => {
     const ratingList = await Rating.find({
       product: req.params.id,
       user: req.userId,
-    })
-      .populate("user")
-      .sort({ _id: -1 });
+    });
+
     res.json({
       success: true,
       ratingList,
@@ -35,12 +43,14 @@ module.exports.getRating = async (req, res) => {
 };
 
 module.exports.addRating = async (req, res) => {
-  const { rating } = req.body;
+  const { rating, content, createAt } = req.body;
   try {
     const newRating = new Rating({
       product: req.params.id,
       user: req.userId,
       rating,
+      content,
+      createAt,
     });
 
     await newRating.save();
@@ -57,9 +67,9 @@ module.exports.addRating = async (req, res) => {
 };
 
 module.exports.updateRating = async (req, res) => {
-  const { rating } = req.body;
+  const { rating, content } = req.body;
   try {
-    let updateRating = { rating };
+    let updateRating = { rating, content };
 
     const ratingUpdateCondition = { product: req.params.id, user: req.userId };
 
@@ -79,6 +89,35 @@ module.exports.updateRating = async (req, res) => {
       success: true,
       message: "Updated rating successfully",
       rating: updateRating,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+module.exports.deleteRating = async (req, res) => {
+  const { _id } = req.body;
+  try {
+    const commentDeleteCondition = {
+      _id,
+      product: req.params.id,
+      user: req.userId,
+    };
+
+    const deletedComment = await Comment.findOneAndDelete(
+      commentDeleteCondition
+    );
+
+    if (!deletedComment)
+      return res.status(401).json({
+        success: false,
+        message: "Comment, Authorized or Product not found",
+      });
+
+    res.json({
+      success: true,
+      message: "Deleted comment successfully",
+      comment: deletedComment,
     });
   } catch (error) {
     console.log(error);

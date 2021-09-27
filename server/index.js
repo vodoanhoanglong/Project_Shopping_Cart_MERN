@@ -10,7 +10,6 @@ const userRouter = require("./routes/user");
 const productRouter = require("./routes/product");
 const cartRouter = require("./routes/cart");
 const favoritesRouter = require("./routes/favorites");
-const commentRouter = require("./routes/comment");
 const ratingRouter = require("./routes/rating");
 
 const connectDB = async () => {
@@ -43,7 +42,6 @@ app.use("/user", verifyToken, userRouter);
 app.use("/product_action", productRouter); // thieu verifyToken
 app.use("/cart", verifyToken, cartRouter);
 app.use("/favorites", verifyToken, favoritesRouter);
-app.use("/comment", commentRouter);
 
 const PORT = 5000;
 

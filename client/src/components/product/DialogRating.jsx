@@ -10,7 +10,6 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import HoverRating from "./HoverRating";
-import Comment from "./Comment";
 
 import "../../css/DialogRating.css";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
@@ -30,7 +29,7 @@ const styles = (theme) => ({
 
 const useStyles = makeStyles({
   root: {
-    width: 200,
+    width: "100%",
     alignItems: "center",
   },
   paperWidthSm: {
@@ -69,16 +68,29 @@ export default function DialogRating(props) {
   const { title, _id, valueRating } = props;
   const { open, setOpen } = props;
 
+  const [userRating, setUserRating] = React.useState({});
+
   const {
     ratingState: { allRatings },
     getAllRating,
+    getRatingUser,
   } = React.useContext(RatingContext);
 
-  React.useEffect(() => getAllRating(_id), []);
+  React.useEffect(() => {
+    getAllRating(_id);
+    async function fetchData() {
+      const response = await getRatingUser(_id);
+      setUserRating(response);
+    }
+    fetchData();
+    // console.log(userRating.user);
+  }, []);
+
+  // const indexRating = allRatings.indexOf(getRatingUser(_id));
+  // const resultAllRating = allRatings.splice(1, indexRating);
 
   const handleClose = () => setOpen(false);
 
-  console.log();
   return (
     <div className="rating-dialog">
       <Dialog
@@ -93,19 +105,38 @@ export default function DialogRating(props) {
           <HoverRating _id={_id} valueRating={valueRating} />
         </DialogTitle>
         <DialogContent dividers>
-          {allRatings.map((userRating, indexRating) => (
+          {/* <div className={classes.root}>
+            <AccountCircleIcon />
+            <b style={{ paddingLeft: 5 }}>
+              {userRating.user.username.split("@")[0]}
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              {userRating.createAt}
+            </b>
+            <br />
+            <Rating
+              name="hover-feedback"
+              value={userRating.rating}
+              precision={1}
+              readOnly
+            />
+            <p>{userRating.content}</p>
+          </div> */}
+          {allRatings.map((ratingUser, indexRating) => (
             <div key={indexRating} className={classes.root}>
               <AccountCircleIcon />
               <b style={{ paddingLeft: 5 }}>
-                {userRating.user.username.split("@")[0]}
+                {ratingUser.user.username.split("@")[0]}
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                {ratingUser.createAt}
               </b>
+              <br />
               <Rating
                 name="hover-feedback"
-                value={userRating.rating}
+                value={ratingUser.rating}
                 precision={1}
                 readOnly
               />
-              {/* <Comment idProduct={_id} idUser={userRating.user._id} /> */}
+              <p>{ratingUser.content}</p>
             </div>
           ))}
         </DialogContent>
