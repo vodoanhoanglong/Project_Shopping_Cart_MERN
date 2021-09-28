@@ -99,9 +99,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQ0M
 
 
 ###
-GET  http://localhost:5000/rating/all_rating/61075969f24d640adc8160f5
+GET  http://localhost:5000/rating/61075969f24d640adc8160f5
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQ0MzIzZDQ2NDg2MjFiMzgwYThkM2UiLCJpYXQiOjE2MzE4OTE0MDV9.jCdcLvSz23SYubCcprRRwp5xUFswHEoGDv-4tfRQ_-Y
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQ0MmVmZTQ2NDg2MjFiMzgwYThkMjkiLCJpYXQiOjE2MzI4Mzg5MjF9.V__Wry8uTildQZlQc5kEdjEljGxMDieIL2iRPT1O41I
+
+
+
 
 ###
 POST http://localhost:5000/rating/61075969f24d640adc8160f5

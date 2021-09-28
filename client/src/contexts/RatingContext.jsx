@@ -8,25 +8,15 @@ export const RatingContext = createContext();
 
 const RatingContextProvider = ({ children }) => {
   const [ratingState, dispatch] = useReducer(ratingReducer, {
-    userRating: null,
     allRatings: [],
   });
 
-  const getRatingUser = async (productId) => {
+  const getAllRating = async (productId, isAuthenticated) => {
     try {
-      const response = await axios.get(`${apiUrl}/rating/${productId}`);
-      if (response.data.success) return response.data.ratingList;
-    } catch (error) {
-      if (error.response.data) return error.response.data;
-      else return { success: false, message: error.message };
-    }
-  };
-
-  const getAllRating = async (productId) => {
-    try {
-      const response = await axios.get(
-        `${apiUrl}/rating/all_rating/${productId}`
-      );
+      let response;
+      if (!isAuthenticated)
+        response = await axios.get(`${apiUrl}/rating/all_rating/${productId}`);
+      else response = await axios.get(`${apiUrl}/rating/${productId}`);
       if (response.data.success)
         dispatch({
           type: "RATING_LOADED_ALL_SUCCESS",
@@ -57,7 +47,6 @@ const RatingContextProvider = ({ children }) => {
 
   const ratingContextData = {
     ratingState,
-    getRatingUser,
     getAllRating,
     addRating,
     updateRating,

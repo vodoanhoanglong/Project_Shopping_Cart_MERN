@@ -1,5 +1,6 @@
 import React from "react";
 import { RatingContext } from "../../contexts/RatingContext";
+import { AuthContext } from "../../contexts/AuthContext";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 
 import Rating from "@material-ui/lab/Rating";
@@ -73,21 +74,16 @@ export default function DialogRating(props) {
   const {
     ratingState: { allRatings },
     getAllRating,
-    getRatingUser,
   } = React.useContext(RatingContext);
 
-  React.useEffect(() => {
-    getAllRating(_id);
-    async function fetchData() {
-      const response = await getRatingUser(_id);
-      setUserRating(response);
-    }
-    fetchData();
-    // console.log(userRating.user);
-  }, []);
+  const {
+    authState: { isAuthenticated },
+  } = React.useContext(AuthContext);
 
-  // const indexRating = allRatings.indexOf(getRatingUser(_id));
-  // const resultAllRating = allRatings.splice(1, indexRating);
+  React.useEffect(() => {
+    if (isAuthenticated) getAllRating(_id, isAuthenticated);
+    else getAllRating(_id);
+  }, []);
 
   const handleClose = () => setOpen(false);
 

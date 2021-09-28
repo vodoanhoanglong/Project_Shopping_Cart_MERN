@@ -4,17 +4,10 @@ module.exports.getAllRating = async (req, res) => {
   try {
     let ratingAllList = await Rating.find({ product: req.params.id })
       .populate("user")
-      .sort({ _id: -1 });
+      .sort({
+        _id: -1,
+      });
 
-    // if (req.userId) {
-    //   console.log(true);
-    //   const userRating = await Rating.find({
-    //     product: req.params.id,
-    //     userId: req.userId,
-    //   });
-    //   ratingAllList.filter((rating) => rating.user._id !== req.userId);
-    //   ratingAllList = [...userRating, ...ratingAllList];
-    // }
     res.json({
       success: true,
       ratingAllList,
@@ -27,14 +20,25 @@ module.exports.getAllRating = async (req, res) => {
 
 module.exports.getRating = async (req, res) => {
   try {
-    const ratingList = await Rating.find({
+    let ratingAllList = await Rating.find({ product: req.params.id })
+      .populate("user")
+      .sort({
+        _id: -1,
+      });
+
+    const userRating = await Rating.find({
       product: req.params.id,
       user: req.userId,
-    });
+    }).populate("user");
+    let result;
+    result = ratingAllList.filter(
+      (rating) => rating.user._id.toString() !== req.userId
+    );
+    ratingAllList = [...userRating, ...result];
 
     res.json({
       success: true,
-      ratingList,
+      ratingAllList,
     });
   } catch (error) {
     console.log(error);
