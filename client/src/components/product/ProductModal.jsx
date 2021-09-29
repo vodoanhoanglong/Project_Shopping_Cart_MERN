@@ -54,10 +54,7 @@ const ProductModal = (props) => {
 
   const {
     ratingState: { allRatings },
-    getAllRating,
   } = React.useContext(RatingContext);
-
-  React.useEffect(() => getAllRating(_id), []);
 
   const valueRating =
     allRatings.reduce((sum, { rating }) => sum + rating, 0) /

@@ -10,6 +10,7 @@ module.exports.getAllRating = async (req, res) => {
 
     res.json({
       success: true,
+      isComment: false,
       ratingAllList,
     });
   } catch (error) {
@@ -30,14 +31,20 @@ module.exports.getRating = async (req, res) => {
       product: req.params.id,
       user: req.userId,
     }).populate("user");
-    let result;
-    result = ratingAllList.filter(
+    if (userRating.length === 0)
+      return res.json({
+        success: true,
+        isComment: false,
+        ratingAllList,
+      });
+    ratingAllList = ratingAllList.filter(
       (rating) => rating.user._id.toString() !== req.userId
     );
-    ratingAllList = [...userRating, ...result];
+    ratingAllList = [...userRating, ...ratingAllList];
 
     res.json({
       success: true,
+      isComment: true,
       ratingAllList,
     });
   } catch (error) {

@@ -39,6 +39,8 @@ const useStyles = makeStyles({
   },
 });
 
+const DialogAddRating = (props) => {};
+
 const DialogTitle = withStyles(styles)((props) => {
   const { children, classes, onClose, ...other } = props;
   return (
@@ -72,7 +74,7 @@ export default function DialogRating(props) {
   const [userRating, setUserRating] = React.useState({});
 
   const {
-    ratingState: { allRatings },
+    ratingState: { isComment, allRatings },
     getAllRating,
   } = React.useContext(RatingContext);
 
@@ -98,25 +100,17 @@ export default function DialogRating(props) {
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
           <p style={{ textAlign: "center" }}>All Rating</p>
           <p style={{ paddingLeft: 2 }}>{title}</p>
-          <HoverRating _id={_id} valueRating={valueRating} />
+          <div style={{ display: "flex" }}>
+            <HoverRating _id={_id} valueRating={valueRating} />
+            {isAuthenticated && (
+              <button className="rating-dialog-btn">
+                {!isComment ? "Add Rating" : "Edit Rating"}
+              </button>
+            )}
+          </div>
         </DialogTitle>
         <DialogContent dividers>
-          {/* <div className={classes.root}>
-            <AccountCircleIcon />
-            <b style={{ paddingLeft: 5 }}>
-              {userRating.user.username.split("@")[0]}
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              {userRating.createAt}
-            </b>
-            <br />
-            <Rating
-              name="hover-feedback"
-              value={userRating.rating}
-              precision={1}
-              readOnly
-            />
-            <p>{userRating.content}</p>
-          </div> */}
+          {isComment && <h6>Your Comment</h6>}
           {allRatings.map((ratingUser, indexRating) => (
             <div key={indexRating} className={classes.root}>
               <AccountCircleIcon />

@@ -2,3 +2,30 @@
   width: 100%;
   text-align: center;
 }
+
+.rating-dialog-btn {
+  display: flex;
+  border-radius: 23px;
+  background-color: #717fe0;
+  text-transform: uppercase;
+  min-width: 150px;
+  height: 30px;
+  font-family: Poppins-Medium;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.466667;
+  color: #fff;
+  justify-content: center;
+  transition: all 0.4s;
+  align-items: center;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.rating-dialog-btn:hover {
+  border-color: #222;
+  background-color: #222;
+  color: #fff;
+}

@@ -19,11 +19,17 @@ const RatingContextProvider = ({ children }) => {
       else response = await axios.get(`${apiUrl}/rating/${productId}`);
       if (response.data.success)
         dispatch({
-          type: "RATING_LOADED_ALL_SUCCESS",
-          payload: response.data.ratingAllList,
+          type: "RATING_LOADED_ALL",
+          payload: {
+            isComment: response.data.isComment,
+            allRatings: response.data.ratingAllList,
+          },
         });
     } catch (error) {
-      dispatch({ type: "RATING_LOADED_ALL_FAIL" });
+      dispatch({
+        type: "RATING_LOADED_ALL",
+        payload: { isComment: false, allRatings: [] },
+      });
     }
   };
 
