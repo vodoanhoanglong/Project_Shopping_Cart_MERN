@@ -11,6 +11,9 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import HoverRating from "./HoverRating";
+import Box from "@material-ui/core/Box";
+import TextField from "@material-ui/core/TextField";
+import StarBorderIcon from "@material-ui/icons/StarBorder";
 
 import "../../css/DialogRating.css";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
@@ -39,7 +42,104 @@ const useStyles = makeStyles({
   },
 });
 
-const DialogAddRating = (props) => {};
+const useStylesInput = makeStyles((theme) => ({
+  root: {
+    "& > *": {
+      margin: theme.spacing(1),
+      width: "97%",
+    },
+  },
+  paperWidthSm: {
+    maxWidth: "unset",
+    width: "30%",
+  },
+}));
+
+const labels = {
+  1: "Useless",
+  2: "Poor",
+  3: "Ok",
+  4: "Good",
+  5: "Excellent",
+};
+
+const DialogInputRating = (props) => {
+  const { open, setOpen, _id, comment, rating, ...other } = props;
+  const classes = useStylesInput();
+
+  const [valueRating, setValueRating] = React.useState(0);
+  const [valueComment, setValueComment] = React.useState("");
+  const [hover, setHover] = React.useState(-1);
+
+  React.useEffect(() => {
+    setValueRating(rating);
+    setValueComment(comment);
+  }, [rating, comment]);
+
+  const handleChangeRating = (e, value) => setValueRating(value);
+
+  const handleChangeComment = (e) => setValueComment(e.target.value);
+
+  const handleClose = () => setOpen(false);
+
+  const submitRating = async (e) => {
+    e.preventDefault();
+
+    const value = {
+      rating: valueRating,
+      content: valueComment,
+    };
+
+    try {
+      if (other.isComment) await other.updateRating(_id, value);
+      else await other.addRating(_id, value);
+      setOpen(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return (
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      classes={{ paperWidthSm: classes.paperWidthSm }}
+    >
+      <DialogTitle>Your Rating</DialogTitle>
+      <form className={classes.root} onSubmit={submitRating} autoComplete="off">
+        <Box
+          component="fieldset"
+          mb={3}
+          borderColor="transparent"
+          style={{ display: "flex", alignItems: "center" }}
+        >
+          <Rating
+            name="customized-empty"
+            value={valueRating}
+            onChange={handleChangeRating}
+            size="large"
+            precision={1}
+            onChangeActive={(event, newHover) => setHover(newHover)}
+            emptyIcon={<StarBorderIcon fontSize="inherit" />}
+          />
+          {valueRating !== null && (
+            <Box ml={2}>{labels[hover !== -1 ? hover : valueRating]}</Box>
+          )}
+        </Box>
+        <TextField
+          id="filled-basic"
+          label="Write a comment"
+          value={valueComment}
+          variant="filled"
+          onChange={handleChangeComment}
+        />
+        <button disabled={valueRating && valueComment ? false : true}>
+          Finished
+        </button>
+      </form>
+    </Dialog>
+  );
+};
 
 const DialogTitle = withStyles(styles)((props) => {
   const { children, classes, onClose, ...other } = props;
@@ -71,11 +171,13 @@ export default function DialogRating(props) {
   const { title, _id, valueRating } = props;
   const { open, setOpen } = props;
 
-  const [userRating, setUserRating] = React.useState({});
+  const [openRatingUser, setOpenRatingUser] = React.useState(false);
 
   const {
     ratingState: { isComment, allRatings },
     getAllRating,
+    addRating,
+    updateRating,
   } = React.useContext(RatingContext);
 
   const {
@@ -85,7 +187,11 @@ export default function DialogRating(props) {
   React.useEffect(() => {
     if (isAuthenticated) getAllRating(_id, isAuthenticated);
     else getAllRating(_id);
-  }, []);
+  }, [openRatingUser]);
+
+  console.log(openRatingUser);
+
+  const handleClick = () => setOpenRatingUser(true);
 
   const handleClose = () => setOpen(false);
 
@@ -103,7 +209,7 @@ export default function DialogRating(props) {
           <div style={{ display: "flex" }}>
             <HoverRating _id={_id} valueRating={valueRating} />
             {isAuthenticated && (
-              <button className="rating-dialog-btn">
+              <button className="rating-dialog-btn" onClick={handleClick}>
                 {!isComment ? "Add Rating" : "Edit Rating"}
               </button>
             )}
@@ -131,6 +237,16 @@ export default function DialogRating(props) {
           ))}
         </DialogContent>
       </Dialog>
+      <DialogInputRating
+        open={openRatingUser}
+        setOpen={setOpenRatingUser}
+        _id={_id}
+        rating={isComment ? allRatings[0].rating : 0}
+        comment={isComment ? allRatings[0].content : ""}
+        isComment={isComment}
+        addRating={addRating}
+        updateRating={updateRating}
+      />
     </div>
   );
 }
