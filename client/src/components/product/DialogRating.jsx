@@ -14,6 +14,9 @@ import HoverRating from "./HoverRating";
 import Box from "@material-ui/core/Box";
 import TextField from "@material-ui/core/TextField";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 import "../../css/DialogRating.css";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
@@ -86,6 +89,7 @@ const DialogInputRating = (props) => {
     e.preventDefault();
 
     const value = {
+      createAt: new Date(Date.now()).toLocaleString(),
       rating: valueRating,
       content: valueComment,
     };
@@ -133,9 +137,14 @@ const DialogInputRating = (props) => {
           variant="filled"
           onChange={handleChangeComment}
         />
-        <button disabled={valueRating && valueComment ? false : true}>
-          Finished
-        </button>
+        <div style={{ textAlign: "center" }}>
+          <button
+            className="rating-dialog-btn"
+            disabled={valueRating && valueComment ? false : true}
+          >
+            Finished
+          </button>
+        </div>
       </form>
     </Dialog>
   );
@@ -172,12 +181,20 @@ export default function DialogRating(props) {
   const { open, setOpen } = props;
 
   const [openRatingUser, setOpenRatingUser] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const openMenu = Boolean(anchorEl);
+
+  const handleClickMenu = (event) => setAnchorEl(event.currentTarget);
+
+  const handleCloseMenu = () => setAnchorEl(null);
 
   const {
     ratingState: { isComment, allRatings },
     getAllRating,
     addRating,
     updateRating,
+    deleteRating,
   } = React.useContext(RatingContext);
 
   const {
@@ -187,13 +204,106 @@ export default function DialogRating(props) {
   React.useEffect(() => {
     if (isAuthenticated) getAllRating(_id, isAuthenticated);
     else getAllRating(_id);
-  }, [openRatingUser]);
+  }, [openRatingUser, anchorEl]);
 
-  console.log(openRatingUser);
+  const handleDeleteRating = async () => {
+    try {
+      await deleteRating(_id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleClick = () => setOpenRatingUser(true);
 
   const handleClose = () => setOpen(false);
+
+  let body = allRatings.map((ratingUser, indexRating) => (
+    <div key={indexRating} className={classes.root}>
+      <AccountCircleIcon />
+      <b style={{ paddingLeft: 5 }}>
+        {ratingUser.user.username.split("@")[0]}
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        {ratingUser.createAt}
+      </b>
+      <br />
+      <Rating
+        style={{ marginTop: 5 }}
+        name="hover-feedback"
+        value={ratingUser.rating}
+        precision={1}
+        readOnly
+      />
+      <p style={{ paddingLeft: 5 }}>{ratingUser.content}</p>
+    </div>
+  ));
+
+  if (isComment)
+    body = (
+      <>
+        <div className={classes.root}>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <AccountCircleIcon />
+            <b style={{ paddingLeft: 5 }}>
+              {allRatings[0].user.username.split("@")[0]}
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              {allRatings[0].createAt}
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <span className="rating-user">Your Rating</span>
+            </b>
+            <IconButton
+              aria-label="more"
+              aria-controls="long-menu"
+              aria-haspopup="true"
+              onClick={handleClickMenu}
+              className="rating-icon-btn"
+            >
+              <MoreVertIcon />
+            </IconButton>
+            <Menu
+              id="long-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={openMenu}
+              onClose={handleCloseMenu}
+            >
+              <MenuItem onClick={handleCloseMenu}>
+                <div onClick={handleClick}>Update</div>
+              </MenuItem>
+              <MenuItem onClick={handleCloseMenu}>
+                <div onClick={handleDeleteRating}>Delete</div>
+              </MenuItem>
+            </Menu>
+          </div>
+          <Rating
+            style={{ marginTop: 5 }}
+            name="hover-feedback"
+            value={allRatings[0].rating}
+            precision={1}
+            readOnly
+          />
+          <p style={{ paddingLeft: 5 }}>{allRatings[0].content}</p>
+        </div>
+        {allRatings.slice(1).map((ratingUser, indexRating) => (
+          <div key={indexRating} className={classes.root}>
+            <AccountCircleIcon />
+            <b style={{ paddingLeft: 5 }}>
+              {ratingUser.user.username.split("@")[0]}
+            </b>
+            {ratingUser.createAt}
+            <br />
+            <Rating
+              style={{ marginTop: 5 }}
+              name="hover-feedback"
+              value={ratingUser.rating}
+              precision={1}
+              readOnly
+            />
+            <p style={{ paddingLeft: 5 }}>{ratingUser.content}</p>
+          </div>
+        ))}
+      </>
+    );
 
   return (
     <div className="rating-dialog">
@@ -208,34 +318,16 @@ export default function DialogRating(props) {
           <p style={{ paddingLeft: 2 }}>{title}</p>
           <div style={{ display: "flex" }}>
             <HoverRating _id={_id} valueRating={valueRating} />
-            {isAuthenticated && (
-              <button className="rating-dialog-btn" onClick={handleClick}>
-                {!isComment ? "Add Rating" : "Edit Rating"}
-              </button>
-            )}
           </div>
         </DialogTitle>
-        <DialogContent dividers>
-          {isComment && <h6>Your Comment</h6>}
-          {allRatings.map((ratingUser, indexRating) => (
-            <div key={indexRating} className={classes.root}>
-              <AccountCircleIcon />
-              <b style={{ paddingLeft: 5 }}>
-                {ratingUser.user.username.split("@")[0]}
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                {ratingUser.createAt}
-              </b>
-              <br />
-              <Rating
-                name="hover-feedback"
-                value={ratingUser.rating}
-                precision={1}
-                readOnly
-              />
-              <p>{ratingUser.content}</p>
-            </div>
-          ))}
-        </DialogContent>
+        <DialogContent dividers>{body}</DialogContent>
+        {!isComment && (
+          <div className="container-rating-btn">
+            <button className="rating-dialog-btn" onClick={handleClick}>
+              Add Rating
+            </button>
+          </div>
+        )}
       </Dialog>
       <DialogInputRating
         open={openRatingUser}

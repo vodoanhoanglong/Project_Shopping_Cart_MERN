@@ -107,15 +107,13 @@ module.exports.updateRating = async (req, res) => {
   }
 };
 module.exports.deleteRating = async (req, res) => {
-  const { _id } = req.body;
   try {
     const commentDeleteCondition = {
-      _id,
       product: req.params.id,
       user: req.userId,
     };
 
-    const deletedComment = await Comment.findOneAndDelete(
+    const deletedComment = await Rating.findOneAndDelete(
       commentDeleteCondition
     );
 

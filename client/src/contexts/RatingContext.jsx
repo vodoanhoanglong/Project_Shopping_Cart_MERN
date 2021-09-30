@@ -51,11 +51,21 @@ const RatingContextProvider = ({ children }) => {
     }
   };
 
+  const deleteRating = async (productId) => {
+    try {
+      await axios.delete(`${apiUrl}/rating/${productId}`);
+    } catch (error) {
+      if (error.response.data) return error.response.data;
+      else return { success: false, message: error.message };
+    }
+  };
+
   const ratingContextData = {
     ratingState,
     getAllRating,
     addRating,
     updateRating,
+    deleteRating,
   };
 
   return (
