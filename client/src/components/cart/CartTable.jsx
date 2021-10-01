@@ -2,6 +2,7 @@ import React from "react";
 
 import ProductModal from "../product/ProductModal";
 import { Link } from "react-router-dom";
+import Odometer from "react-odometerjs";
 
 import PropTypes from "prop-types";
 import clsx from "clsx";
@@ -264,7 +265,11 @@ const EnhancedTableToolbar = (props) => {
       ) : (
         <div className="cart-table-header">
           <h3>
-            Total bill: <b>${totalBill.toFixed(2)}</b>
+            Total bill:&ensp;
+            <b>
+              $
+              <Odometer value={totalBill.toFixed(2)} />
+            </b>
           </h3>
           <button onClick={handleNext}>Order</button>
         </div>
@@ -414,6 +419,7 @@ export default function CartTable() {
       </div>
     </>
   );
+
   return (
     <div>
       {itemCart.length !== 0 ? (
@@ -490,9 +496,6 @@ export default function CartTable() {
                                 <div
                                   className="size-color-cart"
                                   onClick={() => {
-                                    // document.getElementById(
-                                    //   "myModal"
-                                    // ).style.display = "block";
                                     setOpenDialog(true);
                                     setInformation(row);
                                   }}
@@ -506,7 +509,9 @@ export default function CartTable() {
                               </div>
                             </div>
                           </TableCell>
-                          <TableCell align="center">${row.price}</TableCell>
+                          <TableCell align="center">
+                            <b>${row.price}</b>
+                          </TableCell>
                           <TableCell align="center">
                             <div
                               style={{
@@ -524,7 +529,9 @@ export default function CartTable() {
                             </div>
                           </TableCell>
                           <TableCell align="center">
-                            ${row.totalPrice.toFixed(2)}
+                            <b>
+                              $<Odometer value={row.totalPrice.toFixed(2)} />
+                            </b>
                           </TableCell>
                         </TableRow>
                       );
