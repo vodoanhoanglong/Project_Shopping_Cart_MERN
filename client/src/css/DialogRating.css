@@ -3,7 +3,8 @@
   text-align: center;
 }
 
-.rating-dialog-btn {
+.rating-dialog-btn,
+#btn-rating {
   border-radius: 23px;
   background-color: #717fe0;
   text-transform: uppercase;
@@ -21,10 +22,15 @@
   margin-left: 20px;
 }
 
-.rating-dialog-btn:hover {
+.rating-dialog-btn:hover,
+#btn-rating:hover {
   border-color: #222;
   background-color: #222;
   color: #fff;
+}
+
+.MuiButton-root.Mui-disabled {
+  color: rgba(0, 0, 0, 0.26) !important;
 }
 
 .rating-user {
@@ -44,4 +50,15 @@
 .container-rating-btn {
   text-align: center;
   margin: 10px 0 10px 0;
+}
+
+.empty-rating p {
+  margin-top: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: Poppins-Medium;
+}
+
+.empty-rating {
+  margin-top: 15px;
 }

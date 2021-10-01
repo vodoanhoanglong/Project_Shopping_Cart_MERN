@@ -163,7 +163,10 @@ const Profile = () => {
   }, [active, value, gender, selectedDate]);
 
   return (
-    <div className="profile animate__animated animate__fadeIn">
+    <div
+      className="profile animate__animated animate__fadeIn"
+      style={{ textAlign: "center" }}
+    >
       <h1>My Profile</h1>
       {active === "add" || active === "update-cancel" ? (
         <form onSubmit={saveUser}>

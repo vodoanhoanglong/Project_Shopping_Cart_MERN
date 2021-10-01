@@ -29,7 +29,10 @@ const Order = () => {
   const handleChangePage = (event, value) => setPage(value);
 
   return (
-    <div className="order animate__animated animate__fadeIn">
+    <div
+      className="order animate__animated animate__fadeIn"
+      style={{ textAlign: "center" }}
+    >
       <h1>My Order</h1>
       {order.length ? (
         <div className="user-order">

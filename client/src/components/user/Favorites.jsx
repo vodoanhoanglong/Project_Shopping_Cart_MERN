@@ -59,7 +59,10 @@ const Favorites = () => {
     handleChangePageDeleted();
 
   return (
-    <div className="favorites animate__animated animate__fadeIn">
+    <div
+      className="favorites animate__animated animate__fadeIn"
+      style={{ textAlign: "center" }}
+    >
       <h1>My Favorites</h1>
       {totalPage > 0 ? (
         <>

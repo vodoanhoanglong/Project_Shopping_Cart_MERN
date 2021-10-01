@@ -1,17 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Rating from "@material-ui/lab/Rating";
-import Box from "@material-ui/core/Box";
-
-import { RatingContext } from "../../contexts/RatingContext";
-
-const labels = {
-  1: "Useless",
-  2: "Poor",
-  3: "Ok",
-  4: "Good",
-  5: "Excellent",
-};
 
 const useStyles = makeStyles({
   root: {

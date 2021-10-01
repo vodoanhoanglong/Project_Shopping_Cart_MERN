@@ -1,16 +1,3 @@
-/* .modal {
-  display: none;
-  position: fixed; 
-  padding-top: 100px; 
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%; 
-  overflow: auto; 
-  background-color: rgb(0, 0, 0); 
-  background-color: rgba(0, 0, 0, 0.4); 
-} */
-
 .modal-content {
   background-color: #fff;
   margin: auto;
@@ -190,6 +177,19 @@
   border-color: #222;
   background-color: #222;
   color: #fff;
+}
+
+.container-information .rating-length {
+  color: #333;
+  font-weight: bold;
+  margin-left: 20px;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: all 0.4s;
+}
+
+.container-information .rating-length:hover {
+  color: #717fe0;
 }
 
 .container-information .container-button {

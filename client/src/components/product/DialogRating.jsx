@@ -17,6 +17,8 @@ import StarBorderIcon from "@material-ui/icons/StarBorder";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import CommentIcon from "@material-ui/icons/Comment";
+import Button from "@material-ui/core/Button";
 
 import "../../css/DialogRating.css";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
@@ -109,7 +111,7 @@ const DialogInputRating = (props) => {
       onClose={handleClose}
       classes={{ paperWidthSm: classes.paperWidthSm }}
     >
-      <DialogTitle>Your Rating</DialogTitle>
+      <DialogTitle onClose={handleClose}>Your Rating</DialogTitle>
       <form className={classes.root} onSubmit={submitRating} autoComplete="off">
         <Box
           component="fieldset"
@@ -138,12 +140,13 @@ const DialogInputRating = (props) => {
           onChange={handleChangeComment}
         />
         <div style={{ textAlign: "center" }}>
-          <button
-            className="rating-dialog-btn"
+          <Button
+            id="btn-rating"
+            type="submit"
             disabled={valueRating && valueComment ? false : true}
           >
             Finished
-          </button>
+          </Button>
         </div>
       </form>
     </Dialog>
@@ -268,7 +271,7 @@ export default function DialogRating(props) {
               onClose={handleCloseMenu}
             >
               <MenuItem onClick={handleCloseMenu}>
-                <div onClick={handleClick}>Update</div>
+                <div onClick={handleClick}>Edit</div>
               </MenuItem>
               <MenuItem onClick={handleCloseMenu}>
                 <div onClick={handleDeleteRating}>Delete</div>
@@ -320,7 +323,16 @@ export default function DialogRating(props) {
             <HoverRating _id={_id} valueRating={valueRating} />
           </div>
         </DialogTitle>
-        <DialogContent dividers>{body}</DialogContent>
+        <DialogContent dividers>
+          {allRatings.length === 0 ? (
+            <div className="empty-rating">
+              <CommentIcon fontSize="large" />
+              <p>There are no ratings</p>
+            </div>
+          ) : (
+            body
+          )}
+        </DialogContent>
         {!isComment && (
           <div className="container-rating-btn">
             <button className="rating-dialog-btn" onClick={handleClick}>

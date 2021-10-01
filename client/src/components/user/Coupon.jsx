@@ -53,7 +53,10 @@ export default function Coupon() {
   const headTable = ["Code", "Discount"];
 
   return (
-    <div className="coupon animate__animated animate__fadeIn">
+    <div
+      className="coupon animate__animated animate__fadeIn"
+      style={{ textAlign: "center" }}
+    >
       <h1>My Coupon</h1>
       {totalPage > 0 ? (
         <TableContainer component={Paper} style={{ marginTop: 70 }}>

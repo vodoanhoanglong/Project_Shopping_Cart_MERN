@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { ProductContext } from "../../contexts/ProductContext";
 import { CartContext } from "../../contexts/CartContext";
 import { RatingContext } from "../../contexts/RatingContext";
@@ -294,15 +295,14 @@ const ProductModal = (props) => {
               showPlayButton={false}
               showFullscreenButton={false}
             />
-            ;
           </div>
           <div className="container-information">
             <h2 className="information-title">{title}</h2>
             <div className="rating">
               <HoverRating _id={_id} valueRating={valueRating} />
-              <button onClick={handleClickRating}>
+              <div className="rating-length" onClick={handleClickRating}>
                 {allRatings.length} ratings
-              </button>
+              </div>
             </div>
 
             <strong>${price}</strong>
