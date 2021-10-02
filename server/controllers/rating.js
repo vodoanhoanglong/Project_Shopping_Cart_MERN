@@ -108,25 +108,23 @@ module.exports.updateRating = async (req, res) => {
 };
 module.exports.deleteRating = async (req, res) => {
   try {
-    const commentDeleteCondition = {
+    const ratingDeleteCondition = {
       product: req.params.id,
       user: req.userId,
     };
 
-    const deletedComment = await Rating.findOneAndDelete(
-      commentDeleteCondition
-    );
+    const deletedRating = await Rating.findOneAndDelete(ratingDeleteCondition);
 
-    if (!deletedComment)
+    if (!deletedRating)
       return res.status(401).json({
         success: false,
-        message: "Comment, Authorized or Product not found",
+        message: "Rating, Authorized or Product not found",
       });
 
     res.json({
       success: true,
-      message: "Deleted comment successfully",
-      comment: deletedComment,
+      message: "Deleted rating successfully",
+      rating: deletedRating,
     });
   } catch (error) {
     console.log(error);

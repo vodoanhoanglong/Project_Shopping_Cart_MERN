@@ -200,10 +200,6 @@
   margin-top: 50px;
 }
 
-.shop-container .footer {
-  transform: translateY(440%);
-}
-
 .container-information .MuiAlert-standardError {
   color: red !important;
   background-color: rgb(253, 236, 234);

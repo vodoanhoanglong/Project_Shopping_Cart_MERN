@@ -14,6 +14,7 @@ import Shop from "./views/Shop";
 import Cart from "./views/Cart";
 import Auth from "./views/Auth";
 import User from "./views/User";
+import Dashboard from "./views/Dashboard";
 
 function App() {
   return (
@@ -41,6 +42,11 @@ function App() {
                     />
                     <ProtectedRoute exact path="/user" component={User} />
                     <ProtectedRoute exact path="/cart" component={Cart} />
+                    <ProtectedRoute
+                      exact
+                      path="/dashboard"
+                      component={Dashboard}
+                    />
                   </Switch>
                 </Router>
               </RatingContextProvider>

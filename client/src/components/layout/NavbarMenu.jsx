@@ -7,6 +7,7 @@ import { UserContext } from "../../contexts/UserContext";
 
 import CartHover from "../cart/CartHover";
 import UserHover from "../user/UserHover";
+import DashboardMenu from "./DashboardMenu";
 
 import "../../css/NavbarMenu.css";
 import Cart from "../../assets/shopping-cart.png";
@@ -58,10 +59,14 @@ const NavbarMenu = () => {
     history.push(currentLink);
   };
 
-  const handleClickBack = () => {
-    history.goBack();
+  const handleClickBackLogo = () => {
     setActiveStep(0);
     setOpenedUser(false);
+  };
+
+  const handleClickBack = () => {
+    history.goBack();
+    handleClickBackLogo();
   };
 
   const handleMouseEnter = () =>
@@ -74,24 +79,32 @@ const NavbarMenu = () => {
 
   const navbarMenu = currentLink === "/user" ? "nav-back-user" : "nav-back";
 
+  const navbarMode =
+    currentLink === "/cart" ||
+    currentLink === "/user" ||
+    currentLink === "/dashboard"
+      ? true
+      : false;
+
   const navbarColorItem = (string) =>
     currentLink !== string ? null : { color: "#717fe0" };
 
   return (
     <>
       <header className={navbarScroll + toggle}>
+        {currentLink === "/dashboard" && <DashboardMenu />}
         <div className="logo">
           <h1 style={{ color: navbarColor }}>
             <Link
               to="/"
-              onClick={handleClickBack}
+              onClick={handleClickBackLogo}
               onMouseEnter={handleMouseEnter}
             >
               Clothes
             </Link>
           </h1>
         </div>
-        {currentLink === "/cart" || currentLink === "/user" ? (
+        {navbarMode ? (
           <Link
             to="/shop"
             className={navbarMenu}
@@ -115,8 +128,8 @@ const NavbarMenu = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/" style={navbarColorItem("/about")}>
-                  About
+                <Link to="/dashboard" style={navbarColorItem("/dashboard")}>
+                  DashBoard
                 </Link>
               </li>
             </ul>
