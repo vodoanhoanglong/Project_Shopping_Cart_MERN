@@ -83,9 +83,9 @@ const CardProduct = (props) => {
       >
         <div className="block-pic">
           <Card.Img variant="top" src={product.url} />
-          <Link to="#" onClick={handleClick}>
+          <button to="#" onClick={handleClick}>
             Quick View
-          </Link>
+          </button>
         </div>
         <Card.Body>
           <Card.Title>{product.title}</Card.Title>

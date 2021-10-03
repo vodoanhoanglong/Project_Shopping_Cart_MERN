@@ -1,14 +1,16 @@
 import React from "react";
-import Product from "../components/dashboard/Product";
+import Information from "../components/contact/Information";
 import NavbarMenu from "../components/layout/NavbarMenu";
 
-const Dashboard = () => {
+import "../css/Contact.css";
+
+const Contact = () => {
   return (
     <div className="animate__animated animate__fadeIn">
       <NavbarMenu />
-      <Product />
+      <Information />
     </div>
   );
 };
 
-export default Dashboard;
+export default Contact;

@@ -72,7 +72,7 @@
   border-top-right-radius: 10px;
 }
 
-.shop-container .products .block-pic a {
+.shop-container .products .block-pic button {
   position: absolute;
   display: flex;
   justify-content: center;
@@ -86,6 +86,7 @@
   font-size: 20px;
   line-height: 1.466667;
   color: #333;
+  border: 1px solid #fff;
   border-radius: 30px;
   bottom: -50px;
   left: 50%;
@@ -98,11 +99,11 @@
   transition: transform 0.9s ease;
 }
 
-.shop-container .products .block-pic:hover > a {
+.shop-container .products .block-pic:hover > button {
   bottom: 30px;
 }
 
-.shop-container .products .block-pic a:focus {
+.shop-container .products .block-pic button:focus {
   display: none;
 }
 
@@ -110,7 +111,7 @@
   transform: scale(1.1);
 }
 
-.shop-container .products .block-pic a:hover {
+.shop-container .products .block-pic button:hover {
   border-color: #222;
   background-color: #222;
   color: #fff;

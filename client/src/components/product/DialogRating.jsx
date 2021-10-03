@@ -174,6 +174,8 @@ const DialogTitle = withStyles(styles)((props) => {
 const DialogContent = withStyles((theme) => ({
   root: {
     padding: theme.spacing(2),
+    height: 290,
+    overflowY: "scroll",
   },
 }))(MuiDialogContent);
 
@@ -292,8 +294,9 @@ export default function DialogRating(props) {
             <AccountCircleIcon />
             <b style={{ paddingLeft: 5 }}>
               {ratingUser.user.username.split("@")[0]}
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              {ratingUser.createAt}
             </b>
-            {ratingUser.createAt}
             <br />
             <Rating
               style={{ marginTop: 5 }}

@@ -24,8 +24,6 @@ const Auth = ({ authRoute }) => {
     return <Redirect to="/user" />;
   if (isAuthenticated && currentLocation === "/cart")
     return <Redirect to="/cart" />;
-  if (isAuthenticated && currentLocation === "/dashboard")
-    return <Redirect to="/dashboard" />;
   if (isAuthenticated) return <Redirect to="/" />;
   else
     body = (

@@ -7,7 +7,6 @@ import { UserContext } from "../../contexts/UserContext";
 
 import CartHover from "../cart/CartHover";
 import UserHover from "../user/UserHover";
-import DashboardMenu from "./DashboardMenu";
 
 import "../../css/NavbarMenu.css";
 import Cart from "../../assets/shopping-cart.png";
@@ -80,11 +79,7 @@ const NavbarMenu = () => {
   const navbarMenu = currentLink === "/user" ? "nav-back-user" : "nav-back";
 
   const navbarMode =
-    currentLink === "/cart" ||
-    currentLink === "/user" ||
-    currentLink === "/dashboard"
-      ? true
-      : false;
+    currentLink === "/cart" || currentLink === "/user" ? true : false;
 
   const navbarColorItem = (string) =>
     currentLink !== string ? null : { color: "#717fe0" };
@@ -92,7 +87,6 @@ const NavbarMenu = () => {
   return (
     <>
       <header className={navbarScroll + toggle}>
-        {currentLink === "/dashboard" && <DashboardMenu />}
         <div className="logo">
           <h1 style={{ color: navbarColor }}>
             <Link
@@ -128,8 +122,8 @@ const NavbarMenu = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/dashboard" style={navbarColorItem("/dashboard")}>
-                  DashBoard
+                <Link to="/contact" style={navbarColorItem("/contact")}>
+                  Contact
                 </Link>
               </li>
             </ul>

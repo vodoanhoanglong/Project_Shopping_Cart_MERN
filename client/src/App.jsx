@@ -14,7 +14,7 @@ import Shop from "./views/Shop";
 import Cart from "./views/Cart";
 import Auth from "./views/Auth";
 import User from "./views/User";
-import Dashboard from "./views/Dashboard";
+import Contact from "./views/Contact";
 
 function App() {
   return (
@@ -28,6 +28,7 @@ function App() {
                   <Switch>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/shop" component={Shop} />
+                    <Route exact path="/contact" component={Contact} />
                     <Route
                       exact
                       path="/login"
@@ -42,11 +43,6 @@ function App() {
                     />
                     <ProtectedRoute exact path="/user" component={User} />
                     <ProtectedRoute exact path="/cart" component={Cart} />
-                    <ProtectedRoute
-                      exact
-                      path="/dashboard"
-                      component={Dashboard}
-                    />
                   </Switch>
                 </Router>
               </RatingContextProvider>
