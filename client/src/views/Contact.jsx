@@ -1,4 +1,5 @@
 import React from "react";
+import Address from "../components/contact/Address";
 import Information from "../components/contact/Information";
 import NavbarMenu from "../components/layout/NavbarMenu";
 
@@ -9,6 +10,7 @@ const Contact = () => {
     <div className="animate__animated animate__fadeIn">
       <NavbarMenu />
       <Information />
+      <Address />
     </div>
   );
 };

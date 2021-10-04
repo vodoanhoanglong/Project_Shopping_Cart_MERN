@@ -3,7 +3,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import instagram from "../../assets/instagram.png";
-import founder from "../../assets/founder.jpg";
+import founder from "../../assets/founder.png";
 import overlap from "../../assets/overlap.png";
 
 const useStyles = makeStyles((theme) => ({
@@ -78,8 +78,20 @@ const Information = () => {
       </div>
       <div className="founder">
         <div className="founder-info">
-          <img src={overlap} alt="" style={{ width: 300, height: 300 }} />
-          <Avatar alt="Remy Sharp" src={founder} className={classes.large} />
+          <img
+            src={overlap}
+            alt=""
+            className="blob-img animate__animated animate__rotateIn"
+          />
+          <Avatar
+            alt="Remy Sharp"
+            src={founder}
+            className={classes.large + " animate__animated animate__bounceInUp"}
+          />
+          <h3 className="animate__animated animate__zoomIn">
+            Founder
+            <p>Hoang Long</p>
+          </h3>
         </div>
       </div>
     </div>

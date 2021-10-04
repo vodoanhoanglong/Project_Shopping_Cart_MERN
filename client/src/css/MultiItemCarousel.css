@@ -17,20 +17,22 @@
   border-top-right-radius: 10px;
 }
 
-.slider .block-pic a {
+.slider .block-pic button {
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
   text-decoration: none;
   background-color: #fff;
-  border-radius: 20px;
   min-width: 139px;
   height: 40px;
   font-weight: bold;
   font-family: Poppins-Regular;
   font-size: 15px;
+  line-height: 1.466667;
   color: #333;
+  border: 1px solid #fff;
+  border-radius: 30px;
   bottom: -50px;
   left: 50%;
   transform: translateX(-50%);
@@ -43,7 +45,7 @@
   transition: transform 0.9s ease;
 }
 
-.slider .block-pic:hover > a {
+.slider .block-pic:hover > button {
   bottom: 30px;
 }
 
@@ -51,7 +53,11 @@
   transform: scale(1.1);
 }
 
-.slider .block-pic a:hover {
+.slider .block-pic button:focus {
+  display: none;
+}
+
+.slider .block-pic button:hover {
   border-color: #222;
   background-color: #222;
   color: #fff;

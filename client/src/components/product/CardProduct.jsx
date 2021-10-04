@@ -1,6 +1,5 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { FavoritesContext } from "../../contexts/FavoritesContext";
 import { ProductContext } from "../../contexts/ProductContext";

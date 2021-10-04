@@ -2,7 +2,7 @@
   background-color: #fff4e4;
   display: flex;
   justify-content: space-between;
-  height: 100vh;
+  height: 50vh;
   padding-top: 200px;
 }
 
@@ -58,5 +58,67 @@ h2 {
 
 .container-contact .founder .founder-info {
   height: 11rem;
+  position: relative;
+}
+
+.container-contact .founder .founder-info h3 {
+  margin-top: 10px;
   position: absolute;
+  z-index: 1;
+  text-align: center;
+  width: 200px;
+  left: -11%;
+  color: #fff;
+  font-weight: 500;
+  color: #333;
+  font-family: "Bebas Neue", cursive;
+}
+
+.container-contact .founder .founder-info .blob-img {
+  width: 300px;
+  height: 350px;
+  transform: rotate(-15deg);
+  position: absolute;
+  top: -5rem;
+  right: -4rem;
+}
+
+.contact-address {
+  margin-top: 50px;
+  text-align: center;
+  width: 100%;
+  padding: 0 300px 0 300px;
+}
+
+.contact-address h1 {
+  font-family: "Bebas Neue", cursive;
+  font-weight: bold;
+}
+
+.contact-address .contact-card {
+  width: 20rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.contact-address .contact-card img {
+  width: 60px;
+  height: 60px;
+}
+
+.contact-address .contact-address-info {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.contact-address .contact-card .card-title-contact,
+.contact-address .contact-card .card-text-contact {
+  font-family: "Bebas Neue", cursive;
+  font-size: 20px;
+}
+
+.contact-address .contact-card .card-title-contact {
+  font-weight: bold;
+  color: #333;
+  line-height: 2;
 }

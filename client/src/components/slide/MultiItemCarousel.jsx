@@ -18,6 +18,7 @@ const MultiItemCarousel = () => {
   const {
     productState: { products },
     get12Products,
+    setOpenDialog,
   } = useContext(ProductContext);
 
   const { showToastCart } = useContext(CartContext);
@@ -32,7 +33,7 @@ const MultiItemCarousel = () => {
 
   const handleClick = (event, product) => {
     setInfo(product);
-    document.getElementById("myModal").style.display = "block";
+    setOpenDialog(true);
   };
 
   return (
@@ -93,9 +94,7 @@ const MultiItemCarousel = () => {
           >
             <div className="block-pic">
               <Card.Img variant="top" src={item.url}></Card.Img>
-              <Link to="#" onClick={(e) => handleClick(e, item)}>
-                ADD TO CART
-              </Link>
+              <button onClick={(e) => handleClick(e, item)}>ADD TO CART</button>
             </div>
             <Card.Body>
               <Card.Title>{item.title}</Card.Title>
