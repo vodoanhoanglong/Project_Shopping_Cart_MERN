@@ -16,11 +16,13 @@
 }
 
 .container-contact .contact-info h1,
-h2 {
+.container-contact .contact-info h2 {
   font-weight: bold;
   font-family: PlayfairDisplay-Bold;
   color: white;
   text-transform: uppercase;
+  animation-delay: 1200ms;
+  animation-duration: 1.5s;
 }
 
 .container-contact .contact-info .social-contact {
@@ -39,6 +41,8 @@ h2 {
   align-items: center;
   cursor: pointer;
   transition: all 0.4s;
+  animation-delay: 1200ms;
+  animation-duration: 1.5s;
 }
 
 .container-contact .contact-info .social-contact .info-social:hover {
@@ -72,6 +76,8 @@ h2 {
   font-weight: 500;
   color: #333;
   font-family: "Bebas Neue", cursive;
+  animation-delay: 1s;
+  animation-duration: 1.5s;
 }
 
 .container-contact .founder .founder-info .blob-img {
@@ -81,6 +87,7 @@ h2 {
   position: absolute;
   top: -5rem;
   right: -4rem;
+  animation-delay: 1.5s;
 }
 
 .contact-address {
@@ -93,6 +100,21 @@ h2 {
 .contact-address h1 {
   font-family: "Bebas Neue", cursive;
   font-weight: bold;
+  animation-delay: 500ms;
+  animation-duration: 1s;
+}
+
+.contact-address .contact-card.animated1 {
+  animation-delay: 700ms;
+  animation-duration: 1.5s;
+}
+.contact-address .contact-card.animated2 {
+  animation-delay: 900ms;
+  animation-duration: 1.7s;
+}
+.contact-address .contact-card.animated3 {
+  animation-delay: 1100ms;
+  animation-duration: 1.9s;
 }
 
 .contact-address .contact-card {
@@ -124,6 +146,7 @@ h2 {
 }
 
 .container-line-chart {
-  width: 50%;
+  padding-top: 50px;
+  width: 55%;
   margin: 0 auto;
 }

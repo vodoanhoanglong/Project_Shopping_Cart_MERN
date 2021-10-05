@@ -26,6 +26,48 @@ const convertStringToDate = (string) => {
   }
 };
 
+const options = {
+  plugins: {
+    legend: {
+      labels: {
+        font: {
+          size: 40,
+          family: "'Bebas Neue', cursive",
+          weight: "bold",
+        },
+      },
+    },
+  },
+  scales: {
+    y: {
+      beginAtZero: true,
+      ticks: {
+        text: "Dollar",
+        callback: function (value, index, values) {
+          return "$" + value;
+        },
+        font: {
+          size: 20,
+          family: "'Bebas Neue', cursive",
+          weight: "bold",
+        },
+        padding: 20,
+      },
+    },
+    x: {
+      ticks: {
+        font: {
+          size: 20,
+          family: "'Bebas Neue', cursive",
+          weight: "bold",
+        },
+        padding: 20,
+      },
+    },
+  },
+  animation: { duration: 1800 },
+};
+
 const LineChart = () => {
   const [state, setState] = React.useState(false);
   const {
@@ -45,25 +87,30 @@ const LineChart = () => {
         label: "Revenue By Week",
         data: value && value.map((cost) => cost),
         fill: true,
-        backgroundColor: "rgba(113,127,224, 0.6)",
+        backgroundColor: "rgba(113,127,224, 0.4)",
         borderColor: "#717fe0",
+        tension: 0.3,
       },
     ],
   };
 
   window.addEventListener("scroll", () => {
     const scrollPos = window.scrollY;
-    if (scrollPos > 350) setState(true);
+    if (scrollPos > 130) setState(true);
     else setState(false);
   });
 
   return (
     <div
       data-aos="fade-right"
-      data-aos-duration="1000"
+      data-aos-duration="1500"
       className="container-line-chart"
     >
-      {state ? <Line data={data} /> : <div style={{ height: 477 }}></div>}
+      {state ? (
+        <Line data={data} options={options} />
+      ) : (
+        <div style={{ height: 477 }}></div>
+      )}
     </div>
   );
 };

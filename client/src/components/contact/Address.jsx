@@ -26,11 +26,16 @@ const addressPerCountry = [
 
 const Address = () => {
   return (
-    <div className="contact-address animate__animated animate__fadeInUp">
-      <h1>Location</h1>
+    <div className="contact-address">
+      <h1 className="animate__animated animate__fadeInUp">Location</h1>
       <div className="contact-address-info">
         {addressPerCountry.map((item, index) => (
-          <Card className="contact-card" key={index}>
+          <Card
+            className={`contact-card animate__animated animate__fadeInUp animated${
+              index + 1
+            }`}
+            key={index}
+          >
             <Card.Body>
               <div>{item.flag}</div>
               <Card.Title className="card-title-contact">

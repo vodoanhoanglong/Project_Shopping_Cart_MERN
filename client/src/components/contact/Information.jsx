@@ -24,9 +24,11 @@ const Information = () => {
 
   return (
     <div className="container-contact">
-      <div className="contact-info">
-        <div className="info-shop animate__animated animate__fadeInLeft">
-          <h1>Thank you for visited my shop</h1>
+      <div className="contact-info animate__animated animate__fadeInLeft animate__delay-1s">
+        <div>
+          <h1 className="info-shop animate__animated animate__fadeInLeft">
+            Thank you for visited my shop
+          </h1>
         </div>
         <br />
         <div className="social-contact">
@@ -86,6 +88,7 @@ const Information = () => {
           <Avatar
             alt="Remy Sharp"
             src={founder}
+            style={{ animationDelay: "1s", animationDuration: "1.5s" }}
             className={classes.large + " animate__animated animate__bounceInUp"}
           />
           <h3 className="animate__animated animate__zoomIn">
