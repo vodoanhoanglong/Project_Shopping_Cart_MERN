@@ -127,3 +127,18 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQ0M
     "content": "Dep qua",
     "createAt": "23:45:15, 27/9/2021"
 }
+
+###
+GET http://localhost:5000/cart
+Content-Type: application/json
+
+###
+POST http://localhost:5000/cart
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGY2NGVjNTdmMjNiYzIzY2M1ZTkzMDEiLCJpYXQiOjE2MjY4MzU1MjR9.kfSPVHQQ8DiEuZe8I6vcjIGzrBLzoFZQl5NU0p8WicQ
+
+
+{
+    "createAt": "17:39:12, 4/10/2021",
+    "totalPrice": 650
+}

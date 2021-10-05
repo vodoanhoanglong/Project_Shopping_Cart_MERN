@@ -26,7 +26,7 @@ const addressPerCountry = [
 
 const Address = () => {
   return (
-    <div className="contact-address">
+    <div className="contact-address animate__animated animate__fadeInUp">
       <h1>Location</h1>
       <div className="contact-address-info">
         {addressPerCountry.map((item, index) => (

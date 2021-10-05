@@ -1,10 +1,16 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useReducer, useEffect } from "react";
 import { apiUrl } from "./constants";
+import { cartReducer } from "../reducers/cartReducer";
+
 import axios from "axios";
 
 export const CartContext = createContext();
 
 const CartContextProvider = ({ children }) => {
+  const [cartState, dispatch] = useReducer(cartReducer, {
+    revenue: null,
+  });
+
   const [itemCart, setItemCart] = useState([]);
   const [showToastCart, setShowToastCart] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
@@ -50,6 +56,23 @@ const CartContextProvider = ({ children }) => {
     }
   };
 
+  const getRevenue = async () => {
+    try {
+      const response = await axios.get(`${apiUrl}/cart`);
+      if (response.data.success)
+        dispatch({
+          type: "SET_REVENUE_SUCCESS",
+          payload: response.data.allOrder,
+        });
+    } catch (error) {
+      dispatch({
+        type: "SET_REVENUE_FAIL",
+      });
+    }
+  };
+
+  useEffect(() => getRevenue(), []);
+
   const cartContextData = {
     itemCart,
     setItemCart,
@@ -70,6 +93,8 @@ const CartContextProvider = ({ children }) => {
     disabled,
     setDisabled,
     cartUser,
+    cartState,
+    getRevenue,
   };
 
   return (

@@ -40,7 +40,7 @@ app.use("/auth", authRouter);
 app.use("/rating", ratingRouter);
 app.use("/user", verifyToken, userRouter);
 app.use("/product_action", productRouter); // thieu verifyToken
-app.use("/cart", verifyToken, cartRouter);
+app.use("/cart", cartRouter);
 app.use("/favorites", verifyToken, favoritesRouter);
 
 const PORT = 5000;
