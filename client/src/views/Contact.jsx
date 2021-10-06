@@ -1,6 +1,7 @@
 import React from "react";
 import Address from "../components/contact/Address";
 import Information from "../components/contact/Information";
+import ContactForm from "../components/contact/ContactForm";
 import NavbarMenu from "../components/layout/NavbarMenu";
 import Footer from "../components/layout/Footer";
 import AOS from "aos";
@@ -16,10 +17,10 @@ const Contact = () => {
       <Information />
       <Address />
       <div style={{ marginBottom: 150 }}></div>
-
       <LineChart />
-
-      <div style={{ marginBottom: 350 }}></div>
+      <div style={{ marginBottom: 150 }}></div>
+      <ContactForm />
+      <div style={{ marginBottom: 150 }}></div>
       <Footer />
     </div>
   );

@@ -85,11 +85,11 @@ const Information = () => {
             alt=""
             className="blob-img animate__animated animate__rotateIn"
           />
-          <Avatar
-            alt="Remy Sharp"
+          <img
+            alt=""
             src={founder}
             style={{ animationDelay: "1s", animationDuration: "1.5s" }}
-            className={classes.large + " animate__animated animate__bounceInUp"}
+            className="img-founder animate__animated animate__bounceInUp"
           />
           <h3 className="animate__animated animate__zoomIn">
             Founder

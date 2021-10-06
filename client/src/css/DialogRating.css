@@ -62,3 +62,20 @@
 .empty-rating {
   margin-top: 15px;
 }
+
+.dialog-rating .MuiFilledInput-root {
+  background-color: rgba(143, 142, 142, 0.2);
+  border-radius: 25px;
+}
+
+.dialog-rating .MuiFilledInput-underline:before {
+  border: none;
+}
+
+.dialog-rating .MuiFilledInput-underline:after {
+  border: none;
+}
+
+.dialog-rating .MuiFilledInput-underline:hover:before {
+  border: none;
+}

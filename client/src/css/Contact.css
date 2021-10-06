@@ -71,7 +71,8 @@
   z-index: 1;
   text-align: center;
   width: 200px;
-  left: -11%;
+  left: -56%;
+  top: 18%;
   color: #fff;
   font-weight: 500;
   color: #333;
@@ -81,13 +82,18 @@
 }
 
 .container-contact .founder .founder-info .blob-img {
-  width: 300px;
+  width: 340px;
   height: 350px;
   transform: rotate(-15deg);
   position: absolute;
   top: -5rem;
   right: -4rem;
   animation-delay: 1.5s;
+}
+
+.container-contact .founder .founder-info .img-founder {
+  height: 400px;
+  margin-top: -100px;
 }
 
 .contact-address {
@@ -149,4 +155,91 @@
   padding-top: 50px;
   width: 55%;
   margin: 0 auto;
+}
+
+.contact-form {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-form h1 {
+  font-family: "Bebas Neue", cursive;
+  font-weight: bold;
+  animation-delay: 500ms;
+  animation-duration: 1s;
+}
+
+.contact-form .btn-user {
+  margin-top: 50px;
+  text-decoration: none;
+  background-color: #717fe0;
+  min-width: 140px;
+  height: 43px;
+  font-weight: bold;
+  font-family: "Bebas Neue", cursive;
+  font-size: 30px;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 30px;
+  transition: all 0.4s;
+  animation-delay: 1500ms;
+  animation-duration: 1.5s;
+}
+
+.contact-form .btn-user:hover {
+  background-color: #333;
+}
+
+.contact-form form {
+  margin-top: 40px;
+  background-color: #f7f8fa;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  border-radius: 30px;
+  padding: 30px;
+  animation-delay: 500ms;
+  animation-duration: 1s;
+}
+
+.contact-form .MuiFilledInput-root {
+  background-color: rgba(143, 142, 142, 0.2);
+  border-radius: 25px;
+}
+
+.contact-form .MuiFilledInput-underline:before {
+  border: none;
+}
+
+.contact-form .MuiFilledInput-underline:after {
+  border: none;
+}
+
+.contact-form .MuiFilledInput-underline:hover:before {
+  border: none;
+}
+
+#dialog-contact {
+  color: #333;
+  background-color: #b5e6b5;
+  font-family: "Bebas Neue", cursive;
+}
+
+.contact-form .txt1 {
+  animation-delay: 700ms;
+  animation-duration: 1.5s;
+}
+
+.contact-form .txt2 {
+  animation-delay: 800ms;
+  animation-duration: 1.6s;
+}
+
+.contact-form .txt3 {
+  animation-delay: 1000ms;
+  animation-duration: 1.8s;
+}
+
+.contact-form .txt4 {
+  animation-delay: 1200ms;
+  animation-duration: 2s;
 }

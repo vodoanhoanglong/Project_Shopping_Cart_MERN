@@ -45,6 +45,19 @@ module.exports.getOrder = async (req, res) => {
 
   try {
     const resultAllOrder = [];
+
+    // let allOrder = await Cart.aggregate([
+    //   {
+    //     $project: {
+    //       createAt: { $split: ["$createAt", ", "] },
+    //       totalPrice: 1,
+    //     },
+    //   },
+    //   { $unwind: "$createAt" },
+    //   { $match: { createAt: /[^"]{9}/ } },
+    //   { $sort: { _id: -1 } },
+    // ]);
+
     let allOrder = await Cart.find().sort({ _id: -1 });
 
     for (let i in result) resultAllOrder.push(sum(allOrder, i));

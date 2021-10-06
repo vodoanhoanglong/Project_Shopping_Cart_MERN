@@ -142,3 +142,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGY2N
     "createAt": "17:39:12, 4/10/2021",
     "totalPrice": 650
 }
+
+###
+POST  http://localhost:5000/contact
+Content-Type: application/json
+
+{
+    "fullName": "Test",
+    "email": "test@example.com",
+    "phone": "0909230102",
+    "message": "Nothing"
+}

@@ -110,6 +110,7 @@ const DialogInputRating = (props) => {
       open={open}
       onClose={handleClose}
       classes={{ paperWidthSm: classes.paperWidthSm }}
+      className="dialog-rating"
     >
       <DialogTitle onClose={handleClose}>Your Rating</DialogTitle>
       <form className={classes.root} onSubmit={submitRating} autoComplete="off">

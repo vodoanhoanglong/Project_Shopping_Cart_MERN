@@ -110,7 +110,10 @@ const CartPayment = () => {
       style={{ height: "100vh", backgroundColor: "#F7F8FA" }}
     >
       <div className="container-card-bill-information">
-        <Card className={classes.root} style={{ width: "40%" }}>
+        <Card
+          className={classes.root}
+          style={{ width: "40%", boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px" }}
+        >
           <CardContent>
             <h1>Bill Information</h1>
             <div className="card-bill-information">

@@ -71,6 +71,15 @@ const CartContextProvider = ({ children }) => {
     }
   };
 
+  const addContact = async (info) => {
+    try {
+      await axios.post(`${apiUrl}/contact`, info);
+    } catch (error) {
+      if (error.response.data) return error.response.data;
+      else return { success: false, message: error.message };
+    }
+  };
+
   useEffect(() => getRevenue(), []);
 
   const cartContextData = {
@@ -95,6 +104,7 @@ const CartContextProvider = ({ children }) => {
     cartUser,
     cartState,
     getRevenue,
+    addContact,
   };
 
   return (
