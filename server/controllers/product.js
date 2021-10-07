@@ -1,4 +1,5 @@
 const Product = require("../models/product");
+const Favorites = require("../models/favorites");
 
 module.exports.addProduct = async (req, res) => {
   const { title, description, url, price, type } = req.body;
@@ -95,14 +96,42 @@ module.exports.deleteProduct = async (req, res) => {
 
 module.exports.getProducts = async (req, res) => {
   try {
-    const products = await Product.find().sort({ _id: -1 }).limit(12);
     const allProducts = await Product.find().sort({ _id: -1 });
+    const products = allProducts.slice(0, 12);
     res.json({
       success: true,
       type: {
         products,
         allProducts,
       },
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};
+
+module.exports.getMostFavoritesProducts = async (req, res) => {
+  try {
+    let mostFavoriteProducts = await Favorites.aggregate([
+      {
+        $group: {
+          _id: "$product", // chỉ group theo trường có _id
+          product: { $first: "$product" },
+          favorites: { $sum: 1 },
+        },
+      },
+      { $sort: { favorites: -1 } },
+      { $limit: 12 },
+    ]);
+
+    mostFavoriteProducts = await Product.populate(mostFavoriteProducts, {
+      path: "product",
+    });
+
+    res.json({
+      success: true,
+      mostFavoriteProducts,
     });
   } catch (error) {
     console.log(error);

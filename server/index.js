@@ -40,7 +40,7 @@ app.use(cors());
 app.use("/auth", authRouter);
 app.use("/rating", ratingRouter);
 app.use("/user", verifyToken, userRouter);
-app.use("/product_action", productRouter); // thieu verifyToken
+app.use("/product_action", productRouter);
 app.use("/cart", cartRouter);
 app.use("/favorites", verifyToken, favoritesRouter);
 app.use("/contact", contactRouter);

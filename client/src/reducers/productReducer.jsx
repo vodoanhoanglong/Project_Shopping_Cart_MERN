@@ -11,6 +11,16 @@ export const productReducer = (state, action) => {
         ...state,
         products: [],
       };
+    case "PRODUCT_LOADED_12FAVORITES_SUCCESS":
+      return {
+        ...state,
+        productFavorites: payload,
+      };
+    case "PRODUCT_LOADED_12FAVORITES_FAIL":
+      return {
+        ...state,
+        productFavorites: [],
+      };
     case "PRODUCT_LOADED_ALL_SUCCESS":
       return {
         ...state,

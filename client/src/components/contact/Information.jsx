@@ -92,7 +92,7 @@ const Information = () => {
             className="img-founder animate__animated animate__bounceInUp"
           />
           <h3 className="animate__animated animate__zoomIn">
-            Founder
+            <b style={{ lineHeight: "2" }}>Founder</b>
             <p>Hoang Long</p>
           </h3>
         </div>

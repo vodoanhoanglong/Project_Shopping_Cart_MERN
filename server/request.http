@@ -153,3 +153,7 @@ Content-Type: application/json
     "phone": "0909230102",
     "message": "Nothing"
 }
+
+###
+GET http://localhost:5000/product_action/most_favorites
+Content-Type: application/json

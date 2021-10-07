@@ -7,8 +7,8 @@ export const ProductContext = createContext();
 
 const ProductContextProvider = ({ children }) => {
   const [productState, dispatch] = useReducer(productReducer, {
-    product: null,
     products: [],
+    productFavorites: [],
     allProducts: [],
   });
   const [cart, setCart] = useState(0);
@@ -29,6 +29,21 @@ const ProductContextProvider = ({ children }) => {
     }
   };
 
+  const get12ProductsFavorites = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5000/product_action/most_favorites"
+      );
+      if (response.data.success)
+        dispatch({
+          type: "PRODUCT_LOADED_12FAVORITES_SUCCESS",
+          payload: response.data.mostFavoriteProducts,
+        });
+    } catch (error) {
+      dispatch({ type: "PRODUCT_LOADED_12FAVORITES_FAIL" });
+    }
+  };
+
   const getAllProducts = async () => {
     try {
       const response = await axios.get("http://localhost:5000/product_action");
@@ -45,6 +60,7 @@ const ProductContextProvider = ({ children }) => {
   const productContextData = {
     productState,
     get12Products,
+    get12ProductsFavorites,
     getAllProducts,
     cart,
     setCart,

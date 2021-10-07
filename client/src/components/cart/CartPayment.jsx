@@ -33,16 +33,8 @@ const useStyles = makeStyles({
 const CartPayment = () => {
   const classes = useStyles();
 
-  const {
-    itemCart,
-    value,
-    setValue,
-    date,
-    handleNext,
-    handleBack,
-    cartUser,
-    getRevenue,
-  } = useContext(CartContext);
+  const { itemCart, value, setValue, date, handleNext, handleBack, cartUser } =
+    useContext(CartContext);
   const {
     authState: { user },
     loadUser,
@@ -100,7 +92,6 @@ const CartPayment = () => {
     localStorage.removeItem("cart");
     handleNext();
     setValue((prevValue) => ({ ...prevValue, couponCode: "" }));
-    await getRevenue();
     await loadUser();
   };
 

@@ -80,8 +80,6 @@ const CartContextProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => getRevenue(), []);
-
   const cartContextData = {
     itemCart,
     setItemCart,

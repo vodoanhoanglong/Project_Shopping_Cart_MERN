@@ -66,3 +66,30 @@
 .slider p {
   font-weight: bold;
 }
+
+.slider .card-multi-carousel {
+  width: 19rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.slider .card-multi-carousel .blob-favorites {
+  background-color: #717fe0;
+  border: 1px solid transparent;
+  border-radius: 20px;
+}
+
+.slider .card-multi-carousel .container-blob {
+  display: flex;
+  justify-content: space-between;
+}
+
+.slider .card-multi-carousel .container-blob .fas {
+  font-size: 20px;
+  color: #fe2c55;
+  padding-left: 8px;
+}
+
+.slider .card-multi-carousel .container-blob span {
+  font-size: 15px;
+  font-weight: bold;
+}

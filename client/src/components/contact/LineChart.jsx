@@ -68,12 +68,9 @@ const options = {
   animation: { duration: 1800 },
 };
 
-const LineChart = () => {
+const LineChart = (props) => {
+  const { revenue } = props;
   const [state, setState] = React.useState(false);
-  const {
-    cartState: { revenue },
-  } = React.useContext(CartContext);
-
   let key, value;
   if (revenue) {
     key = Object.keys(revenue).reverse();

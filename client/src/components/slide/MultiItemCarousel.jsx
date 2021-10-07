@@ -1,34 +1,19 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useContext } from "react";
 import { Card } from "react-bootstrap";
 
-import { ProductContext } from "../../contexts/ProductContext";
 import { CartContext } from "../../contexts/CartContext";
 
-import ProductModal from "../product/ProductModal";
 import ShowToast from "../layout/ShowToast";
 import Carousel from "react-multi-carousel";
 
 import "react-multi-carousel/lib/styles.css";
 import "../../css/MultiItemCarousel.css";
 
-const MultiItemCarousel = () => {
-  const [info, setInfo] = useState("");
-
-  const {
-    productState: { products },
-    get12Products,
-    setOpenDialog,
-  } = useContext(ProductContext);
+const MultiItemCarousel = (props) => {
+  const { data, setOpenDialog, setInfo, ...other } = props;
 
   const { showToastCart } = useContext(CartContext);
-
-  const isMounted = useRef(false);
-
-  useEffect(() => {
-    isMounted.current = true;
-    get12Products();
-    return () => (isMounted.current = false);
-  }, []);
+  if (other.label) console.log(other.label);
 
   const handleClick = (event, product) => {
     setInfo(product);
@@ -83,26 +68,27 @@ const MultiItemCarousel = () => {
         slidesToSlide={1}
         swipeable
       >
-        {products.map((item, index) => (
-          <Card
-            style={{
-              width: "19rem",
-              boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
-            }}
-            key={item._id}
-          >
+        {data.map((item, index) => (
+          <Card className="card-multi-carousel" key={item._id}>
             <div className="block-pic">
               <Card.Img variant="top" src={item.url}></Card.Img>
               <button onClick={(e) => handleClick(e, item)}>ADD TO CART</button>
             </div>
             <Card.Body>
               <Card.Title>{item.title}</Card.Title>
-              <Card.Text>{"$ " + item.price}</Card.Text>
+              <div className="container-blob">
+                <Card.Text>{"$ " + item.price}</Card.Text>
+                {other.label && (
+                  <div className="container-blob">
+                    <span>{other.label[index].favorites}</span>
+                    <i className="fas fa-heart "></i>
+                  </div>
+                )}
+              </div>
             </Card.Body>
           </Card>
         ))}
       </Carousel>
-      <ProductModal _id={info._id} product={info} />
       <ShowToast title="Added to cart" showToast={showToastCart} />
     </div>
   );
