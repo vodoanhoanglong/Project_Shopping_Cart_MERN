@@ -31,7 +31,6 @@ const Favorites = () => {
 
   const handleClick = (event, product) => {
     setView(product);
-    // document.getElementById("myModal").style.display = "block";
     setOpenDialog(true);
   };
 
@@ -75,6 +74,11 @@ const Favorites = () => {
                     boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
                   }}
                 >
+                  {item.product.discount !== 0 && (
+                    <div className="label-discount">
+                      <b>-{item.product.discount}%</b>
+                    </div>
+                  )}
                   <div className="block-pic" onMouseEnter={handleHover}>
                     <Card.Img variant="top" src={item.product.url} />
                     <button

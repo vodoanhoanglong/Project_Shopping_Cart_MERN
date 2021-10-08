@@ -46,7 +46,7 @@ module.exports.updateProduct = async (req, res) => {
       type,
     };
 
-    const productUpdateCondition = { _id: req.params.id, user: req.userId };
+    const productUpdateCondition = { _id: req.params.id };
 
     updatedProduct = await Product.findOneAndUpdate(
       productUpdateCondition,
@@ -72,7 +72,7 @@ module.exports.updateProduct = async (req, res) => {
 
 module.exports.deleteProduct = async (req, res) => {
   try {
-    const productDeleteCondition = { _id: req.params.id, user: req.userId };
+    const productDeleteCondition = { _id: req.params.id };
 
     const deletedProduct = await Product.findOneAndDelete(
       productDeleteCondition
@@ -136,5 +136,52 @@ module.exports.getMostFavoritesProducts = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};
+
+module.exports.getDiscountProducts = async (req, res) => {
+  try {
+    const discountProducts = await Product.find()
+      .sort({ discount: -1 })
+      .limit(12);
+
+    res.json({
+      success: true,
+      discountProducts,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};
+
+module.exports.addDiscount = async (req, res) => {
+  const { discount } = req.body;
+  try {
+    let updatedProduct = {
+      discount,
+    };
+
+    const productUpdateCondition = { _id: req.params.id };
+
+    updatedProduct = await Product.findOneAndUpdate(
+      productUpdateCondition,
+      { $set: updatedProduct },
+      { new: true }
+    );
+
+    if (!updatedProduct)
+      return res
+        .status(401)
+        .json({ success: false, message: "Product or Authorized not found" });
+
+    res.json({
+      success: true,
+      message: "Updated product successfully",
+      product: updatedProduct,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 };

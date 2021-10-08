@@ -23,5 +23,9 @@ const ProductSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "users",
   },
+  discount: {
+    type: Number,
+    default: 0,
+  },
 });
 module.exports = mongoose.model("products", ProductSchema);

@@ -1,8 +1,7 @@
 .slider {
   text-align: left;
-  padding-left: 290px;
   width: 94%;
-  margin: 50px 0 50px 0;
+  margin: 0 auto;
 }
 .card {
   border-radius: 10px;
@@ -92,4 +91,28 @@
 .slider .card-multi-carousel .container-blob span {
   font-size: 15px;
   font-weight: bold;
+}
+
+.label-discount {
+  position: absolute;
+  border-top: 70px solid #d53333;
+  border-right: 70px solid transparent;
+  line-height: 2;
+  top: 0%;
+  left: 0%;
+  z-index: 2;
+}
+
+.label-discount b {
+  color: #fff;
+  position: absolute;
+  top: -60px;
+  left: -5px;
+  text-align: center;
+  font-size: 15px;
+  width: 50px;
+}
+
+.discount-text {
+  padding-left: 20px;
 }

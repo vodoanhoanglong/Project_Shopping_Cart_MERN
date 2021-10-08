@@ -13,7 +13,6 @@ const MultiItemCarousel = (props) => {
   const { data, setOpenDialog, setInfo, ...other } = props;
 
   const { showToastCart } = useContext(CartContext);
-  if (other.label) console.log(other.label);
 
   const handleClick = (event, product) => {
     setInfo(product);
@@ -25,13 +24,11 @@ const MultiItemCarousel = (props) => {
       <Carousel
         additionalTransfrom={0}
         arrows
-        autoPlaySpeed={3000}
         centerMode={false}
         containerClass="carousel-container"
         dotListClass=""
         draggable
         focusOnSelect={false}
-        infinite={false}
         itemClass=""
         keyBoardControl
         minimumTouchDrag={80}
@@ -64,12 +61,19 @@ const MultiItemCarousel = (props) => {
           },
         }}
         showDots={false}
+        autoPlay={false}
         sliderClass=""
         slidesToSlide={1}
         swipeable
+        customTransition="transform 800ms ease-in-out"
       >
         {data.map((item, index) => (
           <Card className="card-multi-carousel" key={item._id}>
+            {item.discount !== 0 && (
+              <div className="label-discount">
+                <b>-{item.discount}%</b>
+              </div>
+            )}
             <div className="block-pic">
               <Card.Img variant="top" src={item.url}></Card.Img>
               <button onClick={(e) => handleClick(e, item)}>ADD TO CART</button>
@@ -77,7 +81,30 @@ const MultiItemCarousel = (props) => {
             <Card.Body>
               <Card.Title>{item.title}</Card.Title>
               <div className="container-blob">
-                <Card.Text>{"$ " + item.price}</Card.Text>
+                <div style={{ display: "flex" }}>
+                  <Card.Text
+                    style={
+                      item.discount !== 0
+                        ? {
+                            textDecorationLine: "line-through",
+                            opacity: 0.6,
+                          }
+                        : null
+                    }
+                  >
+                    {"$ " + item.price}
+                  </Card.Text>
+                  {item.discount !== 0 && (
+                    <Card.Text className="discount-text">
+                      {"$ " +
+                        (
+                          item.price -
+                          (item.price * item.discount) / 100
+                        ).toFixed(2)}
+                    </Card.Text>
+                  )}
+                </div>
+
                 {other.label && (
                   <div className="container-blob">
                     <span>{other.label[index].favorites}</span>

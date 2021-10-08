@@ -497,7 +497,16 @@ export default function CartTable() {
                                   className="size-color-cart"
                                   onClick={() => {
                                     setOpenDialog(true);
-                                    setInformation(row);
+                                    setInformation({
+                                      _id: row._id,
+                                      size: row.size,
+                                      color: row.color,
+                                      title: row.title,
+                                      description: row.description,
+                                      price: row.priceNoDiscount,
+                                      url: row.url,
+                                      discount: row.discount,
+                                    });
                                   }}
                                 >
                                   <span>{row.size}</span>

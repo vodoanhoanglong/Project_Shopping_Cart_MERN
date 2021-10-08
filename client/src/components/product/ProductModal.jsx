@@ -30,7 +30,7 @@ const ProductModal = (props) => {
     _id,
     size,
     color,
-    product: { title, description, price, url },
+    product: { title, description, price, url, discount },
   } = props;
 
   const [showRating, setShowRating] = useState(false);
@@ -159,12 +159,20 @@ const ProductModal = (props) => {
         _id,
         url,
         title,
-        price,
+        discount,
+        priceNoDiscount: price,
+        price:
+          discount !== 0
+            ? (price - (price * discount) / 100).toFixed(2)
+            : price,
         description,
         totalItem: quantity,
         size: defaultSelect,
         color: defaultSelect2,
-        totalPrice: price * quantity,
+        totalPrice:
+          discount !== 0
+            ? (price - (price * discount) / 100).toFixed(2) * quantity
+            : price * quantity,
       },
       ...prevState,
     ]);
@@ -303,8 +311,26 @@ const ProductModal = (props) => {
                 {allRatings.length} ratings
               </div>
             </div>
+            <div style={{ display: "flex" }}>
+              <strong
+                style={
+                  discount !== 0
+                    ? {
+                        textDecorationLine: "line-through",
+                        opacity: 0.6,
+                      }
+                    : null
+                }
+              >
+                ${price}
+              </strong>
+              {discount !== 0 && (
+                <strong className="discount-text">
+                  {"$ " + (price - (price * discount) / 100).toFixed(2)}
+                </strong>
+              )}
+            </div>
 
-            <strong>${price}</strong>
             <p> {description} </p>
             <div className="information-size">
               <span>Size</span>

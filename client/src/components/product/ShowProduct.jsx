@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect, useRef } from "react";
+import { useContext, useState } from "react";
 
 import { Pagination } from "@material-ui/lab";
 import { Row, Col } from "react-bootstrap";
@@ -16,16 +16,7 @@ const ShowProduct = (props) => {
 
   const {
     productState: { allProducts },
-    getAllProducts,
   } = useContext(ProductContext);
-
-  const isMounted = useRef(false);
-
-  useEffect(() => {
-    isMounted.current = true;
-    getAllProducts();
-    return () => (isMounted.current = false);
-  }, []);
 
   const products = allProducts.filter((item) => item.type === type);
 

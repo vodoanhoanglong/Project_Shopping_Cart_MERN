@@ -157,3 +157,8 @@ Content-Type: application/json
 ###
 GET http://localhost:5000/product_action/most_favorites
 Content-Type: application/json
+
+
+###
+GET http://localhost:5000/product_action/discount_products
+Content-Type: application/json

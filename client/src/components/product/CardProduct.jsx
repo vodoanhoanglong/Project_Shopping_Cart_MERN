@@ -80,6 +80,11 @@ const CardProduct = (props) => {
           boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
         }}
       >
+        {product.discount !== 0 && (
+          <div className="label-discount">
+            <b>-{product.discount}%</b>
+          </div>
+        )}
         <div className="block-pic">
           <Card.Img variant="top" src={product.url} />
           <button to="#" onClick={handleClick}>
@@ -89,7 +94,29 @@ const CardProduct = (props) => {
         <Card.Body>
           <Card.Title>{product.title}</Card.Title>
           <div className="icon-heart">
-            <Card.Text>${product.price}</Card.Text>
+            <div style={{ display: "flex" }}>
+              <Card.Text
+                style={
+                  product.discount !== 0
+                    ? {
+                        textDecorationLine: "line-through",
+                        opacity: 0.6,
+                      }
+                    : null
+                }
+              >
+                {"$ " + product.price}
+              </Card.Text>
+              {product.discount !== 0 && (
+                <Card.Text className="discount-text">
+                  {"$ " +
+                    (
+                      product.price -
+                      (product.price * product.discount) / 100
+                    ).toFixed(2)}
+                </Card.Text>
+              )}
+            </div>
             <i
               className={"fas fa-heart " + animate}
               style={colorFavorites}

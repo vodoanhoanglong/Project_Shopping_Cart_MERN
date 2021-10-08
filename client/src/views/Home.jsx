@@ -8,20 +8,22 @@ import ShowToast from "../components/layout/ShowToast";
 import { ProductContext } from "../contexts/ProductContext";
 import ProductModal from "../components/product/ProductModal";
 
+import "../css/Home.css";
+
 const Home = () => {
   const { toastLogoutUser } = React.useContext(UserContext);
   const [info, setInfo] = React.useState("");
 
   const {
-    productState: { products, productFavorites },
-    get12Products,
+    productState: { products, productFavorites, productDiscount },
     get12ProductsFavorites,
+    get12ProductsDiscount,
     setOpenDialog,
   } = React.useContext(ProductContext);
 
   React.useEffect(() => {
-    get12Products();
     get12ProductsFavorites();
+    get12ProductsDiscount();
   }, []);
 
   return (
@@ -29,19 +31,7 @@ const Home = () => {
       <NavbarMenu />
       <SlideBar />
       <div>
-        <h2
-          style={{
-            paddingLeft: "290px",
-            marginTop: "50px",
-            fontFamily: "PlayfairDisplay-Bold",
-            fontWeight: "bold",
-            fontSize: "40px",
-            color: "black",
-            textTransform: "uppercase",
-          }}
-        >
-          New Products
-        </h2>
+        <h2 className="title-slider">New Products</h2>
       </div>
       <MultiItemCarousel
         type="new"
@@ -50,19 +40,7 @@ const Home = () => {
         data={products}
       />
       <div>
-        <h2
-          style={{
-            paddingLeft: "290px",
-            marginTop: "50px",
-            fontFamily: "PlayfairDisplay-Bold",
-            fontWeight: "bold",
-            fontSize: "40px",
-            color: "black",
-            textTransform: "uppercase",
-          }}
-        >
-          Most Favorites Products
-        </h2>
+        <h2 className="title-slider">Products with the most likes</h2>
       </div>
       <MultiItemCarousel
         type="favorites"
@@ -70,6 +48,15 @@ const Home = () => {
         setInfo={setInfo}
         data={productFavorites.map((item) => item.product)}
         label={productFavorites}
+      />
+      <div>
+        <h2 className="title-slider">Products are on sale</h2>
+      </div>
+      <MultiItemCarousel
+        type="discount"
+        setOpenDialog={setOpenDialog}
+        setInfo={setInfo}
+        data={productDiscount}
       />
       <ProductModal _id={info._id} product={info} />
       <ShowToast title="Logout success" showToast={toastLogoutUser} />
