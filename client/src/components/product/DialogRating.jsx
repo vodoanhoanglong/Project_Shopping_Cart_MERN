@@ -22,6 +22,7 @@ import Button from "@material-ui/core/Button";
 
 import "../../css/DialogRating.css";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import BackDrop from "../layout/BackDrop";
 
 const styles = (theme) => ({
   root: {
@@ -75,6 +76,7 @@ const DialogInputRating = (props) => {
   const [valueRating, setValueRating] = React.useState(0);
   const [valueComment, setValueComment] = React.useState("");
   const [hover, setHover] = React.useState(-1);
+  const [openBackdrop, setOpenBackdrop] = React.useState(false);
 
   React.useEffect(() => {
     setValueRating(rating);
@@ -89,7 +91,7 @@ const DialogInputRating = (props) => {
 
   const submitRating = async (e) => {
     e.preventDefault();
-
+    setOpenBackdrop(true);
     const value = {
       createAt: new Date(Date.now()).toLocaleString(),
       rating: valueRating,
@@ -100,6 +102,7 @@ const DialogInputRating = (props) => {
       if (other.isComment) await other.updateRating(_id, value);
       else await other.addRating(_id, value);
       setOpen(false);
+      setTimeout(() => setOpenBackdrop(false), 1000);
     } catch (error) {
       console.log(error);
     }
@@ -150,6 +153,7 @@ const DialogInputRating = (props) => {
           </Button>
         </div>
       </form>
+      <BackDrop open={openBackdrop} />
     </Dialog>
   );
 };

@@ -20,7 +20,7 @@ const MultiItemCarousel = (props) => {
   };
 
   return (
-    <div className="slider">
+    <div className="slider" data-aos="fade-up" data-aos-duration="1500">
       <Carousel
         additionalTransfrom={0}
         arrows

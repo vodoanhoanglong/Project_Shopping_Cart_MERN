@@ -11,6 +11,7 @@ import Slide from "@material-ui/core/Slide";
 import "../../css/ProductModal.css";
 import { Dialog } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import BackDrop from "../layout/BackDrop";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -38,6 +39,7 @@ const ProductModal = (props) => {
   const [defaultSelect2, setDefaultSelect2] = useState(
     !color ? "DEFAULT" : color
   );
+  const [openBackdrop, setOpenBackdrop] = React.useState(false);
 
   const [showAlert1, setShowAlert1] = useState("show-alert");
   const [showAlert2, setShowAlert2] = useState("show-alert");
@@ -215,6 +217,7 @@ const ProductModal = (props) => {
   };
 
   const handleAddToCart = () => {
+    setOpenBackdrop(true);
     if (defaultSelect === "DEFAULT") setShowAlert1("");
     if (defaultSelect2 === "DEFAULT") setShowAlert2("");
     if (defaultSelect !== "DEFAULT" && defaultSelect2 !== "DEFAULT") {
@@ -229,11 +232,13 @@ const ProductModal = (props) => {
         let currentQuantity = addItem.totalItem + quantity;
         updateItemPopover(currentQuantity);
       }
+      setTimeout(() => setOpenBackdrop(false), 1000);
       handleClose();
     }
   };
 
   const handleUpdateToCart = () => {
+    setOpenBackdrop(true);
     const resultTotalItem = itemCart.find(
       (itemUpdate) =>
         itemUpdate._id === _id &&
@@ -275,6 +280,7 @@ const ProductModal = (props) => {
         ),
       ]);
     }
+    setTimeout(() => setOpenBackdrop(false), 1000);
     handleClose();
   };
 
@@ -431,6 +437,7 @@ const ProductModal = (props) => {
           </div>
         </div>
       </div>
+      <BackDrop open={openBackdrop} />
       <DialogRating
         open={showRating}
         setOpen={setShowRating}

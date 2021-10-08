@@ -12,6 +12,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { UserContext } from "../../contexts/UserContext";
 
 import "../../css/CartPayment.css";
+import BackDrop from "../layout/BackDrop";
 
 const useStyles = makeStyles({
   root: {
@@ -32,6 +33,8 @@ const useStyles = makeStyles({
 
 const CartPayment = () => {
   const classes = useStyles();
+
+  const [openBackdrop, setOpenBackdrop] = React.useState(false);
 
   const { itemCart, value, setValue, date, handleNext, handleBack, cartUser } =
     useContext(CartContext);
@@ -60,6 +63,7 @@ const CartPayment = () => {
   today = dd + "/" + mm + "/" + yyyy;
 
   const handleClick = async () => {
+    setOpenBackdrop(true);
     const userInformation = {
       fullName: value.fullName,
       phone: value.phone,
@@ -93,6 +97,7 @@ const CartPayment = () => {
     handleNext();
     setValue((prevValue) => ({ ...prevValue, couponCode: "" }));
     await loadUser();
+    setTimeout(() => setOpenBackdrop(false), 1000);
   };
 
   return (
@@ -151,6 +156,7 @@ const CartPayment = () => {
           </CardActions>
         </Card>
       </div>
+      <BackDrop open={openBackdrop} />
       <CartSlider />
     </div>
   );

@@ -20,6 +20,7 @@ import DoneIcon from "@material-ui/icons/Done";
 
 import "../../css/Profile.css";
 import ShowToast from "../layout/ShowToast";
+import BackDrop from "../layout/BackDrop";
 
 const couponCode = { name: "LOVEYOUSOMUCH", discount: 10 };
 
@@ -44,6 +45,7 @@ const Profile = () => {
 
   const [active, setActive] = React.useState(!user.fullName ? "add" : "edit");
   const [disabled, setDisabled] = React.useState(true);
+  const [openBackdrop, setOpenBackdrop] = React.useState(false);
 
   const [value, setValue] = React.useState(
     user.fullName
@@ -92,6 +94,7 @@ const Profile = () => {
   const classes = useStyles();
 
   const saveUser = async (e) => {
+    setOpenBackdrop(true);
     e.preventDefault();
     if (!selectedDate.getTime()) return;
     const userForm = {
@@ -114,6 +117,7 @@ const Profile = () => {
         setShowToastCoupon(true);
         setTimeout(() => setShowToastCoupon(false), 3000);
       }
+      setTimeout(() => setOpenBackdrop(false), 1000);
     } catch (error) {
       console.log(error);
     }
@@ -319,6 +323,7 @@ const Profile = () => {
         </div>
       )}
       <ShowToast title="Received a coupon CODE" showToast={showToastCoupon} />
+      <BackDrop open={openBackdrop} />
     </div>
   );
 };
