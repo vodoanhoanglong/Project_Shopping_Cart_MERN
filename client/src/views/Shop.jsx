@@ -12,7 +12,6 @@ import "../css/Shop.css";
 
 const Shop = () => {
   const [urlImg, setUrlImg] = React.useState("");
-
   const { showToastCart } = React.useContext(CartContext);
   const { toastLogoutUser } = React.useContext(UserContext);
 

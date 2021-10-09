@@ -44,14 +44,17 @@ const CartHover = (props) => {
           <div className={"popover-cart " + showScroll}>
             {itemCart.map((item, index) => (
               <div key={index} className="popover-item">
-                <img src={item.url} alt="" />
+                <img src={item.url[item.imgIndex].img[0]} alt="" />
                 <div className="item-information">
                   <h5>{item.title}</h5>
                   <p className="price-information">${item.price}</p>
                   <div className="item-information-child">
-                    <p>x{item.totalItem}</p>
-                    <p>{item.size}</p>
-                    <p>{item.color}</p>
+                    <span>x{item.totalItem}</span>
+                    <span>{item.size}</span>
+                    <div
+                      className="color-popover"
+                      style={{ backgroundColor: item.color }}
+                    ></div>
                   </div>
                 </div>
               </div>

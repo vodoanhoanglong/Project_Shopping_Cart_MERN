@@ -77,6 +77,7 @@ const CardProduct = (props) => {
       <Card
         style={{
           width: "18rem",
+          height: 450,
           boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
         }}
       >
@@ -86,7 +87,9 @@ const CardProduct = (props) => {
           </div>
         )}
         <div className="block-pic">
-          <Card.Img variant="top" src={product.url} />
+          {product.url !== undefined && (
+            <Card.Img variant="top" src={product.url[0].img[0]} />
+          )}
           <button to="#" onClick={handleClick}>
             Quick View
           </button>

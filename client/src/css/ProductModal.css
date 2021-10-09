@@ -38,16 +38,16 @@
 }
 
 .container-information h2 {
-  font-family: Poppins-Regular;
-  font-size: 40px;
-  font-weight: 400;
+  font-family: "Bebas Neue", cursive;
+  font-size: 50px;
+  font-weight: bold;
   line-height: 1;
   color: #333;
   margin-bottom: 15px;
 }
 
 .container-information strong {
-  font-family: Poppins-SemiBold;
+  font-family: "Bebas Neue", cursive;
   font-size: 25px;
   font-weight: bolder;
   color: #333;
@@ -56,28 +56,22 @@
 .container-information p {
   margin-top: 30px;
   margin-bottom: 30px;
-  font-family: Poppins-SemiBold;
-  font-size: 20px;
+  font-family: "Bebas Neue", cursive;
+  font-size: 25px;
   color: #333;
   line-height: 1;
 }
 
-.container-information .information-size {
-  width: 11.8rem;
+.container-information .information-size,
+.container-information .information-color,
+.container-information .information-quantity {
+  width: 100%;
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
-  font-size: 18px;
-  color: #333;
-}
-
-.container-information .information-color {
-  width: 12.3rem;
-  display: flex;
-  align-items: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  font-size: 18px;
+  margin-bottom: 30px;
+  font-weight: bold;
+  font-family: "Bebas Neue", cursive;
+  font-size: 25px;
   color: #333;
 }
 
@@ -105,21 +99,20 @@
   cursor: pointer;
 }
 
-.container-information .information-quantity {
-  width: 72%;
-  display: flex;
-  align-items: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  font-size: 18px;
-  color: #333;
-}
-
 .container-information .information-quantity .quantity-btn {
   transform: translateX(15%);
   display: flex;
-  border: 1px solid #ced4da;
-  border-radius: 3px;
+  border: 3px solid #333;
+  border-radius: 30px;
+}
+
+.container-information .information-quantity .increase-btn {
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+.container-information .information-quantity .decrease-btn {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 
 .container-information .information-quantity .increase-btn,
@@ -129,7 +122,7 @@
   align-items: center;
   width: 46.3px;
   height: 40px;
-  font-size: 22px;
+  font-size: 25px;
   transition: all 0.4s;
 }
 
@@ -141,13 +134,13 @@
 
 .container-information .information-quantity .quantity-show {
   border: none;
-  border-left: 1px solid #e6e6e6;
-  border-right: 1px solid #e6e6e6;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
   background-color: #f7f7f7;
   text-align: center;
   width: 46.3px;
   height: 40px;
-  font-size: 22px;
+  font-size: 25px;
 }
 
 .container-information .information-quantity .quantity-show:focus-visible {
@@ -156,13 +149,13 @@
 
 .container-information button {
   display: flex;
-  border-radius: 23px;
+  border-radius: 25px;
   background-color: #717fe0;
-  min-width: 161px;
-  height: 46px;
+  min-width: 200px;
+  height: 50px;
   font-weight: bold;
-  font-family: Poppins-Medium;
-  font-size: 15px;
+  font-family: "Bebas Neue", cursive;
+  font-size: 30px;
   line-height: 1.466667;
   color: #fff;
   justify-content: center;
@@ -182,6 +175,8 @@
 .container-information .rating-length {
   color: #333;
   font-weight: bold;
+  font-size: 20px;
+  font-family: "Bebas Neue", cursive;
   margin-left: 20px;
   cursor: pointer;
   text-decoration: underline;
@@ -195,7 +190,6 @@
 .container-information .container-button {
   width: 15.4rem;
   display: flex;
-  justify-content: center;
   align-items: center;
   margin-top: 50px;
 }
@@ -223,4 +217,40 @@
 .container-slider .image-gallery-thumbnail.active,
 .image-gallery-thumbnail:hover {
   border: 3px solid #333;
+}
+
+.container-information .radio-group-color,
+.container-information .radio-group-size {
+  margin-left: 20px;
+}
+
+.container-information .MuiFormGroup-root {
+  flex-wrap: unset !important;
+  flex-direction: unset !important;
+}
+
+.information-color .radio-color {
+  border-radius: 30px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 12px;
+  animation-duration: 4s;
+}
+
+.container-information .MuiRadio-colorSecondary.Mui-checked {
+  color: black !important;
+}
+
+.container-information .MuiTypography-body1 {
+  font-family: "Bebas Neue", cursive;
+  font-weight: bold;
+  font-size: 25px;
+}
+.information-size .MuiSvgIcon-root {
+  font-size: 2.5rem;
+}
+
+.information-color .MuiIconButton-label {
+  color: transparent;
+}
+.radio-group-color .MuiIconButton-colorSecondary:hover {
+  background-color: transparent !important;
 }

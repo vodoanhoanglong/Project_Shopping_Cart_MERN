@@ -2,8 +2,7 @@ const Product = require("../models/product");
 const Favorites = require("../models/favorites");
 
 module.exports.addProduct = async (req, res) => {
-  const { title, description, url, price, type } = req.body;
-
+  const { title, description, size, url, price, type } = req.body;
   if (!title && !url && !price && !type)
     return res
       .status(400)
@@ -12,7 +11,9 @@ module.exports.addProduct = async (req, res) => {
     const newProduct = new Product({
       title,
       description,
-      url: url.startsWith("https://") ? url : `https://${url}`,
+      size,
+      // url: url.startsWith("https://") ? url : `https://${url}`,
+      url,
       price,
       type,
       user: req.userId,

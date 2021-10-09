@@ -95,13 +95,17 @@ const Order = () => {
                       style={{ width: "93%" }}
                       className="total-item-cart-slider"
                     >
-                      ${product.price}
-                      <br />
-                      {product.size}&nbsp;-&nbsp;{product.color}&nbsp;-&nbsp;x
+                      ${product.price}&nbsp;-&nbsp;
+                      {product.size}&nbsp;-&nbsp;
+                      <div
+                        className="color-popover"
+                        style={{ backgroundColor: product.color }}
+                      ></div>
+                      &nbsp;-&nbsp;x
                       {product.totalItem}
                     </span>
                     <img
-                      src={product.url}
+                      src={product.url[product.imgIndex].img[0]}
                       alt=""
                       style={{ width: 180, height: 200 }}
                     />

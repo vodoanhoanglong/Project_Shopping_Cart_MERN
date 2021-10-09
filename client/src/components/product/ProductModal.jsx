@@ -2,16 +2,18 @@ import React, { useState, useContext, useEffect } from "react";
 import { ProductContext } from "../../contexts/ProductContext";
 import { CartContext } from "../../contexts/CartContext";
 import { RatingContext } from "../../contexts/RatingContext";
+import { Dialog, Radio } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
 import HoverRating from "./HoverRating";
 import DialogRating from "./DialogRating";
-
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import BackDrop from "../layout/BackDrop";
 import ImageGallery from "react-image-gallery";
 import Alert from "@material-ui/lab/Alert";
 import Slide from "@material-ui/core/Slide";
 import "../../css/ProductModal.css";
-import { Dialog } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import BackDrop from "../layout/BackDrop";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -29,20 +31,22 @@ const ProductModal = (props) => {
 
   const {
     _id,
-    size,
     color,
-    product: { title, description, price, url, discount },
+    product: { title, description, size, price, url, discount },
   } = props;
+  const sizeCurr = props.currSize;
 
   const [showRating, setShowRating] = useState(false);
-  const [defaultSelect, setDefaultSelect] = useState(!size ? "DEFAULT" : size);
+  const [defaultSelect, setDefaultSelect] = useState(
+    !sizeCurr ? "DEFAULT" : sizeCurr
+  );
   const [defaultSelect2, setDefaultSelect2] = useState(
     !color ? "DEFAULT" : color
   );
+  const [indexImg, setIndexImg] = React.useState(0);
   const [openBackdrop, setOpenBackdrop] = React.useState(false);
 
-  const [showAlert1, setShowAlert1] = useState("show-alert");
-  const [showAlert2, setShowAlert2] = useState("show-alert");
+  const [showAlert, setShowAlert] = useState("show-alert");
 
   const { itemCart, setItemCart, setShowToastCart } = useContext(CartContext);
   const {
@@ -62,23 +66,29 @@ const ProductModal = (props) => {
     allRatings.reduce((sum, { rating }) => sum + rating, 0) /
       allRatings.length || 0;
 
+  const currColor = (hexColor) =>
+    defaultSelect2 === hexColor ? "3px solid #000000" : "2px solid #FFFFFF";
+
   // khi truyền props xuống để làm constructor cho State thì nên dùng useEffect
   useEffect(() => {
-    if (size !== undefined) {
-      setDefaultSelect(size);
+    if (sizeCurr !== undefined) {
+      setDefaultSelect(sizeCurr);
       setDefaultSelect2(color);
-    }
-  }, [size, color]);
+      setIndexImg(findIndex(color));
+    } else if (url !== undefined) setDefaultSelect2(url[0].color);
+  }, [sizeCurr, color, url]);
 
   const regex = /^[0-9\b]+$/;
 
+  const findIndex = (string) => url.findIndex((item) => item.color === string);
+
   const handleChange = (e) => {
     setDefaultSelect(e.target.value);
-    if (e.target.value !== "DEFAULT") setShowAlert1("show-alert");
+    if (e.target.value !== "DEFAULT") setShowAlert("show-alert");
   };
   const handleChange2 = (e) => {
     setDefaultSelect2(e.target.value);
-    if (e.target.value !== "DEFAULT") setShowAlert2("show-alert");
+    setIndexImg(findIndex(e.target.value));
   };
 
   const handleIncrease = () => setQuantity(quantity + 1);
@@ -103,46 +113,16 @@ const ProductModal = (props) => {
 
   const handleOnClickInput = () => setQuantity("");
 
-  const images = [
-    {
-      original: url,
-      thumbnail: url,
+  const images =
+    url !== undefined &&
+    url[indexImg].img.map((item) => ({
+      original: url !== undefined ? item : null,
+      thumbnail: url !== undefined ? item : null,
       originalWidth: "550",
       originalHeight: "650",
       thumbnailWidth: "150",
       thumbnailHeight: "100",
-    },
-    {
-      original:
-        "https://preview.colorlib.com/theme/cozastore/images/xproduct-detail-01.jpg.pagespeed.ic.p3moSJxG7I.webp",
-      thumbnail:
-        "https://preview.colorlib.com/theme/cozastore/images/xproduct-detail-01.jpg.pagespeed.ic.p3moSJxG7I.webp",
-      originalWidth: "550",
-      originalHeight: "650",
-      thumbnailWidth: "150",
-      thumbnailHeight: "100",
-    },
-    {
-      original:
-        "https://preview.colorlib.com/theme/cozastore/images/xproduct-detail-02.jpg.pagespeed.ic.1bDtXoN8v6.webp",
-      thumbnail:
-        "https://preview.colorlib.com/theme/cozastore/images/xproduct-detail-02.jpg.pagespeed.ic.1bDtXoN8v6.webp",
-      originalWidth: "550",
-      originalHeight: "650",
-      thumbnailWidth: "150",
-      thumbnailHeight: "100",
-    },
-    {
-      original:
-        "https://preview.colorlib.com/theme/cozastore/images/xproduct-detail-03.jpg.pagespeed.ic.-rPS2k8YRO.webp",
-      thumbnail:
-        "https://preview.colorlib.com/theme/cozastore/images/xproduct-detail-03.jpg.pagespeed.ic.-rPS2k8YRO.webp",
-      originalWidth: "550",
-      originalHeight: "650",
-      thumbnailWidth: "150",
-      thumbnailHeight: "100",
-    },
-  ];
+    }));
 
   const updateCountCart = () => setCart((prevCart) => prevCart + quantity);
 
@@ -162,6 +142,8 @@ const ProductModal = (props) => {
         url,
         title,
         discount,
+        allSize: size,
+        imgIndex: findIndex(defaultSelect2),
         priceNoDiscount: price,
         price:
           discount !== 0
@@ -203,24 +185,25 @@ const ProductModal = (props) => {
   const handleClose = () => {
     setOpenDialog(false);
     setTimeout(() => {
-      if (!size) {
+      if (!sizeCurr) {
         setDefaultSelect("DEFAULT");
-        setDefaultSelect2("DEFAULT");
+        setDefaultSelect2(url[0].color);
+        setIndexImg(0);
       } else {
-        setDefaultSelect(size);
+        setDefaultSelect(sizeCurr);
         setDefaultSelect2(color);
+        setIndexImg(findIndex(color));
       }
       setQuantity(1);
-      setShowAlert1("show-alert");
-      setShowAlert2("show-alert");
+
+      setShowAlert("show-alert");
     }, 400);
   };
 
   const handleAddToCart = () => {
-    setOpenBackdrop(true);
-    if (defaultSelect === "DEFAULT") setShowAlert1("");
-    if (defaultSelect2 === "DEFAULT") setShowAlert2("");
-    if (defaultSelect !== "DEFAULT" && defaultSelect2 !== "DEFAULT") {
+    if (defaultSelect === "DEFAULT") setShowAlert("");
+    else {
+      setOpenBackdrop(true);
       const addItem = itemCart.find(
         (item) =>
           item._id === _id &&
@@ -232,13 +215,14 @@ const ProductModal = (props) => {
         let currentQuantity = addItem.totalItem + quantity;
         updateItemPopover(currentQuantity);
       }
-      setTimeout(() => setOpenBackdrop(false), 1000);
+      setTimeout(() => setOpenBackdrop(false), 300);
       handleClose();
     }
   };
 
   const handleUpdateToCart = () => {
     setOpenBackdrop(true);
+    setIndexImg(findIndex(defaultSelect2));
     const resultTotalItem = itemCart.find(
       (itemUpdate) =>
         itemUpdate._id === _id &&
@@ -247,13 +231,14 @@ const ProductModal = (props) => {
     );
     if (
       !resultTotalItem ||
-      (size === defaultSelect && color === defaultSelect2)
+      (sizeCurr === defaultSelect && color === defaultSelect2)
     ) {
       setItemCart((prevState) => [
         ...prevState.map((item) =>
-          item._id === _id && item.size === size && item.color === color
+          item._id === _id && item.size === sizeCurr && item.color === color
             ? {
                 ...item,
+                imgIndex: findIndex(defaultSelect2),
                 size: defaultSelect,
                 color: defaultSelect2,
               }
@@ -267,11 +252,12 @@ const ProductModal = (props) => {
 
       setItemCart((prevState) => [
         ...prevState.map((item) =>
-          item._id === _id && item.size === size && item.color === color
+          item._id === _id && item.size === sizeCurr && item.color === color
             ? {
                 ...item,
                 size: defaultSelect,
                 color: defaultSelect2,
+                imgIndex: findIndex(defaultSelect2),
                 totalItem: item.totalItem + resultTotalItem.totalItem,
                 totalPrice:
                   item.price * (item.totalItem + resultTotalItem.totalItem),
@@ -339,70 +325,62 @@ const ProductModal = (props) => {
 
             <p> {description} </p>
             <div className="information-size">
-              <span>Size</span>
-              <select
-                className="form-select"
-                aria-label="Default select example"
+              <span>Size:</span>
+              <RadioGroup
+                className="radio-group-size"
                 name="size"
                 value={defaultSelect}
                 onChange={handleChange}
               >
-                {!size && (
-                  <option value="DEFAULT" disabled>
-                    Choose
-                  </option>
-                )}
-                <option value="S">S</option>
-                <option value="M">M</option>
-                <option value="L">L</option>
-                <option value="XL">XL</option>
-              </select>
+                {size !== undefined &&
+                  size.map((item, index) => (
+                    <FormControlLabel
+                      key={index}
+                      value={item}
+                      className="radio-size"
+                      label={item}
+                      control={<Radio />}
+                    />
+                  ))}
+              </RadioGroup>
+              {!sizeCurr && (
+                <div className={showAlert}>
+                  <Alert
+                    className="animate__animated animate__shakeX"
+                    severity="error"
+                  >
+                    Please, choose size
+                  </Alert>
+                </div>
+              )}
             </div>
-            {!size && (
-              <div className={showAlert1}>
-                <Alert
-                  className="animate__animated animate__shakeX"
-                  severity="error"
-                >
-                  Please, choose size
-                </Alert>
-              </div>
-            )}
 
             <div className="information-color">
-              <span>Color</span>
-              <select
-                className="form-select"
-                aria-label="Default select example"
+              <span>Color:</span>
+              <RadioGroup
+                className="radio-group-color"
                 name="color"
                 value={defaultSelect2}
                 onChange={handleChange2}
               >
-                {!color && (
-                  <option value="DEFAULT" disabled>
-                    Choose
-                  </option>
-                )}
-                <option value="Red">Red</option>
-                <option value="Blue">Blue</option>
-                <option value="Yellow">Yellow</option>
-                <option value="Pink">Pink</option>
-              </select>
+                {url !== undefined &&
+                  url.map((item, index) => (
+                    <FormControlLabel
+                      key={index}
+                      value={item.color}
+                      className="radio-color"
+                      style={{
+                        backgroundColor: item.color,
+                        border: currColor(item.color),
+                      }}
+                      control={<Radio />}
+                    />
+                  ))}
+              </RadioGroup>
             </div>
-            {!color && (
-              <div className={showAlert2}>
-                <Alert
-                  className="animate__animated animate__shakeX"
-                  severity="error"
-                >
-                  Please, choose color
-                </Alert>
-              </div>
-            )}
-
-            {!size && (
+            {!sizeCurr && (
               <div className="information-quantity">
-                <span>Quantity</span>
+                <span>Quantity:</span>
                 <div className="quantity-btn">
                   <div
                     className="decrease-btn"
@@ -430,8 +408,10 @@ const ProductModal = (props) => {
               </div>
             )}
             <div className="container-button">
-              <button onClick={!size ? handleAddToCart : handleUpdateToCart}>
-                {!size ? "ADD TO CART" : "UPDATE TO CART"}
+              <button
+                onClick={!sizeCurr ? handleAddToCart : handleUpdateToCart}
+              >
+                {!sizeCurr ? "ADD TO CART" : "UPDATE TO CART"}
               </button>
             </div>
           </div>

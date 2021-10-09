@@ -8,6 +8,7 @@
 
 .popover-cart.popover-cart-scroll {
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .popover-cart-empty {
@@ -30,6 +31,7 @@
 .popover-cart .popover-item {
   padding: 5px;
   display: flex;
+  width: 300px;
 }
 
 .popover-cart .popover-item img {
@@ -38,11 +40,23 @@
   margin-right: 20px;
 }
 
+.popover-cart .popover-item .item-information {
+  width: 80%;
+}
+
 .popover-cart .popover-item .item-information .item-information-child {
-  font-size: 15px;
   font-weight: bold;
+  font-size: 15px;
   display: flex;
-  justify-content: space-around;
+  width: 80%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.color-popover {
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
 }
 
 .popover-cart .popover-item .item-information h5 {

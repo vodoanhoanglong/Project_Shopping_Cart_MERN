@@ -11,7 +11,6 @@ import "../../css/MultiItemCarousel.css";
 
 const MultiItemCarousel = (props) => {
   const { data, setOpenDialog, setInfo, ...other } = props;
-
   const { showToastCart } = useContext(CartContext);
 
   const handleClick = (event, product) => {
@@ -75,7 +74,7 @@ const MultiItemCarousel = (props) => {
               </div>
             )}
             <div className="block-pic">
-              <Card.Img variant="top" src={item.url}></Card.Img>
+              <Card.Img variant="top" src={item.url[0].img[0]}></Card.Img>
               <button onClick={(e) => handleClick(e, item)}>ADD TO CART</button>
             </div>
             <Card.Body>

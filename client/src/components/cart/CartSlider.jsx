@@ -61,10 +61,19 @@ const CartSlider = () => {
         {itemCart.map((item, index) => (
           <div key={index}>
             <span className="total-item-cart-slider">
-              {item.size}&nbsp;-&nbsp;{item.color}&nbsp;-&nbsp;x
+              {item.size}&nbsp;-&nbsp;
+              <div
+                className="color-popover"
+                style={{ backgroundColor: item.color }}
+              ></div>
+              &nbsp;-&nbsp;x
               {item.totalItem}
             </span>
-            <img src={item.url} alt="" style={{ width: 180, height: 200 }} />
+            <img
+              src={item.url[item.imgIndex].img[0]}
+              alt=""
+              style={{ width: 180, height: 200 }}
+            />
           </div>
         ))}
       </Carousel>

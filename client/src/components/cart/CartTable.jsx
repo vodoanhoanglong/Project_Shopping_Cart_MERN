@@ -485,7 +485,7 @@ export default function CartTable() {
                               }}
                             >
                               <img
-                                src={row.url}
+                                src={row.url[row.imgIndex].img[0]}
                                 alt=""
                                 style={{ width: 100, height: 130 }}
                               />
@@ -499,7 +499,8 @@ export default function CartTable() {
                                     setOpenDialog(true);
                                     setInformation({
                                       _id: row._id,
-                                      size: row.size,
+                                      size: row.allSize,
+                                      currSize: row.size,
                                       color: row.color,
                                       title: row.title,
                                       description: row.description,
@@ -511,7 +512,10 @@ export default function CartTable() {
                                 >
                                   <span>{row.size}</span>
                                   <span>&nbsp;/&nbsp;</span>
-                                  <span>{row.color}</span>
+                                  <div
+                                    className="color-popover"
+                                    style={{ backgroundColor: row.color }}
+                                  ></div>
                                   &nbsp;
                                   <ExpandMoreIcon />
                                 </div>
@@ -557,7 +561,7 @@ export default function CartTable() {
           </Paper>
           <ProductModal
             _id={information._id}
-            size={information.size}
+            currSize={information.currSize}
             color={information.color}
             product={information}
           />

@@ -12,6 +12,7 @@ const ProductContextProvider = ({ children }) => {
     productDiscount: [],
     allProducts: [],
   });
+
   const [cart, setCart] = useState(0);
   const [openedPopover, setOpenedPopover] = useState(false);
   const [quantity, setQuantity] = useState(1);

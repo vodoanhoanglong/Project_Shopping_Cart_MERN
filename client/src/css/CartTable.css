@@ -53,13 +53,13 @@
 .size-color-cart {
   display: flex;
   white-space: nowrap;
-  display: inline-block;
+  align-items: center;
   padding: 8px 15px;
   color: #222;
   cursor: default;
   background: #f2f2f2;
-  border-radius: 18px;
-  font-size: 13px;
+  border-radius: 20px;
+  font-size: 15px;
   font-weight: 700;
   border: 1px solid #f2f2f2;
   margin-bottom: 8px;
