@@ -175,48 +175,58 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGY2NGVjNTdmMjNiYzIzY2M1ZTkzMDEiLCJpYXQiOjE2MjY4MzU1MjR9.kfSPVHQQ8DiEuZe8I6vcjIGzrBLzoFZQl5NU0p8WicQ
 
 {
-    "title": "Jordan One Take II",
-    "description": "Older Kids' Basketball Shoe",
-    "type": "Shoes",
-    "size": ["35", "36","37", "38", "39", "40", "42"],
-    "price": 112.2,
+    "title": "CHRONO CERAMIC",
+    "description": "The clock stands out in the dark",
+    "type": "Watches",
+    "size": ["30mm", "31mm","32mm"],
+    "price": 328.33,
     "url": [
         {
-            "color": "#B3B3B3",
+            "color": "#e7e6eb",
             "img": [
-                "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/f75534bb-0ed6-49b5-8bdc-b008a593f775/jordan-one-take-ii-older-basketball-shoe-PPKPrv.png",
-                "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/74fa8894-fbab-49c1-9c81-74c70412129f/jordan-one-take-ii-older-basketball-shoe-PPKPrv.png",
-                "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/4b41c3c3-c960-4112-a6e6-01877dc8a1a5/jordan-one-take-ii-older-basketball-shoe-PPKPrv.png",
-                "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/ff4ff213-50c4-4a8a-bb89-193f779195f2/jordan-one-take-ii-older-basketball-shoe-PPKPrv.png"
-            ]
-        },
-        {
-            "color": "#fe5656",
-            "img":[
-                "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/aa72d7c7-edd1-4de8-b955-0779046c095f/jordan-one-take-ii-older-basketball-shoe-PPKPrv.png",
-                "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/0c7d265a-e019-461a-b476-a242ed0c9283/jordan-one-take-ii-older-basketball-shoe-PPKPrv.png",
-                "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/c632020c-06b0-4022-87d7-335f137a09eb/jordan-one-take-ii-older-basketball-shoe-PPKPrv.png",
-                "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/9f2f8e18-0c09-440e-99e2-1ea6e84562ef/jordan-one-take-ii-older-basketball-shoe-PPKPrv.png"
-            ]
-        },
-        {
-            "color": "#07080f",
-            "img":[
-                "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/3a78b3de-48f7-4b09-85b5-f3086611747c/jordan-one-take-ii-older-basketball-shoe-PPKPrv.png",
-                "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/d4ff253d-c05e-446b-9551-5f194a48ff89/jordan-one-take-ii-older-basketball-shoe-PPKPrv.png",
-                "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/9827e31e-65f5-477c-8d6b-3b793c7baa81/jordan-one-take-ii-older-basketball-shoe-PPKPrv.png",
-                "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/70b6ce0f-e538-448a-9bbd-4ce0d9af0541/jordan-one-take-ii-older-basketball-shoe-PPKPrv.png"
-            ]
-        },
-        {
-            "color": "#DC9E8B",
-            "img":[
-                "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/1990f818-45b2-49a8-92fb-595aa580bf55/jordan-one-take-ii-older-basketball-shoe-PPKPrv.png",
-                "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/6d1c17d9-ca90-4d9c-a97f-d28664704677/jordan-one-take-ii-older-basketball-shoe-PPKPrv.png",
-                "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/e27cb416-db2a-4e31-bfaf-bfbd9df755be/jordan-one-take-ii-older-basketball-shoe-PPKPrv.png",
-                "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/9466272d-2eb5-43d9-a1b2-fafeacab734e/jordan-one-take-ii-older-basketball-shoe-PPKPrv.png"
+                "https://www.mvmt.com/dw/image/v2/BDKZ_PRD/on/demandware.static/-/Sites-mgi-master/default/dwd169d09c/images/products/28000122_fr.jpg?sw=600&sh=600",
+                "https://www.mvmt.com/dw/image/v2/BDKZ_PRD/on/demandware.static/-/Sites-mgi-master/default/dw553d5776/images/products/28000122_s.jpg?sw=600&sh=600",
+                "https://www.mvmt.com/dw/image/v2/BDKZ_PRD/on/demandware.static/-/Sites-mgi-master/default/dw12f2d804/images/products/28000122_b.jpg?sw=600&sh=600",
+                "https://www.mvmt.com/dw/image/v2/BDKZ_PRD/on/demandware.static/-/Sites-mgi-master/default/dweb694286/images/products/28000122_l.jpg?sw=600&sh=600"
             ]
         }
-       
+        # {
+        #     "color": "#717171",
+        #     "img": [
+        #         "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/bdd506db-45c1-4600-95b9-8f6e59abb8be/air-zoom-infinity-tour-golf-shoe-xbMdtR.png",
+        #         "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/1bc082b5-3be0-445c-9dc9-49dec6e7c7ca/air-zoom-infinity-tour-golf-shoe-xbMdtR.png",
+        #         "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/62257571-64c2-436f-8ede-f5dcfd886370/air-zoom-infinity-tour-golf-shoe-xbMdtR.png",
+        #         "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/2d9b1ce9-6002-4806-8302-55d4cf57d59e/air-zoom-infinity-tour-golf-shoe-xbMdtR.png",
+        #         "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/611e90fb-1a27-4ef0-9c3f-9f6a8344e6f4/air-zoom-infinity-tour-golf-shoe-xbMdtR.png"
+        #     ]
+        # },
+        # {
+        #     "color": "#4ED0D2",
+        #     "img": [
+        #         "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/40e3f1ee-a43c-4472-82d4-b65af9146104/air-zoom-infinity-tour-golf-shoe-xbMdtR.png",
+        #         "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5,q_80/2d06cf6d-8f65-49a0-bb18-c264a14f425d/air-zoom-infinity-tour-golf-shoe-xbMdtR.png",
+        #         "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5,q_80/c2c66419-017f-471b-809b-83501464b49a/air-zoom-infinity-tour-golf-shoe-xbMdtR.png"
+        #     ]
+        # }
+        # {
+        #     "color": "#A30327",
+        #     "img": [
+        #         "https://img.ltwebstatic.com/images3_pi/2021/09/17/1631856194d770d7a827de5c9622ace2a61ab5f6c3_thumbnail_600x.webp",
+        #         "https://img.ltwebstatic.com/images3_pi/2021/09/17/16318561950ba198ed39f1d479bb3f8c561c86a2fc_thumbnail_600x.webp",
+        #         "https://img.ltwebstatic.com/images3_pi/2021/09/17/16318561977c83f8595f75d34ad41aeac5431c19ec_thumbnail_600x.webp",
+        #         "https://img.ltwebstatic.com/images3_pi/2021/09/17/16318561995fe4578cd8b55886d252c235138073cb_thumbnail_600x.webp",
+        #         "https://img.ltwebstatic.com/images3_pi/2021/09/17/1631856201c34319d52690fbf5db3cf7ffe74ec46e_thumbnail_600x.webp"
+        #     ]
+        # }
+        # {
+        #     "color": "#C1C5C2",
+        #     "img": [
+        #         "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/00908861-8d1a-48e2-aa63-9f70c0d93298/zion-1-pf-basketball-shoe-bHGvxg.png",
+        #         "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/9e356619-099c-44b7-9537-00f0a14d191f/zion-1-pf-basketball-shoe-bHGvxg.png",
+        #         "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/65ca5b67-9986-4020-84c4-b08c959c2de9/zion-1-pf-basketball-shoe-bHGvxg.png",
+        #         "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/50a91473-d5bd-4b15-87b9-e0886670c22b/zion-1-pf-basketball-shoe-bHGvxg.png",
+        #         "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/cc153d4f-ca8f-451f-9be3-adfbd3b88c54/zion-1-pf-basketball-shoe-bHGvxg.png"
+        #     ]
+        # }
     ]
 }

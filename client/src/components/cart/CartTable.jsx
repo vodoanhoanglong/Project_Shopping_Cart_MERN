@@ -157,16 +157,16 @@ const headCells = [
 
 function EnhancedTableHead(props) {
   const {
-    classes,
+    // classes,
     onSelectAllClick,
-    order,
-    orderBy,
+    // order,
+    // orderBy,
     numSelected,
     rowCount,
-    onRequestSort,
+    // onRequestSort,
   } = props;
-  const createSortHandler = (property) => (event) =>
-    onRequestSort(event, property);
+  // const createSortHandler = (property) => (event) =>
+  //   onRequestSort(event, property);
 
   return (
     <TableHead>
@@ -184,9 +184,9 @@ function EnhancedTableHead(props) {
             key={headCell.id}
             align={headCell.numeric ? "center" : "left"}
             padding={headCell.disablePadding ? "none" : "normal"}
-            sortDirection={orderBy === headCell.id ? order : false}
+            // sortDirection={orderBy === headCell.id ? order : false}
           >
-            {headCell.id !== "product" ? (
+            {/* {headCell.id !== "product" ? (
               <TableSortLabel
                 active={orderBy === headCell.id}
                 direction={orderBy === headCell.id ? order : "asc"}
@@ -201,9 +201,9 @@ function EnhancedTableHead(props) {
                   </span>
                 )}
               </TableSortLabel>
-            ) : (
-              <span className="header-title">{headCell.label}</span>
-            )}
+            ) : ( */}
+            <span className="header-title">{headCell.label}</span>
+            {/* )} */}
           </TableCell>
         ))}
       </TableRow>
@@ -265,7 +265,14 @@ const EnhancedTableToolbar = (props) => {
       ) : (
         <div className="cart-table-header">
           <h3>
-            Total bill:&ensp;
+            <b
+              style={{
+                fontFamily: "'Bebas Neue', cursive",
+              }}
+            >
+              Total bill:
+            </b>
+            &ensp;
             <b>
               $
               <Odometer value={totalBill.toFixed(2)} />
@@ -322,8 +329,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CartTable() {
   const classes = useStyles();
-  const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("price");
+  // const [order, setOrder] = React.useState("asc");
+  // const [orderBy, setOrderBy] = React.useState("price");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(1);
   const [information, setInformation] = React.useState("");
@@ -341,11 +348,11 @@ export default function CartTable() {
     0
   );
 
-  const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === "asc";
-    setOrder(isAsc ? "desc" : "asc");
-    setOrderBy(property);
-  };
+  // const handleRequestSort = (event, property) => {
+  //   const isAsc = orderBy === property && order === "asc";
+  //   setOrder(isAsc ? "desc" : "asc");
+  //   setOrderBy(property);
+  // };
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
@@ -441,16 +448,16 @@ export default function CartTable() {
                 <EnhancedTableHead
                   classes={classes}
                   numSelected={selected.length}
-                  order={order}
-                  orderBy={orderBy}
+                  // order={order}
+                  // orderBy={orderBy}
                   onSelectAllClick={handleSelectAllClick}
-                  onRequestSort={handleRequestSort}
+                  // onRequestSort={handleRequestSort}
                   rowCount={itemCart.length}
                 />
                 <TableBody>
-                  {stableSort(itemCart, getComparator(order, orderBy))
-                    .slice(start, end)
-                    .map((row, index) => {
+                  {
+                    // stableSort(itemCart, getComparator(order, orderBy))
+                    itemCart.slice(start, end).map((row, index) => {
                       const idItem = row._id + row.size + row.color;
                       const isItemSelected = isSelected(idItem);
                       const labelId = `enhanced-table-checkbox-${index}`;
@@ -489,10 +496,8 @@ export default function CartTable() {
                                 alt=""
                                 style={{ width: 100, height: 130 }}
                               />
-                              <div style={{ marginLeft: 10 }}>
-                                <p>
-                                  <b> {row.title} </b>
-                                </p>
+                              <div className="product-info-table">
+                                <h4> {row.title} </h4>
                                 <div
                                   className="size-color-cart"
                                   onClick={() => {
@@ -523,7 +528,7 @@ export default function CartTable() {
                             </div>
                           </TableCell>
                           <TableCell align="center">
-                            <b>${row.price}</b>
+                            <span className="price-table">${row.price}</span>
                           </TableCell>
                           <TableCell align="center">
                             <div
@@ -542,13 +547,14 @@ export default function CartTable() {
                             </div>
                           </TableCell>
                           <TableCell align="center">
-                            <b>
+                            <span className="price-table">
                               $<Odometer value={row.totalPrice.toFixed(2)} />
-                            </b>
+                            </span>
                           </TableCell>
                         </TableRow>
                       );
-                    })}
+                    })
+                  }
                 </TableBody>
               </Table>
             </TableContainer>

@@ -26,13 +26,27 @@
   opacity: 0.6;
 }
 
+.show-all-color {
+  margin: 10px 0 0 -10px;
+  display: flex;
+}
+
+.show-all-color .per-color {
+  border-radius: 50%;
+  border: 2px solid #333;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
 .shop-container .icon-heart {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .shop-container .icon-heart .fas {
-  padding-top: 3px;
-  font-size: 20px;
+  font-size: 25px;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -55,7 +69,6 @@
 
 .shop-container .products {
   position: absolute;
-
   width: 63%;
   left: 18.3%;
 }
@@ -66,6 +79,7 @@
 
 .shop-container .products .block-pic {
   position: relative;
+  height: 320px;
   display: block;
   overflow: hidden;
   border-top-left-radius: 10px;
@@ -94,11 +108,10 @@
   transition: all 0.4s;
   padding-right: 15px;
   padding-left: 15px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 .shop-container .products .block-pic img {
   transition: transform 0.9s ease;
-  width: 300px;
-  height: 300px;
 }
 
 .shop-container .products .block-pic:hover > button {
@@ -140,10 +153,13 @@
 }
 .shop-container .products .card-body .card-title {
   opacity: 0.9;
+  font-size: 25px;
+  font-weight: bold;
+  font-family: "Bebas Neue", cursive;
 }
-.shop-container .products .card-body .card-text {
-  font-size: 17px;
-  font-weight: 600;
+.shop-container .products .card-body strong {
+  font-size: 20px;
+  font-family: "Bebas Neue", cursive;
 }
 
 .shop-container .products .MuiPagination-ul {

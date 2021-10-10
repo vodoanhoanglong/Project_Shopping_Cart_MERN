@@ -1,12 +1,14 @@
 .header-title {
-  font-size: 13.5px;
+  font-size: 20px;
   vertical-align: middle;
+  font-weight: bold;
+  font-family: "Bebas Neue", cursive;
 }
 
 .quantity-btn-cart {
   display: flex;
-  border: 1px solid #ced4da;
-  border-radius: 18px;
+  border: 3px solid #333;
+  border-radius: 30px;
 }
 
 .increase-btn-cart,
@@ -16,17 +18,19 @@
   align-items: center;
   width: 46.3px;
   height: 40px;
-  font-size: 22px;
+  font-size: 25px;
+  font-weight: bold;
+  font-family: "Bebas Neue", cursive;
   transition: all 0.4s;
 }
 
 .increase-btn-cart {
-  border-top-right-radius: 18px;
-  border-bottom-right-radius: 18px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 .decrease-btn-cart {
-  border-top-left-radius: 18px;
-  border-bottom-left-radius: 18px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 
 .increase-btn-cart:hover,
@@ -37,21 +41,34 @@
 
 .quantity-show-cart {
   border: none;
-  border-left: 1px solid #e6e6e6;
-  border-right: 1px solid #e6e6e6;
-  background: #f2f2f2;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  background-color: #f7f7f7;
   text-align: center;
   width: 46.3px;
   height: 40px;
-  font-size: 22px;
+  font-size: 25px;
+  font-weight: bold;
+  font-family: "Bebas Neue", cursive;
 }
 
 .quantity-show-cart:focus-visible {
   outline: none;
 }
 
+.product-info-table {
+  margin-left: 15px;
+}
+
+.product-info-table h4 {
+  font-weight: bold;
+  font-family: "Bebas Neue", cursive;
+}
+
 .size-color-cart {
   display: flex;
+  justify-content: space-evenly;
+  width: 135px;
   white-space: nowrap;
   align-items: center;
   padding: 8px 15px;
@@ -62,7 +79,7 @@
   font-size: 15px;
   font-weight: 700;
   border: 1px solid #f2f2f2;
-  margin-bottom: 8px;
+  margin-top: 10px;
   transition: all 0.4s;
 }
 
@@ -70,6 +87,15 @@
   background: #717fe0;
   cursor: pointer;
   color: white;
+}
+.cart-table .MuiButtonBase-root {
+  font-weight: bold;
+  font-family: "Bebas Neue", cursive;
+  font-size: 20px;
+}
+.cart-table .price-table {
+  font-weight: bold;
+  font-size: 15px;
 }
 
 .MuiTableRow-root.Mui-selected,
@@ -123,7 +149,8 @@
   border-radius: 25px;
   color: white;
   font-weight: bold;
-  font-size: 20px;
+  font-family: "Bebas Neue", cursive;
+  font-size: 30px;
   transition: all 0.4s;
 }
 .cart-table-header button:hover {
@@ -141,7 +168,7 @@
   font-weight: bold;
   padding-left: 25px;
   text-transform: uppercase;
-  font-family: Poppins-Medium;
+  font-family: "Bebas Neue", cursive;
 }
 
 .empty-cart-btn {

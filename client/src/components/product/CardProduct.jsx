@@ -17,6 +17,7 @@ const CardProduct = (props) => {
     deleted: false,
   });
   const [colorFavorites, setColorFavorites] = React.useState(null);
+  const [indexImg, setIndexImg] = React.useState(0);
 
   const {
     authState: { isAuthenticated },
@@ -62,6 +63,9 @@ const CardProduct = (props) => {
     }
   };
 
+  const handleHover = (color, listUrl) => (e) =>
+    setIndexImg(listUrl.findIndex((item) => item.color === color));
+
   const handleClick = () => {
     setOpenDialog(true);
     setUrlImg(product);
@@ -77,7 +81,6 @@ const CardProduct = (props) => {
       <Card
         style={{
           width: "18rem",
-          height: 450,
           boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
         }}
       >
@@ -88,17 +91,15 @@ const CardProduct = (props) => {
         )}
         <div className="block-pic">
           {product.url !== undefined && (
-            <Card.Img variant="top" src={product.url[0].img[0]} />
+            <Card.Img variant="top" src={product.url[indexImg].img[0]} />
           )}
-          <button to="#" onClick={handleClick}>
-            Quick View
-          </button>
+          <button onClick={handleClick}>Quick View</button>
         </div>
         <Card.Body>
           <Card.Title>{product.title}</Card.Title>
           <div className="icon-heart">
             <div style={{ display: "flex" }}>
-              <Card.Text
+              <strong
                 style={
                   product.discount !== 0
                     ? {
@@ -109,15 +110,15 @@ const CardProduct = (props) => {
                 }
               >
                 {"$ " + product.price}
-              </Card.Text>
+              </strong>
               {product.discount !== 0 && (
-                <Card.Text className="discount-text">
+                <strong className="discount-text">
                   {"$ " +
                     (
                       product.price -
                       (product.price * product.discount) / 100
                     ).toFixed(2)}
-                </Card.Text>
+                </strong>
               )}
             </div>
             <i
@@ -125,6 +126,16 @@ const CardProduct = (props) => {
               style={colorFavorites}
               onClick={handleFavoritesList}
             ></i>
+          </div>
+          <div className="show-all-color" onMouseLeave={() => setIndexImg(0)}>
+            {product.url.map((item, index) => (
+              <div
+                className="per-color"
+                key={index}
+                style={{ backgroundColor: item.color }}
+                onMouseEnter={handleHover(item.color, product.url)}
+              ></div>
+            ))}
           </div>
         </Card.Body>
       </Card>
