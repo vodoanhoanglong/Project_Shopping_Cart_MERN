@@ -8,7 +8,7 @@ import ShowToast from "../layout/ShowToast";
 import DialogCard from "./DialogCard";
 
 const CardProduct = (props) => {
-  const { product, setUrlImg } = props;
+  const { product, setUrlImg, ...other } = props;
 
   const [animate, setAnimate] = React.useState("");
   const [open, setOpen] = React.useState(false);
@@ -121,11 +121,19 @@ const CardProduct = (props) => {
                 </strong>
               )}
             </div>
-            <i
-              className={"fas fa-heart " + animate}
-              style={colorFavorites}
-              onClick={handleFavoritesList}
-            ></i>
+            {!other.type && (
+              <i
+                className={"fas fa-heart " + animate}
+                style={colorFavorites}
+                onClick={handleFavoritesList}
+              ></i>
+            )}
+            {other.label && (
+              <div className="container-blob">
+                <strong>{other.label[other.index].favorites}</strong>
+                <i className="fas fa-heart "></i>
+              </div>
+            )}
           </div>
           <div className="show-all-color" onMouseLeave={() => setIndexImg(0)}>
             {product.url.map((item, index) => (

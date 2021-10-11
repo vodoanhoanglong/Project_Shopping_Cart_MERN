@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { Card } from "react-bootstrap";
 
 import { CartContext } from "../../contexts/CartContext";
 
@@ -8,15 +7,11 @@ import Carousel from "react-multi-carousel";
 
 import "react-multi-carousel/lib/styles.css";
 import "../../css/MultiItemCarousel.css";
+import CardProduct from "../product/CardProduct";
 
 const MultiItemCarousel = (props) => {
-  const { data, setOpenDialog, setInfo, ...other } = props;
+  const { data, setInfo, ...other } = props;
   const { showToastCart } = useContext(CartContext);
-
-  const handleClick = (event, product) => {
-    setInfo(product);
-    setOpenDialog(true);
-  };
 
   return (
     <div className="slider" data-aos="fade-up" data-aos-duration="1500">
@@ -67,52 +62,13 @@ const MultiItemCarousel = (props) => {
         customTransition="transform 800ms ease-in-out"
       >
         {data.map((item, index) => (
-          <Card className="card-multi-carousel" key={item._id}>
-            {item.discount !== 0 && (
-              <div className="label-discount">
-                <b>-{item.discount}%</b>
-              </div>
-            )}
-            <div className="block-pic">
-              <Card.Img variant="top" src={item.url[0].img[0]}></Card.Img>
-              <button onClick={(e) => handleClick(e, item)}>ADD TO CART</button>
-            </div>
-            <Card.Body>
-              <Card.Title>{item.title}</Card.Title>
-              <div className="container-blob">
-                <div style={{ display: "flex" }}>
-                  <Card.Text
-                    style={
-                      item.discount !== 0
-                        ? {
-                            textDecorationLine: "line-through",
-                            opacity: 0.6,
-                          }
-                        : null
-                    }
-                  >
-                    {"$ " + item.price}
-                  </Card.Text>
-                  {item.discount !== 0 && (
-                    <Card.Text className="discount-text">
-                      {"$ " +
-                        (
-                          item.price -
-                          (item.price * item.discount) / 100
-                        ).toFixed(2)}
-                    </Card.Text>
-                  )}
-                </div>
-
-                {other.label && (
-                  <div className="container-blob">
-                    <span>{other.label[index].favorites}</span>
-                    <i className="fas fa-heart "></i>
-                  </div>
-                )}
-              </div>
-            </Card.Body>
-          </Card>
+          <CardProduct
+            key={index}
+            product={item}
+            setUrlImg={setInfo}
+            index={index}
+            {...other}
+          />
         ))}
       </Carousel>
       <ShowToast title="Added to cart" showToast={showToastCart} />

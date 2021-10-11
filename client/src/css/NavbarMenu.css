@@ -192,16 +192,6 @@
   background: #8994e1;
 }
 
-.MuiTooltip-tooltip {
-  background-color: #333 !important;
-}
-.MuiTooltip-popperArrow {
-  margin-top: 10px;
-}
-.MuiTooltip-arrow {
-  color: #333 !important;
-}
-
 @media screen and (max-width: 767px) {
   .main-header .menu-icon {
     display: block;

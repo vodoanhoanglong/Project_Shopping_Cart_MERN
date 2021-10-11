@@ -5,7 +5,9 @@
   height: 140vh;
 }
 .shop-container .d-flex {
-  justify-content: space-around;
+  margin: 0 auto;
+  width: 60%;
+  justify-content: space-between;
 }
 
 .shop-container .d-flex button {
@@ -40,18 +42,18 @@
   cursor: pointer;
 }
 
-.shop-container .icon-heart {
+.icon-heart {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.shop-container .icon-heart .fas {
+.icon-heart .fas {
   font-size: 25px;
   cursor: pointer;
   transition: all 0.2s;
 }
 
-.shop-container .icon-heart .fas:hover {
+.icon-heart .fas:hover {
   transform: scale(1.1);
 }
 
@@ -77,7 +79,7 @@
   transition: all 0.4s;
 }
 
-.shop-container .products .block-pic {
+.block-pic {
   position: relative;
   height: 320px;
   display: block;
@@ -86,7 +88,7 @@
   border-top-right-radius: 10px;
 }
 
-.shop-container .products .block-pic button {
+.block-pic button {
   position: absolute;
   display: flex;
   justify-content: center;
@@ -110,54 +112,54 @@
   padding-left: 15px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
-.shop-container .products .block-pic img {
+.block-pic img {
   transition: transform 0.9s ease;
 }
 
-.shop-container .products .block-pic:hover > button {
+.block-pic:hover > button {
   bottom: 30px;
 }
 
-.shop-container .products .block-pic button:focus {
+.block-pic button:focus {
   display: none;
 }
 
-.shop-container .products .block-pic:hover > img {
+.block-pic:hover > img {
   transform: scale(1.1);
 }
 
-.shop-container .products .block-pic button:hover {
+.block-pic button:hover {
   border-color: #222;
   background-color: #222;
   color: #fff;
 }
 
-.shop-container .products .card {
+.card {
   padding-right: 0;
   margin-bottom: 20px;
   border-radius: 10px;
   border: none;
 }
 
-.shop-container .products .card-img,
+.card-img,
 .card-img-top {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
 
-.shop-container .products .card-body {
+.card-body {
   padding: 0;
   margin: 15px 0 20px 0;
   padding-left: 5px;
   padding-right: 5px;
 }
-.shop-container .products .card-body .card-title {
+.card-body .card-title {
   opacity: 0.9;
   font-size: 25px;
   font-weight: bold;
   font-family: "Bebas Neue", cursive;
 }
-.shop-container .products .card-body strong {
+.card-body strong {
   font-size: 20px;
   font-family: "Bebas Neue", cursive;
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 
+import { makeStyles } from "@material-ui/core/styles";
 import { Link, useHistory } from "react-router-dom";
 import { ProductContext } from "../../contexts/ProductContext";
 import { CartContext } from "../../contexts/CartContext";
@@ -15,7 +16,24 @@ import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import Tooltip from "@material-ui/core/Tooltip";
 import Zoom from "@material-ui/core/Zoom";
 
+const useStyles = makeStyles({
+  tooltip: {
+    backgroundColor: "#333",
+  },
+  popperArrow: {
+    marginTop: 10,
+  },
+  arrow: { color: "#333" },
+});
+
 const NavbarMenu = () => {
+  const classes = useStyles();
+  const classesStyle = {
+    tooltip: classes.tooltip,
+    popperArrow: classes.popperArrow,
+    arrow: classes.arrow,
+  };
+
   const [toggle, setToggle] = useState("");
 
   const { cart, setCart, setOpenedPopover, openedPopover } =
@@ -136,6 +154,7 @@ const NavbarMenu = () => {
               >
                 <Tooltip
                   title={<UserHover />}
+                  classes={classesStyle}
                   interactive
                   arrow
                   open={openedUser}
@@ -162,6 +181,7 @@ const NavbarMenu = () => {
                 <span id="animate">{cart}</span>
                 <Tooltip
                   title={<CartHover handleClick={handleClick} />}
+                  classes={classesStyle}
                   interactive
                   arrow
                   open={openedPopover}

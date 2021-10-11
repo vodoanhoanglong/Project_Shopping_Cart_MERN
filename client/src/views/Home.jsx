@@ -19,7 +19,6 @@ const Home = () => {
     productState: { products, productFavorites, productDiscount },
     get12ProductsFavorites,
     get12ProductsDiscount,
-    setOpenDialog,
   } = React.useContext(ProductContext);
 
   React.useEffect(() => {
@@ -35,18 +34,12 @@ const Home = () => {
       <div data-aos="fade-down" data-aos-duration="1500">
         <h2 className="title-slider">New Products</h2>
       </div>
-      <MultiItemCarousel
-        type="new"
-        setOpenDialog={setOpenDialog}
-        setInfo={setInfo}
-        data={products}
-      />
+      <MultiItemCarousel type="new" setInfo={setInfo} data={products} />
       <div data-aos="fade-down" data-aos-duration="1500">
         <h2 className="title-slider">Products with the most likes</h2>
       </div>
       <MultiItemCarousel
         type="favorites"
-        setOpenDialog={setOpenDialog}
         setInfo={setInfo}
         data={productFavorites.map((item) => item.product)}
         label={productFavorites}
@@ -56,7 +49,6 @@ const Home = () => {
       </div>
       <MultiItemCarousel
         type="discount"
-        setOpenDialog={setOpenDialog}
         setInfo={setInfo}
         data={productDiscount}
       />

@@ -6,9 +6,10 @@
 .favorites .card {
   padding: 0;
   border-radius: 10px;
+  height: 250px;
 }
 
-.favorites .block-pic {
+.favorites .block-pic-fav {
   position: relative;
   overflow: hidden;
   display: flex;
@@ -16,7 +17,7 @@
   border-radius: 10px;
 }
 
-.favorites .block-pic button {
+.favorites .block-pic-fav button {
   border-radius: 20px;
   font-weight: bold;
   width: 100px;
@@ -29,30 +30,31 @@
   padding: 0;
   transition: all 0.4s;
   display: none;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
-.favorites .block-pic button:hover {
+.favorites .block-pic-fav button:hover {
   color: #fff;
   background-color: #333;
 }
 
-.favorites .block-pic img {
+.favorites .block-pic-fav img {
   border-radius: 10px;
   transition: all 0.4s;
 }
 
-.favorites .block-pic .btn-favorites {
+.favorites .block-pic-fav .btn-favorites {
   position: absolute;
   transition: all 0.4s;
   bottom: 18%;
   display: none;
 }
 
-.favorites .block-pic:hover > button {
+.favorites .block-pic-fav:hover > button {
   display: block;
 }
 
-.favorites .block-pic:hover > img {
+.favorites .block-pic-fav:hover > img {
   transform: scale(1.1);
 }
 

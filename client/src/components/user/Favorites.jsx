@@ -79,7 +79,7 @@ const Favorites = () => {
                       <b>-{item.product.discount}%</b>
                     </div>
                   )}
-                  <div className="block-pic" onMouseEnter={handleHover}>
+                  <div className="block-pic-fav" onMouseEnter={handleHover}>
                     <Card.Img variant="top" src={item.product.url[0].img[0]} />
                     <button
                       style={{ bottom: "18%" }}

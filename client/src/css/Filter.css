@@ -1,0 +1,41 @@
+.checkbox-filter {
+  display: flex;
+  align-items: center;
+}
+
+.slider-filter {
+  display: flex;
+  align-items: center;
+}
+
+.slider-filter b {
+  font-size: 15px;
+  margin: 0 30px 0 10px;
+}
+
+.container-btn-filter {
+  display: flex;
+  margin: 20px 10px 10px 10px;
+}
+
+.delete-filter,
+.apply-filter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  min-width: 100px;
+  height: 40px;
+  font-weight: bold;
+  font-family: "Bebas Neue", cursive;
+  font-size: 20px;
+  line-height: 1.4;
+  color: #333;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  transition: all 0.4s;
+  padding-right: 15px;
+  padding-left: 15px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  margin-right: 20px;
+}

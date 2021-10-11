@@ -142,7 +142,7 @@ module.exports.getMostFavoritesProducts = async (req, res) => {
 
 module.exports.getDiscountProducts = async (req, res) => {
   try {
-    const discountProducts = await Product.find()
+    const discountProducts = await Product.find({ discount: { $gt: 0 } })
       .sort({ discount: -1 })
       .limit(12);
 
