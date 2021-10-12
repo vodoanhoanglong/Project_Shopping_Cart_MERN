@@ -66,11 +66,15 @@ const RangeSlider = (props) => {
 const Checkboxes = (props) => {
   const { label, value, setValue } = props;
 
-  const [checked, setChecked] = React.useState(false);
+  const [checked, setChecked] = React.useState(
+    value.includes(label) ? true : false
+  );
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
     if (event.target.checked) setValue((prevValue) => [...prevValue, label]);
+    else
+      setValue((prevValue) => [...prevValue.filter((item) => item !== label)]);
   };
 
   return (
@@ -92,14 +96,22 @@ const sizeShoes = ["38", "39", "40", "41", "42", "43", "44", "45"];
 const sizeWatches = ["28mm", "29mm", "30mm", "31mm", "32mm", "33mm"];
 
 export default function Filter(props) {
-  const { setData, handle } = props;
+  const {
+    setData,
+    handle,
+    type,
+    setType,
+    selected,
+    setSelected,
+    expanded,
+    setExpanded,
+    price,
+    setPrice,
+    value,
+    setValue,
+    currData,
+  } = props;
   const classes = useStyles();
-
-  const [value, setValue] = React.useState([]);
-  const [price, setPrice] = React.useState([10, 500]);
-  const [expanded, setExpanded] = React.useState([]);
-  const [selected, setSelected] = React.useState("");
-  const [type, setType] = React.useState("");
 
   const handleToggle = (event, nodeIds) => setExpanded(nodeIds.slice(0, 1));
   const handleSelect = (event, nodeIds) => setSelected(nodeIds);
@@ -113,18 +125,34 @@ export default function Filter(props) {
   };
 
   const handleApply = () => {
-    if (type && value.length) {
-      setData((prevData) => [
-        ...prevData.filter(
+    if (type && value.length)
+      setData(
+        currData.filter(
           (item) =>
             item.type === type &&
             Boolean(value.find((size) => item.size.includes(size))) &&
             checkPrice(item.price)
-        ),
-      ]);
-      handle();
-    }
+        )
+      );
+    else if (type)
+      setData(
+        currData.filter((item) => item.type === type && checkPrice(item.price))
+      );
+    else setData(currData.filter((item) => checkPrice(item.price)));
+    handle();
   };
+
+  const handleClear = () => {
+    setData(currData);
+    setValue([]);
+    setPrice([0, 3000]);
+    setExpanded([]);
+    setSelected("");
+    setType("");
+    handle();
+  };
+
+  const style = (kind) => (kind === type ? { color: "#717FE0" } : null);
 
   return (
     <>
@@ -137,11 +165,17 @@ export default function Filter(props) {
         onNodeToggle={handleToggle}
         onNodeSelect={handleSelect}
       >
-        <TreeItem nodeId="Men" label="Men" onClick={handleClick("Men")}>
+        <TreeItem
+          nodeId="Men"
+          label="Men"
+          style={style("Men")}
+          onClick={handleClick("Men")}
+        >
           <div className="d-flex">
             {sizeClothes.map((item, index) => (
               <TreeItem
                 key={index}
+                style={{ color: "white" }}
                 nodeId={`${index}men`}
                 label={
                   <Checkboxes label={item} setValue={setValue} value={value} />
@@ -150,11 +184,17 @@ export default function Filter(props) {
             ))}
           </div>
         </TreeItem>
-        <TreeItem nodeId="Women" label="Women" onClick={handleClick("Women")}>
+        <TreeItem
+          nodeId="Women"
+          label="Women"
+          style={style("Women")}
+          onClick={handleClick("Women")}
+        >
           <div className="d-flex">
             {sizeClothes.map((item, index) => (
               <TreeItem
                 key={index}
+                style={{ color: "white" }}
                 nodeId={`${index}women`}
                 label={
                   <Checkboxes label={item} setValue={setValue} value={value} />
@@ -163,11 +203,17 @@ export default function Filter(props) {
             ))}
           </div>
         </TreeItem>
-        <TreeItem nodeId="Shoes" label="Shoes" onClick={handleClick("Shoes")}>
+        <TreeItem
+          nodeId="Shoes"
+          label="Shoes"
+          style={style("Shoes")}
+          onClick={handleClick("Shoes")}
+        >
           <div className="d-flex">
             {sizeShoes.map((item, index) => (
               <TreeItem
                 key={index}
+                style={{ color: "white" }}
                 nodeId={`${index}shoes`}
                 label={
                   <Checkboxes label={item} setValue={setValue} value={value} />
@@ -179,12 +225,14 @@ export default function Filter(props) {
         <TreeItem
           nodeId="Watches"
           label="Watches"
+          style={style("Watches")}
           onClick={handleClick("Watches")}
         >
           <div className="d-flex">
             {sizeWatches.map((item, index) => (
               <TreeItem
                 key={index}
+                style={{ color: "white" }}
                 nodeId={`${index}watches`}
                 label={
                   <Checkboxes label={item} setValue={setValue} value={value} />
@@ -196,7 +244,9 @@ export default function Filter(props) {
       </TreeView>
       <RangeSlider value={price} setValue={setPrice} />
       <div className="container-btn-filter">
-        <button className="delete-filter">clear filter</button>
+        <button className="delete-filter" onClick={handleClear}>
+          clear filter
+        </button>
         <button className="apply-filter" onClick={handleApply}>
           Apply
         </button>

@@ -9,6 +9,8 @@ import { ProductContext } from "../../contexts/ProductContext";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import CardProduct from "./CardProduct";
 import Zoom from "@material-ui/core/Zoom";
+
+import Cry from "../../assets/cry.png";
 import Filter from "./Filter";
 
 const useStyles = makeStyles({
@@ -25,6 +27,7 @@ const useStyles = makeStyles({
 
 const ShowProduct = (props) => {
   const { setUrlImg } = props;
+
   const classes = useStyles();
   const classesStyle = {
     tooltip: classes.tooltip,
@@ -35,23 +38,23 @@ const ShowProduct = (props) => {
     productState: { allProducts },
   } = useContext(ProductContext);
 
-  // const [type, setType] = useState("");
   const [animate, setAnimate] = useState("");
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
-
-  // const products = allProducts.filter((item) => item.type === type);
-
-  let result = allProducts;
-  // if (type !== "") result = products;
+  const [value, setValue] = useState([]);
+  const [price, setPrice] = useState([0, 3000]);
+  const [expanded, setExpanded] = useState([]);
+  const [selected, setSelected] = useState("");
+  const [type, setType] = useState("");
 
   const perPage = 8;
   const start = (page - 1) * perPage;
   const end = page * perPage;
   const totalPage = Math.ceil(data.length / perPage);
-  console.log(data);
+
   useEffect(() => setData(allProducts), [allProducts]);
+
   let bodyDefault = (
     <Row className="row-cols-1 row-cols-md-4 g-4 mx-auto mt-5">
       {data.slice(start, end).map((product) => (
@@ -64,10 +67,10 @@ const ShowProduct = (props) => {
 
   const handle = () => {
     setAnimate("animate__animated animate__zoomIn");
-    return setTimeout(() => setAnimate(""), 100);
+    setTimeout(() => setAnimate(""), 1000);
   };
 
-  const handleChangePage = (event, value) => setPage(value);
+  const handleChangePage = (event, valuePage) => setPage(valuePage);
 
   return (
     <div className="shop-container">
@@ -77,7 +80,23 @@ const ShowProduct = (props) => {
         onMouseLeave={() => setOpen(false)}
       >
         <Tooltip
-          title={<Filter handle={handle} data={data} setData={setData} />}
+          title={
+            <Filter
+              handle={handle}
+              setData={setData}
+              type={type}
+              setType={setType}
+              selected={selected}
+              setSelected={setSelected}
+              expanded={expanded}
+              setExpanded={setExpanded}
+              price={price}
+              setPrice={setPrice}
+              value={value}
+              setValue={setValue}
+              currData={allProducts}
+            />
+          }
           placement="right"
           classes={classesStyle}
           interactive
@@ -87,73 +106,24 @@ const ShowProduct = (props) => {
         >
           <FilterListIcon fontSize="large" />
         </Tooltip>
-
-        {/* <div>
-          <button
-            className={type === "" ? "button-focus" : ""}
-            onClick={() => {
-              setType("");
-              setPage(1);
-              setAnimate("animate__animated animate__fadeIn");
-            }}
-          >
-            All product
-          </button>
-          <button
-            className={type === "Women" ? "button-focus" : ""}
-            onClick={() => {
-              setType("Women");
-              setPage(1);
-              handle();
-            }}
-          >
-            Women
-          </button>
-          <button
-            className={type === "Men" ? "button-focus" : ""}
-            onClick={() => {
-              setType("Men");
-              setPage(1);
-              handle();
-            }}
-          >
-            Men
-          </button>
-          <button
-            className={type === "Shoes" ? "button-focus" : ""}
-            onClick={() => {
-              setType("Shoes");
-              setPage(1);
-              handle();
-            }}
-          >
-            Shoes
-          </button>
-          <button
-            className={type === "Watches" ? "button-focus" : ""}
-            onClick={() => {
-              setType("Watches");
-              setPage(1);
-              handle();
-            }}
-          >
-            Watches
-          </button>
+      </div>
+      {data.length ? (
+        <div className="products">
+          {bodyDefault}
+          <Pagination
+            count={totalPage}
+            size="large"
+            page={page}
+            onChange={handleChangePage}
+            onClick={handle}
+          />
         </div>
-        <div>
-          <button>Filter</button>
-        </div> */}
-      </div>
-      <div className="products">
-        {bodyDefault}
-        <Pagination
-          count={totalPage}
-          size="large"
-          page={page}
-          onChange={handleChangePage}
-          onClick={handle}
-        />
-      </div>
+      ) : (
+        <div className={"empty-product " + animate}>
+          <img src={Cry} alt="" />
+          <h3>No products found</h3>
+        </div>
+      )}
     </div>
   );
 };

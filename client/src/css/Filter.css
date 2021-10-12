@@ -39,3 +39,19 @@
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   margin-right: 20px;
 }
+
+.apply-filter:hover,
+.delete-filter:hover {
+  background: #717fe0;
+  border-color: #717fe0;
+  color: #fff;
+}
+
+.MuiTreeItem-label {
+  font-weight: bold !important;
+  font-size: 15px !important;
+}
+
+.MuiTreeItem-root.Mui-selected > .MuiTreeItem-content .MuiTreeItem-label {
+  background-color: transparent !important;
+}
