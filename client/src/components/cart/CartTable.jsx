@@ -59,7 +59,8 @@ const InputCart = (props) => {
 
   const regex = /^[0-9\b]+$/;
 
-  const handleIncrease = () => setTotal(total + 1);
+  const handleIncrease = () =>
+    total === 99 ? setTotal(1) : setTotal(total + 1);
 
   const handleDecrease = () =>
     total === typeof String
@@ -71,6 +72,10 @@ const InputCart = (props) => {
   const handleChangeInput = (e) => {
     let input = e.target.value;
     if (!regex.test(input)) return;
+    if (parseInt(input) > 99) {
+      setTotal(1);
+      return;
+    }
     setTotal(parseInt(input));
   };
 

@@ -91,7 +91,8 @@ const ProductModal = (props) => {
     setIndexImg(findIndex(e.target.value));
   };
 
-  const handleIncrease = () => setQuantity(quantity + 1);
+  const handleIncrease = () =>
+    quantity === 99 ? setQuantity(1) : setQuantity(quantity + 1);
 
   const handleDecrease = () =>
     quantity === typeof String
@@ -103,6 +104,10 @@ const ProductModal = (props) => {
   const handleChangeInput = (e) => {
     let input = e.target.value;
     if (!regex.test(input)) return;
+    if (parseInt(input) > 99) {
+      setQuantity(1);
+      return;
+    }
     setQuantity(parseInt(input));
   };
 

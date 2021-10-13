@@ -112,7 +112,7 @@ const NavbarMenu = () => {
               onClick={handleClickBackLogo}
               onMouseEnter={handleMouseEnter}
             >
-              Clothes
+              YIL
             </Link>
           </h1>
         </div>
@@ -161,7 +161,7 @@ const NavbarMenu = () => {
                   TransitionComponent={Zoom}
                 >
                   <Link to="/user" onClick={() => setChoice("profile")}>
-                    <img src={User} alt="" width="20" />
+                    <img src={User} alt="" style={{ width: 30, height: 30 }} />
                   </Link>
                 </Tooltip>
               </div>
@@ -178,7 +178,7 @@ const NavbarMenu = () => {
                   setOpenedPopover(false);
                 }}
               >
-                <span id="animate">{cart}</span>
+                <span id="animate">{cart > 100 ? "99+" : cart}</span>
                 <Tooltip
                   title={<CartHover handleClick={handleClick} />}
                   classes={classesStyle}
@@ -188,7 +188,7 @@ const NavbarMenu = () => {
                   TransitionComponent={Zoom}
                 >
                   <Link to="/cart" onClick={handleClick}>
-                    <img src={Cart} alt="" width="20" />
+                    <img src={Cart} alt="" style={{ width: 25, height: 25 }} />
                   </Link>
                 </Tooltip>
               </div>

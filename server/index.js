@@ -45,6 +45,6 @@ app.use("/cart", cartRouter);
 app.use("/favorites", verifyToken, favoritesRouter);
 app.use("/contact", contactRouter);
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server started on ${PORT}`));

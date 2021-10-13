@@ -10,7 +10,7 @@ const Footer = () => {
           <div className="col">
             <h4>Categories</h4>
             <ul>
-              <li>Menu</li>
+              <li>Men</li>
               <li>Women</li>
               <li>Shoes</li>
               <li>Watches</li>

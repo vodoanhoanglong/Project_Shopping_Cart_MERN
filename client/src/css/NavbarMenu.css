@@ -23,6 +23,10 @@
   height: 40px;
 }
 
+.main-header .logo h1 a {
+  font-family: "Bebas Neue", cursive;
+}
+
 .main-header .nav-back-user {
   color: white;
   text-transform: uppercase;
@@ -163,6 +167,7 @@
 
 .container-icon {
   display: flex;
+  align-items: center;
 }
 
 .nav-user {
