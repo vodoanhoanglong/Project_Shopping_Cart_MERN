@@ -1,27 +1,10 @@
 import React from "react";
 
-import { makeStyles } from "@material-ui/core/styles";
-import Avatar from "@material-ui/core/Avatar";
 import instagram from "../../assets/instagram.png";
 import founder from "../../assets/founder.png";
 import overlap from "../../assets/overlap.png";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    "& > *": {
-      margin: theme.spacing(1),
-    },
-  },
-  large: {
-    width: theme.spacing(20),
-    height: theme.spacing(20),
-  },
-}));
-
 const Information = () => {
-  const classes = useStyles();
-
   return (
     <div className="container-contact">
       <div className="contact-info animate__animated animate__fadeInLeft animate__delay-1s">

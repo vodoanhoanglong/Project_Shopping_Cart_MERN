@@ -115,7 +115,9 @@ const DialogInputRating = (props) => {
       classes={{ paperWidthSm: classes.paperWidthSm }}
       className="dialog-rating"
     >
-      <DialogTitle onClose={handleClose}>Your Rating</DialogTitle>
+      <DialogTitle onClose={handleClose}>
+        <span className="font-dialog">Your Rating</span>
+      </DialogTitle>
       <form className={classes.root} onSubmit={submitRating} autoComplete="off">
         <Box
           component="fieldset"
@@ -133,14 +135,15 @@ const DialogInputRating = (props) => {
             emptyIcon={<StarBorderIcon fontSize="inherit" />}
           />
           {valueRating !== null && (
-            <Box ml={2}>{labels[hover !== -1 ? hover : valueRating]}</Box>
+            <Box ml={2} style={{ fontWeight: "bold" }}>
+              {labels[hover !== -1 ? hover : valueRating]}
+            </Box>
           )}
         </Box>
         <TextField
           id="filled-basic"
-          label="Write a comment"
+          placeholder="Write a comment"
           value={valueComment}
-          variant="filled"
           onChange={handleChangeComment}
         />
         <div style={{ textAlign: "center" }}>
@@ -325,8 +328,12 @@ export default function DialogRating(props) {
         classes={{ paperWidthSm: classes.paperWidthSm }}
       >
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          <p style={{ textAlign: "center" }}>All Rating</p>
-          <p style={{ paddingLeft: 2 }}>{title}</p>
+          <p style={{ textAlign: "center" }} className="font-dialog">
+            All Rating
+          </p>
+          <p style={{ paddingLeft: 2 }} className="font-dialog">
+            {title}
+          </p>
           <div style={{ display: "flex" }}>
             <HoverRating _id={_id} valueRating={valueRating} />
           </div>
@@ -335,7 +342,7 @@ export default function DialogRating(props) {
           {allRatings.length === 0 ? (
             <div className="empty-rating">
               <CommentIcon fontSize="large" />
-              <p>There are no ratings</p>
+              <p className="font-dialog">There are no ratings</p>
             </div>
           ) : (
             body

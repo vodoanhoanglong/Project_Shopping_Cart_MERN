@@ -87,6 +87,8 @@ const RegisterForm = () => {
     event.preventDefault();
   };
 
+  const style = { fontFamily: "Poppins-Medium" };
+
   return (
     <div className="container-login animate__animated animate__fadeIn">
       <form className="login-form" onSubmit={register}>
@@ -172,7 +174,7 @@ const RegisterForm = () => {
           Register
         </button>
       </form>
-      <p>
+      <p style={style}>
         Already have account?&nbsp;
         <Link to="/login">Login now</Link>
       </p>

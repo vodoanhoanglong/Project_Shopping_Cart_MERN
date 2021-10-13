@@ -76,6 +76,9 @@
   border-bottom-right-radius: 2rem;
   border-bottom-left-radius: 2rem;
   transition: all 0.4s;
+  font-weight: bold;
+  font-size: 25px;
+  font-family: "Bebas Neue", cursive;
 }
 .carousel-caption button:hover {
   background: #000;

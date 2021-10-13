@@ -13,12 +13,13 @@
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
   background-color: #333;
+  text-align: center;
 }
 
 .container-contact .contact-info h1,
 .container-contact .contact-info h2 {
   font-weight: bold;
-  font-family: PlayfairDisplay-Bold;
+  font-family: "Bebas Neue", cursive;
   color: white;
   text-transform: uppercase;
   animation-delay: 1200ms;
@@ -202,8 +203,9 @@
 }
 
 .contact-form .MuiFilledInput-root {
-  background-color: rgba(143, 142, 142, 0.2);
+  background-color: #fff;
   border-radius: 25px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
 .contact-form .MuiFilledInput-underline:before {

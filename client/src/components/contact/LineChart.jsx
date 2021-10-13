@@ -1,7 +1,6 @@
 import React from "react";
 
 import { Line } from "react-chartjs-2";
-import { CartContext } from "../../contexts/CartContext";
 
 const convertStringToDate = (string) => {
   const dateParts = string.split("/");

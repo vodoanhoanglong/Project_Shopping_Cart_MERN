@@ -1,4 +1,4 @@
-import { createContext, useState, useReducer, useEffect } from "react";
+import { createContext, useState, useReducer } from "react";
 import { apiUrl } from "./constants";
 import { cartReducer } from "../reducers/cartReducer";
 

@@ -13,10 +13,11 @@ import { Tooltip } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: "2px 4px",
+    padding: "2px 2px",
     display: "flex",
     alignItems: "center",
     width: 400,
+    borderRadius: 25,
     boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
   },
   input: {
@@ -28,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
   },
   divider: {
     height: 28,
-    margin: 4,
   },
 }));
 
@@ -78,14 +78,17 @@ export default function CustomizedInputBase(props) {
           value={valueInput}
           onChange={handleChange}
         />
-        <IconButton
-          type="submit"
-          className={classes.iconButton}
-          aria-label="search"
-          onClick={handleClickSearch}
-        >
-          <SearchIcon />
-        </IconButton>
+        <Tooltip title="Search" placement="top" arrow>
+          <IconButton
+            type="submit"
+            className={classes.iconButton}
+            aria-label="search"
+            onClick={handleClickSearch}
+          >
+            <SearchIcon />
+          </IconButton>
+        </Tooltip>
+
         <Divider className={classes.divider} orientation="vertical" />
       </Paper>
       <Collapse in={open} timeout="auto" unmountOnExit>

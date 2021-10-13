@@ -101,6 +101,8 @@ const LoginForm = () => {
     }
   };
 
+  const style = { fontFamily: "Poppins-Medium" };
+
   return (
     <div className="container-login animate__animated animate__fadeIn">
       <form className="login-form" onSubmit={login}>
@@ -152,7 +154,7 @@ const LoginForm = () => {
         <button className="button-submit" type="submit">
           Login
         </button>
-        <h5>Or login with</h5>
+        <h5 style={style}>Or login with</h5>
         <div className="container-btn-api">
           <GoogleLogin
             clientId="455854470240-d6stpuonh3g1jh4ob8m6mn4bssg7uc48.apps.googleusercontent.com"
@@ -180,7 +182,7 @@ const LoginForm = () => {
           />
         </div>
       </form>
-      <p>
+      <p style={style}>
         Don't have account?&nbsp;
         <Link to="/register">Register now</Link>
       </p>

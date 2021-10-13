@@ -1,5 +1,10 @@
 import "./App.css";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 
 import AuthContextProvider from "./contexts/AuthContext";
 import UserContextProvider from "./contexts/UserContext";
@@ -15,6 +20,7 @@ import Cart from "./views/Cart";
 import Auth from "./views/Auth";
 import User from "./views/User";
 import Contact from "./views/Contact";
+import Disabled from "./views/Disabled";
 
 function App() {
   return (
@@ -26,6 +32,10 @@ function App() {
               <RatingContextProvider>
                 <Router>
                   <Switch>
+                    <Route exact path="/mobile" component={Disabled} />
+                    {/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(
+                      navigator.userAgent
+                    ) && <Redirect to="/mobile" />}
                     <Route exact path="/" component={Home} />
                     <Route exact path="/shop" component={Shop} />
                     <Route exact path="/contact" component={Contact} />

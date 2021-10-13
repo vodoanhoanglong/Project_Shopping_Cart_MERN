@@ -343,18 +343,17 @@ const ProductModal = (props) => {
                     />
                   ))}
               </RadioGroup>
-              {!sizeCurr && (
-                <div className={showAlert}>
-                  <Alert
-                    className="animate__animated animate__shakeX"
-                    severity="error"
-                  >
-                    Please, choose size
-                  </Alert>
-                </div>
-              )}
             </div>
-
+            {!sizeCurr && (
+              <div className={showAlert}>
+                <Alert
+                  className="animate__animated animate__shakeX"
+                  severity="error"
+                >
+                  Please, choose size
+                </Alert>
+              </div>
+            )}
             <div className="information-color">
               <span>Color:</span>
               <RadioGroup
