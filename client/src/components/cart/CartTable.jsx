@@ -258,7 +258,11 @@ const EnhancedTableToolbar = (props) => {
           color="inherit"
           variant="subtitle1"
           component="div"
-          style={{ fontWeight: "bold" }}
+          style={{
+            fontWeight: "bold",
+            fontFamily: "'Bebas Neue', cursive",
+            fontSize: 20,
+          }}
         >
           {numSelected} selected
         </Typography>
@@ -283,7 +287,7 @@ const EnhancedTableToolbar = (props) => {
       )}
 
       {numSelected > 0 && (
-        <Tooltip title="Delete">
+        <Tooltip title="Delete" placement="top" arrow>
           <IconButton aria-label="delete" onClick={itemRemoved}>
             <DeleteIcon />
           </IconButton>

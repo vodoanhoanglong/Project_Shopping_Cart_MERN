@@ -277,7 +277,7 @@ const CartOrder = () => {
               </div>
             )}
             <h3 style={{ marginTop: 40 }}>
-              Total bill: <b>${resultTotalPrice.toFixed(2)}</b>
+              Total bill:<b>&nbsp;&nbsp;${resultTotalPrice.toFixed(2)}</b>
             </h3>
           </div>
 

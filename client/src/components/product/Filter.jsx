@@ -109,6 +109,7 @@ export default function Filter(props) {
     setPrice,
     value,
     setValue,
+    setOpen,
     currData,
   } = props;
   const classes = useStyles();
@@ -140,9 +141,11 @@ export default function Filter(props) {
       );
     else setData(currData.filter((item) => checkPrice(item.price)));
     handle();
+    setOpen(false);
   };
 
   const handleClear = () => {
+    setOpen(false);
     setData(currData);
     setValue([]);
     setPrice([0, 3000]);
@@ -152,7 +155,9 @@ export default function Filter(props) {
     handle();
   };
 
-  const style = (kind) => (kind === type ? { color: "#717FE0" } : null);
+  const style = (kind) =>
+    kind === type ? { color: "#717FE0" } : { color: "#fff" };
+  const color = { color: "#fff" };
 
   return (
     <>
@@ -175,7 +180,7 @@ export default function Filter(props) {
             {sizeClothes.map((item, index) => (
               <TreeItem
                 key={index}
-                style={{ color: "white" }}
+                style={color}
                 nodeId={`${index}men`}
                 label={
                   <Checkboxes label={item} setValue={setValue} value={value} />
@@ -194,7 +199,7 @@ export default function Filter(props) {
             {sizeClothes.map((item, index) => (
               <TreeItem
                 key={index}
-                style={{ color: "white" }}
+                style={color}
                 nodeId={`${index}women`}
                 label={
                   <Checkboxes label={item} setValue={setValue} value={value} />
@@ -213,7 +218,7 @@ export default function Filter(props) {
             {sizeShoes.map((item, index) => (
               <TreeItem
                 key={index}
-                style={{ color: "white" }}
+                style={color}
                 nodeId={`${index}shoes`}
                 label={
                   <Checkboxes label={item} setValue={setValue} value={value} />
@@ -232,7 +237,7 @@ export default function Filter(props) {
             {sizeWatches.map((item, index) => (
               <TreeItem
                 key={index}
-                style={{ color: "white" }}
+                style={color}
                 nodeId={`${index}watches`}
                 label={
                   <Checkboxes label={item} setValue={setValue} value={value} />

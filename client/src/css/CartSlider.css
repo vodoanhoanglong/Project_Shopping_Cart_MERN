@@ -8,6 +8,9 @@
   border-bottom: 1px solid #c5c5c5;
   width: 50%;
   margin: 0 auto;
+  font-family: "Bebas Neue", cursive;
+  font-weight: bold;
+  font-size: 40px;
 }
 
 .total-item-cart-slider {

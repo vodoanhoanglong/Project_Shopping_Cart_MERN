@@ -138,7 +138,7 @@ const CartPayment = () => {
               </p>
               <h2>
                 <b style={{ marginRight: 30 }}>
-                  Total: ${totalBill.toFixed(2)}
+                  Total: &nbsp;&nbsp;${totalBill.toFixed(2)}
                 </b>
                 {value.couponCode !== "" ? (
                   <span className="payment-discount">

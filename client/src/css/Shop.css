@@ -4,28 +4,17 @@
   padding-top: 200px;
   height: 140vh;
 }
-.shop-container .d-flex {
+.shop-container .filter {
   margin: 0 auto;
-  width: 60%;
-  justify-content: space-between;
+  width: 62%;
 }
 
-.shop-container .d-flex button {
-  outline: 0 !important;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  color: black;
-  font-family: Poppins-Regular;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 1.2;
-  border-bottom: 1px solid transparent;
-  transition: all 0.4s;
-  margin-right: 20px;
-  padding: 0;
-  border-radius: unset;
-  opacity: 0.6;
+.shop-container .filter .filter-child {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #333;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
 .show-all-color {

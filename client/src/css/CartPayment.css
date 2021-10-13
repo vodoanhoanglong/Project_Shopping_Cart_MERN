@@ -7,20 +7,20 @@
 .container-card-bill-information h1 {
   text-align: center;
   font-weight: bold;
-  font-family: Poppins-Medium;
+  font-family: "Bebas Neue", cursive;
 }
 
 .container-card-bill-information h2 {
   margin-top: 30px;
   display: flex;
   align-items: center;
+  font-family: "Bebas Neue", cursive;
 }
 
 .container-card-bill-information .card-bill-information {
   margin-top: 30px;
-  font-size: 20px;
-
-  font-family: Poppins-Medium;
+  font-size: 25px;
+  font-family: "Bebas Neue", cursive;
 }
 
 .container-card-bill-information .container-button-payment-finished {
@@ -64,9 +64,9 @@
   border: 1px solid #fe8725;
   color: #fe8725;
   padding: 0 5px;
-  font-size: 15px;
+  font-size: 30px;
   font-weight: 700;
-  line-height: 14px;
-  display: inline-block;
-  vertical-align: middle;
+  height: 30px;
+  display: flex;
+  align-items: center;
 }
