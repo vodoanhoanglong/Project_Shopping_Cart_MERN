@@ -3,6 +3,7 @@ import { Card } from "react-bootstrap";
 import { AuthContext } from "../../contexts/AuthContext";
 import { FavoritesContext } from "../../contexts/FavoritesContext";
 import { ProductContext } from "../../contexts/ProductContext";
+import BackDrop from "../layout/BackDrop";
 
 import ShowToast from "../layout/ShowToast";
 import DialogCard from "./DialogCard";
@@ -18,6 +19,7 @@ const CardProduct = (props) => {
   });
   const [colorFavorites, setColorFavorites] = React.useState(null);
   const [indexImg, setIndexImg] = React.useState(0);
+  const [openBackdrop, setOpenBackdrop] = React.useState(false);
 
   const {
     authState: { isAuthenticated },
@@ -47,6 +49,7 @@ const CardProduct = (props) => {
 
   const handleFavoritesList = async () => {
     if (!isAuthenticated) return setOpen(true);
+    setOpenBackdrop(true);
     try {
       const result = await checkFavoritesProduct(product._id);
       if (result.success) {
@@ -58,6 +61,7 @@ const CardProduct = (props) => {
         setColorFavorites({ color: "#717fe0" });
         changeShowToast("added");
       }
+      setTimeout(() => setOpenBackdrop(false), 2000);
     } catch (error) {
       console.log(error);
     }
@@ -150,6 +154,7 @@ const CardProduct = (props) => {
       <DialogCard open={open} setOpen={setOpen} />
       <ShowToast title="Added favorites" showToast={showToast.added} />
       <ShowToast title="Deleted favorites" showToast={showToast.deleted} />
+      <BackDrop open={openBackdrop} />
     </div>
   );
 };

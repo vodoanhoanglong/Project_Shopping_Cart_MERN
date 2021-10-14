@@ -195,6 +195,7 @@ export default function DialogRating(props) {
 
   const [openRatingUser, setOpenRatingUser] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [openBackdrop, setOpenBackdrop] = React.useState(false);
 
   const openMenu = Boolean(anchorEl);
 
@@ -220,8 +221,10 @@ export default function DialogRating(props) {
   }, [openRatingUser, anchorEl]);
 
   const handleDeleteRating = async () => {
+    setOpenBackdrop(true);
     try {
       await deleteRating(_id);
+      setTimeout(() => setOpenBackdrop(false), 500);
     } catch (error) {
       console.log(error);
     }
@@ -355,6 +358,7 @@ export default function DialogRating(props) {
             </button>
           </div>
         )}
+        <BackDrop open={openBackdrop} />
       </Dialog>
       <DialogInputRating
         open={openRatingUser}

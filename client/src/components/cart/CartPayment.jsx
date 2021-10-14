@@ -149,7 +149,7 @@ const CartPayment = () => {
             </div>
           </CardContent>
           <CardActions>
-            <div className="container-button-payment-finished">
+            <div className="container-button-payment" style={{ width: "90%" }}>
               <button onClick={handleBack}>Back</button>
               <button onClick={handleClick}>Complete</button>
             </div>

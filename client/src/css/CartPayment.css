@@ -23,43 +23,6 @@
   font-family: "Bebas Neue", cursive;
 }
 
-.container-card-bill-information .container-button-payment-finished {
-  margin-top: 30px;
-  margin-bottom: 20px;
-  width: -webkit-fill-available;
-  display: flex;
-  justify-content: space-around;
-  background-color: #ffff;
-}
-
-.container-card-bill-information .container-button-payment-finished button {
-  display: flex;
-  border-radius: 23px;
-  background-color: #717fe0;
-  text-transform: uppercase;
-  min-width: 180px;
-  height: 50px;
-  font-family: Poppins-Medium;
-  font-size: 20px;
-  font-weight: bold;
-  line-height: 1.466667;
-  color: #fff;
-  justify-content: center;
-  transition: all 0.4s;
-  align-items: center;
-  outline: none;
-  border: none;
-  cursor: pointer;
-}
-
-.container-card-bill-information
-  .container-button-payment-finished
-  button:hover {
-  border-color: #222;
-  background-color: #222;
-  color: #fff;
-}
-
 .container-card-bill-information .payment-discount {
   border: 1px solid #fe8725;
   color: #fe8725;

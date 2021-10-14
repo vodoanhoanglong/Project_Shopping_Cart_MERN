@@ -6,6 +6,7 @@ import Slide from "@material-ui/core/Slide";
 import CheckIcon from "@material-ui/icons/Check";
 
 import { CartContext } from "../../contexts/CartContext";
+import BackDrop from "../layout/BackDrop";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -20,11 +21,13 @@ const ContactForm = () => {
   });
   const [open, setOpen] = React.useState(false);
   const [state, setState] = React.useState(false);
+  const [openBackdrop, setOpenBackdrop] = React.useState(false);
 
   const { addContact } = React.useContext(CartContext);
 
   const saveContact = async (e) => {
     e.preventDefault();
+    setOpenBackdrop(true);
 
     const info = {
       fullName: value.fullName,
@@ -41,7 +44,10 @@ const ContactForm = () => {
         message: "",
       });
       setOpen(true);
-      setTimeout(() => setOpen(false), 1000);
+      setTimeout(() => {
+        setOpenBackdrop(false);
+        setOpen(false);
+      }, 1000);
     } catch (error) {
       console.log(error);
     }
@@ -174,6 +180,7 @@ const ContactForm = () => {
           </div>
         </DialogTitle>
       </Dialog>
+      <BackDrop open={openBackdrop} />
     </div>
   );
 };

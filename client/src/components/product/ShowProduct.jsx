@@ -7,10 +7,14 @@ import CardProduct from "./CardProduct";
 
 import Cry from "../../assets/cry.png";
 import Search from "./Search";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const ShowProduct = (props) => {
   const { setUrlImg } = props;
 
+  const {
+    authState: { isAuthenticated },
+  } = useContext(AuthContext);
   const {
     productState: { allProducts },
   } = useContext(ProductContext);
@@ -30,7 +34,11 @@ const ShowProduct = (props) => {
     <Row className="row-cols-1 row-cols-md-4 g-4 mx-auto mt-5">
       {data.slice(start, end).map((product) => (
         <Col key={product._id} className={"my-2 " + animate}>
-          <CardProduct product={product} setUrlImg={setUrlImg} />
+          <CardProduct
+            product={product}
+            setUrlImg={setUrlImg}
+            isAuthenticated={isAuthenticated}
+          />
         </Col>
       ))}
     </Row>
