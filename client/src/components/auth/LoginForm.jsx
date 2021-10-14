@@ -173,7 +173,7 @@ const LoginForm = () => {
             cookiePolicy={"single_host_origin"}
           />
           <FacebookLogin
-            appId="165707709038185"
+            appId="459560505029470"
             fields="name,email,picture"
             textButton=""
             cssClass="button-api-login"
