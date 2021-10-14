@@ -45,8 +45,7 @@ const NavbarMenu = () => {
 
   let history = useHistory();
 
-  const currentLink = "/" + window.location.href.split("/")[1];
-
+  const currentLink = "/" + window.location.href.split("/")[3];
   const isMounted = useRef(false);
 
   useEffect(() => {
