@@ -1,4 +1,4 @@
-const Favorites = require("../models/favorites");
+const Favorites = require("../models/Favorites");
 
 module.exports.getFavoritesList = async (req, res) => {
   try {

@@ -1,5 +1,6 @@
 import { createContext, useReducer, useState, useEffect } from "react";
 import { productReducer } from "../reducers/productReducer";
+import { apiUrl } from "./constants";
 
 import axios from "axios";
 
@@ -21,7 +22,7 @@ const ProductContextProvider = ({ children }) => {
   const get12ProductsFavorites = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/product_action/most_favorites"
+        `${apiUrl}/product_action/most_favorites`
       );
       if (response.data.success)
         dispatch({
@@ -36,7 +37,7 @@ const ProductContextProvider = ({ children }) => {
   const get12ProductsDiscount = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/product_action/discount_products"
+        `${apiUrl}/product_action/discount_products`
       );
       if (response.data.success)
         dispatch({
@@ -50,7 +51,7 @@ const ProductContextProvider = ({ children }) => {
 
   const getAllProducts = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/product_action");
+      const response = await axios.get(`${apiUrl}/product_action`);
       if (response.data.success)
         dispatch({
           type: "PRODUCT_LOADED_ALL_SUCCESS",

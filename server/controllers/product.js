@@ -1,5 +1,5 @@
-const Product = require("../models/product");
-const Favorites = require("../models/favorites");
+const Product = require("../models/Product");
+const Favorites = require("../models/Favorites");
 
 module.exports.addProduct = async (req, res) => {
   const { title, description, size, url, price, type } = req.body;
