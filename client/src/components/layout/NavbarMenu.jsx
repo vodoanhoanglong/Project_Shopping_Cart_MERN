@@ -45,7 +45,7 @@ const NavbarMenu = () => {
 
   let history = useHistory();
 
-  const currentLink = window.location.href.slice(21);
+  const currentLink = window.location.href.split("/")[1];
 
   const isMounted = useRef(false);
 
