@@ -29,8 +29,7 @@ export const SlideBar = () => {
     >
       <Carousel.Item interval="4000">
         <img
-          className="d-block w-100"
-          // style={{ height: "100vh" }}
+          className="d-block w-100 slide-bar-img"
           src="https://preview.colorlib.com/theme/cozastore/images/xslide-02.jpg.pagespeed.ic.__MQeyG5T4.webp"
           alt="First slide"
         />
@@ -50,8 +49,7 @@ export const SlideBar = () => {
 
       <Carousel.Item interval="4000">
         <img
-          className="d-block w-100"
-          // style={{ height: "100vh" }}
+          className="d-block w-100 slide-bar-img"
           src="https://preview.colorlib.com/theme/cozastore/images/xslide-01.jpg.pagespeed.ic.XotvXKn0Mi.webp"
           alt="Second slide"
         />
@@ -70,8 +68,7 @@ export const SlideBar = () => {
       </Carousel.Item>
       <Carousel.Item interval="4000">
         <img
-          className="d-block w-100"
-          // style={{ height: "100vh" }}
+          className="d-block w-100 slide-bar-img"
           src="https://preview.colorlib.com/theme/cozastore/images/xslide-03.jpg.pagespeed.ic.tP-L47NU9M.webp"
           alt="Third slide"
         />

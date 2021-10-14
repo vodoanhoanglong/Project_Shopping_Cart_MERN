@@ -9,6 +9,33 @@ import "react-multi-carousel/lib/styles.css";
 import "../../css/MultiItemCarousel.css";
 import CardProduct from "../product/CardProduct";
 
+const responsive = {
+  desktop: {
+    breakpoint: {
+      max: 3000,
+      min: 1800,
+    },
+    items: 6,
+    partialVisibilityGutter: 40,
+  },
+  mobile: {
+    breakpoint: {
+      max: 464,
+      min: 0,
+    },
+    items: 2,
+    partialVisibilityGutter: 30,
+  },
+  tablet: {
+    breakpoint: {
+      max: 1024,
+      min: 464,
+    },
+    items: 3,
+    partialVisibilityGutter: 30,
+  },
+};
+
 const MultiItemCarousel = (props) => {
   const { data, setInfo, ...other } = props;
   const { showToastCart } = useContext(CartContext);
@@ -28,32 +55,7 @@ const MultiItemCarousel = (props) => {
         minimumTouchDrag={80}
         renderButtonGroupOutside={false}
         renderDotsOutside={false}
-        responsive={{
-          desktop: {
-            breakpoint: {
-              max: 3000,
-              min: 1024,
-            },
-            items: 5,
-            partialVisibilityGutter: 40,
-          },
-          mobile: {
-            breakpoint: {
-              max: 464,
-              min: 0,
-            },
-            items: 1,
-            partialVisibilityGutter: 30,
-          },
-          tablet: {
-            breakpoint: {
-              max: 1024,
-              min: 464,
-            },
-            items: 2,
-            partialVisibilityGutter: 30,
-          },
-        }}
+        responsive={responsive}
         showDots={false}
         autoPlay={false}
         sliderClass=""

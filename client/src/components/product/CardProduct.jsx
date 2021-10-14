@@ -82,12 +82,7 @@ const CardProduct = (props) => {
 
   return (
     <div>
-      <Card
-        style={{
-          width: "18rem",
-          boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
-        }}
-      >
+      <Card className="card-product">
         {product.discount !== 0 && (
           <div className="label-discount">
             <b>-{product.discount}%</b>

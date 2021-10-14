@@ -36,7 +36,7 @@ const Auth = ({ authRoute }) => {
     <div className="animate__animated animate__fadeIn">
       <div className="landing">
         <div className="dark-overlay">
-          <h1>Dragon's Store</h1>
+          <h1>YIL Shopping</h1>
           {!currentLocation ? (
             <h4>Reasonable place to shop</h4>
           ) : (

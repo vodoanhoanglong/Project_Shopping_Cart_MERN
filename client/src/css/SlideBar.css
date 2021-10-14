@@ -9,6 +9,10 @@
   width: 32px;
 }
 
+.slide-bar-img {
+  height: 100vh;
+}
+
 .carousel-control-next,
 .carousel-control-prev {
   position: absolute;

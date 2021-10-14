@@ -1,8 +1,9 @@
 .shop-container {
   width: 100%;
-  position: relative;
+  /* position: relative; */
   padding-top: 200px;
-  height: 140vh;
+  margin-bottom: 100px;
+  /* height: 140vh; */
 }
 .shop-container .filter {
   margin: 0 auto;
@@ -59,9 +60,11 @@
 }
 
 .shop-container .products {
-  position: absolute;
   width: 63%;
-  left: 18.3%;
+  margin: 0 auto;
+  /* position: absolute; */
+  /* width: 63%; */
+  /* left: 18.3%; */
 }
 
 .shop-container .products .row {
@@ -144,6 +147,12 @@
   border-color: #222;
   background-color: #222;
   color: #fff;
+}
+
+.card-product {
+  width: 98%;
+  /* width: 18rem; */
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
 .card {
