@@ -61,7 +61,7 @@ const CardProduct = (props) => {
         setColorFavorites({ color: "#717fe0" });
         changeShowToast("added");
       }
-      setTimeout(() => setOpenBackdrop(false), 2000);
+      setTimeout(() => setOpenBackdrop(false), 1);
     } catch (error) {
       console.log(error);
     }
