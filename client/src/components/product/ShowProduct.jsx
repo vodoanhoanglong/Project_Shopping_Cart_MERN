@@ -31,7 +31,7 @@ const ShowProduct = (props) => {
   useEffect(() => setData(allProducts), [allProducts]);
 
   let bodyDefault = (
-    <Row className="row-cols-1 row-cols-md-4 g-4 mx-auto mt-5">
+    <Row className="row-cols-1 row-cols-md-2 row-cols-xl-3 row-cols-xxl-4 mx-auto mt-5">
       {data.slice(start, end).map((product) => (
         <Col key={product._id} className={"my-2 " + animate}>
           <CardProduct

@@ -294,7 +294,7 @@ const ProductModal = (props) => {
           <div className="container-slider">
             <ImageGallery
               items={images}
-              thumbnailPosition="left"
+              thumbnailPosition="bottom"
               showNav={false}
               showPlayButton={false}
               showFullscreenButton={false}

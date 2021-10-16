@@ -226,7 +226,6 @@
 }
 
 .container-information .MuiFormGroup-root {
-  flex-wrap: unset !important;
   flex-direction: unset !important;
 }
 

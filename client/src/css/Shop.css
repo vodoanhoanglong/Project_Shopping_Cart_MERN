@@ -229,3 +229,12 @@
 .dialog-login:hover {
   color: #3f51b5;
 }
+
+@media screen and (max-width: 1700px) {
+  .card-body .card-title {
+    font-size: 20px;
+  }
+  .products .block-pic {
+    height: 250px;
+  }
+}

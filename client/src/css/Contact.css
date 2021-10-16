@@ -8,7 +8,7 @@
 
 .container-contact .contact-info {
   width: 40%;
-  height: 15vh;
+  height: 50%;
   border: 1px solid #333;
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
@@ -137,6 +137,7 @@
 .contact-address .contact-address-info {
   margin-top: 50px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
 }
 
@@ -244,4 +245,10 @@
 .contact-form .txt4 {
   animation-delay: 1200ms;
   animation-duration: 2s;
+}
+
+@media screen and (max-height: 900px) {
+  .container-contact .contact-info {
+    height: 65%;
+  }
 }
