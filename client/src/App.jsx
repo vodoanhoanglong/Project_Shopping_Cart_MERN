@@ -32,10 +32,10 @@ function App() {
               <RatingContextProvider>
                 <Router>
                   <Switch>
-                    {/* <Route exact path="/mobile" component={Disabled} />
+                    <Route exact path="/mobile" component={Disabled} />
                     {/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(
                       navigator.userAgent
-                    ) && <Redirect to="/mobile" />} */}
+                    ) && <Redirect to="/mobile" />}
                     <Route exact path="/" component={Home} />
                     <Route exact path="/shop" component={Shop} />
                     <Route exact path="/contact" component={Contact} />
